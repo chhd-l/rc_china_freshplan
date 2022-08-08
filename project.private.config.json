@@ -8,7 +8,7 @@
     "useIsolateContext": true,
     "bigPackageSizeSupport": true
   },
-  "projectname": "rc_china_taro",
+  "projectname": "rc_china_freshplan",
   "condition": {
     "miniprogram": {
       "list": [

@@ -1,5 +1,5 @@
 {
-  "name": "rc_china_taro",
+  "name": "rc_china_freshplan",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -26,7 +26,6 @@
     "build:qq": "taro build --type qq",
     "build:jd": "taro build --type jd",
     "build:quickapp": "taro build --type quickapp",
-   
     "dev:swan": "npm run build:swan -- --watch",
     "dev:alipay": "npm run build:alipay -- --watch",
     "dev:tt": "npm run build:tt -- --watch",

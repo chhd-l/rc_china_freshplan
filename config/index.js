@@ -1,7 +1,7 @@
 const path=require('path');
 
 const config = {
-  projectName: 'rc_china_taro',
+  projectName: 'rc_china_freshplan',
   date: '2022-3-1',
   designWidth: 750,
   deviceRatio: {
