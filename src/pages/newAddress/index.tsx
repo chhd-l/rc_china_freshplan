@@ -6,7 +6,6 @@ import RegionPicker from '@/components/common/WePicker/index'
 import { createAddress, updateAddress } from '@/framework/api/consumer/address'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { pickForUpdate } from '@/utils/utils'
-import NavBar from '@/components/common/Navbar'
 import './index.less'
 
 const Index = () => {
@@ -54,7 +53,7 @@ const Index = () => {
   }
 
   const saveNewAddress = async () => {
-    let actionRes=false
+    let actionRes = false
     if (!addressInfo.detail || !addressInfo.phone || !addressInfo.province || !addressInfo.receiverName) {
       setIsOpen(true)
       return
@@ -63,13 +62,13 @@ const Index = () => {
       return
     } else if (router?.params.type === 'edit') {
       let params = pickForUpdate(addressInfo, initData)
-      actionRes=await updateAddress({
+      actionRes = await updateAddress({
         params: Object.assign(params, { id: addressInfo.id }),
       })
     } else {
-      actionRes=await createAddress(addressInfo)
+      actionRes = await createAddress(addressInfo)
     }
-    if(actionRes){
+    if (actionRes) {
       Taro.navigateBack({
         delta: 1,
       })
@@ -92,29 +91,13 @@ const Index = () => {
         },
       })
     }
-    if (router?.params.type === 'addWechatAddress') {
-      //获取微信地址后填充显示、手动保存
-      Taro.getStorage({
-        key: 'current-wechat-address',
-        success: function (response) {
-          console.log(response)
-          if (response?.data) {
-            const data = JSON.parse(response.data)
-            setAddressInfo(data)
-            setInitData(data)
-            setAddress([data.province, data.city, data.region])
-          }
-        },
-      })
-    }
   }, [])
 
   return (
     <>
-      <NavBar navbarTitle={router?.params?.type === 'edit' ? '编辑地址' : '新增地址'} isNeedBack />
-      <View className="index bg-gray-eee p-2 h-screen">
-        <AtForm className="p-2 rounded" onSubmit={() => saveNewAddress()}>
-          <View className=" bg-white">
+      <View className="index bg-gray-eee p-1 h-screen">
+        <AtForm className="p-1 rounded" onSubmit={() => saveNewAddress()}>
+          <View className="bg-white">
             <AtInput
               name="receiverName"
               title="收货人"
@@ -134,8 +117,8 @@ const Index = () => {
               className="rc-address-input"
             />
             <View
-              className="ml-4 py-3 text-28 border-b border-t-0 border-l-0 border-r-0 border-solid"
-              style={{ borderColor: '#d6e4ef' }}
+              className="py-3 text-28 border-b border-t-0 border-l-0 border-r-0 border-solid"
+              style={{ borderColor: '#d6e4ef', paddingLeft: '0.28rem' }}
             >
               <Text>所在地区</Text>
               <Text
@@ -143,7 +126,10 @@ const Index = () => {
                   console.log('WPickerRef', WPickerRef)
                   WPickerRef.show()
                 }}
-                className={`${province ? '' : 'text-gray-300'} ml-8 pl-2`}
+                className={`${province ? '' : 'text-gray-300'} pl-2`}
+                style={{
+                  marginLeft: '0.44rem',
+                }}
               >
                 {province ? province + ',' + city + ',' + region : '省,市,区'}
               </Text>

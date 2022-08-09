@@ -4,7 +4,8 @@ export default defineAppConfig({
   pages: [
     'pages/subscription/index',
     'pages/account/index',
-    'pages/addressList/index'
+    'pages/addressManage/index',
+    'pages/newAddress/index',
   ],
   subpackages: [
     {
