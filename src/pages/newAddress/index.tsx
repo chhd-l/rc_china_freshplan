@@ -83,7 +83,6 @@ const NewAddress = () => {
       Taro.getStorage({
         key: 'current-address',
         success: function (response) {
-          console.log(response)
           if (response?.data) {
             const data = JSON.parse(response.data)
             setAddressInfo(data)
@@ -93,7 +92,7 @@ const NewAddress = () => {
         },
       })
     }
-  }, [])
+  }, [router?.params.type])
 
   return (
     <View className="NewAddress bg-gray-eee p-1 h-screen ">

@@ -7,9 +7,9 @@ import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import './index.less'
 
 const orderTypeList = [
-  { label: '待付款', icon: CDNIMGURL + 'icon_MP_Unpaid.svg', url: '' },
-  { label: '待发货', icon: CDNIMGURL + 'icon_MP_To ship.svg', url: '' },
-  { label: '待收货', icon: CDNIMGURL + 'icon_MP_Shipped.svg', url: '' },
+  { label: '待付款', icon: CDNIMGURL + 'icon_MP_Unpaid.svg', url: '/pages/elencoOrdini/index?status=1' },
+  { label: '待发货', icon: CDNIMGURL + 'icon_MP_To ship.svg', url: '/pages/elencoOrdini/index?status=2' },
+  { label: '待收货', icon: CDNIMGURL + 'icon_MP_Shipped.svg', url: '/pages/elencoOrdini/index?status=3' },
 ]
 
 const Account = () => {
@@ -17,7 +17,7 @@ const Account = () => {
     <View
       className="Account pb-2"
       style={{
-        backgroundColor: '#E4E4E4',
+        backgroundColor: '#F9F9F9',
       }}
     >
       <View className="flex items-center loginHerder">
@@ -43,10 +43,27 @@ const Account = () => {
       <View className="p-1 h-full">
         <View>
           <AtList className="orderAtList">
-            <AtListItem title="我的订单" arrow="right" extraText="查看全部订单" />
+            <AtListItem
+              title="我的订单"
+              arrow="right"
+              extraText="查看全部订单"
+              onClick={() =>
+                Taro.navigateTo({
+                  url: '/pages/elencoOrdini/index?status=0',
+                })
+              }
+            />
             <View className="grid grid-cols-3 myOrderLists my-1">
               {orderTypeList.map((str, key) => (
-                <View key={key} className="inline-block py-1 flex flex-col items-center justify-center">
+                <View
+                  key={key}
+                  className="inline-block py-1 flex flex-col items-center justify-center"
+                  onClick={() =>
+                    Taro.navigateTo({
+                      url: str.url,
+                    })
+                  }
+                >
                   <Image
                     style={{
                       width: '30px',
@@ -62,7 +79,7 @@ const Account = () => {
           </AtList>
         </View>
         {/* 宠物列表 */}
-        <RotationChartList list={[]} />
+        <RotationChartList list={[1, 2]} />
         {/* 计划列表 */}
         <RotationChartList list={[1]} type="plan" />
         {/* 其他选项 */}

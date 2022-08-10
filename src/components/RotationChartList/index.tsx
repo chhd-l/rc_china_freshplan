@@ -1,4 +1,4 @@
-import { CDNIMGURL } from '@/lib/constants'
+import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
@@ -39,7 +39,7 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
             )}
             <Swiper
               className="w-full flex items-center overflow-hidden"
-              circular
+              circular={list.length > 2 ? true : false}
               nextMargin={nextMargin + 'px'}
               previousMargin={previousMargin + 'px'}
               current={current}
@@ -62,9 +62,10 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
                         style={{
                           width: current === key ? '80%' : '60%',
                           height: current === key ? '80%' : '60%',
+                          boxShadow: '-0.5px 0.5px 10px -3px #999',
                         }}
                         className="rounded-full"
-                        src="https://jdc.jd.com/img/200"
+                        src={`${CDNIMGURL2}default-head.png`}
                       />
                     </View>
                   </SwiperItem>
@@ -81,6 +82,7 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
                     <View
                       style={{
                         backgroundImage: `url(${CDNIMGURL}Pet_Add.png)`,
+                        boxShadow: '-0.5px 0.5px 10px -3px #999',
                       }}
                       className="m-auto w-full h-full rounded-full bg-no-repeat bg-contain text-gray-300"
                     />

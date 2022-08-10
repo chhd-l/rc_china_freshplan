@@ -4,25 +4,9 @@ export default defineAppConfig({
   pages: [
     'pages/subscription/index',
     'pages/account/index',
-   'pages/addressManage/index',
-   'pages/newAddress/index',
-  ],
-  subPackages: [
-    {
-      root: 'pages/packageA',
-      pages: [
-        'orderList/index',
-        'orderDetail/index',
-      ],
-    },
-    {
-      root: 'pages/packageB',
-      pages: [
-        'breedList/index',
-        'petList/index',
-        'createSubscription/index',
-      ],
-    },
+    'pages/addressManage/index',
+    'pages/newAddress/index',
+    'pages/elencoOrdini/index'
   ],
   window: {
     navigationBarBackgroundColor: '#fff',
