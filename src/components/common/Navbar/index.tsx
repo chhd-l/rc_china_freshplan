@@ -29,8 +29,8 @@ const NavBar = ({
 
   const getStoreSettingList = async () => {
     console.log('store-settingaaaaaaa')
-    const storeSettings = await getStoreSettings()
-    setMiniProShowService(storeSettings?.find((item) => item.code === 'store_客服开关')?.isEnabled || false)
+    // const storeSettings = await getStoreSettings()
+    // setMiniProShowService(storeSettings?.find((item) => item.code === 'store_客服开关')?.isEnabled || false)
   }
 
   useEffect(() => {

@@ -87,6 +87,10 @@ const AuthLogin = () => {
     })
   }
 
+  if (Taro.getEnv() === Taro.ENV_TYPE.ALIPAY) {
+    return null;
+  }
+
   return (
     <View className="auth-login">
       <AtFloatLayout

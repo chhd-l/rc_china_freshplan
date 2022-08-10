@@ -62,6 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
+    "@mini-types/alipay": "^2.0.1",
     "@tarojs/mini-runner": "3.4.2",
     "@tarojs/webpack-runner": "3.4.2",
     "@types/mockjs": "^1.0.6",

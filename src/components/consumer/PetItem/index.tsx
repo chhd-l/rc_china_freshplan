@@ -88,144 +88,52 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
   }
 
   return (
-    <View className="my-2 mx-3">
-      <View className=" rounded-lg overflow-hidden relative" style={{ zIndex: 1 }}>
-        {pet.id !== '-1' ? (
-          isEdit ? (
-            <View
-              className="text-center pt-14 pb-2 w-screen bg-cover bg-no-repeat"
-              style={{ backgroundImage: `url(${petBg})` }}
-              onClick={() => {
-                showEdit(petIdx)
-              }}
-            >
-              <View
-                className={`w-22 ${
-                  pet.image ? ' bg-white   image-pad shadow-little' : ''
-                } h-22 rounded-full  flex items-center justify-center m-auto`}
-              >
-                <Image
-                  className="w-full h-full  rounded-full"
-                  src={imgUrl || pet.image || (pet.type === 'DOG' ? Dog : Cat)}
-                  // style={{ borderRadius: '50%' }}
-                  onClick={() => {
-                    handleImage()
-                  }}
-                />
-              </View>
-            </View>
-          ) : (
-            // 宠物列表
-            <AtSwipeAction
-              className="PetItem"
-              autoClose
-              onClick={(val) => {
-                console.log('val', val)
-                handleClick(val, petIdx)
-              }}
-              onOpened={() => {
-                showEdit(petIdx)
-              }}
-              disabled={isEdit}
-              isOpened={pet.isOpened}
-              options={editPetButton}
-              maxDistance={175}
-              areaWidth={Taro.getSystemInfoSync().windowWidth}
-            >
-              <View
-                className="text-center pt-14 pb-2 w-screen bg-cover bg-no-repeat"
-                style={{ backgroundImage: `url(${petBg})` }}
-                onClick={() => {
-                  showEdit(petIdx)
-                }}
-              >
-                <View
-                  className={`w-22 ${
-                    pet.image ? ' bg-white   image-pad shadow-little' : ''
-                  } h-22 rounded-full  flex items-center justify-center m-auto `}
-                >
-                  <Image
-                    src={pet.image || (pet.type === 'DOG' ? Dog : Cat)}
-                    // style={{ borderRadius: '50%' }}
-                    className="w-full h-full m-auto Petpictureshadow rounded-full"
-                  />
-                </View>
-                <View className="flex justify-center pt-3">
-                  <View className="text-lg text-red-600 pr-3 font-medium">{pet.name}</View>
-                  <View className="text-xs flex items-center">
-                    <View className="mr-1">{pet.breed}</View>
-                    <View>{pet.age}</View>
-                  </View>
-                </View>
-              </View>
-            </AtSwipeAction>
-          )
-        ) : (
-          // 新增
+    <View className="PetItemContainer">
+      <View className="overflow-hidden relative" style={{ zIndex: 1 }}>
+        <AtSwipeAction
+          className="PetItem"
+          autoClose
+          onClick={(val) => {
+            console.log('val', val)
+            handleClick(val, petIdx)
+          }}
+          onOpened={() => {
+            showEdit(petIdx)
+          }}
+          disabled={isEdit}
+          isOpened={false}
+          options={editPetButton}
+          maxDistance={120}
+          areaWidth={my.getSystemInfoSync().windowWidth * 0.9}
+        >
           <View
-            className="text-center py-8 w-screen z-50 bg-cover"
-            style={{ backgroundImage: `url(${petBg})` }}
+            className="text-center w-screen bg-cover bg-no-repeat"
+            style={{ backgroundImage: `url(${petBg})`, padding: '30px 0' }}
             onClick={() => {
               showEdit(petIdx)
             }}
           >
-            {imgUrl ? (
-              <View
-                className="w-22 h-22 m-auto relative rounded-full image-pad shadow-little"
-                // style={{ borderRadius: '50%' }}
-              >
-                <Image
-                  className="w-full h-full rounded-full"
-                  src={imgUrl}
-                  // style={{ borderRadius: '50%' }}
-                  onClick={() => {
-                    handleImage()
-                  }}
-                />
-              </View>
-            ) : (
-              <View
-                style={{
-                  backgroundImage: `url(https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/Pet_Add.png)`,
-                }}
-                className="w-22 h-22 m-auto mb-3 rounded-full   bg-no-repeat  bg-contain flex justify-center items-center Petpictureshadow text-gray-300 mt-2"
-                // src={pet.image}
-                onClick={() => {
-                  handleImage()
-                }}
-              >
-                {/* <AtIcon value="add" size={16} /> */}
-              </View>
-            )}
-            {/* <Image
-              className="w-24 h-24 m-auto relative"
-              src={imgUrl}
-              style={{ borderRadius: '50%' }}
-              onClick={(files) => {
-                handleImage(files, petIdx)
-              }}
-            />
             <View
-              className="w-16 h-16 m-auto mb-3 bg-white flex justify-center items-center Petpictureshadow text-gray-300 mt-2"
-              style={{ borderRadius: '50%' }}
-            // src={pet.image}
+              className={`w-rc190 ${
+                pet.image ? ' bg-white   image-pad shadow-little' : ''
+              } h-rc190 rounded-full  flex items-center justify-center m-auto `}
             >
-              <AtIcon value="add" size={16} />
-            </View> */}
+              <Image
+                src={pet.image || (pet.type === 'DOG' ? Dog : Cat)}
+                // style={{ borderRadius: '50%' }}
+                className="w-full h-full m-auto Petpictureshadow rounded-full"
+              />
+            </View>
+            <View className="flex justify-center pt-rc30">
+              <View className="text-rc28 text-red-600 pr-rc30 font-medium">阿猫</View>
+              <View className="text-rc20 flex items-center">
+                <View className="mr-rc10">短毛猫</View>
+                <View>11月</View>
+              </View>
+            </View>
           </View>
-        )}
+        </AtSwipeAction>
       </View>
-      {isEdit ? (
-        <EditPet
-          petList={petList}
-          setPetList={setPetList}
-          setIsEdit={setIsEdit}
-          SetshowAddPetBtn={SetshowAddPetBtn}
-          getList={getList}
-          petItem={item}
-          pet={pet}
-        />
-      ) : null}
       <AtModal
         key="shipnow"
         isOpened={showDelModal}
@@ -242,19 +150,6 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
         onConfirm={comfirmDel}
         className="rc_modal"
       />
-      {/* <AtModal isOpened={showDelModal}>
-        <AtModalContent>确定删除宠物信息？</AtModalContent>
-        <AtModalAction>
-          <Button
-            onClick={() => {
-              setShowDelModal(false)
-            }}
-          >
-            再想想
-          </Button>{' '}
-          <Button onClick={comfirmDel}>狠心删除</Button>{' '}
-        </AtModalAction>
-      </AtModal> */}
     </View>
   )
 }

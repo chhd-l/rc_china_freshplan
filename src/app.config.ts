@@ -4,14 +4,29 @@ export default defineAppConfig({
   pages: [
     'pages/subscription/index',
     'pages/account/index',
-    'pages/addressManage/index',
-    'pages/newAddress/index',
+   'pages/addressManage/index',
+   'pages/newAddress/index',
+  ],
+  subPackages: [
+    {
+      root: 'pages/packageA',
+      pages: [
+        'orderList/index',
+        'orderDetail/index',
+      ],
+    },
+    {
+      root: 'pages/packageB',
+      pages: [
+        'breedList/index',
+        'petList/index',
+        'createSubscription/index',
+      ],
+    },
   ],
   window: {
-    backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black',
+    navigationBarTitleText: 'Alipay',
   },
   tabBar: {
     color: '',
@@ -31,7 +46,6 @@ export default defineAppConfig({
         selectedIconPath: 'assets/icons/icon-account-selected.png',
       },
     ],
-    position: 'bottom',
   },
 })
 
