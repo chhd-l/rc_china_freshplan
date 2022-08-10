@@ -1,0 +1,135 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Program Files\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\mysql-8.0.28-winx64\bin;;C:\Program Files (x86)\Tencent\微信web开发者工具\dll;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Azure Data Studio\bin;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Program Files\JetBrains\WebStorm 2021.2.3\bin;
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.13.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@rc-china-commerce%2ftaro: Not found
+      at Request.params.callback [as _callback] (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
+      at Request.self.callback (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
+      at Request.emit (node:events:390:28)
+      at Request.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141855:10)
+      at Request.emit (node:events:390:28)
+      at IncomingMessage.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141777:12)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "rc_china_freshplan",
+    "version": "1.0.0",
+    "private": true,
+    "description": "",
+    "templateInfo": {
+      "name": "default",
+      "typescript": true,
+      "css": "less"
+    },
+    "scripts": {
+      "precond-weapp:dev": "cross-env NODE_ENV=development node ./config/updateProjectConfig.js",
+      "precond-weapp:prod": "cross-env NODE_ENV=production node ./config/updateProjectConfig.js",
+      "precond-weapp:stg": "cross-env NODE_ENV=stg node ./config/updateProjectConfig.js",
+      "build-dev:weapp": "npm run precond-weapp:dev && taro build --type weapp",
+      "build-prod:weapp": "npm run precond-weapp:prod && taro build --type weapp",
+      "build-stg:weapp": "npm run precond-weapp:stg && taro build --type weapp",
+      "dev-dev:weapp": "npm run build-dev:weapp -- --watch",
+      "dev-prod:weapp": "npm run build-prod:weapp -- --watch",
+      "dev-stg:weapp": "npm run build-stg:weapp -- --watch",
+      "build:swan": "taro build --type swan",
+      "build:alipay": "taro build --type alipay",
+      "build:tt": "taro build --type tt",
+      "build:h5": "taro build --type h5",
+      "build:rn": "taro build --type rn",
+      "build:qq": "taro build --type qq",
+      "build:jd": "taro build --type jd",
+      "build:quickapp": "taro build --type quickapp",
+      "dev:swan": "npm run build:swan -- --watch",
+      "dev:alipay": "npm run build:alipay -- --watch",
+      "dev:tt": "npm run build:tt -- --watch",
+      "dev:h5": "npm run build:h5 -- --watch",
+      "dev:rn": "npm run build:rn -- --watch",
+      "dev:qq": "npm run build:qq -- --watch",
+      "dev:jd": "npm run build:jd -- --watch",
+      "dev:quickapp": "npm run build:quickapp -- --watch"
+    },
+    "browserslist": [
+      "last 3 versions",
+      "Android >= 4.1",
+      "ios >= 8"
+    ],
+    "author": "",
+    "dependencies": {
+      "@babel/runtime": "^7.7.7",
+      "@rc-china-commerce/taro": "^1.0.4",
+      "@tarojs/components": "3.4.2",
+      "@tarojs/plugin-framework-react": "3.4.2",
+      "@tarojs/react": "3.4.2",
+      "@tarojs/runtime": "3.4.2",
+      "@tarojs/taro": "3.4.2",
+      "ahooks": "^3.3.12",
+      "cross-env": "^7.0.3",
+      "jotai": "^1.6.0",
+      "moment": "^2.29.2",
+      "rc_china_commerce": "^1.0.3",
+      "react": "^17.0.0",
+      "react-dom": "^17.0.0",
+      "semver": "^7.3.7",
+      "taro-plugin-tailwind": "^1.2.8",
+      "taro-ui": "3.0.0-alpha.9"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.8.0",
+      "@tarojs/mini-runner": "3.4.2",
+      "@tarojs/webpack-runner": "3.4.2",
+      "@types/mockjs": "^1.0.6",
+      "@types/react": "^17.0.2",
+      "@types/webpack-env": "^1.13.6",
+      "@typescript-eslint/eslint-plugin": "^4.15.1",
+      "@typescript-eslint/parser": "^4.15.1",
+      "babel-preset-taro": "3.4.2",
+      "eslint": "^7.32.0",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-config-taro": "3.4.2",
+      "eslint-plugin-import": "^2.12.0",
+      "eslint-plugin-prettier": "^4.0.0",
+      "eslint-plugin-react": "^7.8.2",
+      "eslint-plugin-react-hooks": "^4.2.0",
+      "husky": "^7.0.4",
+      "lint-staged": "^12.3.8",
+      "mockjs": "^1.1.0",
+      "prettier": "^2.6.2",
+      "stylelint": "^14.4.0",
+      "taro-iconfont-cli": "^3.3.0",
+      "typescript": "^4.1.0"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged"
+      }
+    },
+    "lint-staged": {
+      "*.{js,json,scss}": [
+        "prettier --config .prettierrc --write",
+        "eslint --fix",
+        "git add"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

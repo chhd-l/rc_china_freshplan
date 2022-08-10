@@ -1,11 +1,11 @@
-import { useEffect } from 'react'
 import '@/utils/global.ts'
+import { useEffect } from 'react'
 
 import '@/assets/css/custom-theme.scss'
+import Taro from "@tarojs/taro"
+import 'windi.css'
 import './app.less'
 import './assets/css/global.less'
-import 'windi.css'
-import Taro from "@tarojs/taro"
 
 const App = (props) => {
   useEffect(() => {
