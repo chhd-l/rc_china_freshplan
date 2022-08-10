@@ -31,6 +31,23 @@ export const wxRegisterAndLogin = async (): Promise<Consumer> => {
   return wxLoginRes.userInfo
 }
 
+export const aliRegisterAndLogin = async (auth_code: string): Promise<Consumer> => {
+  const { wxRegisterAndLogin: wxLoginRes }: { wxRegisterAndLogin: WxLoginResult } =
+    await ApiRoot({ url: apis.auth }).consumers().wxRegisterAndLogin({
+      input: {
+        jsCode: auth_code,
+        storeId: '12345678',
+      },
+      userInfo: {
+        avatarUrl: "",
+        nickName: "",
+        gender: "",
+      },
+    }, "")
+  my.setStorageSync({ key: 'wxLoginRes', data: wxLoginRes })
+  return wxLoginRes.userInfo
+}
+
 export const wxLogin = async () => {
   let wxLoginResStorage = Taro.getStorageSync('wxLoginRes')
   const { wxLogin: wxLoginRes }: { wxLogin: WxLoginResult } = await ApiRoot({ url: apis.auth }).consumers().wxLogin({

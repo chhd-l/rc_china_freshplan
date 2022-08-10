@@ -3,10 +3,15 @@ import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
 import { AtAvatar, AtIcon, AtList, AtListItem } from 'taro-ui'
+import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login';
 import './index.less'
 
 const Account = () => {
   const [current, setCurrent] = useState(1)
+
+  const handleLogin = () => {
+    loginWithAlipay();
+  }
 
   return (
     <View
@@ -17,7 +22,7 @@ const Account = () => {
     >
       <View className="flex items-center loginHerder">
         <AtAvatar className="mx-1.5" circle image="https://jdc.jd.com/img/200" />
-        <Text>点击授权登录</Text>
+        <Text onClick={handleLogin}>点击授权登录</Text>
       </View>
       {/* 订单列表 */}
       <View className="p-1 h-full">
@@ -47,6 +52,7 @@ const Account = () => {
             <Image
               style={{ width: '20px', height: '20px' }}
               src="https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/pet_edit.png"
+              onClick={() => my.navigateTo({ url: '/pages/packageB/petList/index' })}
             />
           </View>
           <View className="box-border px-2">

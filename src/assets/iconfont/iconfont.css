@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "rcciconfont"; /* Project id 3579405 */
+  src: url('iconfont.woff2?t=1660128246861') format('woff2'),
+       url('iconfont.woff?t=1660128246861') format('woff'),
+       url('iconfont.ttf?t=1660128246861') format('truetype'),
+       url('iconfont.svg?t=1660128246861#rcciconfont') format('svg');
+}
+
+.rcciconfont {
+  font-family: "rcciconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.rccicon-freshweixuanzhong:before {
+  content: "\e62f";
+}
+
+.rccicon-freshxuanzhong:before {
+  content: "\e630";
+}
+
+.rccicon-gerenzhongxinxuanzhong:before {
+  content: "\e632";
+}
+
+.rccicon-a-bianzu16:before {
+  content: "\e633";
+}
+

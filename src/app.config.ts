@@ -4,8 +4,8 @@ export default defineAppConfig({
   pages: [
     'pages/subscription/index',
     'pages/account/index',
-   'pages/addressManage/index',
-   'pages/newAddress/index',
+    'pages/addressManage/index',
+    'pages/newAddress/index',
   ],
   subPackages: [
     {
@@ -20,6 +20,7 @@ export default defineAppConfig({
       pages: [
         'breedList/index',
         'petList/index',
+        'petEdit/index',
         'createSubscription/index',
       ],
     },
@@ -30,20 +31,20 @@ export default defineAppConfig({
   },
   tabBar: {
     color: '#bfbfbf',
-    selectedColor: '#d81e06',
+    selectedColor: '#96CC39',
     backgroundColor: '',
     list: [
       {
         pagePath: 'pages/subscription/index',
         text: '订阅',
-        iconPath: 'assets/icons/icon-subscription.png',
-        selectedIconPath: 'assets/icons/icon-subscription-selected.png',
+        iconPath: 'assets/icons/icon-subscription.svg',
+        selectedIconPath: 'assets/icons/icon-subscription-selected.svg',
       },
       {
         pagePath: 'pages/account/index',
         text: '我的',
-        iconPath: 'assets/icons/icon-account.png',
-        selectedIconPath: 'assets/icons/icon-account-selected.png',
+        iconPath: 'assets/icons/icon-account.svg',
+        selectedIconPath: 'assets/icons/icon-account-selected.svg',
       },
     ],
   },

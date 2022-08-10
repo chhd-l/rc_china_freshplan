@@ -28,38 +28,39 @@ const PetList = () => {
   let petNumber = router?.params?.petNumber || '0'
 
   const getList = async () => {
-    let res = (await getPets({ consumerId: consumerInfo?.id })) || []
-    console.log('resxxxxxxxxxxxxx', res)
-    res.forEach((item) => {
-      item.age = getAge(item.birthday)
-    })
-    setPetInfoList(res)
-    if (res.length) {
-      setPetList(res)
-      SetshowAddPetBtn(true)
-    } else {
-      setPetList([
-        {
-          age: '',
-          birthday: '',
-          breed: '',
-          // consumerId: '20220415',
-          gender: 'MALE',
-          id: '-1',
-          image: '',
-          isSterilized: false,
-          name: '',
-          type: 'CAT',
-        },
-      ])
-      SetshowAddPetBtn(false)
-    }
+    // let res = (await getPets({ consumerId: consumerInfo?.id })) || []
+    // console.log('resxxxxxxxxxxxxx', res)
+    // res.forEach((item) => {
+    //   item.age = getAge(item.birthday)
+    // })
+    // setPetInfoList(res)
+    // if (res.length) {
+    //   setPetList(res)
+    //   SetshowAddPetBtn(true)
+    // } else {
+    //   setPetList([
+    //     {
+    //       age: '',
+    //       birthday: '',
+    //       breed: '',
+    //       // consumerId: '20220415',
+    //       gender: 'MALE',
+    //       id: '-1',
+    //       image: '',
+    //       isSterilized: false,
+    //       name: '',
+    //       type: 'CAT',
+    //     },
+    //   ])
+    //   SetshowAddPetBtn(false)
+    // }
   }
 
   const addPet = () => {
-    petList.push(initNewPet)
-    SetshowAddPetBtn(false)
-    setPetList(cloneDeep(petList))
+    // petList.push(initNewPet)
+    // SetshowAddPetBtn(false)
+    // setPetList(cloneDeep(petList))
+    my.navigateTo({ url: '/pages/packageB/petEdit/index' })
   }
 
   useEffect(() => {
@@ -90,20 +91,18 @@ const PetList = () => {
         {showAddPetBtn ? (
           systemType ? (
             <AtButton
-              className="mx-3 mt-4 flex items-center justify-center h-10 text-xs"
+              className="mx-4 mt-1 flex items-center justify-center h-4 text-rc30"
               onClick={addPet}
-              circle
-              type="secondary"
+              type="primary"
             >
               添加宠物
             </AtButton>
           ) : (
             <AtButton
-              className="mx-3 mt-4 flex items-center h-11 justify-center"
-              customStyle={{ fontSize: '.85rem' }}
+              className="mx-4 mt-1 flex items-center h-4 justify-center"
+              customStyle={{ fontSize: '.35rem' }}
               onClick={addPet}
-              circle
-              type="secondary"
+              type="primary"
             >
               添加宠物
             </AtButton>
