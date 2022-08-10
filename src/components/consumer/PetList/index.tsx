@@ -108,13 +108,15 @@ const PetList = (props: Props) => {
   }
 
   const toPetList = () => {
-    if (!Taro.getStorageSync('wxLoginRes')) {
-      setAuthLoginOpened(true)
-      return
-    }
-    Taro.navigateTo({
-      url: `/pages/packageB/petList/index?petNumber=${petList.length}`,
-    })
+    // if (!Taro.getStorageSync('wxLoginRes')) {
+    //   setAuthLoginOpened(true)
+    //   return
+    // }
+    // Taro.navigateTo({
+    //   url: `/pages/packageB/petList/index?petNumber=${petList.length}`,
+    // })
+    
+    my.navigateTo({ url: `/pages/packageB/petList/index?petNumber=${petList.length}` })
   }
   const CheckBoxItem = ({ id, idx }: { id: string; idx?: number }) => {
     return props.showCheckBox ? (

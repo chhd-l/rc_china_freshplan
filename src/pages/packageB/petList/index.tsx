@@ -12,6 +12,7 @@ import { useAtom } from 'jotai'
 import cloneDeep from 'lodash.cloneDeep'
 import { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
+import IconFont from '@/iconfont';
 import './index.less'
 
 const PetList = () => {
@@ -71,8 +72,7 @@ const PetList = () => {
 
   return (
     <>
-      <NavBar navbarTitle="宠物管理" isNeedBack />
-      <View className="pet-list  py-2" style={{ backgroundColor: '#eee', minHeight: '100vh' }}>
+      <View className="pet-list  py-rc8" style={{ backgroundColor: '#eee', minHeight: '100vh' }}>
         {petList.map((pet, idx) => {
           return (
             <PetItem

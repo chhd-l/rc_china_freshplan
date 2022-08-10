@@ -5,7 +5,7 @@ export default defineAppConfig({
     'pages/subscription/index',
     'pages/account/index',
   ],
-  subpackages: [
+  subPackages: [
     {
       root: 'pages/packageA',
       pages: [
@@ -25,10 +25,8 @@ export default defineAppConfig({
     },
   ],
   window: {
-    backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
-    navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black',
+    navigationBarTitleText: 'Alipay',
   },
   tabBar: {
     color: '#bfbfbf',
@@ -48,7 +46,6 @@ export default defineAppConfig({
         selectedIconPath: 'assets/icons/icon-account-selected.png',
       },
     ],
-    position: 'bottom',
   },
 })
 
