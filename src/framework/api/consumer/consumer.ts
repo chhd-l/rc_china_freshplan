@@ -36,7 +36,7 @@ export const aliRegisterAndLogin = async (auth_code: string): Promise<Consumer> 
     await ApiRoot({ url: apis.auth }).consumers().wxRegisterAndLogin({
       input: {
         jsCode: auth_code,
-        storeId: '12345678',
+        storeId: '39b6444b-683b-4915-8b75-5d8403f40a02',
       },
       userInfo: {
         avatarUrl: "",

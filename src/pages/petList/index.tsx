@@ -60,7 +60,7 @@ const PetList = () => {
     // petList.push(initNewPet)
     // SetshowAddPetBtn(false)
     // setPetList(cloneDeep(petList))
-    my.navigateTo({ url: '/pages/packageB/petEdit/index' })
+    my.navigateTo({ url: '/pages/petEdit/index' })
   }
 
   useEffect(() => {
