@@ -33,8 +33,22 @@ const AddRessManage = () => {
 
   return (
     <View className="AddRessManage">
-      <View className="index p-1 min-h-screen bg-gray-eee">
-        {addressList.map((item: Address, key: number) => (
+      <View className="index px-1 pb-1 min-h-screen bg-gray-eee overflow-hidden">
+        {[
+          {
+            id: '0001',
+            receiverName: 'bbbdx',
+            phone: '18723489950',
+            province: 'cq', //省
+            city: 'cq', //市
+            detail: 'dsdssdsds',
+            postcode: 'xx10282x',
+            isDefault: true,
+            country: 'xxxx',
+            region: 'xx', //区
+            consumerId: '119199',
+          },
+        ].map((item: Address, key: number) => (
           <AddressItem
             key={key}
             addressInfo={item}

@@ -1,18 +1,42 @@
-.rc-text-area {
-  border: none !important;
-  .at-textarea__textarea{
-    font-size: 28px;
-  }
-}
+.NewAddress {
+  .rc-text-area {
+    border: none !important;
 
-.rc-address-input.at-input {
-  .at-input__title {
-    font-size: 28px;
+    .at-textarea__textarea {
+      font-size: 28px;
+    }
   }
-  .at-input__input {
-    font-size: 28px !important;
+
+  .rc-address-input.at-input {
+    .at-input__title {
+      font-size: 28px;
+    }
+
+    .at-input__input {
+      font-size: 28px !important;
+    }
+
+    &::after {
+      border-bottom-width: 1px !important;
+    }
   }
-  &::after {
-    border-bottom-width: 1px !important;
+
+  .radioText {
+    .at-checkbox__option-cnt {
+      display: flex;
+      align-items: center;
+    }
+
+    .at-checkbox__option--selected .at-checkbox__icon-cnt {
+      background-color: #96CC39;
+    }
+
+    .at-checkbox__title {
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 28px;
+    }
   }
 }

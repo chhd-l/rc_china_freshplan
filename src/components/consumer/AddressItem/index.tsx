@@ -5,7 +5,7 @@ import { Address } from '@/framework/types/consumer'
 import Taro, { getCurrentPages } from '@tarojs/taro'
 import { deleteAddress, updateAddress } from '@/framework/api/consumer/address'
 import routers from '@/routers'
-import { EDIT_ADDRESS_ICON, DELETE_ADDRESS_ICON } from '@/lib/constants'
+import { CDNIMGURL } from '@/lib/constants'
 import './index.less'
 
 const AddressItem = ({
@@ -71,8 +71,6 @@ const AddressItem = ({
 
   //checkout过来勾选地址
   const selectAddress = () => {
-    console.log('getCurrentPages ', getCurrentPages())
-    console.log(routers.checkout.replace('/', ''))
     const findCheckoutIndex = getCurrentPages().findIndex((el) => {
       console.log(el.route)
       return el.route === routers.checkout.replace('/', '')
@@ -82,7 +80,7 @@ const AddressItem = ({
       Taro.getStorage({
         key: 'address-from-checkout',
         success: function (data) {
-          console.info('datadatadata',data)
+          console.info('datadatadata', data)
           if (data.data) {
             Taro.setStorage({
               key: 'select-address',
@@ -100,42 +98,43 @@ const AddressItem = ({
   }
 
   return (
-    <View className="px-4 pt-4 pb-2 bg-white address-item mt-2 rounded">
+    <View className="p-1 bg-white mt-1 rounded">
       <View onClick={selectAddress}>
         <View className="flex flex-row justify-between">
-          <Text className="text-28 text-black font-semibold">{receiverName}</Text>
-          <Text className="text-26 text-gray-400">{phone}</Text>
+          <Text className="text-black font-semibold">{receiverName}</Text>
+          <Text className="text-gray-400">{phone}</Text>
         </View>
         <View className="mt-2 pb-3" style={{ borderBottom: '1px solid #D8D8D8' }}>
-          <Text className="text-26">
+          <Text className="">
             {province} {city} {region} {detail}
           </Text>
         </View>
       </View>
       <View className="flex flex-row justify-between items-center mt-1">
-        <Radio
-          key={addressInfo.id}
-          value="选中"
-          checked={Boolean(addressInfo.isDefault)}
-          color="#d33024"
-          className="text-40 -ml-5 text-gray-400 transform-6"
-          onClick={() => setAsDefault()}
-        >
-          &nbsp;默认地址
-        </Radio>
+        <View>
+          <Radio
+            key={addressInfo.id}
+            value="选中"
+            checked={Boolean(addressInfo.isDefault)}
+            color="#96CC39"
+            className="text-gray-400"
+            onClick={() => setAsDefault()}
+          />
+          默认地址
+        </View>
         <View className="flex flex-row items-center">
           <Image
-            style={{ width: '20px', height: '20px' }}
-            src={EDIT_ADDRESS_ICON}
+            style={{ width: '30px', height: '30px' }}
+            src={`${CDNIMGURL}edit_address.png`}
             onClick={(e) => {
               console.log(e)
               editAddress()
             }}
           />
-          <View className="h-4 border-r border-t-0 border-b-0 border-l-0 border-solid border-gray-300 mx-2" />
           <Image
-            style={{ width: '18px', height: '18px' }}
-            src={DELETE_ADDRESS_ICON}
+            className="ml-1"
+            style={{ width: '28px', height: '28px' }}
+            src={`${CDNIMGURL}remove_address.png`}
             onClick={() => {
               setShowDelTip(true)
             }}

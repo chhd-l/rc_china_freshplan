@@ -10,6 +10,7 @@ export type Address = {
   country?: string
   region: string //区
   consumerId?: string
+  storeId?: string
 }
 
 export type Consumer = {

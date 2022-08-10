@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/account/index',
     'pages/addressManage/index',
     'pages/newAddress/index',
+    'pages/elencoOrdini/index'
   ],
   subPackages: [
     {
@@ -30,7 +31,7 @@ export default defineAppConfig({
     navigationBarTitleText: 'Alipay',
   },
   tabBar: {
-    color: '#bfbfbf',
+    color: '',
     selectedColor: '#96CC39',
     backgroundColor: '',
     list: [
