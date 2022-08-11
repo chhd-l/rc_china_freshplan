@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "31205283",
+      "name": "picture",
+      "font_class": "picture",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "31205285",
+      "name": "camera",
+      "font_class": "camera",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "31205286",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "31203935",
+      "name": "cat1",
+      "font_class": "cat1",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "31203932",
+      "name": "dog1",
+      "font_class": "dog1",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "31203933",
+      "name": "dog2",
+      "font_class": "dog2",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "31203934",
+      "name": "success",
+      "font_class": "success",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
       "icon_id": "31174699",
       "name": "fresh-unsel",
       "font_class": "freshweixuanzhong",

@@ -1,6 +1,6 @@
 import { View, Image, Button } from '@tarojs/components'
 import { AtIcon, AtModal, AtModalAction, AtModalContent, AtSwipeAction } from 'taro-ui'
-import { Cat, Dog, petBg, UPLOADURL } from '@/lib/constants'
+import { UPLOADURL, CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import Taro from '@tarojs/taro'
 import cloneDeep from 'lodash.cloneDeep'
 import { useEffect, useState } from 'react'
@@ -108,7 +108,7 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
         >
           <View
             className="text-center w-screen bg-cover bg-no-repeat"
-            style={{ backgroundImage: `url(${petBg})`, padding: '30px 0' }}
+            style={{ backgroundImage: `url(${CDNIMGURL}Pet_Bg.png)`, padding: '30px 0' }}
             onClick={() => {
               showEdit(petIdx)
             }}
@@ -119,16 +119,15 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
               } h-rc190 rounded-full  flex items-center justify-center m-auto `}
             >
               <Image
-                src={pet.image || (pet.type === 'DOG' ? Dog : Cat)}
+                src={pet.image || `${CDNIMGURL2}default-head.png`}
                 // style={{ borderRadius: '50%' }}
                 className="w-full h-full m-auto Petpictureshadow rounded-full"
               />
             </View>
             <View className="flex justify-center pt-rc30">
-              <View className="text-rc28 text-red-600 pr-rc30 font-medium">阿猫</View>
-              <View className="text-rc20 flex items-center">
-                <View className="mr-rc10">短毛猫</View>
-                <View>11月</View>
+              <View className="text-rc28 pr-rc30 font-medium" style={{color:'#D49D28'}}>阿猫</View>
+              <View className="text-rc20 flex items-center" style={{color:'#999999'}}>
+                短毛猫11月
               </View>
             </View>
           </View>

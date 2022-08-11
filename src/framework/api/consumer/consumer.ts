@@ -31,12 +31,14 @@ export const wxRegisterAndLogin = async (): Promise<Consumer> => {
   return wxLoginRes.userInfo
 }
 
-export const aliRegisterAndLogin = async (auth_code: string): Promise<Consumer> => {
+export const aliRegisterAndLogin = async (auth_code: string, phone_code: string): Promise<Consumer> => {
   const { wxRegisterAndLogin: wxLoginRes }: { wxRegisterAndLogin: WxLoginResult } =
     await ApiRoot({ url: apis.auth }).consumers().wxRegisterAndLogin({
       input: {
         jsCode: auth_code,
         storeId: '39b6444b-683b-4915-8b75-5d8403f40a02',
+        authType: 'ALIPAY',
+        phoneCode: phone_code,
       },
       userInfo: {
         avatarUrl: "",

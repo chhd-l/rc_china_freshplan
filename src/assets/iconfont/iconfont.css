@@ -1,9 +1,9 @@
 @font-face {
   font-family: "rcciconfont"; /* Project id 3579405 */
-  src: url('iconfont.woff2?t=1660128246861') format('woff2'),
-       url('iconfont.woff?t=1660128246861') format('woff'),
-       url('iconfont.ttf?t=1660128246861') format('truetype'),
-       url('iconfont.svg?t=1660128246861#rcciconfont') format('svg');
+  src: url('iconfont.woff2?t=1660208676231') format('woff2'),
+       url('iconfont.woff?t=1660208676231') format('woff'),
+       url('iconfont.ttf?t=1660208676231') format('truetype'),
+       url('iconfont.svg?t=1660208676231#rcciconfont') format('svg');
 }
 
 .rcciconfont {
@@ -12,6 +12,34 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.rccicon-picture:before {
+  content: "\e600";
+}
+
+.rccicon-camera:before {
+  content: "\e606";
+}
+
+.rccicon-close:before {
+  content: "\e607";
+}
+
+.rccicon-cat1:before {
+  content: "\e605";
+}
+
+.rccicon-dog1:before {
+  content: "\e602";
+}
+
+.rccicon-dog2:before {
+  content: "\e603";
+}
+
+.rccicon-success:before {
+  content: "\e604";
 }
 
 .rccicon-freshweixuanzhong:before {

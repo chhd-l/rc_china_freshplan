@@ -78,8 +78,8 @@ const handleApis = () => {
   const keys = Object.keys(apis)
   const values = Object.values(apis)
   keys.map((item, index) => {
-    if (String(apis[item]).indexOf('https://fcstg.fivefen.com') === -1 && String(apis[item]).indexOf('http://localhost:7000') === -1) {
-      apis[item] = 'https://fcstg.fivefen.com/' + String(values[index]).split('run/')[1]
+    if (String(apis[item]).indexOf('https://fcdev.fivefen.com') === -1 && String(apis[item]).indexOf('http://localhost:7000') === -1) {
+      apis[item] = 'https://fcdev.fivefen.com/' + String(values[index]).split('run/')[1]
     }
   })
   console.log(apis)

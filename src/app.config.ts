@@ -21,15 +21,15 @@ export default defineAppConfig({
     list: [
       {
         pagePath: 'pages/subscription/index',
-        text: '订阅',
-        iconPath: 'assets/icons/icon-subscription.svg',
-        selectedIconPath: 'assets/icons/icon-subscription-selected.svg',
+        text: 'Fresh Plan',
+        iconPath: 'assets/icons/icon-subscription.png',
+        selectedIconPath: 'assets/icons/icon-subscription-selected.png',
       },
       {
         pagePath: 'pages/account/index',
         text: '我的',
-        iconPath: 'assets/icons/icon-account.svg',
-        selectedIconPath: 'assets/icons/icon-account-selected.svg',
+        iconPath: 'assets/icons/icon-account.png',
+        selectedIconPath: 'assets/icons/icon-account-selected.png',
       },
     ],
   },

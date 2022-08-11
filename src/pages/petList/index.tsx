@@ -17,7 +17,6 @@ import './index.less'
 
 const PetList = () => {
   const [petList, setPetList] = useState<PetListItemProps[]>([])
-  const [showAddPetBtn, SetshowAddPetBtn] = useState(true)
   const { router } = getCurrentInstance()
   const [consumerInfo, setConsumerInfo] = useAtom(consumerAtom)
   const { system } = Taro.getSystemInfoSync()
@@ -25,7 +24,7 @@ const PetList = () => {
   const [petInfoList, setPetInfoList] = useAtom(petInfoListAuto)
 
   console.log('system', system, systemType)
-  let petNumber = router?.params?.petNumber || '0'
+  let petNumber = router?.params?.petNumber || '1'
 
   const getList = async () => {
     // let res = (await getPets({ consumerId: consumerInfo?.id })) || []
@@ -54,6 +53,20 @@ const PetList = () => {
     //   ])
     //   SetshowAddPetBtn(false)
     // }
+    setPetList([
+      {
+        age: '',
+        birthday: '',
+        breed: '',
+        // consumerId: '20220415',
+        gender: 'MALE',
+        id: '-1',
+        image: '',
+        isSterilized: false,
+        name: '',
+        type: 'CAT',
+      },
+    ])
   }
 
   const addPet = () => {
@@ -64,11 +77,7 @@ const PetList = () => {
   }
 
   useEffect(() => {
-    if (Number(petNumber) > 0) {
-      getList()
-    } else {
-      addPet()
-    }
+    getList()
   }, [])
 
   return (
@@ -77,9 +86,9 @@ const PetList = () => {
         {petList.map((pet, idx) => {
           return (
             <PetItem
-              showAddPetBtn={showAddPetBtn}
+              showAddPetBtn={true}
               key={pet.id}
-              SetshowAddPetBtn={SetshowAddPetBtn}
+              SetshowAddPetBtn={() => {}}
               getList={getList}
               pet={pet}
               petIdx={idx}
@@ -88,26 +97,14 @@ const PetList = () => {
             />
           )
         })}
-        {showAddPetBtn ? (
-          systemType ? (
-            <AtButton
-              className="mx-4 mt-1 flex items-center justify-center h-4 text-rc30"
-              onClick={addPet}
-              type="primary"
-            >
-              添加宠物
-            </AtButton>
-          ) : (
-            <AtButton
-              className="mx-4 mt-1 flex items-center h-4 justify-center"
-              customStyle={{ fontSize: '.35rem' }}
-              onClick={addPet}
-              type="primary"
-            >
-              添加宠物
-            </AtButton>
-          )
-        ) : null}
+        <AtButton
+          className="mx-4 mt-1"
+          customStyle={{ fontSize: '.35rem' }}
+          type="primary"
+          onClick={addPet}
+        >
+          添加宠物
+        </AtButton>
       </View>
     </>
   )

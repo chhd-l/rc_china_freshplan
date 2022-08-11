@@ -21,13 +21,6 @@ const petEdit = () => {
           ? <Step2 pet={{}} onStepChange={setStep} />
           : null
       }
-      <View className="mt-2">
-        <Image
-          className="w-full"
-          mode="widthFix"
-          src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/dog01.png"
-        />
-      </View>
     </View>
   );
 }
