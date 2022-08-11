@@ -16,11 +16,15 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
     setPreviousMargin(pw)
   }, [])
 
+  const handlePetList = () => {
+    my.navigateTo({ url: '/pages/petList/index' });
+  }
+
   return (
     <View className="Pets bg-white my-1" style={{ borderRadius: '16px' }}>
       <View className="PetTitle flex items-center justify-between p-1">
         {type === 'plan' ? 'Fresh Plan' : '我的宠物'}
-        <Image style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />
+        <Image onClick={handlePetList} style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />
       </View>
       <View className="splitline ml-1" />
       <View className="box-border px-2">
