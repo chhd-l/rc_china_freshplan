@@ -1,7 +1,8 @@
+import OrderCard from '@/components/OrderCard'
 import { View } from '@tarojs/components'
 import { getCurrentInstance } from '@tarojs/taro'
 import { useState } from 'react'
-import { AtTabs, AtTabsPane } from 'taro-ui'
+import { AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 
 const tabList = [{ title: '全部' }, { title: '待付款' }, { title: '待发货' }, { title: '待收货' }]
@@ -12,11 +13,14 @@ const OrderList = () => {
   const [current, setCurrent] = useState(Number(router?.params?.status) || 0)
 
   return (
-    <View>
+    <View className="myOrderList pb-2">
+      <View className="bg-white py-0.5">
+        <AtSearchBar value="" onChange={() => null} />
+      </View>
       <AtTabs current={current} tabList={tabList} onClick={(e) => setCurrent(e)} swipeable>
         {tabList.map((item, index) => (
           <AtTabsPane current={index} index={index} key={item.title}>
-            <View>1111</View>
+            <OrderCard />
           </AtTabsPane>
         ))}
       </AtTabs>

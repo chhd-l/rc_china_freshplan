@@ -2,6 +2,7 @@
 
 export default defineAppConfig({
   pages: [
+    'pages/orderDetail/index',
     'pages/subscription/index',
     'pages/account/index',
     'pages/addressManage/index',

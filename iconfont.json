@@ -6,7 +6,7 @@
   "default_icon_size": 18,
   "use_typescript": true,
   "platforms": [
-    "weapp"
+    "alipay"
   ],
   "design_width": 750
 }

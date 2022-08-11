@@ -44,7 +44,7 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
               previousMargin={previousMargin + 'px'}
               current={current}
               onChange={(e) => {
-                const index = e.detail.current === 4 ? 0 : e.detail.current
+                const index = e.detail.current === list.length ? 0 : e.detail.current
                 setCurrent(index)
               }}
             >
