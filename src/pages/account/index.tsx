@@ -33,12 +33,7 @@ const Account = () => {
   }
 
   return (
-    <View
-      className="Account pb-2"
-      style={{
-        backgroundColor: '#F9F9F9',
-      }}
-    >
+    <View className="Account pb-2">
       <View className="flex items-center loginHerder">
         <AtAvatar className="mx-1.5" circle image={consumer?.avatarUrl ?? "https://jdc.jd.com/img/200"} />
         {/* <Text>点击授权登录</Text> */}
