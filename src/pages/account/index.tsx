@@ -16,9 +16,8 @@ const Account = () => {
   return (
     <View className="Account pb-2">
       <View className="flex items-center loginHerder">
-        <AtAvatar className="mx-1.5" circle image="https://jdc.jd.com/img/200" />
+        <AtAvatar size="large" className="mx-1.5" circle image="https://jdc.jd.com/img/200" />
         <Text className="UserName">点击授权登录</Text>
-        <Text className="rcciconfont rccicon-freshweixuanzhong" style={{ fontSize: '28px' }} />
         {/* <View className="flex flex-col">
           <Text className="UserName">小于的码</Text>
           <Text className="UserNameIcon flex items-center">

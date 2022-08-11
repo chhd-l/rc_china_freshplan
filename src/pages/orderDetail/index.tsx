@@ -1,3 +1,4 @@
+import { CDNIMGURL } from '@/lib/constants'
 import { Image, ScrollView, Text, View } from '@tarojs/components'
 import { AtButton, AtList, AtListItem } from 'taro-ui'
 import './index.less'
@@ -8,7 +9,10 @@ const OrderDetails = () => {
     <ScrollView scrollY overflow-anchor={false} className="pb-1 OrderDetails">
       <View className="bg-white">
         <View className="mx-2 mt-1 py-0.5 flex items-center header">
-          <Image className="h-full mr-1 headerImage" src="https://jdc.jd.com/img/200" />
+          <Image
+            className="h-full mr-1 headerImage"
+            src={`${CDNIMGURL}${1 === 1 ? 'to%20be%20paid.png' : 'to%20be%20shipped.png'}`}
+          />
           <View className="flex flex-col">
             <Text>等待买家付款</Text>
             <Text>商家会在七天内发货</Text>

@@ -2,12 +2,12 @@
 
 export default defineAppConfig({
   pages: [
-    'pages/orderDetail/index',
-    'pages/subscription/index',
     'pages/account/index',
+    'pages/subscription/index',
+    'pages/elencoOrdini/index',
+    'pages/orderDetail/index',
     'pages/addressManage/index',
     'pages/newAddress/index',
-    'pages/elencoOrdini/index',
     'pages/petList/index',
     'pages/petEdit/index',
   ],

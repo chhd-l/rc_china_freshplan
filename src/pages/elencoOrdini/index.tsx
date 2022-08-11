@@ -1,5 +1,6 @@
 import OrderCard from '@/components/OrderCard'
-import { View } from '@tarojs/components'
+import { CDNIMGURL } from '@/lib/constants'
+import { Image, Text, View } from '@tarojs/components'
 import { getCurrentInstance } from '@tarojs/taro'
 import { useState } from 'react'
 import { AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
@@ -24,6 +25,12 @@ const OrderList = () => {
           </AtTabsPane>
         ))}
       </AtTabs>
+      <View className="noOrders flex flex-col items-center justify-center mt-8">
+        <Image className="noOrdersImage" src={`${CDNIMGURL}Empty%20orders.png`} />
+        <View className="mt-2 flex justify-center">
+          <Text className="ml-0.5">汪汪~啥也没有!</Text>
+        </View>
+      </View>
       {/* <AtModal
         isOpened={showActionTipModal}
         title="确认"
