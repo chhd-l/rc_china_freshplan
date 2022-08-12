@@ -1,5 +1,4 @@
 import Taro from '@tarojs/taro'
-import { orderDetailMockData, orderListMockData } from '@/mock/order'
 import { session } from '@/utils/global'
 import omit from 'lodash/omit'
 import { pay } from '@/framework/api/payment/pay'
@@ -7,7 +6,7 @@ import routers from '@/routers'
 import cloneDeep from 'lodash.cloneDeep'
 import { formatDateToApi } from '@/utils/utils'
 import apis from '@/framework/config/api-config'
-import ApiRoot, { isMock } from './fetcher'
+import ApiRoot from './fetcher'
 
 export const createOrder = async ({ orderItems, address, remark, deliveryTime, voucher, isWXGroupVip }) => {
   try {
@@ -139,25 +138,17 @@ export const getOrderSetting = async () => {
 
 export const getOrderList = async (queryOrderListParams: any) => {
   try {
-    if (isMock) {
-      return {
-        total: 0,
-        records: orderListMockData,
-      }
-    } else {
-      console.log('query orders view params', queryOrderListParams)
-      let wxLoginRes = Taro.getStorageSync('wxLoginRes')
-      const params = Object.assign(queryOrderListParams, {
-        withTotal: true,
-        sample: { ...queryOrderListParams?.sample, consumerId: wxLoginRes?.consumerAccount?.consumerId },
-      })
-      let res = await ApiRoot({ url: apis?.orderList }).orders().getOrders({ queryOrderListParams: params })
-      const { records, total } = res
-      console.log('query orders view list', res)
-      return {
-        total: total || 0,
-        records: records || [],
-      }
+    let wxLoginRes = Taro.getStorageSync('wxLoginRes')
+    const params = Object.assign(queryOrderListParams, {
+      withTotal: true,
+      sample: { ...queryOrderListParams?.sample, consumerId: wxLoginRes?.consumerAccount?.consumerId },
+    })
+    let res = await ApiRoot({ url: apis?.orderList }).orders().getOrders({ queryOrderListParams: params })
+    const { records, total } = res
+    console.log('query orders view list', res)
+    return {
+      total: total || 0,
+      records: records || [],
     }
   } catch (e) {
     console.log(e)
@@ -170,13 +161,9 @@ export const getOrderList = async (queryOrderListParams: any) => {
 
 export const getOrderDetail = async ({ orderNum }: { orderNum: string }) => {
   try {
-    if (isMock) {
-      return orderDetailMockData
-    } else {
-      let res = await ApiRoot({ url: apis.orderDetail }).orders().getOrder({ orderNum })
-      console.info('res', res)
-      return res
-    }
+    let res = await ApiRoot({ url: apis.orderDetail }).orders().getOrder({ orderNum })
+    console.info('res', res)
+    return res
   } catch (e) {
     console.log(e)
     return {}

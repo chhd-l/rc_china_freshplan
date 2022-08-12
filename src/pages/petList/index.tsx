@@ -1,18 +1,12 @@
-import NavBar from '@/components/common/Navbar'
 import PetItem from '@/components/consumer/PetItem'
-import { getPets } from '@/framework/api/pet/get-pets'
 import { PetListItemProps } from '@/framework/types/consumer'
-import { initNewPet } from '@/lib/consumer'
 import { consumerAtom } from '@/store/consumer'
 import { petInfoListAuto } from '@/store/pets'
-import { getAge } from '@/utils/utils'
 import { View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useAtom } from 'jotai'
-import cloneDeep from 'lodash.cloneDeep'
 import { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
-import IconFont from '@/iconfont';
 import './index.less'
 
 const PetList = () => {
@@ -86,7 +80,7 @@ const PetList = () => {
         {petList.map((pet, idx) => {
           return (
             <PetItem
-              showAddPetBtn={true}
+              showAddPetBtn
               key={pet.id}
               SetshowAddPetBtn={() => {}}
               getList={getList}
@@ -97,12 +91,7 @@ const PetList = () => {
             />
           )
         })}
-        <AtButton
-          className="mx-4 mt-1"
-          customStyle={{ fontSize: '.35rem' }}
-          type="primary"
-          onClick={addPet}
-        >
+        <AtButton className="mx-4 mt-1" customStyle={{ fontSize: '.35rem' }} type="primary" onClick={addPet}>
           添加宠物
         </AtButton>
       </View>
