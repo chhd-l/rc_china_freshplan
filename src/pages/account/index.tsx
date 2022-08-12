@@ -1,13 +1,13 @@
 // import Announcement from '@/components/common/Announcement'
-import { useEffect } from 'react';
+import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { CDNIMGURL } from '@/lib/constants'
-import { Image, Text, View, Button } from '@tarojs/components'
+import { consumerAtom } from '@/store/consumer'
+import { Button, Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { useAtom } from 'jotai'
+import { useEffect } from 'react'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
-import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login';
-import { useAtom } from 'jotai';
-import { consumerAtom } from '@/store/consumer';
 import './index.less'
 
 const orderTypeList = [
@@ -17,43 +17,53 @@ const orderTypeList = [
 ]
 
 const Account = () => {
-  const [consumer, setConsumer] = useAtom(consumerAtom);
+  const [consumer, setConsumer] = useAtom(consumerAtom)
 
   useEffect(() => {
-    const res: any = my.getStorageSync({ key: 'wxLoginRes' });
+    const res: any = my.getStorageSync({ key: 'wxLoginRes' })
     if (!res.error && res.success && res.data?.userInfo?.id) {
-      setConsumer(res.data.userInfo);
+      setConsumer(res.data.userInfo)
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleLogin = () => {
     loginWithAlipay((data) => {
-      setConsumer(data);
-    });
+      setConsumer(data)
+    })
   }
 
   return (
     <View className="Account pb-2">
       <View className="flex items-center loginHerder">
-        <AtAvatar className="mx-1.5" circle image={consumer?.avatarUrl ?? "https://jdc.jd.com/img/200"} />
-        {/* <Text>点击授权登录</Text> */}
-        {consumer?.id
-          ? <View className="flex flex-col">
-              <Text className="UserName">{consumer?.nickName}</Text>
-              <Text className="UserNameIcon flex items-center">
-                <Image
-                  style={{
-                    width: '15px',
-                    height: '15px',
-                    marginRight: '3px',
-                  }}
-                  className="rounded-full"
-                  src={`${CDNIMGURL}consumer_type.png`}
-                />
-                {consumer?.level}
-              </Text>
-            </View>
-          : <Button style={{backgroundColor:'transparent',border:'none'}} type="default" openType="getAuthorize" scope="phoneNumber" onGetAuthorize={handleLogin}>点击授权登录</Button>}
+        <AtAvatar className="mx-1.5" circle image={consumer?.avatarUrl || 'https://jdc.jd.com/img/200'} />
+        {consumer?.id ? (
+          <View className="flex flex-col">
+            <Text className="UserName">{consumer?.nickName}</Text>
+            <Text className="UserNameIcon flex items-center">
+              <Image
+                style={{
+                  width: '15px',
+                  height: '15px',
+                  marginRight: '3px',
+                }}
+                className="rounded-full"
+                src={`${CDNIMGURL}consumer_type.png`}
+              />
+              {consumer?.level}
+            </Text>
+          </View>
+        ) : (
+          <Button
+            style={{ backgroundColor: 'transparent', border: 'none' }}
+            type="default"
+            openType="getAuthorize"
+            scope="phoneNumber"
+            onGetAuthorize={handleLogin}
+          >
+            点击授权登录
+          </Button>
+        )}
       </View>
       {/* 订单列表 */}
       <View className="p-1 h-full">

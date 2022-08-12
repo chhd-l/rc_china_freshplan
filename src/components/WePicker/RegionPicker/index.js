@@ -1,9 +1,9 @@
+import { PickerView, PickerViewColumn, View } from '@tarojs/components';
+import Taro from '@tarojs/taro';
 import PropTypes from 'prop-types';
-import Taro from '@tarojs/taro'
-import React, { Component } from 'react'
-import { View, PickerView, PickerViewColumn } from '@tarojs/components'
-import './index.scss'
-import areaData from "./areadata.js"
+import { Component } from 'react';
+import areaData from "./areadata.js";
+import './index.scss';
 
 export default class RegionPicker extends Component {
     constructor(props) {
@@ -24,7 +24,7 @@ export default class RegionPicker extends Component {
         this.initData();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (prevProps.value !== this.state.values) {
             // this.initData();
             this.setState({

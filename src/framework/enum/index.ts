@@ -17,11 +17,8 @@ export enum CartOrigin {
   Merchant = "Merchant",
 }
 
-export enum OrderState {
-  "Open" = "Open",
-  "Confirmed" = "Confirmed",
-  "Complete" = "Complete",
-  "Cancelled" = "Cancelled",
+export type OrderState = {
+  orderState: string
 }
 
 export enum PaymentState {

@@ -6,7 +6,7 @@ import Step1 from '@/components/consumer/EditPet/step1';
 import Step2 from '@/components/consumer/EditPet/step2';
 import Step3 from '@/components/consumer/EditPet/step3';
 
-import './index.less';
+import './index.less'
 
 const petEdit = () => {
   const [step, setStep] = useState<PetStep>(PetStep.STEP1);
@@ -42,7 +42,7 @@ const petEdit = () => {
           : null
       }
     </View>
-  );
+  )
 }
 
 export default petEdit

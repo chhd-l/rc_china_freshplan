@@ -1,8 +1,8 @@
+import { Text, View } from '@tarojs/components';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react'
-import { View, Text } from '@tarojs/components'
-import RegionPicker from "./RegionPicker/index"
-import './index.scss'
+import { Component } from 'react';
+import './index.scss';
+import RegionPicker from "./RegionPicker/index";
 
 let defaultTime = new Date().getFullYear()
 export default class WPicker extends Component {
@@ -52,7 +52,7 @@ export default class WPicker extends Component {
         })
     }
 
-    onCancel = (res) => {
+    onCancel = () => {
         this.setState({
             visible: false
         })
@@ -70,12 +70,12 @@ export default class WPicker extends Component {
     }
 
     render() {
-        const { itemHeight, visible, confirmFlag, createKey } = this.state
+        const { itemHeight, visible, createKey } = this.state
         return (
             <View class="w-picker" key={createKey} data-key={createKey}>
-                <View class={'mask' + (visible ? ' visible' : '')} onTap={this.onCancel} catchtouchmove={true}></View>
+                <View class={'mask' + (visible ? ' visible' : '')} onTap={this.onCancel} catchtouchmove></View>
                 <View class={'w-picker-cnt' + (visible ? ' visible' : '')}>
-                    <View class="w-picker-header" catchtouchmove={true}>
+                    <View class="w-picker-header" catchtouchmove>
                         <Text onTap={this.onCancel}>取消</Text>
                         {this.props.children}
                         <Text style={'color:' + this.props.themeColor} onTap={this.pickerConfirm}>确定</Text>
@@ -156,4 +156,3 @@ WPicker.defaultProps = {
     startYear: 1970,
     endYear: defaultTime
 };
-

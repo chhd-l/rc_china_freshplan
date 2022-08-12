@@ -1,4 +1,4 @@
-import RegionPicker from '@/components/common/WePicker/index'
+import RegionPicker from '@/components/WePicker/index'
 import { createAddress, updateAddress } from '@/framework/api/consumer/address'
 import { Address } from '@/framework/types/consumer'
 import { pickForUpdate } from '@/utils/utils'
@@ -18,8 +18,6 @@ const NewAddress = () => {
     region: '',
     detail: '',
     isDefault: false,
-    consumerId: '5bad912b-2504-01a5-0aef-4aa05d7ea3b6',
-    storeId: '12345678',
   })
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isOpenPhone, setIsOpenPhone] = useState<boolean>(false)
@@ -27,8 +25,6 @@ const NewAddress = () => {
   const [address, setAddress] = useState(['浙江省', '杭州市', '滨江区'])
   const { province, city, region } = addressInfo
   const [initData, setInitData] = useState(null)
-
-  const [chekList, setChekList] = useState<string[]>([])
 
   const [WPickerRef, setWPickerRef] = useState({
     show: () => {},
@@ -155,13 +151,13 @@ const NewAddress = () => {
               className="radioText"
               options={[
                 {
-                  value: 'isDefault',
+                  value: true,
                   label: '默认地址',
                 },
               ]}
-              selectedList={chekList}
+              selectedList={[addressInfo.isDefault]}
               onChange={(e) => {
-                setChekList(e)
+                if (e.length === 0) return null
                 updateAddressInfo(!addressInfo.isDefault, 'isDefault')
               }}
             />

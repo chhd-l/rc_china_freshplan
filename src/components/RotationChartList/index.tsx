@@ -17,11 +17,11 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
   }, [])
 
   const handlePetList = () => {
-    my.navigateTo({ url: '/pages/petList/index' });
+    my.navigateTo({ url: '/pages/petList/index' })
   }
 
   return (
-    <View className="Pets bg-white my-1" style={{ borderRadius: '16px' }}>
+    <View className="Pets bg-white my-1">
       <View className="PetTitle flex items-center justify-between p-1">
         {type === 'plan' ? 'Fresh Plan' : '我的宠物'}
         <Image onClick={handlePetList} style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />

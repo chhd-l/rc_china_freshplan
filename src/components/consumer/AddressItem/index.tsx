@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import { View, Radio, Text, Image } from '@tarojs/components'
-import { AtModal } from 'taro-ui'
-import { Address } from '@/framework/types/consumer'
-import Taro, { getCurrentPages } from '@tarojs/taro'
 import { deleteAddress, updateAddress } from '@/framework/api/consumer/address'
-import routers from '@/routers'
+import { Address } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
+import routers from '@/routers'
+import { Image, Text, View } from '@tarojs/components'
+import Taro, { getCurrentPages } from '@tarojs/taro'
+import { useState } from 'react'
+import { AtCheckbox, AtModal } from 'taro-ui'
 import './index.less'
 
 const AddressItem = ({
@@ -55,14 +55,6 @@ const AddressItem = ({
       if (res) {
         isDefaultUpdateSuccess && isDefaultUpdateSuccess(addressInfo, !addressInfo.isDefault)
       }
-      Taro.setStorage({
-        key: 'select-address',
-        data: JSON.stringify(addressInfo),
-        success: function (selectRes) {
-          console.log(selectRes)
-          // Taro.redirectTo({ url: routers.checkout })
-        },
-      })
     } else {
       //不允许将默认地址设置成非默认地址
       return false
@@ -75,7 +67,6 @@ const AddressItem = ({
       console.log(el.route)
       return el.route === routers.checkout.replace('/', '')
     })
-    console.log(findCheckoutIndex)
     if (findCheckoutIndex > -1) {
       Taro.getStorage({
         key: 'address-from-checkout',
@@ -112,25 +103,14 @@ const AddressItem = ({
       </View>
       <View className="flex flex-row justify-between items-center mt-1">
         <View>
-          <Radio
-            key={addressInfo.id}
-            value="选中"
-            checked={Boolean(addressInfo.isDefault)}
-            color="#96CC39"
-            className="text-gray-400"
-            onClick={() => setAsDefault()}
+          <AtCheckbox
+            options={[{ label: '默认地址', value: true }]}
+            selectedList={[addressInfo.isDefault]}
+            onChange={setAsDefault}
           />
-          默认地址
         </View>
         <View className="flex flex-row items-center">
-          <Image
-            style={{ width: '30px', height: '30px' }}
-            src={`${CDNIMGURL}edit_address.png`}
-            onClick={(e) => {
-              console.log(e)
-              editAddress()
-            }}
-          />
+          <Image style={{ width: '30px', height: '30px' }} src={`${CDNIMGURL}edit_address.png`} onClick={editAddress} />
           <Image
             className="ml-1"
             style={{ width: '28px', height: '28px' }}
