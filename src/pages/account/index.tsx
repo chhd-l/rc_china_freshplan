@@ -36,7 +36,7 @@ const Account = () => {
   return (
     <View className="Account pb-2">
       <View className="flex items-center loginHerder">
-        <AtAvatar className="mx-1.5" circle image={consumer?.avatarUrl ?? 'https://jdc.jd.com/img/200'} />
+        <AtAvatar className="mx-1.5" circle image={consumer?.avatarUrl || 'https://jdc.jd.com/img/200'} />
         {consumer?.id ? (
           <View className="flex flex-col">
             <Text className="UserName">{consumer?.nickName}</Text>

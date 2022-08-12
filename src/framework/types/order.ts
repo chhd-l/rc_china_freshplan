@@ -46,7 +46,7 @@ export interface OrderPrice {
 
 export interface OrderState {
   orderType: string
-  orderState: string
+  orderState: 'UNPAID' | 'TO_SHIP' | 'SHIPPED' | 'COMPLETED' | 'VOID'
   storeId: string
   lastModifiedAt: string
   lastModifiedBy: string
