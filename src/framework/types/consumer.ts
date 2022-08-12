@@ -32,8 +32,8 @@ export interface PetListItemProps {
   age: string
   id: string
   name: string
-  type: PetType
-  gender: PetGender
+  type?: PetType
+  gender?: PetGender
   breed: string
   isSterilized: boolean
   birthday: string
@@ -55,4 +55,13 @@ export enum PetGender {
 export enum Sterilized {
   No,
   Yes,
+}
+
+export enum PetStep {
+  STEP1 = 13,
+  STEP2 = 26,
+  STEP3 = 41,
+  STEP4 = 57,
+  STEP5 = 72,
+  STEP6 = 87,
 }
