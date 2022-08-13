@@ -43,6 +43,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
             const { url } = JSON.parse(vla.data)
             console.log('url', url)
             onChange("image", url);
+            setShow(false);
           },
         })
       },
@@ -63,7 +64,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
       </View>
       <View className="mt-2 flex justify-between items-center">
         <View className="flex-1">
-          <Input className="rcc-input" onInput={handleNameChange} />
+          <Input value={pet.name} className="rcc-input" onInput={handleNameChange} />
         </View>
         <Text onClick={handleComplete} className="rcciconfont rccicon-success text-color-primary ml-2 text-48"></Text>
       </View>

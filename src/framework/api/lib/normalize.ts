@@ -14,6 +14,15 @@ export const normalizePetsForApi = (petInfo: any) => {
     //处理日期
     data.birthday = formatDateToApi(data.birthday)
   }
+  if (data.recentHealth) {
+    data.recentHealth = data.recentHealth.join('|')
+  }
+  if (data.recentWeight) {
+    data.recentWeight = Number(data.recentWeight)
+  }
+  if (data.targetWeight) {
+    data.targetWeight = Number(data.targetWeight)
+  }
   console.info('data', data)
   return data
 }
@@ -167,6 +176,10 @@ const petItemApiArr = [
   'consumerId',
   'operator',
   'id',
+  'recentWeight',
+  'targetWeight',
+  'recentPosture',
+  'recentHealth',
 ]
 const petItemFeArr = [
   'name',
@@ -180,6 +193,10 @@ const petItemFeArr = [
   'consumerId',
   'operator',
   'id',
+  'recentWeight',
+  'targetWeight',
+  'recentPosture',
+  'recentHealth',
 ]
 
 export const normalizeCartData = (cart: any, productSkuInfo: any, isSubscription?: boolean) => {

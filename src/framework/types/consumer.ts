@@ -34,12 +34,17 @@ export interface PetListItemProps {
   name: string
   type?: PetType
   gender?: PetGender
+  code?: string
   breed: string
   isSterilized: boolean
   birthday: string
   image: string
   isOpened?: boolean
   consumerId?: string
+  recentWeight?: string
+  recentPosture?: PetPosture
+  targetWeight?: string
+  recentHealth?: string[]
 }
 
 export enum PetType {
@@ -55,6 +60,23 @@ export enum PetGender {
 export enum Sterilized {
   No,
   Yes,
+}
+
+export enum PetPosture {
+  Emaciated = 'EMACIATED',
+  Thinner = 'THINNER',
+  Standard = 'STANDARD',
+  Fat = 'FAT',
+  Obesity = 'OBESITY',
+}
+
+export enum PetHealth {
+  PICKY_EATER = '1',
+  FOOD_ALLERGIES_OR_STOMAC = '2',
+  H_SENSITIVITIES = '3',
+  DULL_OR_FLAKY_FUR = '4',
+  ARTHRITIS_OR_JOINT_PAIN = '5',
+  NONE = '0',
 }
 
 export enum PetStep {

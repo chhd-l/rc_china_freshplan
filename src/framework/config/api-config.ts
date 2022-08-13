@@ -39,7 +39,7 @@ const API_CONFIG: IApiConfig = {
     address_list: "https://fc-com-ess-list-dev-common-quileiwebv.cn-shanghai.fcapp.run/fc-com-address-list/graphql",
     common_subscription: "https://fc-com-cription-dev-common-ogvrfcxebk.cn-shanghai.fcapp.run/fc-com-subscription/graphql",
     common_pet: "https://fc-com-pet-dev-common-oecjgzxfmp.cn-shanghai.fcapp.run/fc-com-pet/graphql",
-    wx_pet: "https://fc-mp-pet-dev-miniprogram-mnsracjtdg.cn-shanghai.fcapp.run/fc-mp-pet/graphql",
+    wx_pet: "http://localhost:7000/fc-mp-pet/graphql",
     consumer: 'https://fc-sc-consumer-dev-selercenter-ybuuesxcai.cn-shanghai.fcapp.run/fc-sc-consumer/graphql',
     storeSetting: 'https://fc-com-setting-dev-common-dmgwlxbcvr.cn-shanghai.fcapp.run/fc-com-store-setting/graphql',
     liveStreaming: 'https://fc-com-treaming-dev-common-unckjafhvm.cn-shanghai.fcapp.run/fc-com-live-streaming/graphql',

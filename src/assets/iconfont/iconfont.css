@@ -1,9 +1,9 @@
 @font-face {
   font-family: "rcciconfont"; /* Project id 3579405 */
-  src: url('iconfont.woff2?t=1660208676231') format('woff2'),
-       url('iconfont.woff?t=1660208676231') format('woff'),
-       url('iconfont.ttf?t=1660208676231') format('truetype'),
-       url('iconfont.svg?t=1660208676231#rcciconfont') format('svg');
+  src: url('iconfont.woff2?t=1660375614681') format('woff2'),
+       url('iconfont.woff?t=1660375614681') format('woff'),
+       url('iconfont.ttf?t=1660375614681') format('truetype'),
+       url('iconfont.svg?t=1660375614681#rcciconfont') format('svg');
 }
 
 .rcciconfont {
@@ -12,6 +12,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.rccicon-add:before {
+  content: "\e601";
+}
+
+.rccicon-right:before {
+  content: "\e608";
+}
+
+.rccicon-edit:before {
+  content: "\e609";
 }
 
 .rccicon-picture:before {

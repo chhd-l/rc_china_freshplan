@@ -5,6 +5,9 @@ import { PetListItemProps, PetStep } from '@/framework/types/consumer';
 import Step1 from '@/components/consumer/EditPet/step1';
 import Step2 from '@/components/consumer/EditPet/step2';
 import Step3 from '@/components/consumer/EditPet/step3';
+import Step4 from '@/components/consumer/EditPet/step4';
+import Step5 from '@/components/consumer/EditPet/step5';
+import Step6 from '@/components/consumer/EditPet/step6';
 
 import './index.less'
 
@@ -23,7 +26,7 @@ const petEdit = () => {
   });
 
   const handleSetPet = (key: keyof PetListItemProps, value: any) => {
-    setPet(Object.assign(pet, { [key]: value }));
+    setPet(Object.assign({}, pet, { [key]: value }));
   }
 
   return (
@@ -39,6 +42,12 @@ const petEdit = () => {
           ? <Step2 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
           : step === PetStep.STEP3
           ? <Step3 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
+          : step === PetStep.STEP4
+          ? <Step4 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
+          : step === PetStep.STEP5
+          ? <Step5 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
+          : step === PetStep.STEP6
+          ? <Step6 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
           : null
       }
     </View>
