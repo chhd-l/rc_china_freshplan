@@ -51,7 +51,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
   }
 
   return (
-    <View className="mx-1 mt-2">
+    <View className="mx-1 pt-2">
       <View className="mt-3 text-center flex justify-center">
         <View className="pet-avatar flex justify-center items-center" onClick={() => setShow(true)}>
           {pet.image

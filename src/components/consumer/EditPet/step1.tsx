@@ -18,7 +18,8 @@ const Step1 = ({ pet, onStepChange, onChange }: IProps) => {
   }
 
   return (
-    <View className="mx-1 mt-2">
+    <View className="mx-1 pt-2">
+      <View className="mt-1"></View>
       <PetTitle>您的爱宠是</PetTitle>
       <Text className="text-24" style={{marginLeft: '14PX'}}>爱宠的健康之旅，从这里开始。</Text>
       <View className="mt-3 flex justify-around items-center">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { AtProgress } from 'taro-ui';
-import { PetListItemProps, PetStep } from '@/framework/types/consumer';
+import { PetListItemProps, PetStep, PetPosture } from '@/framework/types/consumer';
 import Step1 from '@/components/consumer/EditPet/step1';
 import Step2 from '@/components/consumer/EditPet/step2';
 import Step3 from '@/components/consumer/EditPet/step3';
@@ -17,16 +17,22 @@ const petEdit = () => {
     age: '',
     birthday: '',
     breed: '',
+    code: '',
     gender: undefined,
     id: '-1',
     image: '',
     isSterilized: false,
     name: '',
     type: undefined,
+    recentPosture: PetPosture.Standard,
   });
 
   const handleSetPet = (key: keyof PetListItemProps, value: any) => {
     setPet(Object.assign({}, pet, { [key]: value }));
+  }
+
+  const handleSetPetAll = (obj: Partial<PetListItemProps>) => {
+    setPet(Object.assign({}, pet, obj));
   }
 
   return (
@@ -41,7 +47,7 @@ const petEdit = () => {
           : step === PetStep.STEP2
           ? <Step2 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
           : step === PetStep.STEP3
-          ? <Step3 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
+          ? <Step3 pet={pet} onStepChange={setStep} onChange={handleSetPet} onChangeAll={handleSetPetAll} />
           : step === PetStep.STEP4
           ? <Step4 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
           : step === PetStep.STEP5

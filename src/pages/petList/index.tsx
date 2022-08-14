@@ -2,6 +2,8 @@ import PetItem from '@/components/consumer/PetItem'
 import { PetListItemProps } from '@/framework/types/consumer'
 import { consumerAtom } from '@/store/consumer'
 import { petInfoListAuto } from '@/store/pets'
+import { getPets } from '@/framework/api/pet/get-pets'
+import { getAge } from '@/utils/utils'
 import { View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useAtom } from 'jotai'
@@ -21,46 +23,15 @@ const PetList = () => {
   let petNumber = router?.params?.petNumber || '1'
 
   const getList = async () => {
-    // let res = (await getPets({ consumerId: consumerInfo?.id })) || []
-    // console.log('resxxxxxxxxxxxxx', res)
-    // res.forEach((item) => {
-    //   item.age = getAge(item.birthday)
-    // })
-    // setPetInfoList(res)
-    // if (res.length) {
-    //   setPetList(res)
-    //   SetshowAddPetBtn(true)
-    // } else {
-    //   setPetList([
-    //     {
-    //       age: '',
-    //       birthday: '',
-    //       breed: '',
-    //       // consumerId: '20220415',
-    //       gender: 'MALE',
-    //       id: '-1',
-    //       image: '',
-    //       isSterilized: false,
-    //       name: '',
-    //       type: 'CAT',
-    //     },
-    //   ])
-    //   SetshowAddPetBtn(false)
-    // }
-    setPetList([
-      {
-        age: '',
-        birthday: '',
-        breed: '',
-        // consumerId: '20220415',
-        gender: 'MALE',
-        id: '-1',
-        image: '',
-        isSterilized: false,
-        name: '',
-        type: 'CAT',
-      },
-    ])
+    let res = (await getPets({ consumerId: consumerInfo?.id })) || []
+    console.log('resxxxxxxxxxxxxx', res)
+    res.forEach((item) => {
+      item.age = getAge(item.birthday)
+    })
+    setPetInfoList(res)
+    if (res.length) {
+      setPetList(res)
+    }
   }
 
   const addPet = () => {
@@ -76,7 +47,7 @@ const PetList = () => {
 
   return (
     <>
-      <View className="pet-list  py-rc8" style={{ backgroundColor: '#eee', minHeight: '100vh' }}>
+      <View className="pet-list" style={{ backgroundColor: '#eee', minHeight: '100vh' }}>
         {petList.map((pet, idx) => {
           return (
             <PetItem
@@ -91,9 +62,11 @@ const PetList = () => {
             />
           )
         })}
-        <AtButton className="mx-4 mt-1" customStyle={{ fontSize: '.35rem' }} type="primary" onClick={addPet}>
-          添加宠物
-        </AtButton>
+        <View className="add-pet-btn">
+          <AtButton className="mx-4 mt-1 mb-2 rounded-full" customStyle={{ fontSize: '.35rem' }} type="primary" onClick={addPet}>
+            添加宠物
+          </AtButton>
+        </View>
       </View>
     </>
   )

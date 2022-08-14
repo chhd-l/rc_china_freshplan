@@ -1,21 +1,21 @@
-import { useState } from 'react';
 import { View, Text, Picker } from '@tarojs/components';
 import { PetStep } from '@/framework/types/consumer';
-import Taro from '@tarojs/taro';
 import PetTitle from './components/PetTitle';
 import { IProps } from './step1';
+import moment from 'moment';
 
 import './step.less';
 
 const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
 
   const handleChangeDate = (e) => {
-    onChange('birthday', e.detail.value);
+    const d = moment(e.detail.value);
+    onChange('birthday', d.format('YYYY-MM-DD'));
   }
 
   return (
-    <View className="mx-1 mt-2">
-      <View className="mt-4">
+    <View className="mx-1 pt-2">
+      <View className="mt-2">
         <PetTitle>{pet.name}多大了<Text className="ml-1 text-22 text-gray-800">(请选择出生日期)</Text></PetTitle>
       </View>
       <View>
@@ -27,8 +27,8 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
           onChange={handleChangeDate}
         >
           <View className="mt-1 choose-other-breed flex items-center">
-            <Text className="text-28 mx-2 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
-            <Text className="rcciconfont rccicon-right text-34 mx-2" />
+            <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
+            <Text className="rcciconfont rccicon-right text-34 mx-1" />
           </View>
         </Picker>
       </View>

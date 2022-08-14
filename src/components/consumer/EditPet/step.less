@@ -56,6 +56,9 @@
   border-radius: 20px;
   line-height: 80px;
   background-color: #f6f6f6;
+  &.active {
+    background-color: #96CC39;
+  }
 }
 
 .pet-edit-btns {
@@ -127,5 +130,28 @@
   border-radius: 20px;
   &.active {
     background-color: #96CC39;
+  }
+}
+
+.pet-health-desc {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 17%;
+    margin-left: -20px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent transparent #f6f6f6 transparent;
+  }
+  &.pet-thin::before {
+    left: 17%;
+  }
+  &.pet-std::before {
+    left: 50%;
+  }
+  &.pet-fat::before {
+    left: 83%;
   }
 }

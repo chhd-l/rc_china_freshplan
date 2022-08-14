@@ -32,8 +32,8 @@ const Step6 = ({ pet, onStepChange, onChange }: IProps) => {
   }
 
   return (
-    <View className="mx-1 mt-2">
-      <View className="mt-4">
+    <View className="mx-1 pt-2">
+      <View className="mt-2">
         <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-22 text-gray-800">(可多选)</Text></PetTitle>
       </View>
       <View>
