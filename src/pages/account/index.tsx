@@ -12,9 +12,9 @@ import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import './index.less'
 
 const orderTypeList = [
-  { label: '待付款', icon: CDNIMGURL + 'icon_MP_Unpaid.svg', url: '/pages/elencoOrdini/index?status=1' },
-  { label: '待发货', icon: CDNIMGURL + 'icon_MP_To ship.svg', url: '/pages/elencoOrdini/index?status=2' },
-  { label: '待收货', icon: CDNIMGURL + 'icon_MP_Shipped.svg', url: '/pages/elencoOrdini/index?status=3' },
+  { label: '待付款', icon: CDNIMGURL + 'my-topay.png', url: '/pages/elencoOrdini/index?status=1' },
+  { label: '待发货', icon: CDNIMGURL + 'my-toship.png', url: '/pages/elencoOrdini/index?status=2' },
+  { label: '待收货', icon: CDNIMGURL + 'my-toconfirm.png', url: '/pages/elencoOrdini/index?status=3' },
 ]
 
 const Account = () => {
@@ -47,7 +47,7 @@ const Account = () => {
   return (
     <View className="Account pb-2">
       <View className="flex items-center loginHerder">
-        <AtAvatar size="large" className="mx-1.5" circle image={consumer?.avatarUrl || 'https://jdc.jd.com/img/200'} />
+        <AtAvatar size="large" className="mx-1.5" circle image={consumer?.avatarUrl || CDNIMGURL + 'my-notlo.png'} />
         {consumer?.id ? (
           <View className="flex flex-col">
             <Text className="UserName">{consumer?.nickName}</Text>
@@ -79,9 +79,10 @@ const Account = () => {
       {/* 订单列表 */}
       <View className="p-1 h-full">
         <View>
-          <AtList className="orderAtList">
+          <AtList hasBorder={false} className="orderAtList">
             <AtListItem
               title="我的订单"
+              hasBorder={false}
               arrow="right"
               extraText="查看全部订单"
               onClick={() =>
@@ -116,13 +117,14 @@ const Account = () => {
           </AtList>
         </View>
         {/* 宠物列表 */}
-        <RotationChartList list={[1, 2]} />
+        <RotationChartList list={[]} />
         {/* 计划列表 */}
         {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}
-        <AtList className="mt-1">
+        <AtList hasBorder={false} className="mt-1">
           <AtListItem
             thumb={`${CDNIMGURL}my-address.png`}
+            hasBorder={false}
             title="收货地址"
             arrow="right"
             onClick={() => {
@@ -132,7 +134,7 @@ const Account = () => {
             }}
           />
         </AtList>
-        {/* <AtList>
+        {/* <AtList hasBorder={false}>
           <AtListItem iconInfo={{ size: 28, value: 'user' }} title="个人信息" arrow="right" />
           <AtListItem iconInfo={{ size: 28, value: 'settings' }} title="设置" arrow="right" />
         </AtList> */}
