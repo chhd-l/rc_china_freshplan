@@ -173,20 +173,26 @@ const OrderDetails = () => {
           ))}
         </View>
       </View>
-      <AtList className="my-1">
-        <AtListItem title="配送方式" extraText={'快递' + formatMoney(orderDetail.orderPrice.deliveryPrice)} />
-        <AtListItem title="买家留言" extraText={orderDetail.remark || '无'} />
+      <AtList hasBorder={false} className="my-1">
+        <AtListItem
+          hasBorder={false}
+          title="配送方式"
+          extraText={'快递' + formatMoney(orderDetail.orderPrice.deliveryPrice)}
+        />
+        <AtListItem hasBorder={false} title="买家留言" extraText={orderDetail.remark || '无'} />
       </AtList>
-      <AtList className="mb-1">
+      <AtList hasBorder={false} className="mb-1">
         <AtListItem
           title="商品金额"
+          hasBorder={false}
           extraText={formatMoney(orderDetail.orderPrice.productPrice + orderDetail.orderPrice.deliveryPrice)}
         />
         <AtListItem
           title="折扣"
+          hasBorder={false}
           extraText={formatMoney(orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice)}
         />
-        <AtListItem title="运费" extraText={formatMoney(orderDetail.orderPrice.deliveryPrice)} />
+        <AtListItem hasBorder={false} title="运费" extraText={formatMoney(orderDetail.orderPrice.deliveryPrice)} />
         <View className="flex justify-end py-1.5">
           <Text className="TotalPrice">
             <Text className="item-content__info-title" style={{ color: '#000' }}>
