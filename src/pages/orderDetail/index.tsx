@@ -146,7 +146,8 @@ const OrderDetails = () => {
         <TimeLine type={orderDetail?.orderState?.orderState} />
         <View className="pl-4 py-1 mt-0.5 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
           <View className="express">
-            <View className="flex items-center">
+            <View className="flex items-center relative">
+              <Image className="absolute receivingIcon" src={`${CDNIMGURL}order%20logistics.png`} />
               <Text className="mr-0.5">{getCarrierType()}</Text>
               <CopyText str={orderDetail.delivery.trackingId} />
             </View>
