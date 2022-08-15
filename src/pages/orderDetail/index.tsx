@@ -1,4 +1,4 @@
-import { getOrderDetail, getOrderSetting } from '@/framework/api/order'
+import { getExpressCompanyList, getOrderDetail, getOrderSetting } from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL } from '@/lib/constants'
 import { formatMoney, getDateDiff, handleReturnTime } from '@/utils/utils'
@@ -7,6 +7,7 @@ import { getCurrentInstance } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 import { AtButton, AtCountdown, AtList, AtListItem } from 'taro-ui'
 import CopyText from './copyText'
+import ExpressLine from './expressLine'
 import './index.less'
 import TimeLine from './timeLine'
 
@@ -22,6 +23,7 @@ const OrderDetails = () => {
   const [orderId, setOrderId] = useState('')
   const { router } = getCurrentInstance()
   const [orderCancelMinute, setOrderCancelMinute] = useState(30)
+  const [carrierTypes, setCarrierTypes] = useState<any[]>([])
   const [orderDetail, setOrderDetail] = useState<Order>({
     shippingAddress: {
       receiverName: '',
@@ -66,11 +68,23 @@ const OrderDetails = () => {
     await getOrderCancelTime()
   }
 
+  const getExpressCompanys = async () => {
+    const res = await getExpressCompanyList()
+    console.log('getExpressCompanyList', res)
+    setCarrierTypes(res)
+  }
+
+  const getCarrierType = () => {
+    const carriers = carrierTypes.filter((item) => item?.code === orderDetail?.delivery?.shippingCompany)
+    return carriers.length > 0 ? carriers[0].name : ''
+  }
+
   useEffect(() => {
     if (router?.params?.id) {
       setOrderId(router.params.id)
       getOrder(router.params.id)
     }
+    getExpressCompanys()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router?.params?.id])
 
@@ -130,18 +144,28 @@ const OrderDetails = () => {
           </View>
         </View>
         <TimeLine type={orderDetail?.orderState?.orderState} />
-        <View className="pl-4 py-1 mt-0.5 receiving" style={{ borderTop: '1px solid #EBEBEB' }}>
-          <View className="receivingUser">
-            收货人： {orderDetail.shippingAddress.receiverName} {orderDetail.shippingAddress.phone}
+        <View className="pl-4 py-1 mt-0.5 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
+          <View className="express">
+            <View className="flex items-center">
+              <Text className="mr-0.5">{getCarrierType()}</Text>
+              <CopyText str={orderDetail.delivery.trackingId} />
+            </View>
+            <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} />
           </View>
-          <View className="receivingAddress mt-0.5">
-            收货地址：{orderDetail.shippingAddress.city} {orderDetail.shippingAddress.region}{' '}
-            {orderDetail.shippingAddress.detail}
+          <View>
+            <View className="receivingUser">
+              收货人： {orderDetail.shippingAddress.receiverName} {orderDetail.shippingAddress.phone}
+            </View>
+            <View className="receivingAddress mt-0.5">
+              收货地址：{orderDetail.shippingAddress.city} {orderDetail.shippingAddress.region}{' '}
+              {orderDetail.shippingAddress.detail}
+            </View>
           </View>
+          <View className="receivingBorder w-full absolute left-0 bottom-0" />
         </View>
       </View>
       <View className="bg-white mt-1 orderAtCard px-1">
-        <View className="orderAtCardTitle">订单信息</View>
+        <View className="orderAtCardTitle py-1">订单信息</View>
         <View className="mb-2 flex flex flex-col">
           {(orderDetail?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
@@ -174,11 +198,7 @@ const OrderDetails = () => {
         </View>
       </View>
       <AtList hasBorder={false} className="my-1">
-        <AtListItem
-          hasBorder={false}
-          title="配送方式"
-          extraText={'快递' + formatMoney(orderDetail.orderPrice.deliveryPrice)}
-        />
+        <AtListItem title="配送方式" extraText={'快递' + formatMoney(orderDetail.orderPrice.deliveryPrice)} />
         <AtListItem hasBorder={false} title="买家留言" extraText={orderDetail.remark || '无'} />
       </AtList>
       <AtList hasBorder={false} className="mb-1">
@@ -192,7 +212,7 @@ const OrderDetails = () => {
           hasBorder={false}
           extraText={formatMoney(orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice)}
         />
-        <AtListItem hasBorder={false} title="运费" extraText={formatMoney(orderDetail.orderPrice.deliveryPrice)} />
+        <AtListItem title="运费" extraText={formatMoney(orderDetail.orderPrice.deliveryPrice)} />
         <View className="flex justify-end py-1.5">
           <Text className="TotalPrice">
             <Text className="item-content__info-title" style={{ color: '#000' }}>
@@ -205,25 +225,25 @@ const OrderDetails = () => {
         </View>
       </AtList>
       <View className="orderInfo bg-white px-1 py-1.5 mb-3">
-        <View>
+        <View className="flex items-center">
           <Text>订单编号：</Text>
           <CopyText str={orderDetail.orderNumber} />
         </View>
-        <View>
+        <View className="flex items-center">
           <Text>Fresh编号：</Text>
           <CopyText str={orderDetail.subscriptionNo} />
         </View>
         <View>
           <Text>付款方式：</Text>
-          <Text>{orderDetail?.payment?.payWayCode}</Text>
+          <Text className="copyText">{orderDetail?.payment?.payWayCode}</Text>
         </View>
         <View>
           <Text>付款时间：</Text>
-          <Text>{handleReturnTime(orderDetail?.payment?.paymentFinishTime)}</Text>
+          <Text className="copyText">{handleReturnTime(orderDetail?.payment?.paymentFinishTime)}</Text>
         </View>
         <View>
           <Text>创建时间：</Text>
-          <Text>{handleReturnTime(orderDetail?.orderState?.createdAt)}</Text>
+          <Text className="copyText">{handleReturnTime(orderDetail?.orderState?.createdAt)}</Text>
         </View>
       </View>
       <View className="pt-1 pb-1.5 bg-white orderFooter">

@@ -2,6 +2,10 @@
   .TitleSwiper {
     height: 1048.81px;
 
+    swiper {
+      height: 1048.81px !important;
+    }
+
     .selectInd {
       background-color: #96CC39 !important;
       width: 25px !important;
@@ -18,6 +22,24 @@
           height: 15px;
           background-color: #f6f6f6;
           transition: all .3s;
+        }
+      }
+    }
+
+    swiper-item {
+      >view {
+        &:first-child {
+          font-weight: 700;
+          font-size: 48px;
+        }
+
+        &:nth-child(2) {
+          font-size: 35px;
+        }
+
+        &:last-child {
+          font-size: 22px;
+          color: #353535;
         }
       }
     }

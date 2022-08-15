@@ -26,6 +26,49 @@
     height: 78px;
   }
 
+  .express {
+    font-size: 20px;
+    color: #949494;
+  }
+
+  .expressLine {
+    font-size: 14px;
+
+    .dian {
+      width: 15px;
+      height: 15px;
+      background-color: #E1E1E1;
+    }
+
+    .title {
+      >text:first-child {
+        font-size: 20px;
+      }
+    }
+
+    .selectLine {
+      height: 60px;
+
+      >view {
+        &:first-child {
+          >view {
+            width: 1px;
+            background-color: #949494;
+          }
+        }
+      }
+    }
+
+    .line {
+      margin: 0.03rem 0;
+
+      >view {
+        &:first-child {
+          width: 15px;
+        }
+      }
+    }
+  }
 
   .timeLine {
     font-size: 24px;
@@ -44,6 +87,12 @@
   }
 
   .receiving {
+    .receivingBorder {
+      height: 4px;
+      background: url(https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/address%20bar.png) no-repeat center;
+      background-size: 100% 100%;
+    }
+
     .receivingUser {
       font-weight: 700;
       font-size: 26px;
@@ -97,6 +146,10 @@
   .orderInfo {
     font-size: 28px;
 
+    .copyText {
+      font-size: 22px;
+    }
+
     >view {
       margin-top: 0.25rem;
 
@@ -135,7 +188,7 @@
     background-color: #96CC39 !important;
   }
 
-  .copyText {
+  .copyTextSpan {
     font-size: 16px;
     border: 1px solid #F3F3F3;
   }

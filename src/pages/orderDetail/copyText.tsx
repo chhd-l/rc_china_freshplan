@@ -3,10 +3,10 @@ import Taro from '@tarojs/taro'
 
 const CopyText = ({ str }: { str: string | undefined }) => {
   return (
-    <Text className="flex items-center">
+    <Text className="copyText flex items-center">
       {str}
       <Text
-        className="copyText px-0.5"
+        className="copyTextSpan px-0.5"
         onClick={(e) => {
           e.stopPropagation()
           Taro.setClipboardData({

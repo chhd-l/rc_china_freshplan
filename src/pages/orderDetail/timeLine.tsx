@@ -1,6 +1,10 @@
 import { View } from '@tarojs/components'
 
-const TimeLine = ({ type }: { type: 'UNPAID' | 'TO_SHIP' | 'SHIPPED' | 'COMPLETED' | 'VOID' | undefined }) => {
+const TimeLine = ({
+  type = 'UNPAID',
+}: {
+  type: 'UNPAID' | 'TO_SHIP' | 'SHIPPED' | 'COMPLETED' | 'VOID' | undefined
+}) => {
   return (
     <View className="timeLine mx-2 py-1">
       <View className="flex items-center justify-between mb-1">
