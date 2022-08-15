@@ -9,16 +9,21 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
 
+  const handlePetList = () => {
+    my.navigateTo({ url: '/pages/petList/index' })
+  }
+
+  // const returnPetdefaultImage = (petType: 'dog' | 'cat') => {
+  //   if(petType === 'dog') return 'cat-default.png'
+  //   else return 'dog-default.png'
+  // }
+
   useEffect(() => {
     const nw = (Taro.getSystemInfoSync().windowWidth / 7.5) * 1.73
     setNextMargin(nw)
     const pw = (Taro.getSystemInfoSync().windowWidth / 7.5) * 2.02
     setPreviousMargin(pw)
   }, [])
-
-  const handlePetList = () => {
-    my.navigateTo({ url: '/pages/petList/index' })
-  }
 
   return (
     <View className="Pets bg-white my-1">
@@ -86,9 +91,12 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
                     className="flex items-center justify-center"
                   >
                     <View
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handlePetList()
+                      }}
                       style={{
                         backgroundImage: `url(${CDNIMGURL}add-pet.png)`,
-                        // boxShadow: '-0.5px 0.5px 10px -3px #999',
                         width: '90%',
                         height: '90%',
                       }}
