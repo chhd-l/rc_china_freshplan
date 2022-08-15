@@ -9,6 +9,15 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
 
+  const handlePetList = () => {
+    my.navigateTo({ url: '/pages/petList/index' })
+  }
+
+  // const returnPetdefaultImage = (petType: 'dog' | 'cat') => {
+  //   if(petType === 'dog') return 'cat-default.png'
+  //   else return 'dog-default.png'
+  // }
+
   useEffect(() => {
     const nw = (Taro.getSystemInfoSync().windowWidth / 7.5) * 1.73
     setNextMargin(nw)
@@ -16,21 +25,19 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
     setPreviousMargin(pw)
   }, [])
 
-  const handlePetList = () => {
-    my.navigateTo({ url: '/pages/petList/index' })
-  }
-
   return (
     <View className="Pets bg-white my-1">
       <View className="PetTitle flex items-center justify-between p-1">
         {type === 'plan' ? 'Fresh Plan' : '我的宠物'}
-        <Image onClick={handlePetList} style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />
+        {!!list.length && (
+          <Image onClick={handlePetList} style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />
+        )}
       </View>
       <View className="splitline ml-1" />
       <View className="box-border px-2">
         <View className="box-border overflow-hidden">
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
-            {type === 'pet' && (
+            {type === 'pet' && !!list.length && (
               <View className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10">
                 <View
                   className="bg-no-repeat bg-contain w-full h-full rounded-full bg-white"
@@ -84,8 +91,14 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
                     className="flex items-center justify-center"
                   >
                     <View
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handlePetList()
+                      }}
                       style={{
-                        backgroundImage: `url(${CDNIMGURL}Pet_Add.png)`,
+                        backgroundImage: `url(${CDNIMGURL}add-pet.png)`,
+                        width: '90%',
+                        height: '90%',
                         boxShadow: '-0.5px 0.5px 10px -3px #999',
                       }}
                       className="m-auto w-full h-full rounded-full bg-no-repeat bg-contain text-gray-300"
@@ -94,13 +107,17 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: any[] 
                 </SwiperItem>
               )}
             </Swiper>
-            <View className="PetInfo mt-1">
-              <Text className={`PetInfoOne petNameColor ${type === 'plan' ? '' : 'mr-1'}`}>xxxx</Text>
-              <Text className={`${type === 'plan' ? 'petNameColor' : 'mr-0.5'}`}>{type === 'plan' ? '的' : 'xxx'}</Text>
-              <Text className={`${type === 'plan' ? 'petNameColor' : ''}`}>
-                {type === 'plan' ? 'Fresh Plan' : 'xx'}
-              </Text>
-            </View>
+            {!!list.length && (
+              <View className="PetInfo mt-1">
+                <Text className={`PetInfoOne petNameColor ${type === 'plan' ? '' : 'mr-1'}`}>xxxx</Text>
+                <Text className={`${type === 'plan' ? 'petNameColor' : 'mr-0.5'}`}>
+                  {type === 'plan' ? '的' : 'xxx'}
+                </Text>
+                <Text className={`${type === 'plan' ? 'petNameColor' : ''}`}>
+                  {type === 'plan' ? 'Fresh Plan' : 'xx'}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
       </View>

@@ -172,9 +172,10 @@ export const getOrderDetail = async ({ orderNum }: { orderNum: string }) => {
 
 export const getExpressCompanyList = async () => {
   try {
-    let expressCompanyList = session.get('express-company-list')
-    if (!expressCompanyList) {
+    let expressCompanyList = session.get('express-company-list') || []
+    if (!expressCompanyList.lenght) {
       let res = await ApiRoot({ url: apis?.orderList }).orders().getExpressCompany()
+      expressCompanyList = res
       console.info('get expressCompany data view', res)
       session.set('express-company-list', res)
     }

@@ -37,10 +37,10 @@ const OrderList = () => {
     setOrderList(records.concat(res?.records))
   }
 
-  const handleClick = async (value) => {
+  const handleClick = (value) => {
     const cur = Object.values(OrderStatusEnum).filter((item) => item === value)[0]
     setCurrent(Object.keys(OrderStatusEnum)[cur])
-    await getOrderLists({ orderState: Object.keys(OrderStatusEnum)[cur] })
+    getOrderLists({ orderState: Object.keys(OrderStatusEnum)[cur] })
   }
 
   useReachBottom(() => {

@@ -89,19 +89,19 @@ const AddressItem = ({
   }
 
   return (
-    <View className="p-1 bg-white mt-1 rounded">
+    <View className="p-1 bg-white mt-1 rounded AddressItem">
       <View onClick={selectAddress}>
         <View className="flex flex-row justify-between">
           <Text className="text-black font-semibold">{receiverName}</Text>
           <Text className="text-gray-400">{phone}</Text>
         </View>
-        <View className="mt-2 pb-3" style={{ borderBottom: '1px solid #D8D8D8' }}>
+        <View className="mt-1 pb-1" style={{ borderBottom: '1px solid #D8D8D8' }}>
           <Text className="">
             {province} {city} {region} {detail}
           </Text>
         </View>
       </View>
-      <View className="flex flex-row justify-between items-center mt-1">
+      <View className="flex flex-row justify-between items-center">
         <View>
           <AtCheckbox
             options={[{ label: '默认地址', value: true }]}
@@ -110,10 +110,10 @@ const AddressItem = ({
           />
         </View>
         <View className="flex flex-row items-center">
-          <Image style={{ width: '30px', height: '30px' }} src={`${CDNIMGURL}edit_address.png`} onClick={editAddress} />
+          <Image style={{ width: '26px', height: '26px' }} src={`${CDNIMGURL}edit_address.png`} onClick={editAddress} />
           <Image
             className="ml-1"
-            style={{ width: '28px', height: '28px' }}
+            style={{ width: '20px', height: '24px' }}
             src={`${CDNIMGURL}remove_address.png`}
             onClick={() => {
               setShowDelTip(true)

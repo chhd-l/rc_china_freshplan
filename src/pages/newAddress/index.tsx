@@ -164,10 +164,11 @@ const NewAddress = () => {
           </View>
         </View>
       </AtForm>
-      <View className="mt-2 flex justify-center">
+      <View className="w-full pt-1 pb-3 fixed bottom-0 left-0 bg-white">
         <AtButton
-          className="text-white w-14 rounded text-28"
+          className="mx-4 rounded-full"
           customStyle={{ backgroundColor: '#96CC39', borderColor: '#96CC39' }}
+          type="primary"
           formType="submit"
           onClick={saveNewAddress}
         >

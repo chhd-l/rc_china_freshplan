@@ -1,9 +1,63 @@
-.subscription-intrduce{
-    .layout-header{
-        background-color: #fff;
-        padding-bottom: 14px;
-        height: 40px;
-        display: flex;
-        align-items: center;
+.subscription {
+  .TitleSwiper {
+    height: 1228.81px !important;
+
+    .selectInd {
+      background-color: #96CC39 !important;
+      width: 25px !important;
     }
+
+    .indicatorDots {
+      left: 0;
+      bottom: 15px;
+
+      >view:last-child {
+        >view {
+          margin: 0 10px;
+          width: 15px;
+          height: 15px;
+          background-color: #c5c5c5;
+          transition: all .3s;
+        }
+      }
+    }
+
+    swiper-item {
+      height: 1228.81px !important;
+
+      &:first-child {
+        background: url(https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/banner1.png) no-repeat center;
+        background-size: 100% 100%;
+      }
+
+      &:last-child {
+        background: url(https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/banner2.png) no-repeat center;
+        background-size: 100% 100%;
+      }
+
+      >view:first-child {
+        height: 1048.81px !important;
+
+        >view {
+          &:first-child {
+            font-weight: 700;
+            font-size: 48px;
+          }
+
+          &:nth-child(2) {
+            font-size: 35px;
+          }
+
+          &:last-child {
+            font-size: 22px;
+            color: #353535;
+          }
+        }
+      }
+
+      >view:last-child {
+        height: 180px;
+      }
+    }
+  }
 }
