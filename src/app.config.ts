@@ -10,6 +10,7 @@ export default defineAppConfig({
     'pages/newAddress/index',
     'pages/petList/index',
     'pages/petEdit/index',
+    'pages/breedList/index',
   ],
   window: {
     navigationBarBackgroundColor: '#fff',

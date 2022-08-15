@@ -23,26 +23,29 @@
       border-radius: 0 4px 4px 0;
 
       &::after {
-        background: url('https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/pet_detail_delete.png') no-repeat center;
+        background: url('https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/pet-delete.png') no-repeat center;
         margin-top: -10px;
+        background-size: .6rem .6rem;
       }
     }
 
     &:nth-child(1) {
       &::after {
-        background: url('https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/pet_detail_edit.png') no-repeat center;
+        background: url('https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/pet-edit.png') no-repeat center;
         margin-top: -10px;
+        background-size: .6rem .6rem;
       }
     }
 
     &::after {
       content: '';
-      width: 100px;
-      height: 100px;
+      width: 60px;
+      height: 60px;
     }
 
     >text {
       height: 20%;
+      margin-top: .1rem;
     }
   }
 }

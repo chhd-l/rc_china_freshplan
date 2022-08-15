@@ -59,34 +59,6 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
     setPetList(cloneDeep(petList))
   }
 
-  const handleImage = () => {
-    Taro.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-        Taro.uploadFile({
-          url: `${UPLOADURL}`, //仅为示例，非真实的接口地址
-          filePath: tempFilePaths[0],
-          header: { 'Content-Type': 'multipart/form-data' },
-          name: 'file',
-          success(vla: any) {
-            const { url } = JSON.parse(vla.data)
-            console.log('url', url)
-            setItem({
-              ...item,
-              image: url,
-            })
-            setImgUrl(url)
-            //do something
-          },
-        })
-      },
-    })
-  }
-
   return (
     <View className="PetItemContainer">
       <View className="overflow-hidden relative" style={{ zIndex: 1 }}>
@@ -101,7 +73,7 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
             showEdit(petIdx)
           }}
           disabled={isEdit}
-          isOpened={false}
+          isOpened={pet.isOpened}
           options={editPetButton}
           maxDistance={120}
           areaWidth={my.getSystemInfoSync().windowWidth * 0.9}
@@ -114,9 +86,9 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
             }}
           >
             <View
-              className={`w-rc190 ${
+              className={`w-6 ${
                 pet.image ? ' bg-white   image-pad shadow-little' : ''
-              } h-rc190 rounded-full  flex items-center justify-center m-auto `}
+              } h-6 rounded-full flex items-center justify-center m-auto `}
             >
               <Image
                 src={pet.image || `${CDNIMGURL2}default-head.png`}
@@ -124,10 +96,10 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
                 className="w-full h-full m-auto Petpictureshadow rounded-full"
               />
             </View>
-            <View className="flex justify-center pt-rc30">
-              <View className="text-rc28 pr-rc30 font-medium" style={{color:'#D49D28'}}>阿猫</View>
-              <View className="text-rc20 flex items-center" style={{color:'#999999'}}>
-                短毛猫11月
+            <View className="flex justify-center items-end pt-1">
+              <View className="text-28 pr-1 font-medium" style={{color:'#D49D28'}}>{pet.name}</View>
+              <View className="text-22" style={{color:'#999999'}}>
+                {pet.breed}{pet.age}
               </View>
             </View>
           </View>

@@ -1,4 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: '宠物编辑',
+  navigationBarTitleText: '创建宠物档案',
   navigationStyle: 'custom',
+  backgroundColor: '#ffffff',
 })

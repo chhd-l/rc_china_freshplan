@@ -1,6 +1,7 @@
 // import Announcement from '@/components/common/Announcement'
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
+import { wxLogin } from '@/framework/api/consumer/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
 import { Button, Image, Text, View } from '@tarojs/components'
@@ -19,11 +20,21 @@ const orderTypeList = [
 const Account = () => {
   const [consumer, setConsumer] = useAtom(consumerAtom)
 
-  useEffect(() => {
-    const res: any = my.getStorageSync({ key: 'wxLoginRes' })
-    if (!res.error && res.success && res.data?.userInfo?.id) {
-      setConsumer(res.data.userInfo)
+  const loginInit = async () => {
+    if (my.getStorageSync({ key: 'wxLoginRes'})) {
+      // Taro.setStorageSync('commerce-loading', 1)
+      const data = await wxLogin()
+      setConsumer(data)
+      // setRefreshed(true)//兼容token过期报错
     }
+  }
+
+  useEffect(() => {
+    // const res: any = my.getStorageSync({ key: 'wxLoginRes' })
+    // if (!res.error && res.success && res.data?.userInfo?.id) {
+    //   setConsumer(res.data.userInfo)
+    // }
+    loginInit()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
