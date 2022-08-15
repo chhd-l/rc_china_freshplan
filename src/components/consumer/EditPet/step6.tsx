@@ -1,13 +1,16 @@
 // import { useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { PetStep, PetHealth } from '@/framework/types/consumer';
-import { addPet } from '@/framework/api/pet/add-pet';
 import PetTitle from './components/PetTitle';
 import { IProps } from './step1';
 
 import './step.less';
 
-const Step6 = ({ pet, onStepChange, onChange }: IProps) => {
+interface Iprops6 extends IProps {
+  onSave: () => void;
+}
+
+const Step6 = ({ pet, onStepChange, onChange, onSave }: Iprops6) => {
 
   const handleChooseHealth = (health: PetHealth) => {
     let healthes = pet.recentHealth ?? [];
@@ -27,8 +30,7 @@ const Step6 = ({ pet, onStepChange, onChange }: IProps) => {
   }
 
   const handleSave = async () => {
-    const res = await addPet(pet);
-    console.log(res);
+    onSave()
   }
 
   return (

@@ -58,7 +58,7 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
         {hotBreedList.map((item: BreedListItemProps, index: number) => (
             <Text
               key={index}
-              className={`rcc-choice-item text-28 font-bold ${pet.code === item.code ? 'active' : ''}`}
+              className={`rcc-choice-item text-28 font-bold truncate ${pet.code === item.code ? 'active' : ''}`}
               onClick={() => handleChooseBreed(item.name, item.code)}
             >
               {item.name}

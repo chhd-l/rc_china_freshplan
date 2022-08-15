@@ -69,7 +69,7 @@ const BreedList = () => {
       {breedList.length ? (
         <View className="breedlist" style={{ backgroundColor: '#eee' }}>
           <AtSearchBar
-            className="bg-gray-200 petsSearchBtn"
+            className="bg-white petsSearchBtn"
             showActionButton
             value={keyword}
             onChange={handleKeyword}
@@ -87,27 +87,7 @@ const BreedList = () => {
               </View>
             ))}
           </View>
-          <View className="px-1">
-            <View className="text-30 py-1">热门品种</View>
-            <View className="grid grid-cols-5 gap-6 px-1">
-              {breedList
-                .filter((el) => el.isHot)
-                .filter((el, idx) => idx < 10)
-                .map((breed) => (
-                  <View
-                    onClick={() => {
-                      console.info('breedbreed', breed)
-                      handleBreed(breed)
-                    }}
-                  >
-                    <Image lazyLoad src={breed.image} className="w-full rounded-full  h-3" mode="widthFix" />
-                    <View className="text-24 whitespace-nowrap overflow-hidden overflow-ellipsis">{breed.name}</View>
-                  </View>
-                ))}
-            </View>
-          </View>
           <View>
-            <View className="px-1 text-30 pt-2 pb-1">品种列表</View>
             <BreedLists activeId={activeId} list={list} handleBreed={handleBreed} />
           </View>
         </View>

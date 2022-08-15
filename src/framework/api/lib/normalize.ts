@@ -31,6 +31,15 @@ export const normalizePetsForFe = (petInfo: any) => {
   if (data.birthday) {
     data.birthday = moment(petInfo.birthday).format('YYYY-MM-DD')
   }
+  if (data.recentHealth) {
+    data.recentHealth = data.recentHealth.split('|');
+  }
+  if (data.recentWeight) {
+    data.recentWeight = '' + data.recentWeight;
+  }
+  if (data.targetWeight) {
+    data.targetWeight = '' + data.targetWeight;
+  }
   return data
 }
 

@@ -1,9 +1,9 @@
 @font-face {
   font-family: "rcciconfont"; /* Project id 3579405 */
-  src: url('iconfont.woff2?t=1660375614681') format('woff2'),
-       url('iconfont.woff?t=1660375614681') format('woff'),
-       url('iconfont.ttf?t=1660375614681') format('truetype'),
-       url('iconfont.svg?t=1660375614681#rcciconfont') format('svg');
+  src: url('iconfont.woff2?t=1660556350490') format('woff2'),
+       url('iconfont.woff?t=1660556350490') format('woff'),
+       url('iconfont.ttf?t=1660556350490') format('truetype'),
+       url('iconfont.svg?t=1660556350490#rcciconfont') format('svg');
 }
 
 .rcciconfont {
@@ -12,6 +12,42 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.rccicon-male:before {
+  content: "\e60e";
+}
+
+.rccicon-save:before {
+  content: "\e60f";
+}
+
+.rccicon-footprint:before {
+  content: "\e610";
+}
+
+.rccicon-timer:before {
+  content: "\e611";
+}
+
+.rccicon-female:before {
+  content: "\e612";
+}
+
+.rccicon-location:before {
+  content: "\e60d";
+}
+
+.rccicon-check:before {
+  content: "\e60a";
+}
+
+.rccicon-ship:before {
+  content: "\e60b";
+}
+
+.rccicon-ontime:before {
+  content: "\e60c";
 }
 
 .rccicon-add:before {

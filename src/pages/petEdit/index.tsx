@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { AtProgress } from 'taro-ui';
 import { PetListItemProps, PetStep, PetPosture } from '@/framework/types/consumer';
+import { addPet } from '@/framework/api/pet/add-pet';
 import Step1 from '@/components/consumer/EditPet/step1';
 import Step2 from '@/components/consumer/EditPet/step2';
 import Step3 from '@/components/consumer/EditPet/step3';
@@ -35,6 +36,11 @@ const petEdit = () => {
     setPet(Object.assign({}, pet, obj));
   }
 
+  const handleSave = async () => {
+    await addPet(pet);
+    my.navigateTo({ url: '/pages/petList/index' });
+  }
+
   return (
     <View className="pet-edit-page">
       <View className="pet-edit-progress px-1">
@@ -53,7 +59,7 @@ const petEdit = () => {
           : step === PetStep.STEP5
           ? <Step5 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
           : step === PetStep.STEP6
-          ? <Step6 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
+          ? <Step6 pet={pet} onStepChange={setStep} onChange={handleSetPet} onSave={handleSave} />
           : null
       }
     </View>

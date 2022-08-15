@@ -6,6 +6,69 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "31258330",
+      "name": "male",
+      "font_class": "male",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "31258331",
+      "name": "save",
+      "font_class": "save",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "31258332",
+      "name": "footprint",
+      "font_class": "footprint",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "31258333",
+      "name": "timer",
+      "font_class": "timer",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "31258334",
+      "name": "female",
+      "font_class": "female",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "31256033",
+      "name": "location",
+      "font_class": "location",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "31245371",
+      "name": "check",
+      "font_class": "check",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "31245372",
+      "name": "ship",
+      "font_class": "ship",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "31245373",
+      "name": "ontime",
+      "font_class": "ontime",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
       "icon_id": "31220709",
       "name": "add",
       "font_class": "add",

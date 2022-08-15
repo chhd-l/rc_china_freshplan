@@ -15,7 +15,7 @@ const BreedLists = ({ activeId, list, handleBreed }: Props) => {
         ?.filter((el) => el?.data?.length)
         ?.map((item) => (
           <View id={`item-${item.letter}`}>
-            <View className="title px-1 py-1">{item.letter?.toUpperCase()}</View>
+            <View className="title px-1 py-0.5">{item.letter?.toUpperCase()}</View>
             <View>
               {item?.data?.map((el) => (
                 <View

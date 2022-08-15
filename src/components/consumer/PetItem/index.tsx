@@ -34,7 +34,13 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
 
   const handleClick = (option, idx) => {
     if (option.text == '编辑') {
-      setIsEdit(true)
+      // setIsEdit(true)
+      Taro.navigateTo({
+        url: '/pages/petDetail/index',
+        success: (res) => {
+          res.eventChannel.emit('petFromList', pet);
+        }
+      });
     } else if (option.text === '删除') {
       setShowDelModal(true)
     }
@@ -72,7 +78,6 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
           onOpened={() => {
             showEdit(petIdx)
           }}
-          disabled={isEdit}
           isOpened={pet.isOpened}
           options={editPetButton}
           maxDistance={120}
