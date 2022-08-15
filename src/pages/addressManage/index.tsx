@@ -1,10 +1,12 @@
-import Taro from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
 import { AddressItem } from '@/components/consumer'
-import { useState } from 'react'
-import { Address } from '@/framework/types/consumer'
 import { getAddresses } from '@/framework/api/consumer/address'
+import { Address } from '@/framework/types/consumer'
+import { CDNIMGURL } from '@/lib/constants'
 import routers from '@/routers'
+import { Image, Text, View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import { useState } from 'react'
+import { AtButton } from 'taro-ui'
 import './index.less'
 
 const AddRessManage = () => {
@@ -33,26 +35,36 @@ const AddRessManage = () => {
 
   return (
     <View className="AddRessManage">
-      <View className="index px-1 pb-1 min-h-screen bg-gray-eee overflow-hidden">
-        {addressList.map((item: Address, key: number) => (
-          <AddressItem
-            key={key}
-            addressInfo={item}
-            delAddressSuccess={() => getAddressList()}
-            isDefaultUpdateSuccess={updateIsDefault}
-          />
-        ))}
-        <View className="mt-2 flex justify-center inline-block">
-          <Button
-            className="Botton bg-white px-1.5 py-1 mr-2 flex items-center text-gray-400"
+      <View className={`px-1 ${!addressList.length && 'pt-10'} pb-1`}>
+        {addressList.length ? (
+          addressList.map((item: Address, key: number) => (
+            <AddressItem
+              key={key}
+              addressInfo={item}
+              delAddressSuccess={() => getAddressList()}
+              isDefaultUpdateSuccess={updateIsDefault}
+            />
+          ))
+        ) : (
+          <View className="noOrders flex flex-col items-center justify-center">
+            <Image className="noOrdersImage" src={`${CDNIMGURL}Empty%20orders.png`} />
+            <View className="mt-2 flex justify-center">
+              <Text className="ml-0.5">汪汪~啥也没有!</Text>
+            </View>
+          </View>
+        )}
+        <View className="w-full pt-1 pb-3 fixed bottom-0 left-0 bg-white">
+          <AtButton
+            className="mx-4 rounded-full"
+            type="primary"
             onClick={() => {
               Taro.navigateTo({
                 url: routers.newAddress,
               })
             }}
           >
-            <Text>+&nbsp; </Text>新增地址
-          </Button>
+            +&nbsp; 新增地址
+          </AtButton>
         </View>
       </View>
     </View>
