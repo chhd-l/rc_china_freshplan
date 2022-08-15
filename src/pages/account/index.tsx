@@ -107,7 +107,7 @@ const Account = () => {
         {/* 宠物列表 */}
         <RotationChartList list={[1, 2]} />
         {/* 计划列表 */}
-        <RotationChartList list={[1]} type="plan" />
+        {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}
         <AtList className="mt-1">
           <AtListItem
