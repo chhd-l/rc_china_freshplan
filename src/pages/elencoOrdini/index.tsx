@@ -1,11 +1,11 @@
 import OrderCard from '@/components/OrderCard'
-import { getOrderList } from '@/framework/api/order'
+import { cancelOrder, getOrderList } from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL } from '@/lib/constants'
 import { Image, Text, View } from '@tarojs/components'
 import { getCurrentInstance, useReachBottom } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
+import { AtModal, AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 
 const tabList = [{ title: '全部' }, { title: '待付款' }, { title: '待发货' }, { title: '待收货' }]
@@ -19,10 +19,13 @@ const OrderStatusEnum = {
 
 const OrderList = () => {
   const { router } = getCurrentInstance()
-  const [current, setCurrent] = useState(OrderStatusEnum[router?.params?.status || 0])
+  const [current, setCurrent] = useState(router?.params?.status || 'ALL')
   const [orderList, setOrderList] = useState<Order[]>([])
   const [isNoMore, setIsNoMore] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
+  const [curActionOrderId, setCurActionOrderId] = useState('')
+  const [curActionType, setCurActionType] = useState('')
+  const [showActionTipModal, setShowActionTipModal] = useState(false)
 
   const getOrderLists = async ({ orderState = current, curPage = currentPage }) => {
     let records: any[] = []
@@ -43,6 +46,12 @@ const OrderList = () => {
     getOrderLists({ orderState: Object.keys(OrderStatusEnum)[cur] })
   }
 
+  const cancel = (id, type) => {
+    setCurActionOrderId(id)
+    setCurActionType(type)
+    setShowActionTipModal(true)
+  }
+
   useReachBottom(() => {
     if (!isNoMore) {
       let page = currentPage + 1
@@ -52,20 +61,20 @@ const OrderList = () => {
   })
 
   useEffect(() => {
-    getOrderLists({ orderState: OrderStatusEnum[router?.params?.status || 0] })
+    getOrderLists({ orderState: router?.params?.status })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router?.params?.status])
 
   return (
     <View className="myOrderList pb-2">
-      <View className="bg-white py-0.5">
+      {/* <View className="bg-white py-0.5">
         <AtSearchBar value="" onChange={() => null} />
-      </View>
+      </View> */}
       <AtTabs current={OrderStatusEnum[current]} tabList={tabList} onClick={handleClick} swipeable>
         {tabList.map((item, index) => (
           <AtTabsPane current={OrderStatusEnum[current]} index={index} key={item.title}>
             {orderList.map((order, key) => (
-              <OrderCard order={order} key={key} />
+              <OrderCard cancel={cancel} order={order} key={key} />
             ))}
           </AtTabsPane>
         ))}
@@ -78,10 +87,10 @@ const OrderList = () => {
           </View>
         </View>
       )}
-      {/* <AtModal
+      <AtModal
         isOpened={showActionTipModal}
         title="确认"
-        content={getModalContent()}
+        content="确定要取消该订单吗？"
         cancelText="取消"
         confirmText="确定"
         onClose={() => {
@@ -90,9 +99,18 @@ const OrderList = () => {
         onCancel={() => {
           setShowActionTipModal(false)
         }}
-        onConfirm={() => handleClickActionTipModal()}
+        onConfirm={async () => {
+          const res = await cancelOrder({
+            orderNum: curActionOrderId,
+            nowOrderState: curActionType,
+          })
+          if (res) {
+            setShowActionTipModal(false)
+            getOrderLists({ orderState: current })
+          }
+        }}
         className="rc_modal"
-      /> */}
+      />
     </View>
   )
 }

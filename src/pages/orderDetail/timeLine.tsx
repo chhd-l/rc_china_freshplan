@@ -16,7 +16,7 @@ const TimeLine = ({
       </View>
       <View className="line flex items-center">
         <View
-          className={`lineSpot mr-0.5 ${
+          className={`lineSpot rounded-full mr-0.5 ${
             (type === 'TO_SHIP' || type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'
           }`}
         />
@@ -25,11 +25,15 @@ const TimeLine = ({
             (type === 'TO_SHIP' || type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'
           }`}
         />
-        <View className={`lineSpot mx-0.5 ${(type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'}`} />
+        <View
+          className={`lineSpot rounded-full mx-0.5 ${
+            (type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'
+          }`}
+        />
         <View
           className={`HorizontalLine flex-1 ${(type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'}`}
         />
-        <View className={`lineSpot ml-0.5 ${type === 'COMPLETED' && 'selectBackground'}`} />
+        <View className={`lineSpot rounded-full ml-0.5 ${type === 'COMPLETED' && 'selectBackground'}`} />
       </View>
     </View>
   )

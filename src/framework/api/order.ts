@@ -81,7 +81,6 @@ export const createOrder = async ({ orderItems, address, remark, deliveryTime, v
         })
       })
       session.set('cart-data', cartProducts)
-      console.info('////////')
       pay({
         params: {
           consumerId: wxLoginRes?.userInfo?.id || '',
@@ -92,7 +91,7 @@ export const createOrder = async ({ orderItems, address, remark, deliveryTime, v
           payWayId: '241e2f4e-e975-6e14-a62a-71fcd435e7e9',
           amount: res?.orderPrice.totalPrice * 100,
           currency: 'CNY',
-          storeId: '12345678',
+          storeId: wxLoginRes?.userInfo?.storeId,
         },
         success: () => {
           Taro.redirectTo({
