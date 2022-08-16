@@ -5,7 +5,7 @@ import { formatMoney, getDateDiff, handleReturnTime } from '@/utils/utils'
 import { Image, ScrollView, Text, View } from '@tarojs/components'
 import { getCurrentInstance } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { AtButton, AtCountdown, AtList, AtListItem } from 'taro-ui'
+import { AtButton, AtCountdown, AtList, AtListItem, AtModal } from 'taro-ui'
 import CopyText from './copyText'
 import ExpressLine from './expressLine'
 import './index.less'
@@ -21,6 +21,7 @@ const orderStatusType = {
 
 const OrderDetails = () => {
   const [orderId, setOrderId] = useState('')
+  const [showActionTipModal, setShowActionTipModal] = useState(false)
   const { router } = getCurrentInstance()
   const [orderCancelMinute, setOrderCancelMinute] = useState(30)
   const [carrierTypes, setCarrierTypes] = useState<any[]>([])
@@ -78,7 +79,6 @@ const OrderDetails = () => {
     const carriers = carrierTypes.filter((item) => item?.code === orderDetail?.delivery?.shippingCompany)
     return carriers.length > 0 ? carriers[0].name : ''
   }
-
   useEffect(() => {
     if (router?.params?.id) {
       setOrderId(router.params.id)
@@ -128,6 +128,28 @@ const OrderDetails = () => {
         return 'order%20completed.png'
       case 'VOID':
         return 'order%20cancel.png'
+      default:
+        break
+    }
+  }
+
+  const getModalContent = () => {
+    switch (orderDetail?.orderState?.orderState) {
+      case 'TO_SHIP':
+        return '已提醒发货，请耐心等待'
+      case 'VOID':
+        return '确定要删除该订单吗？'
+      default:
+        break
+    }
+  }
+
+  const handleClickActionTipModal = () => {
+    switch (orderDetail?.orderState?.orderState) {
+      case 'TO_SHIP':
+        return setShowActionTipModal(false)
+      case 'VOID':
+        return ''
       default:
         break
     }
@@ -269,16 +291,35 @@ const OrderDetails = () => {
         )}
         {orderDetail?.orderState?.orderState === 'TO_SHIP' && (
           <View className="flex items-center justify-end">
-            <AtButton className="rounded-full m-0 mr-1 px-1.5 py-0">催发货</AtButton>
+            <AtButton className="rounded-full m-0 mr-1 px-1.5 py-0" onClick={() => setShowActionTipModal(true)}>
+              催发货
+            </AtButton>
           </View>
         )}
         {orderDetail?.orderState?.orderState === 'VOID' && (
           <View className="flex items-center justify-end">
-            <AtButton className="rounded-full m-0 px-1.5 py-0">删除订单</AtButton>
+            <AtButton className="rounded-full m-0 px-1.5 py-0" onClick={() => setShowActionTipModal(true)}>
+              删除订单
+            </AtButton>
             <AtButton className="rounded-full m-0 mx-1 px-1.5 py-0">再来一单</AtButton>
           </View>
         )}
       </View>
+      <AtModal
+        isOpened={showActionTipModal}
+        title="确认"
+        content={getModalContent()}
+        cancelText="取消"
+        confirmText="确定"
+        onClose={() => {
+          setShowActionTipModal(false)
+        }}
+        onCancel={() => {
+          setShowActionTipModal(false)
+        }}
+        onConfirm={() => handleClickActionTipModal()}
+        className="rc_modal"
+      />
     </ScrollView>
   )
 }

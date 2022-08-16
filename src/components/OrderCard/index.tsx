@@ -1,5 +1,5 @@
-import { formatMoney } from '@/utils/utils'
 import { Order } from '@/framework/types/order'
+import { formatMoney } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
@@ -13,7 +13,7 @@ const orderStatusType = {
   VOID: '交易取消',
 }
 
-const OrderCard = ({ order }: { order: Order }) => {
+const OrderCard = ({ order, cancel }: { order: Order; cancel: Function }) => {
   return (
     <View
       className="p-1 bg-white mt-1 orderCard"
@@ -68,6 +68,7 @@ const OrderCard = ({ order }: { order: Order }) => {
               className="rounded-full"
               onClick={(e) => {
                 e.stopPropagation()
+                cancel(order.orderNumber, order?.orderState?.orderState)
               }}
             >
               取消
