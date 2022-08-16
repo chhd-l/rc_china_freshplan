@@ -1,4 +1,5 @@
-import { Text, View } from '@tarojs/components'
+import { CDNIMGURL } from '@/lib/constants'
+import { Image, Text, View } from '@tarojs/components'
 import { useEffect, useState } from 'react'
 
 const ExpressLine = ({ expressList }: { expressList: any[] }) => {
@@ -12,7 +13,7 @@ const ExpressLine = ({ expressList }: { expressList: any[] }) => {
   return list.length ? (
     <View className="expressLine pt-0.5 pb-1">
       {list.map((express, key) => (
-        <View className="mt-0.5" key={key}>
+        <View className="marginTop" key={key}>
           <View className="flex items-center">
             <View className={`dian rounded-full mr-0.5 ${key === 0 && 'selectBackground'}`} />
             <View className={`title ${key === 0 && 'selectedWord'}`}>
@@ -28,9 +29,9 @@ const ExpressLine = ({ expressList }: { expressList: any[] }) => {
         </View>
       ))}
       {list.length <= 2 && (
-        <View className="mt-0.5" key="no">
+        <View className="marginTop" key="no">
           <View className="flex items-center">
-            <View className="dian rounded-full mr-0.5 selectBackground" />
+            <Image className="dian rounded-full mr-0.5" src={`${CDNIMGURL}logistics-more.png`} />
             <View
               className="title selectedWord}"
               onClick={(e) => {

@@ -118,8 +118,6 @@ const Account = () => {
         </View>
         {/* 宠物列表 */}
         <RotationChartList list={[]} />
-        {/* 计划列表 */}
-        {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}
         <AtList hasBorder={false} className="mt-1">
           <AtListItem

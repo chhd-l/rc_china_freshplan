@@ -147,14 +147,22 @@ const OrderDetails = () => {
         <View className="pl-4 py-1 mt-0.5 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
           <View className="express">
             <View className="flex items-center relative">
-              <Image className="absolute receivingIcon" src={`${CDNIMGURL}order%20logistics.png`} />
+              <Image className="absolute orderDetailsIcon" src={`${CDNIMGURL}order%20logistics.png`} />
               <Text className="mr-0.5">{getCarrierType()}</Text>
               <CopyText str={orderDetail.delivery.trackingId} />
             </View>
             <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} />
           </View>
           <View>
-            <View className="receivingUser">
+            <View className="receivingUser relative">
+              <Image
+                className="absolute orderDetailsIcon"
+                style={{
+                  width: '0.4rem',
+                  left: '-0.6rem',
+                }}
+                src={`${CDNIMGURL}order%20address.png`}
+              />
               收货人： {orderDetail.shippingAddress.receiverName} {orderDetail.shippingAddress.phone}
             </View>
             <View className="receivingAddress mt-0.5">
