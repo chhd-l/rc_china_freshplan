@@ -1,4 +1,4 @@
-// import { useGlobalIconFont } from './iconfont/helper'
+import { useGlobalIconFont } from './iconfont/helper'
 
 export default defineAppConfig({
   pages: [
@@ -39,5 +39,6 @@ export default defineAppConfig({
       },
     ],
   },
+  usingComponents: Object.assign(useGlobalIconFont),
 })
 
