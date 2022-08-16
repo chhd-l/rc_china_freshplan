@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { AtButton, AtIcon, AtTimeline } from 'taro-ui'
 import './index.less'
 import { titleSwiperList } from './index.module'
+import LovePetHealth from '@/components/subscription/LovePetHealth'
 
 const Subscription = () => {
   const [current, setCurrent] = useState(0)
@@ -38,6 +39,7 @@ const Subscription = () => {
       <View className="px-[20px]">
         <Step />
         <FreshFoodExperience />
+        <LovePetHealth />
       </View>
     </View>
   )
