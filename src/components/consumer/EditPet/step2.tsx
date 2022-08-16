@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { View, Text, Input, Image } from '@tarojs/components';
-import { PetGender, PetStep } from '@/framework/types/consumer';
+import { PetGender, PetStep, PetType } from '@/framework/types/consumer';
 import { AtFloatLayout } from 'taro-ui';
-import { UPLOADURL } from '@/lib/constants';
+import { UPLOADURL, CDNIMGURL } from '@/lib/constants';
 import Taro from '@tarojs/taro';
 import PetTitle from './components/PetTitle';
 import { IProps } from './step1';
@@ -54,9 +54,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
     <View className="mx-1 pt-2">
       <View className="mt-3 text-center flex justify-center">
         <View className="pet-avatar flex justify-center items-center" onClick={() => setShow(true)}>
-          {pet.image
-            ? <Image src={pet.image} />
-            : <Text className="rcciconfont rccicon-dog2"></Text>}
+          <Image src={`${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`} />
         </View>
       </View>
       <View className="mt-4">

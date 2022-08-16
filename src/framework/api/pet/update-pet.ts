@@ -8,7 +8,7 @@ import apis from '@/framework/config/api-config'
 export const updatePet = async (petInfo, primaryData) => {
   let data: PetItemSchema = normalizePetsForApi(petInfo)
   let primaryForApi: PetItemSchema = normalizePetsForApi(primaryData)
-  let params = { ...pickForUpdate(data, primaryForApi), id: petInfo.id, image: primaryData.image }
+  let params = { ...pickForUpdate(data, primaryForApi), id: petInfo.id, subscriptionNo: undefined }
 
   console.info('updatePet params', params)
   // mockPetlist.forEach((el) => {

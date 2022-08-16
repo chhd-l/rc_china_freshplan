@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text, Image, Input, Picker, PickerView, PickerViewColumn } from '@tarojs/components';
 import { AtFloatLayout, AtButton } from 'taro-ui';
 import Taro from '@tarojs/taro';
-import { CDNIMGURL2, UPLOADURL } from '@/lib/constants';
+import { CDNIMGURL2, CDNIMGURL, UPLOADURL } from '@/lib/constants';
 import { getBreedList } from '@/framework/api/pet/get-breeds';
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle';
 import { PetListItemProps, PetType, PetGender, PetHealth, PetPosture } from '@/framework/types/consumer';
@@ -159,7 +159,7 @@ const PetDetail = () => {
     <View className="pet-detail-page">
       <View className="bg-white px-2 py-1 flex items-center">
         <View className="head w-6 h-6" onClick={() => setShowUpload(true)}>
-          <Image className="rounded-full" src={pet.image || `${CDNIMGURL2}default-head.png`}></Image>
+          <Image className="rounded-full" src={pet.image || `${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`}></Image>
         </View>
         <Text className="ml-2 text-32">{pet.name}</Text>
         <Text className={`ml-1 rcciconfont text-30 ${pet.gender === PetGender.Female ? 'text-color-primary rccicon-female' : 'text-gray-400 rccicon-male'}`}></Text>
