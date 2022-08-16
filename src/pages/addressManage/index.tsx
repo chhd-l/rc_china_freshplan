@@ -4,13 +4,14 @@ import { Address } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import routers from '@/routers'
 import { Image, Text, View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useState } from 'react'
 import { AtButton } from 'taro-ui'
 import './index.less'
 
 const AddRessManage = () => {
   const [addressList, setAddressList] = useState<Address[]>([])
+  const { router } = getCurrentInstance()
 
   const getAddressList = async () => {
     const res = await getAddresses()
@@ -33,6 +34,16 @@ const AddRessManage = () => {
     setAddressList(curAddresses)
   }
 
+  const handleChooseAddress = (address: Address) => {
+    if (router?.params?.method === 'select') {
+      const pages = Taro.getCurrentPages()
+      const current = pages[pages.length - 1]
+      const eventChannel = current.getOpenerEventChannel()
+      eventChannel.emit('chooseAddress', Object.assign({}, address));
+      Taro.navigateBack()
+    }
+  }
+
   return (
     <View className="AddRessManage">
       <View className={`px-1 ${!addressList.length && 'pt-10'} pb-1`}>
@@ -43,6 +54,7 @@ const AddRessManage = () => {
               addressInfo={item}
               delAddressSuccess={() => getAddressList()}
               isDefaultUpdateSuccess={updateIsDefault}
+              onSelectAddress={handleChooseAddress}
             />
           ))
         ) : (

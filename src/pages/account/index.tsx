@@ -2,13 +2,16 @@
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { wxLogin } from '@/framework/api/consumer/consumer'
+import { PetListItemProps } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
 import { Button, Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useAtom } from 'jotai'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
+import { getPets } from '@/framework/api/pet/get-pets'
+import { getAge } from '@/utils/utils'
 import './index.less'
 
 const orderTypeList = [
@@ -19,12 +22,24 @@ const orderTypeList = [
 
 const Account = () => {
   const [consumer, setConsumer] = useAtom(consumerAtom)
+  const [petList, setPetList] = useState<PetListItemProps[]>([])
+
+  const getList = async (consumerId: string) => {
+    let res = (await getPets({ consumerId })) || []
+    res.forEach((item) => {
+      item.age = getAge(item.birthday)
+    })
+    if (res.length) {
+      setPetList(res)
+    }
+  }
 
   const loginInit = async () => {
     if (my.getStorageSync({ key: 'wxLoginRes' })) {
       // Taro.setStorageSync('commerce-loading', 1)
       const data = await wxLogin()
       setConsumer(data)
+      getList(data.id)
       // setRefreshed(true)//兼容token过期报错
     }
   }
@@ -41,6 +56,7 @@ const Account = () => {
   const handleLogin = () => {
     loginWithAlipay((data) => {
       setConsumer(data)
+      getList(data.id)
     })
   }
 
@@ -117,7 +133,7 @@ const Account = () => {
           </AtList>
         </View>
         {/* 宠物列表 */}
-        <RotationChartList list={[]} />
+        <RotationChartList list={petList} />
         {/* 计划列表 */}
         {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}

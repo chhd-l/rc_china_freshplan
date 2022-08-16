@@ -15,3 +15,14 @@ export const getPets = async ({ consumerId }) => {
     console.log(err, 'err')
   }
 }
+
+export const getPet = async (id: string) => {
+  try {
+    const data = await ApiRoot({ url: apis?.common_pet }).pets().getPet({ id })
+    // const pets = mockPetlist;
+    console.info('petspetspetspets', data.consumerPetGet)
+    return data?.consumerPetGet ? normalizePetsForFe(data.consumerPetGet) : null
+  } catch (err) {
+    console.log(err, 'err')
+  }
+}
