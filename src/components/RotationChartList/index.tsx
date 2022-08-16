@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 import { PetListItemProps, PetGender } from '@/framework/types/consumer';
 import './index.less'
 
-const RotationChartList = ({ type = 'pet', list }: { type?: string; list: PetListItemProps[] }) => {
-  const [current, setCurrent] = useState(list.length > 1 ? 1 : 0)
+const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
+  const [current, setCurrent] = useState(list.length === 1 ? 0 : 1)
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
 
@@ -18,10 +18,10 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: PetLis
     my.navigateTo({ url: '/pages/petEdit/index' })
   }
 
-  // const returnPetdefaultImage = (petType: 'dog' | 'cat') => {
-  //   if(petType === 'dog') return 'cat-default.png'
-  //   else return 'dog-default.png'
-  // }
+  const returnPetdefaultImage = (petType: string) => {
+    if (petType === 'CAT') return 'cat-default.png'
+    else return 'dog-default.png'
+  }
 
   useEffect(() => {
     const nw = (Taro.getSystemInfoSync().windowWidth / 7.5) * 1.73
@@ -33,7 +33,7 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: PetLis
   return (
     <View className="Pets bg-white my-1">
       <View className="PetTitle flex items-center justify-between p-1">
-        {type === 'plan' ? 'Fresh Plan' : '我的宠物'}
+        我的宠物
         {!!list.length && (
           <Image onClick={handlePetList} style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />
         )}
@@ -42,7 +42,7 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: PetLis
       <View className="box-border px-2">
         <View className="box-border overflow-hidden">
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
-            {type === 'pet' && !!list.length && (
+            {!!list.length && (
               <View className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10" onClick={handleAddPet}>
                 <View
                   className="bg-no-repeat bg-contain w-full h-full rounded-full bg-white"
@@ -65,7 +65,7 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: PetLis
               }}
             >
               {list.length ? (
-                list.map((_, key) => (
+                list.map((pet, key) => (
                   <SwiperItem key={key}>
                     <View
                       style={{
@@ -81,7 +81,7 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: PetLis
                           boxShadow: '-0.5px 0.5px 10px -3px #999',
                         }}
                         className="rounded-full"
-                        src={_.image || `${CDNIMGURL2}default-head.png`}
+                        src={`${CDNIMGURL}${pet.image ? pet.image : returnPetdefaultImage(pet.type)}`}
                       />
                     </View>
                   </SwiperItem>
@@ -114,13 +114,17 @@ const RotationChartList = ({ type = 'pet', list }: { type?: string; list: PetLis
             </Swiper>
             {!!list.length && (
               <View className="PetInfo mt-1">
-                <Text className={`PetInfoOne petNameColor ${type === 'plan' ? '' : 'mr-1'}`}>{list[current]['name']}</Text>
-                <Text className={`${type === 'plan' ? 'petNameColor' : 'mr-0.5'}`}>
-                  {type === 'plan' ? '的' : <Text className={`rcciconfont text-22 ${list[current]['gender'] === PetGender.Female ? 'rccicon-female text-color-primary' : 'rccicon-male text-gray-400'}`} />}
-                </Text>
-                <Text className={`${type === 'plan' ? 'petNameColor' : ''}`}>
-                  {type === 'plan' ? 'Fresh Plan' : `${list[current]['breed']}${list[current]['age']}`}
-                </Text>
+                <Text className="PetInfoOne petNameColor">{list[current].name}</Text>
+                <Text
+                  className={`mx-0.5 rcciconfont text-[#D49D28] ${
+                    list[current].gender === 'MALE' ? 'rccicon-male' : 'rccicon-female'
+                  }`}
+                  style={{
+                    fontSize: '0.18rem',
+                  }}
+                />
+                <Text className="mr-0.5">{list[current].breed}</Text>
+                <Text>{list[current].age}</Text>
               </View>
             )}
           </View>

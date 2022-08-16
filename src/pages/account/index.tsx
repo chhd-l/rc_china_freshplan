@@ -15,9 +15,9 @@ import { getAge } from '@/utils/utils'
 import './index.less'
 
 const orderTypeList = [
-  { label: '待付款', icon: CDNIMGURL + 'my-topay.png', url: '/pages/elencoOrdini/index?status=1' },
-  { label: '待发货', icon: CDNIMGURL + 'my-toship.png', url: '/pages/elencoOrdini/index?status=2' },
-  { label: '待收货', icon: CDNIMGURL + 'my-toconfirm.png', url: '/pages/elencoOrdini/index?status=3' },
+  { label: '待付款', icon: CDNIMGURL + 'my-topay.png', url: '/pages/elencoOrdini/index?status=UNPAID' },
+  { label: '待发货', icon: CDNIMGURL + 'my-toship.png', url: '/pages/elencoOrdini/index?status=TO_SHIP' },
+  { label: '待收货', icon: CDNIMGURL + 'my-toconfirm.png', url: '/pages/elencoOrdini/index?status=SHIPPED' },
 ]
 
 const Account = () => {
@@ -103,7 +103,7 @@ const Account = () => {
               extraText="查看全部订单"
               onClick={() =>
                 Taro.navigateTo({
-                  url: '/pages/elencoOrdini/index?status=0',
+                  url: '/pages/elencoOrdini/index?status=ALL',
                 })
               }
             />

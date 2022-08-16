@@ -1,9 +1,9 @@
-// import { useGlobalIconFont } from './iconfont/helper'
+import { useGlobalIconFont } from './iconfont/helper'
 
 export default defineAppConfig({
   pages: [
-    'pages/subscription/index',
     'pages/account/index',
+    'pages/subscription/index',
     'pages/elencoOrdini/index',
     'pages/orderDetail/index',
     'pages/addressManage/index',
@@ -14,6 +14,7 @@ export default defineAppConfig({
     'pages/breedList/index',
     'pages/foodRecom/index',
     'pages/checkout/index',
+    'pages/testView/index',
   ],
   window: {
     navigationBarBackgroundColor: '#fff',
@@ -38,5 +39,6 @@ export default defineAppConfig({
       },
     ],
   },
+  usingComponents: Object.assign(useGlobalIconFont),
 })
 

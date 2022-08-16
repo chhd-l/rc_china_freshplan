@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+  C:\Program Files\nodejs\node.exe C:\Users\CDLX\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add -D weapp-tailwindcss-webpack-plugin postcss-rem-to-responsive-pixel tailwindcss postcss autoprefixer
 
 PATH: 
-  C:\Program Files\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Azure Data Studio\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\mysql-8.0.28-winx64\bin;;C:\Program Files (x86)\Tencent\微信web开发者工具\dll;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\Azure Data Studio\bin;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Program Files\JetBrains\WebStorm 2021.2.3\bin;
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Git\cmd;D:\新建文件夹 (2)\微信web开发者工具\dll;C:\Users\CDLX\AppData\Local\Microsoft\WindowsApps;C:\Users\CDLX\AppData\Roaming\npm;D:\vscode\Microsoft VS Code\bin;
 
 Yarn version: 
   1.22.17
@@ -14,15 +14,15 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@rc-china-commerce%2ftaro: Not found
-      at Request.params.callback [as _callback] (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
-      at Request.self.callback (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
+  Error: http://registry.npm.taobao.org/@rc-china-commerce%2ftaro: [NOT_FOUND] @rc-china-commerce/taro not found
+      at Request.params.callback [as _callback] (C:\Users\CDLX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
+      at Request.self.callback (C:\Users\CDLX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
       at Request.emit (node:events:390:28)
-      at Request.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141855:10)
+      at Request.<anonymous> (C:\Users\CDLX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141855:10)
       at Request.emit (node:events:390:28)
-      at IncomingMessage.<anonymous> (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141777:12)
+      at Gunzip.<anonymous> (C:\Users\CDLX\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141777:12)
       at Object.onceWrapper (node:events:509:28)
-      at IncomingMessage.emit (node:events:402:35)
+      at Gunzip.emit (node:events:390:28)
       at endReadableNT (node:internal/streams/readable:1343:12)
       at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
@@ -91,6 +91,7 @@ npm manifest:
     },
     "devDependencies": {
       "@babel/core": "^7.8.0",
+      "@mini-types/alipay": "^2.0.1",
       "@tarojs/mini-runner": "3.4.2",
       "@tarojs/webpack-runner": "3.4.2",
       "@types/mockjs": "^1.0.6",

@@ -1,0 +1,10 @@
+{
+  "symbol_url": "//at.alicdn.com/t/c/font_3579405_jozwh97p8a.js",
+  "save_dir": "./src/iconfont",
+  "use_rpx": true,
+  "trim_icon_prefix": "icon",
+  "default_icon_size": 18,
+  "use_typescript": true,
+  "platforms": ["alipay"],
+  "design_width": 750
+}
