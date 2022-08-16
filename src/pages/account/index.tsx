@@ -2,12 +2,14 @@
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { wxLogin } from '@/framework/api/consumer/consumer'
+import { getPets } from '@/framework/api/pet/get-pets'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
+import { getAge } from '@/utils/utils'
 import { Button, Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useAtom } from 'jotai'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import './index.less'
 
@@ -19,13 +21,27 @@ const orderTypeList = [
 
 const Account = () => {
   const [consumer, setConsumer] = useAtom(consumerAtom)
+  const [petList, setPetList] = useState([])
 
   const loginInit = async () => {
     if (my.getStorageSync({ key: 'wxLoginRes' })) {
       // Taro.setStorageSync('commerce-loading', 1)
       const data = await wxLogin()
+      getPetList(data.id)
       setConsumer(data)
       // setRefreshed(true)//兼容token过期报错
+    }
+  }
+
+  const getPetList = async (id = consumer?.id) => {
+    if (!consumer?.id) return null
+    else {
+      let res = await getPets({ consumerId: id })
+      res.forEach((item) => {
+        item.age = getAge(item.birthday)
+      })
+      setPetList(res)
+      console.log('res', res)
     }
   }
 
@@ -35,8 +51,19 @@ const Account = () => {
     //   setConsumer(res.data.userInfo)
     // }
     loginInit()
+    getPetList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    getPetList()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [consumer?.id])
+
+  Taro.useDidShow(() => {
+    loginInit()
+    getPetList()
+  })
 
   const handleLogin = () => {
     loginWithAlipay((data) => {
@@ -117,7 +144,7 @@ const Account = () => {
           </AtList>
         </View>
         {/* 宠物列表 */}
-        <RotationChartList list={[]} />
+        <RotationChartList list={petList} />
         {/* 其他选项 */}
         <AtList hasBorder={false} className="mt-1">
           <AtListItem
