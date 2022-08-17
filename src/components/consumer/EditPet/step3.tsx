@@ -46,6 +46,14 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
     onChangeAll({ breed, code });
   }
 
+  const handleNext = () => {
+    if (!pet.code) {
+      Taro.showToast({ title: '请先选择品种' });
+    } else {
+      onStepChange(PetStep.STEP4);
+    }
+  }
+
   const hotBreedList = breedList.filter(el => el.isHot).filter((el, idx) => idx < 9);
   const isOtherBreedSelected = !!pet.code && hotBreedList.map(el => el.code).indexOf(pet.code) === -1;
 
@@ -72,7 +80,7 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP2)}>上一步</Text>
-          <Text className="btn-item active" onClick={() => onStepChange(PetStep.STEP4)}>下一步</Text>
+          <Text className="btn-item active" onClick={handleNext}>下一步</Text>
         </View>
       </View>
     </View>

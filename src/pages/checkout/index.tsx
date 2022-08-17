@@ -1,14 +1,16 @@
 import { View, Text, Image, Input } from '@tarojs/components';
-import { CDNIMGURL2 } from '@/lib/constants';
 import { Address } from '@/framework/types/consumer';
 import { getAddresses } from '@/framework/api/consumer/address';
 import { useState, useEffect } from 'react';
+import { formatMoney } from '@/utils/utils';
 import Taro from '@tarojs/taro';
+import moment from 'moment';
 
 import './index.less';
 
 const Checkout = () => {
   const [address, setAddress] = useState<Address | undefined>();
+  const [items, setItems] = useState<any[]>([]);
 
   const getAddressList = async () => {
     const res: Address[] = await getAddresses()
@@ -18,6 +20,15 @@ const Checkout = () => {
   useEffect(() => {
     getAddressList()
   }, []);
+
+  Taro.useReady(() => {
+    const pages = Taro.getCurrentPages()
+    const current = pages[pages.length - 1]
+    const eventChannel = current.getOpenerEventChannel()
+    eventChannel.on('checkoutItems', (data: any) => {
+      setItems(data);
+    });
+  });
 
   const handleChooseAddress = () => {
     Taro.navigateTo({
@@ -33,21 +44,30 @@ const Checkout = () => {
   }
 
   const handlePayment = () => {
-    my.tradePay({
-      // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
-      tradeNO: '2022081622001402631426752156',
-      success: (res) => {
-        my.alert({
-          content: JSON.stringify(res),
-        });
-      },
-      fail: (res) => {
-        my.alert({
-          content: JSON.stringify(res),
-        });
-      }
-    });
+    // my.tradePay({
+    //   // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
+    //   tradeNO: '2022081622001402631426752156',
+    //   success: (res) => {
+    //     my.alert({
+    //       content: JSON.stringify(res),
+    //     });
+    //   },
+    //   fail: (res) => {
+    //     my.alert({
+    //       content: JSON.stringify(res),
+    //     });
+    //   }
+    // });
+    Taro.navigateTo({
+      url: '/pages/elencoOrdini/index?status=ALL',
+    })
   }
+
+  const subtotal = items.reduce((prev: number, curr: any) => {
+    return prev + curr.price;
+  }, 0);
+
+  const nextThursday = moment().isoWeekday() < 4 ? moment().isoWeekday(4).format('YYYY-MM-DD') : moment().add(1, 'weeks').isoWeekday(4).format('YYYY-MM-DD');
 
   return (
     <View className="checkout-page pt-2 pb-12">
@@ -68,35 +88,27 @@ const Checkout = () => {
 
       <View className="bg-white rounded-sm mx-1 mt-1">
         <View className="food-list p-1">
-          <View className="food-item p-1 flex items-center">
-            <View className="w-8 h-8">
-              <Image src={`${CDNIMGURL2}food-1.png`} />
+          {items.map((item: any, idx: number) => (
+            <View key={idx} className="food-item p-1 flex items-center">
+              <View className="w-8 h-8">
+                <Image src={item.img} />
+              </View>
+              <View className="flex-1 ml-1">
+                <View className="text-30">{item.name}</View>
+                <View className="mt-0.5 text-24 text-color-price">{formatMoney(item.price)}</View>
+                <View className="mt-2 text-24 text-gray-400 text-right">X 1</View>
+              </View>
             </View>
-            <View className="flex-1 ml-1">
-              <View className="text-30">牛肉泥</View>
-              <View className="mt-0.5 text-24 text-color-price">￥22.00</View>
-              <View className="mt-2 text-24 text-gray-400 text-right">X 1</View>
-            </View>
-          </View>
-          <View className="food-item p-1 flex items-center">
-            <View className="w-8 h-8">
-              <Image src={`${CDNIMGURL2}food-1.png`} />
-            </View>
-            <View className="flex-1 ml-1">
-              <View className="text-30">牛肉泥</View>
-              <View className="mt-0.5 text-24 text-color-price">￥22.00</View>
-              <View className="mt-2 text-24 text-gray-400 text-right">X 1</View>
-            </View>
-          </View>
+          ))}
         </View>
         <View className="p-1">
           <View className="flex justify-between items-center">
             <Text className="text-30">运费</Text>
-            <Text className="text-30 font-bold">￥22.00</Text>
+            <Text className="text-30 font-bold">{formatMoney(0)}</Text>
           </View>
           <View className="mt-1 text-right">
             <Text className="text-30 text-gray-400">商品小计：</Text>
-            <Text className="text-30 text-color-price font-bold">￥22.00</Text>
+            <Text className="text-30 text-color-price font-bold">{formatMoney(subtotal)}</Text>
           </View>
         </View>
       </View>
@@ -104,24 +116,24 @@ const Checkout = () => {
       <View className="bg-white rounded-sm mx-1 mt-1 p-1">
         <View className="flex justify-between items-center text-30">
           <Text>商品金额</Text>
-          <Text>￥22.00</Text>
+          <Text>{formatMoney(subtotal)}</Text>
         </View>
         <View className="mt-1 flex justify-between items-center text-30">
           <Text>促销折扣</Text>
-          <Text>-￥22.00</Text>
+          <Text>-￥0.00</Text>
         </View>
         <View className="mt-1 flex justify-between items-center text-30">
           <Text>新人折扣</Text>
-          <Text>-￥22.00</Text>
+          <Text>-￥0.00</Text>
         </View>
         <View className="mt-2 flex justify-between items-center text-30">
           <Text>运费</Text>
-          <Text>￥22.00</Text>
+          <Text>￥0.00</Text>
         </View>
         <View className="mt-1 border border-solid border-gray-100"></View>
         <View className="mt-1 text-right">
           <Text className="text-30">合计：</Text>
-          <Text className="text-30 text-color-price font-bold">￥22.00</Text>
+          <Text className="text-30 text-color-price font-bold">{formatMoney(subtotal)}</Text>
         </View>
       </View>
 
@@ -139,13 +151,13 @@ const Checkout = () => {
         </View>
         <View className="mt-1 flex items-center">
           <Text className="mr-1 rcciconfont rccicon-ship text-color-primary text-28" />
-          <Text className="flex-1 text-28 text-gray-400">本次订单将在2022-08-23发货，请注意查收!</Text>
+          <Text className="flex-1 text-28 text-gray-400">本次订单将在{nextThursday}发货，请注意查收!</Text>
         </View>
       </View>
 
       <View className="pet-food-footer">
         <View className="mx-2 flex justify-between items-center">
-          <View className="text-28">应付：<Text className="price">￥129.00</Text></View>
+          <View className="text-28">应付：<Text className="price">{formatMoney(subtotal)}</Text></View>
           <View className="px-4 py-0.8 text-white text-28 bg-color-primary rounded-full" onClick={handlePayment}>支付</View>
         </View>
       </View>

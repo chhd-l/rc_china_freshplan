@@ -1,19 +1,40 @@
-import IconFont from '@/components/iconfont'
+import { getSubscriptionFindByConsumerId } from '@/framework/api/subscription/subscription'
 import { CDNIMGURL } from '@/lib/constants'
+import { getAgeYear } from '@/utils/utils'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
-import { useState } from 'react'
+import moment from 'moment'
+import { useEffect, useState } from 'react'
 import { AtAvatar, AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 
 const TextView = () => {
   const [current, setCurrent] = useState(0)
+  const [subscriptionList, setSubscriptionList] = useState<any[]>([])
+
+  const getSubscriptionList = async () => {
+    const res = await getSubscriptionFindByConsumerId()
+    console.log('res', res)
+    res.forEach((item) => {
+      item.pet.age = getAgeYear(item.pet.birthday)
+    })
+    setSubscriptionList(res)
+  }
+
+  const returnPetdefaultImage = (petType: string) => {
+    if (petType === 'CAT') return 'cat-default.png'
+    else return 'dog-default.png'
+  }
+
+  useEffect(() => {
+    getSubscriptionList()
+  }, [])
 
   return (
     <View className="oldUserPlan">
       {/* <IconFont name="icon-riqi" size={40} /> */}
       <View className="px-3 py-2 title">
         <Image className="mr-0.5" src={`${CDNIMGURL}claws.png`} />
-        <Text>球球</Text>的专属鲜食食谱
+        <Text>{subscriptionList[current]?.pet?.name}</Text>的专属鲜食食谱
       </View>
       <Swiper
         current={current}
@@ -22,29 +43,35 @@ const TextView = () => {
         nextMargin="10px"
         previousMargin="32px"
       >
-        {[1, 2].map((_, key) => (
+        {subscriptionList.map((item, key) => (
           <SwiperItem key={key}>
             <View className="plan">
-              <View className="p-1 pr-2 inline-block fresh">FRESH编号：S20185275063697</View>
-              <View className="swiperItemCard px-1 pt-1 pb-1.5 flex flex-col justify-between text-white">
+              <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
+              <View className="swiperItemCard px-1 pt-2 pb-1.5 flex flex-col justify-between text-white">
                 <View className="flex text-[24px]">
-                  <View className="pt-1 mr-1">
-                    <AtAvatar size="large" circle image="https://jdc.jd.com/img/200" />
+                  <View className="pt-1 ml-0.5 mr-1.5">
+                    <AtAvatar
+                      size="large"
+                      circle
+                      image={`${
+                        item?.pet?.image ? item?.pet?.image : CDNIMGURL + returnPetdefaultImage(item?.pet?.image)
+                      }`}
+                    />
                   </View>
                   <View className="flex-1 pr-2">
                     <View className="text-[36px] flex items-center justify-between">
-                      球球{' '}
+                      {item?.pet?.name}{' '}
                       <Text
                         className={`rcciconfont ${
-                          key === 0 ? 'rccicon-male text-[#FFE3B9]' : 'rccicon-female text-[#D49D28]'
+                          item?.pet?.gender === 'MALE' ? 'rccicon-male text-[#FFE3B9]' : 'rccicon-female text-[#D49D28]'
                         } translateText`}
                         style={{
                           fontSize: '0.3rem',
                         }}
                       />
                     </View>
-                    <View className="mt-1.5">正常体重&nbsp;&nbsp;不到1岁</View>
-                    <View className="mt-1">爱尔兰雪达犬&nbsp;&nbsp;5kg</View>
+                    <View className="mt-1.5">正常体重&nbsp;&nbsp;{item?.pet?.age}</View>
+                    <View className="mt-1">{item?.pet?.breedName}&nbsp;&nbsp;5kg</View>
                   </View>
                 </View>
                 <AtButton className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[24px]">
@@ -68,7 +95,7 @@ const TextView = () => {
                               width: '100%',
                               height: '100%',
                             }}
-                            src="https://jdc.jd.com/img/200"
+                            src={item?.productList[0]?.defaultImage}
                           />
                         </View>
                         <View className="ml-1 flex-1">
@@ -92,7 +119,11 @@ const TextView = () => {
                         <View className="ml-1 flex-1">
                           <View className="text=[28px] font-medium">发货驿站</View>
                           <View className="font-medium text-[24px] mt-1 leading-[26px]">
-                            下一次将在<Text className="text-[#F69C32]">2022-08-23</Text>发货 请注意查收!
+                            下一次将在
+                            <Text className="text-[#F69C32]">
+                              {moment(item?.createNextDeliveryTime).format('YYYY-MM-DD')}
+                            </Text>
+                            发货 请注意查收!
                           </View>
                         </View>
                       </View>
@@ -105,7 +136,7 @@ const TextView = () => {
         ))}
       </Swiper>
       <View className="flex mt-1 mb-2 items-center justify-center">
-        {[1, 2].map((_, key) => (
+        {subscriptionList.map((_, key) => (
           <View
             key={key}
             className={`${

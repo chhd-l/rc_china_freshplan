@@ -12,5 +12,6 @@ export const addPet = async (petInfo) => {
     return pets
   } catch (err) {
     console.log(err)
+    return false
   }
 }

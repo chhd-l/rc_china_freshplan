@@ -38,8 +38,15 @@ const petEdit = () => {
   }
 
   const handleSave = async () => {
-    await addPet(pet);
-    Taro.navigateBack({ delta: 1 });
+    const res = await addPet(pet);
+    if (res) {
+      Taro.navigateTo({
+        url: '/pages/foodRecom/index',
+        success: (res) => {
+          res.eventChannel.emit('petForRecommend', pet);
+        }
+      })
+    }
   }
 
   return (
