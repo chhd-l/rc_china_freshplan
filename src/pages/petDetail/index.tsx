@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { View, Text, Image, Input, Picker, PickerView, PickerViewColumn } from '@tarojs/components';
 import { AtFloatLayout, AtButton } from 'taro-ui';
 import Taro from '@tarojs/taro';
-import { CDNIMGURL2, UPLOADURL } from '@/lib/constants';
+import { CDNIMGURL2, CDNIMGURL, UPLOADURL } from '@/lib/constants';
 import { getBreedList } from '@/framework/api/pet/get-breeds';
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle';
 import { PetListItemProps, PetType, PetGender, PetHealth, PetPosture } from '@/framework/types/consumer';
 import { BreedListItemProps } from '@/pages/breedList';
 import { updatePet } from '@/framework/api/pet/update-pet';
+import { getPet } from '@/framework/api/pet/get-pets';
 import moment from 'moment';
 
 import '@/components/consumer/EditPet/step.less';
@@ -59,6 +60,10 @@ const PetDetail = () => {
       getBreedListInit(data.type);
       setVal([arr1.indexOf((data?.recentWeight ?? '')[0]) ?? 0, 0, arr3.indexOf((data?.recentWeight ?? '')[2]) ?? 0]);
       setVal1([arr1.indexOf((data?.targetWeight ?? '')[0]) ?? 0, 0, arr3.indexOf((data?.targetWeight ?? '')[2]) ?? 0]);
+      getPet(data.id).then((res: PetListItemProps) => {
+        console.log('pet from api:', res);
+        if (res) { setPet(res) };
+      })
     })
   });
 
@@ -138,6 +143,15 @@ const PetDetail = () => {
     Taro.navigateTo({ url: '/pages/petList/index' });
   }
 
+  const handleSub = () => {
+    Taro.navigateTo({
+      url: '/pages/foodRecom/index',
+      success: (res) => {
+        res.eventChannel.emit('petForRecommend', pet);
+      }
+    });
+  }
+
   const hotBreedList = breedList.filter(el => el.isHot).filter((el, idx) => idx < 9);
   const isOtherBreedSelected = !!pet.code && hotBreedList.map(el => el.code).indexOf(pet.code) === -1;
 
@@ -145,7 +159,7 @@ const PetDetail = () => {
     <View className="pet-detail-page">
       <View className="bg-white px-2 py-1 flex items-center">
         <View className="head w-6 h-6" onClick={() => setShowUpload(true)}>
-          <Image className="rounded-full" src={pet.image || `${CDNIMGURL2}default-head.png`}></Image>
+          <Image className="rounded-full" src={pet.image || `${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`}></Image>
         </View>
         <Text className="ml-2 text-32">{pet.name}</Text>
         <Text className={`ml-1 rcciconfont text-30 ${pet.gender === PetGender.Female ? 'text-color-primary rccicon-female' : 'text-gray-400 rccicon-male'}`}></Text>
@@ -286,9 +300,17 @@ const PetDetail = () => {
       </View>
 
       <View className="add-pet-btn">
-        <AtButton className="mx-4 mt-1 mb-2 rounded-full" customStyle={{ fontSize: '.35rem' }} type="primary" onClick={savePet}>
-          保存编辑
-        </AtButton>
+        <View className="px-1 mt-1 mb-2 flex items-center">
+          <View className="flex-1 mx-1 py-0.8 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={savePet}>
+            <Text className="rcciconfont rccicon-save text-32 mr-1"></Text>
+            <Text className="text-28">保存编辑</Text>
+          </View>
+          {!pet?.subscriptionNo || pet.subscriptionNo.length === 0
+            ? <View className="flex-1 mx-1 py-0.8 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={handleSub}>
+            <Text className="rcciconfont rccicon-timer text-32 mr-1"></Text>
+            <Text className="text-28">开始定制</Text>
+          </View> : null}
+        </View>
       </View>
 
       <AtFloatLayout

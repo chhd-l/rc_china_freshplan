@@ -189,6 +189,7 @@ const petItemApiArr = [
   'targetWeight',
   'recentPosture',
   'recentHealth',
+  'subscriptionNo',
 ]
 const petItemFeArr = [
   'name',
@@ -206,6 +207,7 @@ const petItemFeArr = [
   'targetWeight',
   'recentPosture',
   'recentHealth',
+  'subscriptionNo',
 ]
 
 export const normalizeCartData = (cart: any, productSkuInfo: any, isSubscription?: boolean) => {

@@ -7,3 +7,4 @@ const useGlobalIconFont = () => {
 
 // es modules is unavaiable.
 module.exports.useGlobalIconFont = useGlobalIconFont;
+// export default useGlobalIconFont;

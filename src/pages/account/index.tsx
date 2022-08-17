@@ -2,30 +2,43 @@
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { wxLogin } from '@/framework/api/consumer/consumer'
-import IconFont from '@/components/iconfont'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
 import { Button, Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useAtom } from 'jotai'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
+import { getPets } from '@/framework/api/pet/get-pets'
+import { getAge } from '@/utils/utils'
 import './index.less'
 
 const orderTypeList = [
-  { label: '待付款', icon: CDNIMGURL + 'my-topay.png', url: '/pages/elencoOrdini/index?status=1' },
-  { label: '待发货', icon: CDNIMGURL + 'my-toship.png', url: '/pages/elencoOrdini/index?status=2' },
-  { label: '待收货', icon: CDNIMGURL + 'my-toconfirm.png', url: '/pages/elencoOrdini/index?status=3' },
+  { label: '待付款', icon: CDNIMGURL + 'my-topay.png', url: '/pages/elencoOrdini/index?status=UNPAID' },
+  { label: '待发货', icon: CDNIMGURL + 'my-toship.png', url: '/pages/elencoOrdini/index?status=TO_SHIP' },
+  { label: '待收货', icon: CDNIMGURL + 'my-toconfirm.png', url: '/pages/elencoOrdini/index?status=SHIPPED' },
 ]
 
 const Account = () => {
   const [consumer, setConsumer] = useAtom(consumerAtom)
+  const [petList, setPetList] = useState<PetListItemProps[]>([])
+
+  const getList = async (consumerId: string) => {
+    let res = (await getPets({ consumerId })) || []
+    res.forEach((item) => {
+      item.age = getAge(item.birthday)
+    })
+    if (res.length) {
+      setPetList(res)
+    }
+  }
 
   const loginInit = async () => {
     if (my.getStorageSync({ key: 'wxLoginRes' })) {
       // Taro.setStorageSync('commerce-loading', 1)
       const data = await wxLogin()
       setConsumer(data)
+      getList(data.id)
       // setRefreshed(true)//兼容token过期报错
     }
   }
@@ -42,6 +55,7 @@ const Account = () => {
   const handleLogin = () => {
     loginWithAlipay((data) => {
       setConsumer(data)
+      getList(data.id)
     })
   }
 
@@ -89,7 +103,7 @@ const Account = () => {
               extraText="查看全部订单"
               onClick={() =>
                 Taro.navigateTo({
-                  url: '/pages/elencoOrdini/index?status=0',
+                  url: '/pages/elencoOrdini/index?status=ALL',
                 })
               }
             />
@@ -119,7 +133,9 @@ const Account = () => {
           </AtList>
         </View>
         {/* 宠物列表 */}
-        <RotationChartList list={[]} />
+        <RotationChartList list={petList} />
+        {/* 计划列表 */}
+        {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}
         <AtList hasBorder={false} className="mt-1">
           <AtListItem

@@ -3,6 +3,7 @@ import { View, Text } from '@tarojs/components';
 import { AtProgress } from 'taro-ui';
 import { PetListItemProps, PetStep, PetPosture } from '@/framework/types/consumer';
 import { addPet } from '@/framework/api/pet/add-pet';
+import Taro from '@tarojs/taro';
 import Step1 from '@/components/consumer/EditPet/step1';
 import Step2 from '@/components/consumer/EditPet/step2';
 import Step3 from '@/components/consumer/EditPet/step3';
@@ -38,7 +39,7 @@ const petEdit = () => {
 
   const handleSave = async () => {
     await addPet(pet);
-    my.navigateTo({ url: '/pages/petList/index' });
+    Taro.navigateBack({ delta: 1 });
   }
 
   return (

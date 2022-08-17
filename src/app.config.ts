@@ -1,8 +1,7 @@
-import { useGlobalIconFont } from './components/iconfont/helper';
+import { useGlobalIconFont } from './components/iconfont/helper'
 
 export default defineAppConfig({
   pages: [
-    'pages/testView/index',
     'pages/account/index',
     'pages/subscription/index',
     'pages/elencoOrdini/index',
@@ -15,6 +14,7 @@ export default defineAppConfig({
     'pages/breedList/index',
     'pages/foodRecom/index',
     'pages/checkout/index',
+    'pages/testView/index',
   ],
   window: {
     navigationBarBackgroundColor: '#fff',
@@ -38,7 +38,6 @@ export default defineAppConfig({
         selectedIconPath: 'assets/icons/icon-account-selected.png',
       },
     ],
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-  }, usingComponents: Object.assign(useGlobalIconFont()),
+  }, usingComponents: Object.assign(useGlobalIconFont),
 })
 

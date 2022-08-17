@@ -4,7 +4,7 @@ import { consumerAtom } from '@/store/consumer'
 import { petInfoListAuto } from '@/store/pets'
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getAge } from '@/utils/utils'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
@@ -63,9 +63,12 @@ const PetList = () => {
           )
         })}
         <View className="add-pet-btn">
-          <AtButton className="mx-4 mt-1 mb-2 rounded-full" customStyle={{ fontSize: '.35rem' }} type="primary" onClick={addPet}>
-            添加宠物
-          </AtButton>
+          <View className="px-1 mt-1 mb-2 flex items-center">
+            <View className="flex-1 mx-1 py-0.8 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={addPet}>
+              <Text className="rcciconfont rccicon-footprint text-32 mr-1"></Text>
+              <Text className="text-28">添加宠物</Text>
+            </View>
+          </View>
         </View>
       </View>
     </>

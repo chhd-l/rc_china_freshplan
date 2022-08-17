@@ -45,6 +45,7 @@ export interface PetListItemProps {
   recentPosture?: PetPosture
   targetWeight?: string
   recentHealth?: string[]
+  subscriptionNo?: string[]
 }
 
 export enum PetType {
@@ -71,12 +72,12 @@ export enum PetPosture {
 }
 
 export enum PetHealth {
-  PICKY_EATER = '1',
-  FOOD_ALLERGIES_OR_STOMAC = '2',
-  H_SENSITIVITIES = '3',
-  DULL_OR_FLAKY_FUR = '4',
-  ARTHRITIS_OR_JOINT_PAIN = '5',
-  NONE = '0',
+  PICKY_EATER = 'PICKY_EATER',
+  FOOD_ALLERGIES_OR_STOMAC = 'FOOD_ALLERGIES_OR_STOMAC',
+  H_SENSITIVITIES = 'H_SENSITIVITIES',
+  DULL_OR_FLAKY_FUR = 'DULL_OR_FLAKY_FUR',
+  ARTHRITIS_OR_JOINT_PAIN = 'ARTHRITIS_OR_JOINT_PAIN',
+  NONE = 'NONE',
 }
 
 export enum PetStep {

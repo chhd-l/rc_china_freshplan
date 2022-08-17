@@ -2,10 +2,11 @@ import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
+import { PetListItemProps, PetGender } from '@/framework/types/consumer';
 import './index.less'
 
-const RotationChartList = ({ list }: { list: any[] }) => {
-  const [current, setCurrent] = useState(list.length > 1 ? 1 : 0)
+const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
+  const [current, setCurrent] = useState(list.length === 1 ? 0 : 1)
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
 
@@ -13,10 +14,14 @@ const RotationChartList = ({ list }: { list: any[] }) => {
     my.navigateTo({ url: '/pages/petList/index' })
   }
 
-  // const returnPetdefaultImage = (petType: 'dog' | 'cat') => {
-  //   if(petType === 'dog') return 'cat-default.png'
-  //   else return 'dog-default.png'
-  // }
+  const handleAddPet = () => {
+    my.navigateTo({ url: '/pages/petEdit/index' })
+  }
+
+  const returnPetdefaultImage = (petType: string) => {
+    if (petType === 'CAT') return 'cat-default.png'
+    else return 'dog-default.png'
+  }
 
   useEffect(() => {
     const nw = (Taro.getSystemInfoSync().windowWidth / 7.5) * 1.73
@@ -38,7 +43,7 @@ const RotationChartList = ({ list }: { list: any[] }) => {
         <View className="box-border overflow-hidden">
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
             {!!list.length && (
-              <View className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10">
+              <View className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10" onClick={handleAddPet}>
                 <View
                   className="bg-no-repeat bg-contain w-full h-full rounded-full bg-white"
                   style={{
@@ -60,7 +65,7 @@ const RotationChartList = ({ list }: { list: any[] }) => {
               }}
             >
               {list.length ? (
-                list.map((_, key) => (
+                list.map((pet, key) => (
                   <SwiperItem key={key}>
                     <View
                       style={{
@@ -76,7 +81,7 @@ const RotationChartList = ({ list }: { list: any[] }) => {
                           boxShadow: '-0.5px 0.5px 10px -3px #999',
                         }}
                         className="rounded-full"
-                        src={`${CDNIMGURL2}default-head.png`}
+                        src={`${CDNIMGURL}${pet.image ? pet.image : returnPetdefaultImage(pet.type)}`}
                       />
                     </View>
                   </SwiperItem>
@@ -93,7 +98,7 @@ const RotationChartList = ({ list }: { list: any[] }) => {
                     <View
                       onClick={(e) => {
                         e.stopPropagation()
-                        handlePetList()
+                        handleAddPet()
                       }}
                       style={{
                         backgroundImage: `url(${CDNIMGURL}add-pet.png)`,
@@ -109,9 +114,17 @@ const RotationChartList = ({ list }: { list: any[] }) => {
             </Swiper>
             {!!list.length && (
               <View className="PetInfo mt-1">
-                <Text className="PetInfoOne petNameColor mr-1">xxxx</Text>
-                <Text className="mr-0.5">xxx</Text>
-                <Text>xx</Text>
+                <Text className="PetInfoOne petNameColor">{list[current].name}</Text>
+                <Text
+                  className={`mx-0.5 rcciconfont text-[#D49D28] ${
+                    list[current].gender === 'MALE' ? 'rccicon-male' : 'rccicon-female'
+                  }`}
+                  style={{
+                    fontSize: '0.18rem',
+                  }}
+                />
+                <Text className="mr-0.5">{list[current].breed}</Text>
+                <Text>{list[current].age}</Text>
               </View>
             )}
           </View>
