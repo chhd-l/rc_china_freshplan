@@ -2,6 +2,7 @@ import { useGlobalIconFont } from './iconfont/helper'
 
 export default defineAppConfig({
   pages: [
+    'pages/testView/index',
     'pages/account/index',
     'pages/subscription/index',
     'pages/elencoOrdini/index',
@@ -14,7 +15,6 @@ export default defineAppConfig({
     'pages/breedList/index',
     'pages/foodRecom/index',
     'pages/checkout/index',
-    'pages/testView/index',
   ],
   window: {
     navigationBarBackgroundColor: '#fff',
