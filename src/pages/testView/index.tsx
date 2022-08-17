@@ -46,8 +46,8 @@ const TextView = () => {
         {subscriptionList.map((item, key) => (
           <SwiperItem key={key}>
             <View className="plan">
-              <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：S20185275063697</View>
-              <View className="swiperItemCard px-1 pt-1 pb-1.5 flex flex-col justify-between text-white">
+              <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
+              <View className="swiperItemCard px-1 pt-2 pb-1.5 flex flex-col justify-between text-white">
                 <View className="flex text-[24px]">
                   <View className="pt-1 ml-0.5 mr-1.5">
                     <AtAvatar

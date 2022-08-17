@@ -133,7 +133,9 @@ const Account = () => {
           </AtList>
         </View>
         {/* 宠物列表 */}
-        <RotationChartList list={petList} />
+        <View className="my-1">
+          <RotationChartList list={petList} />
+        </View>
         {/* 计划列表 */}
         {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}

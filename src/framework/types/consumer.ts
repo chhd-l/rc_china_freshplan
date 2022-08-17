@@ -35,8 +35,8 @@ export interface PetListItemProps {
   type?: PetType
   gender?: PetGender
   code?: string
-  breed: string
-  isSterilized: boolean
+  breed?: string
+  isSterilized?: boolean
   birthday: string
   image: string
   isOpened?: boolean
