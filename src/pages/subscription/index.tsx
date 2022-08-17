@@ -4,13 +4,17 @@ import FreshFoodExperience from '@/components/subscription/Freshfoodexperience'
 import LovePetHealth from '@/components/subscription/LovePetHealth'
 import CommonProblem from '@/components/subscription/CommonProblem'
 import home_foot_img from '@/assets/img/home_foot_img.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 import { titleSwiperList } from './index.module'
 
 const Subscription = () => {
   const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    my.setNavigationBar({ image: 'https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/fresh-plan-logo.png' })
+  }, [])
   return (
     <View className="subscription">
       <View className="TitleSwiper relative">
