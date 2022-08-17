@@ -12,8 +12,8 @@ const Subscription = () => {
   const [current, setCurrent] = useState(0)
   return (
     <View className="subscription">
-      1
-      <IconFont name="rccicon-add" size={40} />2
+      <IconFont name="rccicon-add" size={40} />
+      <IconFont name="rccicon-cat1" size={40} />
       <View className="TitleSwiper relative">
         <Swiper current={current} circular autoplay interval={2000} onChange={(e) => setCurrent(e.detail.current)}>
           {titleSwiperList.map((item, key) => (
