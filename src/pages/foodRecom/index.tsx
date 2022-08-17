@@ -96,7 +96,7 @@ const FoodRecom = () => {
               <Text className="name text-28 font-bold">{item.name}</Text>
               <Text className="price ml-1 text-22">{formatMoney(item.price)}</Text>
             </View>
-            <View className="mx-2 text-22 text-gray-400">牛肉、土豆、鸡蛋、胡萝卜、豌豆</View>
+            <View className="mx-2 text-22 text-gray-400">{(item?.description ?? "").replaceAll(/<[^>]+>/ig, "")}</View>
             <View className="rectangle">
               <Text className="rcciconfont rccicon-check text-color-primary"></Text>
             </View>
