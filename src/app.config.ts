@@ -18,7 +18,8 @@ export default defineAppConfig({
     'pages/checkout/index',
     'pages/testView/index',
     'pages/petDiet/index',
-
+    'pages/freshPlanDetails/index',
+    'pages/schedule/index',
   ],
   window: {
     navigationBarBackgroundColor: '#fff',

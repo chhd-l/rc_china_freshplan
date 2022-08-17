@@ -10,8 +10,10 @@ export const getBreedList = async () => {
   let params = { storeId: baseSetting.storeId }
   try {
     // breedList 优先从缓存中取
-    if (Taro.getStorageSync('breedList')) {
-      return Promise.resolve(Taro.getStorageSync('breedList'));
+    const cache = Taro.getStorageSync('breedList');
+    if (cache && cache?.length > 0) {
+      console.log('breeeeeed:', cache);
+      return Promise.resolve(cache);
     }
     const breeds = await ApiRoot({ url: apis?.wx_pet }).pets().getBreeds({ body: params })
     // const breeds = mockPetlist;
