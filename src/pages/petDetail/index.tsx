@@ -139,8 +139,11 @@ const PetDetail = () => {
 
   const savePet = async () => {
     const res = await updatePet(pet, originalPet);
-    console.log('update pet item', res);
-    Taro.navigateTo({ url: '/pages/petList/index' });
+    if (res) {
+      Taro.navigateTo({ url: '/pages/petList/index' });
+    } else {
+      Taro.showToast({ title: '保存失败' });
+    }
   }
 
   const handleSub = () => {

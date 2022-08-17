@@ -13,5 +13,6 @@ export const deletePet = async ({ id }) => {
     return await ApiRoot({ url: apis.wx_pet }).pets().deletePet({ id })
   } catch (err) {
     console.log(err)
+    return false
   }
 }
