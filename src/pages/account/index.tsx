@@ -12,6 +12,7 @@ import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getAge } from '@/utils/utils'
 import './index.less'
+import IconFont from '@/components/iconfont'
 
 const orderTypeList = [
   { label: '待付款', icon: CDNIMGURL + 'my-topay.png', url: '/pages/elencoOrdini/index?status=UNPAID' },
@@ -61,7 +62,6 @@ const Account = () => {
 
   return (
     <View className="Account pb-2">
-      {/* <IconFont name="weilingqu" size={40} /> */}
       <View className="flex items-center loginHerder">
         <AtAvatar size="large" className="mx-1.5" circle image={consumer?.avatarUrl || CDNIMGURL + 'my-notlo.png'} />
         {consumer?.id ? (

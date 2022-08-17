@@ -1,17 +1,19 @@
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Step from '@/components/subscription/Step'
 import FreshFoodExperience from '@/components/subscription/Freshfoodexperience'
-
+import LovePetHealth from '@/components/subscription/LovePetHealth'
+import IconFont from '@/components/iconfont'
 import { useState } from 'react'
 import { AtButton, AtIcon, AtTimeline } from 'taro-ui'
 import './index.less'
 import { titleSwiperList } from './index.module'
-import LovePetHealth from '@/components/subscription/LovePetHealth'
 
 const Subscription = () => {
   const [current, setCurrent] = useState(0)
   return (
     <View className="subscription">
+      1
+      <IconFont name="rccicon-add" size={40} />2
       <View className="TitleSwiper relative">
         <Swiper current={current} circular autoplay interval={2000} onChange={(e) => setCurrent(e.detail.current)}>
           {titleSwiperList.map((item, key) => (
