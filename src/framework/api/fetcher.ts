@@ -8,7 +8,7 @@ export const isMock = false
 
 export const baseSetting = {
   consumerId: consumerInfo?.id || 'test001',
-  storeId: consumerInfo?.storeId || '12345678',
+  storeId: '12345678',
 }
 
 // const API_URL = 'http://localhost:9000/graphql'
