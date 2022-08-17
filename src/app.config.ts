@@ -1,4 +1,4 @@
-// import { useGlobalIconFont } from './iconfont/helper'
+import { useGlobalIconFont } from './components/iconfont/helper';
 
 export default defineAppConfig({
   pages: [
@@ -38,6 +38,7 @@ export default defineAppConfig({
         selectedIconPath: 'assets/icons/icon-account-selected.png',
       },
     ],
-  },
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+  }, usingComponents: Object.assign(useGlobalIconFont()),
 })
 

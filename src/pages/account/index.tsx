@@ -2,6 +2,7 @@
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { wxLogin } from '@/framework/api/consumer/consumer'
+import IconFont from '@/components/iconfont'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
 import { Button, Image, Text, View } from '@tarojs/components'
@@ -46,6 +47,7 @@ const Account = () => {
 
   return (
     <View className="Account pb-2">
+      <IconFont name="weilingqu" size={40} />
       <View className="flex items-center loginHerder">
         <AtAvatar size="large" className="mx-1.5" circle image={consumer?.avatarUrl || CDNIMGURL + 'my-notlo.png'} />
         {consumer?.id ? (

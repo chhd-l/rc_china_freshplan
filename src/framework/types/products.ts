@@ -1,5 +1,5 @@
 
-import { IconNames } from '@/iconfont'
+import { IconNames } from '@/components/iconfont'
 import { Image } from './common'
 import { Scalars } from '../schema/common.schema'
 

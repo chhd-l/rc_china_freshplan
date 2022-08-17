@@ -2,7 +2,7 @@ import CommonTitle from '@/components/creatSubscription/CommonTitle'
 import AuthLogin, { authLoginOpenedAtom } from '@/components/consumer/AuthLogin'
 import { getPets } from '@/framework/api/pet/get-pets'
 import { PetGender, PetListItemProps } from '@/framework/types/consumer'
-import IconFont from '@/iconfont'
+import IconFont from '@/components/iconfont'
 import { Cat, Dog, femaleIcon, maleIcon, petBg } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
 import { petInfoListAuto } from '@/store/pets'
@@ -115,7 +115,7 @@ const PetList = (props: Props) => {
     // Taro.navigateTo({
     //   url: `/pages/packageB/petList/index?petNumber=${petList.length}`,
     // })
-    
+
     my.navigateTo({ url: `/pages/packageB/petList/index?petNumber=${petList.length}` })
   }
   const CheckBoxItem = ({ id, idx }: { id: string; idx?: number }) => {
