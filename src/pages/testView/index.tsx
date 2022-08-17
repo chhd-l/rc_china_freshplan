@@ -1,3 +1,4 @@
+import IconFont from '@/components/iconfont'
 import { CDNIMGURL } from '@/lib/constants'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import { useState } from 'react'
@@ -9,6 +10,7 @@ const TextView = () => {
 
   return (
     <View className="oldUserPlan">
+      {/* <IconFont name="icon-riqi" size={40} /> */}
       <View className="px-3 py-2 title">
         <Image className="mr-0.5" src={`${CDNIMGURL}claws.png`} />
         <Text>球球</Text>的专属鲜食食谱

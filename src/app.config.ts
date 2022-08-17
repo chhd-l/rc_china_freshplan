@@ -39,6 +39,8 @@ export default defineAppConfig({
       },
     ],
   },
-  usingComponents: Object.assign(useGlobalIconFont),
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  usingComponents: Object.assign(useGlobalIconFont()),
 })
 

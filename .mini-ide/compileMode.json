@@ -1,0 +1,8 @@
+{
+  "modes": [
+    {
+      "title": "sub",
+      "page": "pages/subscription/index"
+    }
+  ]
+}

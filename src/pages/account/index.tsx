@@ -2,7 +2,6 @@
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { wxLogin } from '@/framework/api/consumer/consumer'
-import { PetListItemProps } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
 import { Button, Image, Text, View } from '@tarojs/components'
@@ -13,6 +12,7 @@ import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getAge } from '@/utils/utils'
 import './index.less'
+import IconFont from '@/components/iconfont'
 
 const orderTypeList = [
   { label: '待付款', icon: CDNIMGURL + 'my-topay.png', url: '/pages/elencoOrdini/index?status=UNPAID' },
