@@ -1,16 +1,21 @@
-import { CDNIMGURL } from '@/lib/constants'
+import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
+import { PetListItemProps, PetGender } from '@/framework/types/consumer';
 import './index.less'
 
-const RotationChartList = ({ list }: { list: any[] }) => {
+const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
   const [current, setCurrent] = useState(list.length === 1 ? 0 : 1)
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
 
   const handlePetList = () => {
     my.navigateTo({ url: '/pages/petList/index' })
+  }
+
+  const handleAddPet = () => {
+    my.navigateTo({ url: '/pages/petEdit/index' })
   }
 
   const returnPetdefaultImage = (petType: string) => {
@@ -38,14 +43,13 @@ const RotationChartList = ({ list }: { list: any[] }) => {
         <View className="box-border overflow-hidden">
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
             {!!list.length && (
-              <View className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10">
+              <View className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10" onClick={handleAddPet}>
                 <View
                   className="bg-no-repeat bg-contain w-full h-full rounded-full bg-white"
                   style={{
                     backgroundImage: `url(${CDNIMGURL}small_add.svg)`,
                     boxShadow: '0px 0 8px 2px #eaeaea',
                   }}
-                  onClick={handlePetList}
                 />
               </View>
             )}
@@ -94,7 +98,7 @@ const RotationChartList = ({ list }: { list: any[] }) => {
                     <View
                       onClick={(e) => {
                         e.stopPropagation()
-                        handlePetList()
+                        handleAddPet()
                       }}
                       style={{
                         backgroundImage: `url(${CDNIMGURL}add-pet.png)`,

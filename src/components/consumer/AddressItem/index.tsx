@@ -12,10 +12,12 @@ const AddressItem = ({
   addressInfo,
   delAddressSuccess,
   isDefaultUpdateSuccess,
+  onSelectAddress,
 }: {
   addressInfo: Address
   delAddressSuccess: Function
   isDefaultUpdateSuccess: Function
+  onSelectAddress: (address: Address) => void
 }) => {
   const [showDelTip, setShowDelTip] = useState(false)
   const { receiverName, phone, province, city, region, detail } = addressInfo
@@ -63,29 +65,30 @@ const AddressItem = ({
 
   //checkout过来勾选地址
   const selectAddress = () => {
-    const findCheckoutIndex = getCurrentPages().findIndex((el) => {
-      console.log(el.route)
-      return el.route === routers.checkout.replace('/', '')
-    })
-    if (findCheckoutIndex > -1) {
-      Taro.getStorage({
-        key: 'address-from-checkout',
-        success: function (data) {
-          console.info('datadatadata', data)
-          if (data.data) {
-            Taro.setStorage({
-              key: 'select-address',
-              data: JSON.stringify(addressInfo),
-              success: function (res) {
-                console.log(res)
-                Taro.navigateBack()
-              },
-            })
-            Taro.removeStorageSync('address-from-checkout')
-          }
-        },
-      })
-    }
+    // const findCheckoutIndex = getCurrentPages().findIndex((el) => {
+    //   console.log(el.route)
+    //   return el.route === routers.checkout.replace('/', '')
+    // })
+    // if (findCheckoutIndex > -1) {
+    //   Taro.getStorage({
+    //     key: 'address-from-checkout',
+    //     success: function (data) {
+    //       console.info('datadatadata', data)
+    //       if (data.data) {
+    //         Taro.setStorage({
+    //           key: 'select-address',
+    //           data: JSON.stringify(addressInfo),
+    //           success: function (res) {
+    //             console.log(res)
+    //             Taro.navigateBack()
+    //           },
+    //         })
+    //         Taro.removeStorageSync('address-from-checkout')
+    //       }
+    //     },
+    //   })
+    // }
+    onSelectAddress(addressInfo)
   }
 
   return (

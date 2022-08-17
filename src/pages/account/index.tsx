@@ -2,15 +2,16 @@
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { wxLogin } from '@/framework/api/consumer/consumer'
-import { getPets } from '@/framework/api/pet/get-pets'
+import { PetListItemProps } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
-import { getAge } from '@/utils/utils'
 import { Button, Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
+import { getPets } from '@/framework/api/pet/get-pets'
+import { getAge } from '@/utils/utils'
 import './index.less'
 
 const orderTypeList = [
@@ -21,27 +22,25 @@ const orderTypeList = [
 
 const Account = () => {
   const [consumer, setConsumer] = useAtom(consumerAtom)
-  const [petList, setPetList] = useState([])
+  const [petList, setPetList] = useState<PetListItemProps[]>([])
+
+  const getList = async (consumerId: string) => {
+    let res = (await getPets({ consumerId })) || []
+    res.forEach((item) => {
+      item.age = getAge(item.birthday)
+    })
+    if (res.length) {
+      setPetList(res)
+    }
+  }
 
   const loginInit = async () => {
     if (my.getStorageSync({ key: 'wxLoginRes' })) {
       // Taro.setStorageSync('commerce-loading', 1)
       const data = await wxLogin()
-      getPetList(data.id)
       setConsumer(data)
+      getList(data.id)
       // setRefreshed(true)//兼容token过期报错
-    }
-  }
-
-  const getPetList = async (id = consumer?.id) => {
-    if (!consumer?.id) return null
-    else {
-      let res = await getPets({ consumerId: id })
-      res.forEach((item) => {
-        item.age = getAge(item.birthday)
-      })
-      setPetList(res)
-      console.log('res', res)
     }
   }
 
@@ -51,23 +50,13 @@ const Account = () => {
     //   setConsumer(res.data.userInfo)
     // }
     loginInit()
-    getPetList()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  useEffect(() => {
-    getPetList()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [consumer?.id])
-
-  Taro.useDidShow(() => {
-    loginInit()
-    getPetList()
-  })
 
   const handleLogin = () => {
     loginWithAlipay((data) => {
       setConsumer(data)
+      getList(data.id)
     })
   }
 
@@ -145,6 +134,8 @@ const Account = () => {
         </View>
         {/* 宠物列表 */}
         <RotationChartList list={petList} />
+        {/* 计划列表 */}
+        {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}
         <AtList hasBorder={false} className="mt-1">
           <AtListItem

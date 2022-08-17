@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import EditPet from '@/components/consumer/EditPet'
 import { editPetButton } from '@/lib/consumer'
 import { deletePet } from '@/framework/api/pet/delete-pet'
-import { PetListItemProps } from '@/framework/types/consumer'
+import { PetListItemProps, PetType } from '@/framework/types/consumer'
 import './index.less'
 
 interface Props {
@@ -96,7 +96,7 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
               } h-6 rounded-full flex items-center justify-center m-auto `}
             >
               <Image
-                src={pet.image || `${CDNIMGURL2}default-head.png`}
+                src={pet.image || `${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`}
                 // style={{ borderRadius: '50%' }}
                 className="w-full h-full m-auto Petpictureshadow rounded-full"
               />
