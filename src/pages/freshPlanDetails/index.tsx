@@ -3,6 +3,7 @@ import { getSubscriptionDetail } from '@/framework/api/subscription/subscription
 import { CDNIMGURL } from '@/lib/constants'
 import { getAge } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
 import './index.less'
@@ -75,7 +76,16 @@ const FreshPlanDetails = () => {
           <Text className="ml-1.5">下一次将在2022-08-23发货，请注意查收!</Text>
         </View>
         <View className="flex justify-end">
-          <AtButton circle className="w-[228px] h-[64px] leading-[64px] text-[26px] m-0" type="primary">
+          <AtButton
+            onClick={() => {
+              Taro.navigateTo({
+                url: `/pages/schedule/index`,
+              })
+            }}
+            circle
+            className="w-[228px] h-[64px] leading-[64px] text-[26px] m-0"
+            type="primary"
+          >
             计划进度
           </AtButton>
         </View>
