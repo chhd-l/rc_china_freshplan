@@ -1,12 +1,11 @@
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Step from '@/components/subscription/Step'
 import FreshFoodExperience from '@/components/subscription/Freshfoodexperience'
-
+import LovePetHealth from '@/components/subscription/LovePetHealth'
 import { useState } from 'react'
-import { AtButton, AtIcon, AtTimeline } from 'taro-ui'
+import { AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 import { titleSwiperList } from './index.module'
-import LovePetHealth from '@/components/subscription/LovePetHealth'
 
 const Subscription = () => {
   const [current, setCurrent] = useState(0)

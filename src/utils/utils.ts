@@ -92,6 +92,25 @@ export const getAge = (birthdayStr) => {
   return ageStr
 }
 
+export const getAgeYear = (birthdayStr) => {
+  if (!birthdayStr) {
+    return ''
+  }
+  let birthday = birthdayStr.split('-')
+  // 新建日期对象
+  let date = new Date()
+  // 今天日期，数组，同 birthday
+  let today = [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+  // 分别计算年月日差值
+  let age = today.map((value, index) => {
+    return value - birthday[index]
+  })
+
+  let yearStr = age[0] ? `${age[0]}岁` : ''
+  let ageStr = age[0] > 0 ? yearStr : '不到一岁'
+  return ageStr
+}
+
 export const handleReturnTime = (time: any) => {
   if (time !== null && time !== undefined && time !== '') {
     return moment(new Date(time)).format('YYYY-MM-DD HH:mm:SS')

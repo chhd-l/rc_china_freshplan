@@ -2,6 +2,7 @@ import { useGlobalIconFont } from './components/iconfont/helper'
 
 export default defineAppConfig({
   pages: [
+    'pages/freshPlanDetails/index',
     'pages/account/index',
     'pages/subscription/index',
     'pages/elencoOrdini/index',
@@ -38,6 +39,9 @@ export default defineAppConfig({
         selectedIconPath: 'assets/icons/icon-account-selected.png',
       },
     ],
-  }, usingComponents: Object.assign(useGlobalIconFont),
+  },
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  usingComponents: Object.assign(useGlobalIconFont()),
 })
 

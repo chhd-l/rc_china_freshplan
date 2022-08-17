@@ -178,10 +178,12 @@ export const subscriptionCreateAndPay = async ({
   }
 }
 
-export const getSubscriptionFindByConsumerId = async (consumerId: string) => {
+export const getSubscriptionFindByConsumerId = async () => {
   Taro.setStorageSync('commerce-loading', 1)
+  let wxLoginRes = Taro.getStorageSync('wxLoginRes')
+  if (!wxLoginRes?.userInfo?.id) return
   try {
-    const { subscriptionFindByConsumerId } = await ApiRoot({ url: apis.subscription }).subscriptions().subscriptionFindByConsumerId({ consumerId })
+    const { subscriptionFindByConsumerId } = await ApiRoot({ url: apis.subscription }).subscriptions().subscriptionFindByConsumerId({ consumerId: wxLoginRes?.userInfo?.id })
     return subscriptionFindByConsumerId
   } catch (err) {
     return []

@@ -1,8 +1,8 @@
-import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
+import { PetListItemProps } from '@/framework/types/consumer'
+import { CDNIMGURL } from '@/lib/constants'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { PetListItemProps, PetGender } from '@/framework/types/consumer';
 import './index.less'
 
 const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
@@ -18,7 +18,7 @@ const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
     my.navigateTo({ url: '/pages/petEdit/index' })
   }
 
-  const returnPetdefaultImage = (petType: string) => {
+  const returnPetdefaultImage = (petType: any) => {
     if (petType === 'CAT') return 'cat-default.png'
     else return 'dog-default.png'
   }
@@ -31,7 +31,7 @@ const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
   }, [])
 
   return (
-    <View className="Pets bg-white my-1">
+    <View className="Pets bg-white">
       <View className="PetTitle flex items-center justify-between p-1">
         我的宠物
         {!!list.length && (
