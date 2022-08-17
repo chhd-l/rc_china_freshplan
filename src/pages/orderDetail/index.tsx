@@ -165,23 +165,25 @@ const OrderDetails = () => {
             <Text>{titleType()}</Text>
           </View>
         </View>
-        <TimeLine type={orderDetail?.orderState?.orderState} />
+        {orderDetail?.orderState?.orderState !== 'VOID' && <TimeLine type={orderDetail?.orderState?.orderState} />}
         <View className="pl-4 py-1 mt-0.5 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
-          <View className="express">
-            <View className="flex items-center relative">
-              <Image className="absolute orderDetailsIcon" src={`${CDNIMGURL}order%20logistics.png`} />
-              <Text className="mr-0.5">{getCarrierType()}</Text>
-              <CopyText str={orderDetail.delivery.trackingId} />
+          {orderDetail?.orderState?.orderState !== 'VOID' && (
+            <View className="express">
+              <View className="flex items-center relative">
+                <Image className="absolute orderDetailsIcon" src={`${CDNIMGURL}order%20logistics.png`} />
+                <Text className="mr-0.5">{getCarrierType()}</Text>
+                <CopyText str={orderDetail.delivery.trackingId} />
+              </View>
+              <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} />
             </View>
-            <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} />
-          </View>
+          )}
           <View>
             <View className="receivingUser relative">
               <Image
                 className="absolute orderDetailsIcon"
                 style={{
-                  width: '0.4rem',
-                  left: '-0.6rem',
+                  width: '0.35rem',
+                  bottom: '-0.05rem',
                 }}
                 src={`${CDNIMGURL}order%20address.png`}
               />
@@ -195,9 +197,9 @@ const OrderDetails = () => {
           <View className="receivingBorder w-full absolute left-0 bottom-0" />
         </View>
       </View>
-      <View className="bg-white mt-1 orderAtCard px-1">
+      <View className="bg-white mt-1 pb-1 orderAtCard px-1">
         <View className="orderAtCardTitle py-1">订单信息</View>
-        <View className="mb-2 flex flex flex-col">
+        <View className="flex flex flex-col">
           {(orderDetail?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
               <Image className="orderAtCardImage mx-1 h-full" src={el?.pic} />
