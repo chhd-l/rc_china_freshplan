@@ -46,6 +46,8 @@ const petEdit = () => {
           res.eventChannel.emit('petForRecommend', pet);
         }
       })
+    } else {
+      Taro.showToast({ title: '保存失败' });
     }
   }
 

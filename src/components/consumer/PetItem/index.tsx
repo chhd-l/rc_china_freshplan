@@ -49,9 +49,13 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
 
   const comfirmDel = async () => {
     let { id } = petList[editActive]
-    await deletePet({ id })
+    const res = await deletePet({ id })
     setShowDelModal(false)
-    getList()
+    if (res) {
+      getList()
+    } else {
+      Taro.showToast({ title: '删除失败' });
+    }
   }
 
   const showEdit = (idx) => {

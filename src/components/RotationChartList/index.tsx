@@ -11,11 +11,11 @@ const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
   const [previousMargin, setPreviousMargin] = useState(0)
 
   const handlePetList = () => {
-    my.navigateTo({ url: '/pages/petList/index' })
+    Taro.navigateTo({ url: '/pages/petList/index' })
   }
 
   const handleAddPet = () => {
-    my.navigateTo({ url: '/pages/petEdit/index' })
+    Taro.navigateTo({ url: '/pages/petEdit/index' })
   }
 
   const returnPetdefaultImage = (petType: any) => {

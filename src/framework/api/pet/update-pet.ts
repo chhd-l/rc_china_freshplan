@@ -23,5 +23,6 @@ export const updatePet = async (petInfo, primaryData) => {
     return pets
   } catch (err) {
     console.log(err)
+    return false
   }
 }
