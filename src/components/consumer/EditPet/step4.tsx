@@ -3,6 +3,7 @@ import { PetStep } from '@/framework/types/consumer';
 import PetTitle from './components/PetTitle';
 import { IProps } from './step1';
 import moment from 'moment';
+import Taro from '@tarojs/taro';
 
 import './step.less';
 
@@ -11,6 +12,14 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
   const handleChangeDate = (e) => {
     const d = moment(e.detail.value);
     onChange('birthday', d.format('YYYY-MM-DD'));
+  }
+
+  const handleNext = () => {
+    if (!pet.birthday) {
+      Taro.showToast({ title: '请先选择生日' });
+    } else {
+      onStepChange(PetStep.STEP5);
+    }
   }
 
   return (
@@ -36,7 +45,7 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP3)}>上一步</Text>
-          <Text className="btn-item active" onClick={() => onStepChange(PetStep.STEP5)}>下一步</Text>
+          <Text className="btn-item active" onClick={handleNext}>下一步</Text>
         </View>
       </View>
     </View>

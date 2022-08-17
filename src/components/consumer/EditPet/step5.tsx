@@ -5,6 +5,7 @@ import { CDNIMGURL2 } from '@/lib/constants';
 import PetTitle from './components/PetTitle';
 import { AtFloatLayout } from 'taro-ui';
 import { IProps } from './step1';
+import Taro from '@tarojs/taro';
 
 import './step.less';
 
@@ -32,6 +33,16 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
 
   const handlePostureChange = (posture: PetPosture) => {
     onChange('recentPosture', posture);
+  }
+
+  const handleNext = () => {
+    if (!pet.recentWeight) {
+      Taro.showToast({ title: '请先设置近期体重' });
+    } else if (!pet.targetWeight) {
+      Taro.showToast({ title: '请先设置目标体重' });
+    } else {
+      onStepChange(PetStep.STEP6);
+    }
   }
 
   return (
@@ -84,7 +95,7 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP4)}>上一步</Text>
-          <Text className="btn-item active" onClick={() => onStepChange(PetStep.STEP6)}>下一步</Text>
+          <Text className="btn-item active" onClick={handleNext}>下一步</Text>
         </View>
       </View>
 

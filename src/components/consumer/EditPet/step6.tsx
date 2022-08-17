@@ -3,6 +3,7 @@ import { View, Text } from '@tarojs/components';
 import { PetStep, PetHealth } from '@/framework/types/consumer';
 import PetTitle from './components/PetTitle';
 import { IProps } from './step1';
+import Taro from '@tarojs/taro';
 
 import './step.less';
 
@@ -30,7 +31,11 @@ const Step6 = ({ pet, onStepChange, onChange, onSave }: Iprops6) => {
   }
 
   const handleSave = async () => {
-    onSave()
+    if (!pet.recentHealth || pet.recentHealth.length === 0) {
+      Taro.showToast({ title: '请选择健康状况' })
+    } else {
+      onSave()
+    }
   }
 
   return (
@@ -46,8 +51,8 @@ const Step6 = ({ pet, onStepChange, onChange, onSave }: Iprops6) => {
           对食物很挑剔
         </View>
         <View
-          className={`pet-health-item my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.FOOD_ALLERGIES_OR_STOMAC) > -1 ? 'active' : ''}`}
-          onClick={() => handleChooseHealth(PetHealth.FOOD_ALLERGIES_OR_STOMAC)}
+          className={`pet-health-item my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES) > -1 ? 'active' : ''}`}
+          onClick={() => handleChooseHealth(PetHealth.FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES)}
         >
           食物过敏或胃敏感
         </View>
@@ -74,7 +79,7 @@ const Step6 = ({ pet, onStepChange, onChange, onSave }: Iprops6) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP5)}>上一步</Text>
-          <Text className="btn-item active" onClick={handleSave}>保存</Text>
+          <Text className="btn-item active" onClick={handleSave}>推荐食谱</Text>
         </View>
       </View>
     </View>
