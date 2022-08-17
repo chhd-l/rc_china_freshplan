@@ -2,7 +2,7 @@
   "symbol_url": "//at.alicdn.com/t/c/font_3579405_jozwh97p8a.js",
   "save_dir": "./src/components/iconfont",
   "use_rpx": true,
-  "trim_icon_prefix": "icon",
+  "trim_icon_prefix": "rccicon",
   "default_icon_size": 18,
   "use_typescript": true,
   "platforms": ["alipay"],
