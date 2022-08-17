@@ -1,8 +1,11 @@
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { useState } from 'react'
 import { AtButton, AtIcon, AtList, AtListItem } from 'taro-ui'
 
 const Schedule = () => {
+  const [PopupOpne, setPopupOpne] = useState(false)
+
   return (
     <View className="p-1 pb-4 Schedule">
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
@@ -30,7 +33,13 @@ const Schedule = () => {
           <AtListItem title="促销折扣" hasBorder={false} extraText="-¥40.00" />
           <AtListItem title="运费" extraText="¥0.00" />
           <View className="flex items-center justify-between py-1.5">
-            <View className="underline text-[24px]">
+            <View
+              className="underline text-[24px]"
+              onClick={(e) => {
+                e.stopPropagation()
+                setPopupOpne(true)
+              }}
+            >
               <AtIcon className="ml-[30px] mr-[10px]" value="close-circle" size="22" />
               取消计划
             </View>
@@ -94,17 +103,47 @@ const Schedule = () => {
           <View className="p-1 text-right text-[24px] text-[#666]">发货日期:2022-08-23</View>
         </View>
       </View>
-      <View className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center">
-        <View className="w-[650px] bg-white">
-          <Image className="mr-1" src="https://jdc.jd.com/img/200" style={{ width: '2.36rem', height: '2.36rem' }} />
-          <View className="text-[29px] text-[#333] mt-2">您确定要取消这个计划嘛？</View>
-          <View className="flex items-center justify-between mt-2">
-            <AtButton circle className="w-[190px] h-[60px] leading-[60px] text-[24px] m-0">
-              确定
-            </AtButton>
-            <AtButton circle className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0" type="primary">
-              我在想想
-            </AtButton>
+      {/* 弹出层 */}
+      <View
+        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
+        style={{
+          display: PopupOpne ? 'flex' : 'none',
+        }}
+        onClick={(e) => {
+          e.stopPropagation()
+          setPopupOpne(false)
+        }}
+      >
+        <View>
+          <View
+            className="w-[650px] bg-white rounded-[50px] flex flex-col items-center"
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Image className="mt-2" src="https://jdc.jd.com/img/200" style={{ width: '2.36rem', height: '2.36rem' }} />
+            <View className="text-[29px] text-[#333] mt-2">您确定要取消这个计划嘛？</View>
+            <View className="flex items-center justify-between my-2">
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+              >
+                确定
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setPopupOpne(false)
+                }}
+              >
+                我在想想
+              </AtButton>
+            </View>
+          </View>
+          <View className="flex justify-center mt-3">
+            <AtIcon value="close-circle" size={30} color="#fff" />
           </View>
         </View>
       </View>
