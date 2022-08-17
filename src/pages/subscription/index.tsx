@@ -19,17 +19,22 @@ const Subscription = () => {
   const [consumer, setConsumer] = useAtom(consumerAtom)
 
   const loginInit = async () => {
-    if (my.getStorageSync({ key: 'wxLoginRes' })) {
+    const _storeRes: any = Taro.getStorageSync("wxLoginRes");
+    if (_storeRes?.userInfo?.id) {
       const data = await wxLogin()
       setConsumer(data)
     }
   }
 
   const handleLogin = (callback?: Function) => {
-    loginWithAlipay((data) => {
-      setConsumer(data);
+    if (consumer?.id) {
       callback && callback();
-    })
+    } else {
+      loginWithAlipay((data) => {
+        setConsumer(data);
+        callback && callback();
+      })
+    }
   }
 
   Taro.useDidShow(() => {

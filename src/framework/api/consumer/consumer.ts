@@ -51,13 +51,13 @@ export const aliRegisterAndLogin = async (auth_code: string, phone_code: string)
 }
 
 export const wxLogin = async () => {
-  let wxLoginResStorage: any = my.getStorageSync({ key: 'wxLoginRes' })
+  const wxLoginResStorage = Taro.getStorageSync("wxLoginRes");
   const { wxLogin: wxLoginRes }: { wxLogin: WxLoginResult } = await ApiRoot({ url: apis.auth }).consumers().wxLogin({
-    token: wxLoginResStorage.data.access_token,
+    token: wxLoginResStorage?.access_token ?? "",
     // id: wxLoginResStorage.userInfo.id,
   })
   console.log('wxLoginRes', wxLoginRes)
-  my.setStorageSync({ key: 'wxLoginRes', data: Object.assign(wxLoginResStorage.data, wxLoginRes) })
+  Taro.setStorageSync('wxLoginRes', Object.assign(wxLoginResStorage, wxLoginRes))
   return wxLoginRes.userInfo
 }
 

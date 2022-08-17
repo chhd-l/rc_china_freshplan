@@ -27,7 +27,8 @@ const Account = () => {
 
   const getAuthentication = async (callback?: Function) => {
     if (!isLogin) {
-      loginWithAlipay(callback);
+      // loginWithAlipay(callback);
+      Taro.showToast({ title: '请先授权登录' });
     } else {
       callback && callback()
     }
@@ -44,7 +45,8 @@ const Account = () => {
   }
 
   const loginInit = async () => {
-    if (my.getStorageSync({ key: 'wxLoginRes' })) {
+    const _storeRes: any = Taro.getStorageSync("wxLoginRes");
+    if (_storeRes?.userInfo?.id) {
       // Taro.setStorageSync('commerce-loading', 1)
       const data = await wxLogin()
       setConsumer(data)
@@ -60,7 +62,7 @@ const Account = () => {
   })
 
   const handleLogin = () => {
-    getAuthentication((data) => {
+    loginWithAlipay((data) => {
       setConsumer(data)
       getList(data.id)
       setIsLogin(true);
