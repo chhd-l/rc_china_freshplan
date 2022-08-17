@@ -1,4 +1,4 @@
-import { useGlobalIconFont } from './components/iconfont/helper'
+// import { useGlobalIconFont } from './components/iconfont/helper'
 
 export default defineAppConfig({
   pages: [
@@ -38,6 +38,8 @@ export default defineAppConfig({
         selectedIconPath: 'assets/icons/icon-account-selected.png',
       },
     ],
-  }, usingComponents: Object.assign(useGlobalIconFont),
+  },
+
+  // usingComponents: Object.assign(useGlobalIconFont),
 })
 

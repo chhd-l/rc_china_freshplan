@@ -61,7 +61,7 @@ const Account = () => {
 
   return (
     <View className="Account pb-2">
-      <IconFont name="weilingqu" size={40} />
+      {/* <IconFont name="weilingqu" size={40} /> */}
       <View className="flex items-center loginHerder">
         <AtAvatar size="large" className="mx-1.5" circle image={consumer?.avatarUrl || CDNIMGURL + 'my-notlo.png'} />
         {consumer?.id ? (

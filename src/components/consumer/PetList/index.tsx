@@ -383,7 +383,7 @@ const PetList = (props: Props) => {
               Taro.setStorageSync('Nopets', false)
             }}
           >
-            <IconFont name="shanchu" size={42} color="#fff" />
+            {/* <IconFont name="shanchu" size={42} color="#fff" /> */}
           </View>
         </View>
       )}
