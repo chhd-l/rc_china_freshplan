@@ -41,7 +41,7 @@ const Step6 = ({ pet, onStepChange, onChange, onSave }: Iprops6) => {
   return (
     <View className="mx-1 pt-2">
       <View className="mt-2">
-        <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-22 text-gray-800">(可多选)</Text></PetTitle>
+        <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-22 text-gray-200">(可多选)</Text></PetTitle>
       </View>
       <View>
         <View
@@ -79,7 +79,7 @@ const Step6 = ({ pet, onStepChange, onChange, onSave }: Iprops6) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP5)}>上一步</Text>
-          <Text className="btn-item active" onClick={handleSave}>推荐食谱</Text>
+          <Text className={`btn-item ${!pet.recentHealth || pet.recentHealth.length === 0 ? 'active' : 'strong'}`} onClick={handleSave}>推荐食谱</Text>
         </View>
       </View>
     </View>

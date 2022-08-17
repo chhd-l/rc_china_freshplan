@@ -157,3 +157,15 @@ export const getDateDiff = (startTime, endTime, orderCancelMinute) => {
     second: day > 0 || hour > 0 || minute >= orderCancelMinute ? 0 : 60 - Number(second.toFixed(0)),
   }
 }
+
+export const genSeriesNumberArr = (from: number, to: number) => {
+  if (from > to) {
+    return [];
+  } else {
+    let arr: string[] = [];
+    for (let i = from; i <= to; i++) {
+      arr.push(`${i}`);
+    }
+    return arr;
+  }
+}

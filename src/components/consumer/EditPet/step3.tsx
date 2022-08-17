@@ -80,7 +80,7 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP2)}>上一步</Text>
-          <Text className="btn-item active" onClick={handleNext}>下一步</Text>
+          <Text className={`btn-item ${!pet.code ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>
         </View>
       </View>
     </View>

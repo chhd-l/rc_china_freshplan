@@ -6,12 +6,13 @@ import PetTitle from './components/PetTitle';
 import { AtFloatLayout } from 'taro-ui';
 import { IProps } from './step1';
 import Taro from '@tarojs/taro';
+import { genSeriesNumberArr } from '@/utils/utils';
 
 import './step.less';
 
-const arr1 = ['0','1','2','3','4','5','6','7','8','9','10'];
+const arr1 = genSeriesNumberArr(0, 70);
 const arr2 = ['.'];
-const arr3 = ['0','1','2','3','4','5','6','7','8','9'];
+const arr3 = genSeriesNumberArr(0, 9);
 
 const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
   const [show, setShow] = useState<boolean>(false);
@@ -48,7 +49,7 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
   return (
     <View className="mx-1 pt-2">
       <View className="mt-2">
-        <PetTitle>{pet.name}近期的体重<Text className="ml-1 text-22 text-gray-800">(kg)</Text></PetTitle>
+        <PetTitle>{pet.name}近期的体重<Text className="ml-1 text-22 text-gray-200">(kg)</Text></PetTitle>
       </View>
       <View className="mt-1 choose-other-breed flex items-center" onClick={() => setShow(true)}>
         <Text className="text-28 mx-1 flex-1 font-bold">{pet.recentWeight ? pet.recentWeight : '请选择'}</Text>
@@ -59,16 +60,16 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
           <PetTitle>{pet.name}近期的体态</PetTitle>
         </View>
         <View className="mt-1 flex items-center pet-situation">
-          <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Emaciated ? 'active' : ''}`} onClick={() => handlePostureChange(PetPosture.Emaciated)}>
-            <Image className="my-2" src={`${CDNIMGURL2}weight-thin.png`} />
+          <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Emaciated ? 'active font-bold' : ''}`} onClick={() => handlePostureChange(PetPosture.Emaciated)}>
+            <Image className="my-1" src={`${CDNIMGURL2}weight-thin.png`} />
             <View className="text-24 mb-1">瘦弱</View>
           </View>
-          <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Standard ? 'active' : ''}`} onClick={() => handlePostureChange(PetPosture.Standard)}>
-            <Image className="my-2" src={`${CDNIMGURL2}weight-std.png`} />
+          <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Standard ? 'active font-bold' : ''}`} onClick={() => handlePostureChange(PetPosture.Standard)}>
+            <Image className="my-1" src={`${CDNIMGURL2}weight-std.png`} />
             <View className="text-24 mb-1">标准</View>
           </View>
-          <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Obesity ? 'active' : ''}`} onClick={() => handlePostureChange(PetPosture.Obesity)}>
-            <Image className="my-2" src={`${CDNIMGURL2}weight-fat.png`} />
+          <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Obesity ? 'active font-bold' : ''}`} onClick={() => handlePostureChange(PetPosture.Obesity)}>
+            <Image className="my-1" src={`${CDNIMGURL2}weight-fat.png`} />
             <View className="text-24 mb-1">超重</View>
           </View>
         </View>
@@ -84,7 +85,7 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
             : '偏胖：较厚脂肪覆盖，肋骨难以触及'}
         </View>
         <View className="mt-2">
-          <PetTitle>{pet.name}近期的成年目标体重<Text className="ml-1 text-22 text-gray-800">(kg)</Text></PetTitle>
+          <PetTitle>{pet.name}近期的成年目标体重<Text className="ml-1 text-22 text-gray-200">(kg)</Text></PetTitle>
         </View>
         <View className="mt-1 choose-other-breed flex items-center" onClick={() => setShow1(true)}>
           <Text className="text-28 mx-1 flex-1 font-bold">{pet.targetWeight ? pet.targetWeight : '请选择'}</Text>
@@ -95,7 +96,7 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP4)}>上一步</Text>
-          <Text className="btn-item active" onClick={handleNext}>下一步</Text>
+          <Text className={`btn-item ${!pet.recentWeight || !pet.targetWeight ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>
         </View>
       </View>
 
@@ -109,15 +110,17 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
             <PickerView
               value={val}
               onChange={handleChangeCurrentWeight}
+              className="my-1 mx-6"
+              indicatorStyle="height: 50px;"
             >
               <PickerViewColumn>
-                {arr1.map(item => <View>{item}</View>)}
+                {arr1.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr2.map(item => <View>{item}</View>)}
+                {arr2.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr3.map(item => <View>{item}</View>)}
+                {arr3.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
             </PickerView>
           </View>
@@ -137,15 +140,17 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
             <PickerView
               value={val1}
               onChange={handleChangeTargetWeight}
+              className="my-1 mx-6"
+              indicatorStyle="height: 50px;"
             >
               <PickerViewColumn>
-                {arr1.map(item => <View>{item}</View>)}
+                {arr1.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr2.map(item => <View>{item}</View>)}
+                {arr2.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr3.map(item => <View>{item}</View>)}
+                {arr3.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
             </PickerView>
           </View>

@@ -25,7 +25,7 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
   return (
     <View className="mx-1 pt-2">
       <View className="mt-2">
-        <PetTitle>{pet.name}多大了<Text className="ml-1 text-22 text-gray-800">(请选择出生日期)</Text></PetTitle>
+        <PetTitle>{pet.name}多大了<Text className="ml-1 text-22 text-gray-200">(请选择出生日期)</Text></PetTitle>
       </View>
       <View>
         <Picker
@@ -45,7 +45,7 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP3)}>上一步</Text>
-          <Text className="btn-item active" onClick={handleNext}>下一步</Text>
+          <Text className={`btn-item ${!pet.birthday ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>
         </View>
       </View>
     </View>
