@@ -3,9 +3,7 @@ import { useGlobalIconFont } from './components/iconfont/helper'
 export default defineAppConfig({
   pages: [
     'pages/subscription/index',
-    'pages/freshPlanDetails/index',
     'pages/account/index',
-    'pages/subscription/index',
     'pages/elencoOrdini/index',
     'pages/orderDetail/index',
     'pages/addressManage/index',

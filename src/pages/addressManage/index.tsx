@@ -39,7 +39,7 @@ const AddRessManage = () => {
       const pages = Taro.getCurrentPages()
       const current = pages[pages.length - 1]
       const eventChannel = current.getOpenerEventChannel()
-      eventChannel.emit('chooseAddress', Object.assign({}, address));
+      eventChannel.emit('chooseAddress', Object.assign({}, address))
       Taro.navigateBack()
     }
   }
@@ -75,7 +75,7 @@ const AddRessManage = () => {
               })
             }}
           >
-            +&nbsp; 新增地址
+            新增地址
           </AtButton>
         </View>
       </View>

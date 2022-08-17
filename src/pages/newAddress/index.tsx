@@ -101,7 +101,7 @@ const NewAddress = () => {
             placeholder="请输入姓名"
             value={addressInfo['receiverName']}
             onChange={(value) => updateAddressInfo(value, 'receiverName')}
-            className="rc-address-input"
+            className="rc-address-input ml-0"
           />
           <AtInput
             name="phone"
@@ -110,13 +110,13 @@ const NewAddress = () => {
             placeholder="请输入联系电话"
             value={addressInfo['phone']}
             onChange={(value) => updateAddressInfo(value, 'phone')}
-            className="rc-address-input"
+            className="rc-address-input ml-0"
           />
           <View
             className="pt-1 pb-2 text-28 border-b border-t-0 border-l-0 border-r-0 border-solid flex items-center"
             style={{ borderColor: '#d6e4ef' }}
           >
-            <Text style={{ marginLeft: '0.32rem' }}>所在地区</Text>
+            <Text>所在地区</Text>
             <Text
               onClick={() => {
                 WPickerRef.show()
@@ -144,11 +144,11 @@ const NewAddress = () => {
             maxLength={200}
             placeholder="请输入详细地址"
             count={false}
-            className="ml-1 border-0 border-t-0 rc-text-area"
+            className="border-0 border-t-0 rc-text-area"
           />
           <View className="text-gray-400 flex items-center">
             <AtCheckbox
-              className="radioText"
+              className="radioText border-0"
               options={[
                 {
                   value: true,

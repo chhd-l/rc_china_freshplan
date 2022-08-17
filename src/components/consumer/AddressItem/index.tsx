@@ -3,7 +3,7 @@ import { Address } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import routers from '@/routers'
 import { Image, Text, View } from '@tarojs/components'
-import Taro, { getCurrentPages } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { useState } from 'react'
 import { AtCheckbox, AtModal } from 'taro-ui'
 import './index.less'
@@ -98,7 +98,7 @@ const AddressItem = ({
           <Text className="text-black font-semibold">{receiverName}</Text>
           <Text className="text-gray-400">{phone}</Text>
         </View>
-        <View className="mt-1 pb-1" style={{ borderBottom: '1px solid #D8D8D8' }}>
+        <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #D8D8D8' }}>
           <Text className="">
             {province} {city} {region} {detail}
           </Text>

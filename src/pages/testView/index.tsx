@@ -2,6 +2,7 @@ import { getSubscriptionFindByConsumerId } from '@/framework/api/subscription/su
 import { CDNIMGURL } from '@/lib/constants'
 import { getAgeYear } from '@/utils/utils'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { AtAvatar, AtButton, AtIcon } from 'taro-ui'
@@ -74,8 +75,15 @@ const TextView = () => {
                     <View className="mt-1">{item?.pet?.breedName}&nbsp;&nbsp;5kg</View>
                   </View>
                 </View>
-                <AtButton className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[24px]">
-                  开始计划
+                <AtButton
+                  onClick={() => {
+                    Taro.navigateTo({
+                      url: `/pages/freshPlanDetails/index`,
+                    })
+                  }}
+                  className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[24px]"
+                >
+                  管理计划
                 </AtButton>
               </View>
               <View className="swiperItemScroll flex flex-col">
