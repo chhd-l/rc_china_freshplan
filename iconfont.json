@@ -1,6 +1,6 @@
 {
   "symbol_url": "//at.alicdn.com/t/c/font_3579405_jozwh97p8a.js",
-  "save_dir": "./src/iconfont",
+  "save_dir": "./src/components/iconfont",
   "use_rpx": true,
   "trim_icon_prefix": "icon",
   "default_icon_size": 18,

@@ -1,4 +1,4 @@
-import { useGlobalIconFont } from './iconfont/helper'
+import { useGlobalIconFont } from './components/iconfont/helper'
 
 export default defineAppConfig({
   pages: [

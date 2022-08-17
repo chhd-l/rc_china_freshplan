@@ -1,6 +1,6 @@
 Component({
   props: {
-    // male | save | footprint | timer | female | location | check | ship | ontime | add | right | edit | picture | camera | close | cat1 | dog1 | dog2 | success | freshweixuanzhong | freshxuanzhong | gerenzhongxinxuanzhong | a-bianzu16
+    // rccicon-male | rccicon-save | rccicon-footprint | rccicon-timer | rccicon-female | rccicon-location | rccicon-check | rccicon-ship | rccicon-ontime | rccicon-add | rccicon-right | rccicon-edit | rccicon-picture | rccicon-camera | rccicon-close | rccicon-cat1 | rccicon-dog1 | rccicon-dog2 | rccicon-success | rccicon-freshweixuanzhong | rccicon-freshxuanzhong | rccicon-gerenzhongxinxuanzhong | rccicon-a-bianzu16
     name: null,
     // string | string[]
     color: '',
