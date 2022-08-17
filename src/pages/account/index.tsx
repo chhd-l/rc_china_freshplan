@@ -2,16 +2,16 @@
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
 import { wxLogin } from '@/framework/api/consumer/consumer'
+import { getPets } from '@/framework/api/pet/get-pets'
 import { PetListItemProps } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
+import { getAge } from '@/utils/utils'
 import { Button, Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
-import { getPets } from '@/framework/api/pet/get-pets'
-import { getAge } from '@/utils/utils'
 import './index.less'
 
 const orderTypeList = [
