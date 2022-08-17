@@ -38,16 +38,16 @@ const PetList = () => {
     // petList.push(initNewPet)
     // SetshowAddPetBtn(false)
     // setPetList(cloneDeep(petList))
-    my.navigateTo({ url: '/pages/petEdit/index' })
+    Taro.navigateTo({ url: '/pages/petEdit/index' })
   }
 
-  useEffect(() => {
+  Taro.useDidShow(() => {
     getList()
-  }, [])
+  });
 
   return (
     <>
-      <View className="pet-list" style={{ backgroundColor: '#eee', minHeight: '100vh' }}>
+      <View className="pet-list pb-12" style={{ backgroundColor: '#eee', minHeight: '100vh' }}>
         {petList.map((pet, idx) => {
           return (
             <PetItem

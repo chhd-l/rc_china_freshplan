@@ -139,8 +139,11 @@ const PetDetail = () => {
 
   const savePet = async () => {
     const res = await updatePet(pet, originalPet);
-    console.log('update pet item', res);
-    Taro.navigateTo({ url: '/pages/petList/index' });
+    if (res) {
+      Taro.navigateTo({ url: '/pages/petList/index' });
+    } else {
+      Taro.showToast({ title: '保存失败' });
+    }
   }
 
   const handleSub = () => {
@@ -272,8 +275,8 @@ const PetDetail = () => {
               对食物很挑剔
             </View>
             <View
-              className={`pet-health-item bg-white my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.FOOD_ALLERGIES_OR_STOMAC) > -1 ? 'active' : ''}`}
-              onClick={() => handleChooseHealth(PetHealth.FOOD_ALLERGIES_OR_STOMAC)}
+              className={`pet-health-item bg-white my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES) > -1 ? 'active' : ''}`}
+              onClick={() => handleChooseHealth(PetHealth.FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES)}
             >
               食物过敏或胃敏感
             </View>

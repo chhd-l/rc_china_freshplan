@@ -2,13 +2,19 @@ import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Step from '@/components/subscription/Step'
 import FreshFoodExperience from '@/components/subscription/Freshfoodexperience'
 import LovePetHealth from '@/components/subscription/LovePetHealth'
-import { useState } from 'react'
+import CommonProblem from '@/components/subscription/CommonProblem'
+import home_foot_img from '@/assets/img/home_foot_img.png'
+import { useEffect, useState } from 'react'
 import { AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 import { titleSwiperList } from './index.module'
 
 const Subscription = () => {
   const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    my.setNavigationBar({ image: 'https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/fresh-plan-logo.png' })
+  }, [])
   return (
     <View className="subscription">
       <View className="TitleSwiper relative">
@@ -39,6 +45,16 @@ const Subscription = () => {
         <Step />
         <FreshFoodExperience />
         <LovePetHealth />
+        <CommonProblem />
+        <View className="mt-[100px] mb-[70px]">
+          <AtButton className="mx-4 rounded-full flex items-center" type="primary">
+            <AtIcon className="mr-1" value="clock" size="26" />
+            开始定制
+          </AtButton>
+        </View>
+        <View className="w-full h-[750px]">
+          <Image src={home_foot_img} />
+        </View>
       </View>
     </View>
   )

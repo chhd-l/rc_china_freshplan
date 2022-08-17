@@ -1,16 +1,16 @@
 import { mockPetlist } from '@/framework/mock/pet'
-import { PetItemSchema } from '@/framework/schema/pet.schema'
 import { pickForUpdate } from '@/utils/utils'
 import ApiRoot from '../fetcher'
 import { normalizePetsForApi } from '../lib/normalize'
 import apis from '@/framework/config/api-config'
 
 export const updatePet = async (petInfo, primaryData) => {
-  let data: PetItemSchema = normalizePetsForApi(petInfo)
-  let primaryForApi: PetItemSchema = normalizePetsForApi(primaryData)
+  let data: any = normalizePetsForApi(petInfo)
+  let primaryForApi: any = normalizePetsForApi(primaryData)
   let params = { ...pickForUpdate(data, primaryForApi), id: petInfo.id, subscriptionNo: undefined }
 
-  console.info('updatePet params', params)
+
+  console.info('updatePet params', data, primaryForApi, params)
   // mockPetlist.forEach((el) => {
   //   debugger
   //   if (el.id === params.id) {
@@ -23,5 +23,6 @@ export const updatePet = async (petInfo, primaryData) => {
     return pets
   } catch (err) {
     console.log(err)
+    return false
   }
 }

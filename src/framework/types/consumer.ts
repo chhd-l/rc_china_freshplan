@@ -26,6 +26,7 @@ export type Consumer = {
   pets?: any[]
   orders?: any[]
   isCommunity?: boolean
+  storeId?: string
 }
 
 export interface PetListItemProps {
@@ -73,8 +74,7 @@ export enum PetPosture {
 
 export enum PetHealth {
   PICKY_EATER = 'PICKY_EATER',
-  FOOD_ALLERGIES_OR_STOMAC = 'FOOD_ALLERGIES_OR_STOMAC',
-  H_SENSITIVITIES = 'H_SENSITIVITIES',
+  FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES = 'FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES',
   DULL_OR_FLAKY_FUR = 'DULL_OR_FLAKY_FUR',
   ARTHRITIS_OR_JOINT_PAIN = 'ARTHRITIS_OR_JOINT_PAIN',
   NONE = 'NONE',

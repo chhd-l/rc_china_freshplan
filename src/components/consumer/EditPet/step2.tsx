@@ -54,7 +54,8 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
     <View className="mx-1 pt-2">
       <View className="mt-3 text-center flex justify-center">
         <View className="pet-avatar flex justify-center items-center" onClick={() => setShow(true)}>
-          <Image src={`${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`} />
+          <Image src={pet.image ? pet.image : `${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`} />
+          <Text className={`up-alert rcciconfont ${pet.image ? 'rccicon-edit' : 'rccicon-add'}`} />
         </View>
       </View>
       <View className="mt-4">

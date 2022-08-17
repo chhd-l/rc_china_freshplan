@@ -158,6 +158,7 @@ export const normalizeProductsforFe = (data: any) => {
       price: minItem?.marketingPrice,
       sku: minItem?.id,
       spu: item.id,
+      description: item?.description,
     }
   })
   return list
