@@ -157,7 +157,7 @@ const NewAddress = () => {
               ]}
               selectedList={[addressInfo.isDefault]}
               onChange={(e) => {
-                if (e.length === 0) return null
+                if (e.length === 0 && router?.params.type === 'edit') return null
                 updateAddressInfo(!addressInfo.isDefault, 'isDefault')
               }}
             />

@@ -2,12 +2,12 @@
 
 export default defineAppConfig({
   pages: [
-    'pages/schedule/index',
-    'pages/subscription/index',
     'pages/account/index',
+    'pages/subscription/index',
     'pages/foodRecom/index',
     'pages/testView/index',
     'pages/freshPlanDetails/index',
+    'pages/schedule/index',
   ],
   subPackages: [
     {

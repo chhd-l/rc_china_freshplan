@@ -98,7 +98,7 @@ const AddressItem = ({
           <Text className="text-black font-semibold">{receiverName}</Text>
           <Text className="text-gray-400">{phone}</Text>
         </View>
-        <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #D8D8D8' }}>
+        <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #E7E7E7' }}>
           <Text className="">
             {province} {city} {region} {detail}
           </Text>
