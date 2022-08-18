@@ -1,5 +1,6 @@
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle'
 import { Image, Text, View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
 import './index.less'
 import { freshFood_left, freshFood_right } from './index.modules'
@@ -14,7 +15,7 @@ const FreshFoodExperience = () => {
       </View>
       <View className="flex flex-col ">
         <View className="freshFoodbg">用新鲜完整的食材制成</View>
-        <View className="relative pt-[45px] flex flex-col shadow-lg rounded-sm pb-[40px] ">
+        <View className="relative pt-[45px] flex flex-col shadow  pb-[40px] ">
           <View className="flex flex-row mb-[40px]">
             <View className="flex flex-col  flex-1 pl-[55px] divider">
               {freshFood_left.map((item, key) => (
@@ -38,7 +39,17 @@ const FreshFoodExperience = () => {
             </View>
           </View>
           <View className="w-full ">
-            <AtButton type="secondary" circle size="normal" className="w-10/12">
+            <AtButton
+              type="secondary"
+              circle
+              size="normal"
+              className="w-10/12"
+              onClick={() =>
+                Taro.navigateTo({
+                  url: `/pages/packageA/petDiet/index`,
+                })
+              }
+            >
               查看饮食 {'>>'}
             </AtButton>
           </View>

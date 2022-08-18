@@ -38,7 +38,7 @@ const PetList = () => {
     // petList.push(initNewPet)
     // SetshowAddPetBtn(false)
     // setPetList(cloneDeep(petList))
-    Taro.navigateTo({ url: '/pages/petEdit/index' })
+    Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
   }
 
   Taro.useDidShow(() => {

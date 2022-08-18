@@ -32,7 +32,7 @@ const Checkout = () => {
 
   const handleChooseAddress = () => {
     Taro.navigateTo({
-      url: `/pages/addressManage/index?method=select`,
+      url: `/pages/packageA/addressManage/index?method=select`,
       events: {
         chooseAddress: function (address: Address) {
           console.log('choosed address---', address)
@@ -59,7 +59,7 @@ const Checkout = () => {
     //   }
     // });
     Taro.navigateTo({
-      url: '/pages/elencoOrdini/index?status=ALL',
+      url: '/pages/packageA/elencoOrdini/index?status=ALL',
     })
   }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text } from '@tarojs/components';
 import { getBreedList } from '@/framework/api/pet/get-breeds';
-import { BreedListItemProps } from '@/pages/breedList';
+import { BreedListItemProps } from '@/pages/packageA/breedList';
 import { PetStep, PetListItemProps } from '@/framework/types/consumer';
 import PetTitle from './components/PetTitle';
 import { IProps } from './step1';
@@ -30,7 +30,7 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
 
   const handleBreed = () => {
     Taro.navigateTo({
-      url: `/pages/breedList/index?type=${pet.type}`,
+      url: `/pages/packageA/breedList/index?type=${pet.type}`,
       events: {
         seachBreed: function ({ breed, code }) {
           console.log('返回的数据---', breed, code)

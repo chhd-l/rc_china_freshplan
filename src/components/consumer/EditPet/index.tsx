@@ -63,7 +63,7 @@ const EditPet = ({ pet, petItem, getList, SetshowAddPetBtn, setIsEdit, petList, 
   }
   const handleBreed = () => {
     Taro.navigateTo({
-      url: `/pages/packageB/breedList/index?type=${petInfo.type}`,
+      url: `/pages/packageA/breedList/index?type=${petInfo.type}`,
       events: {
         seachBreed: function ({ breed, code }) {
           console.log('返回的数据---', breed, code)

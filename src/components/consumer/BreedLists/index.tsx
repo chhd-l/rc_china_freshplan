@@ -1,5 +1,5 @@
 import { PySortProps } from "@/framework/types/common";
-import { BreedListItemProps } from '@/pages/breedList'
+import { BreedListItemProps } from '@/pages/packageA/breedList'
 import { ScrollView, View, Image } from '@tarojs/components'
 
 interface Props {

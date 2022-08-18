@@ -6,7 +6,7 @@ import { CDNIMGURL2, CDNIMGURL, UPLOADURL } from '@/lib/constants';
 import { getBreedList } from '@/framework/api/pet/get-breeds';
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle';
 import { PetListItemProps, PetType, PetGender, PetHealth, PetPosture } from '@/framework/types/consumer';
-import { BreedListItemProps } from '@/pages/breedList';
+import { BreedListItemProps } from '@/pages/packageA/breedList';
 import { updatePet } from '@/framework/api/pet/update-pet';
 import { getPet } from '@/framework/api/pet/get-pets';
 import moment from 'moment';
@@ -97,7 +97,7 @@ const PetDetail = () => {
 
   const handleBreed = () => {
     Taro.navigateTo({
-      url: `/pages/breedList/index?type=${pet.type}`,
+      url: `/pages/packageA/breedList/index?type=${pet.type}`,
       events: {
         seachBreed: function ({ breed, code }) {
           console.log('返回的数据---', breed, code)
@@ -139,7 +139,6 @@ const PetDetail = () => {
 
   const savePet = async () => {
     const res = await updatePet(pet, originalPet);
-    // const [res] = await Promise.all([updatePet(pet, originalPet), new Promise((resolve) => setTimeout(() => resolve(true), 3000))]);
     if (res) {
       Taro.navigateBack();
     } else {

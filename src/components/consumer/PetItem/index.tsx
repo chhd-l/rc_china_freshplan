@@ -36,7 +36,7 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
     if (option.text == '编辑') {
       // setIsEdit(true)
       Taro.navigateTo({
-        url: '/pages/petDetail/index',
+        url: '/pages/packageA/petDetail/index',
         success: (res) => {
           res.eventChannel.emit('petFromList', pet);
         }
