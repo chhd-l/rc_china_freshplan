@@ -20,32 +20,28 @@ const FoodRecom = () => {
   const [recommendProductNames, setRecommendProductNames] = useState('');
 
   Taro.useReady(() => {
-    const pages = Taro.getCurrentPages()
-    const current = pages[pages.length - 1]
-    const eventChannel = current.getOpenerEventChannel()
-    eventChannel.on('petForRecommend', (data: PetListItemProps) => {
-      setPet(data);
-      Promise.all([
-        getSubscriptionSimpleRecommend({
-          subscriptionType: 'FRESH_PLAN',
-          petType: data.type,
-          petBreedCode: data.code,
-          isPetSterilized: data.isSterilized,
-          petBirthday: moment(data.birthday),
-          recentHealth: (data.recentHealth || []).join("|"),
-        }),
-        getProducts({ limit: 4, sample: { storeId: consumer?.storeId }, withTotal: true, offset: 0 })
-      ]).then(([res1, res2]) => {
-        const defaultSelected = (res1?.productList ?? []).map(p => p?.productVariantInfo?.variants?.[0].id);
-        setSelected(defaultSelected);
-        setList(res2?.productList || []);
-        setRecommendProductNames((res2?.productList || []).reduce((prev: string[], curr: any) => {
-          if (defaultSelected.indexOf(curr.sku) > -1) {
-            prev.push(curr.name);
-          }
-          return prev;
-        }, []).join("、"));
-      });
+    const data: PetListItemProps = Taro.getStorageSync("petItem");
+    setPet(data);
+    Promise.all([
+      getSubscriptionSimpleRecommend({
+        subscriptionType: 'FRESH_PLAN',
+        petType: data.type,
+        petBreedCode: data.code,
+        isPetSterilized: data.isSterilized,
+        petBirthday: moment(data.birthday),
+        recentHealth: (data.recentHealth || []).join("|"),
+      }),
+      getProducts({ limit: 4, sample: { storeId: consumer?.storeId }, withTotal: true, offset: 0 })
+    ]).then(([res1, res2]) => {
+      const defaultSelected = (res1?.productList ?? []).map(p => p?.productVariantInfo?.variants?.[0].id);
+      setSelected(defaultSelected);
+      setList(res2?.productList || []);
+      setRecommendProductNames((res2?.productList || []).reduce((prev: string[], curr: any) => {
+        if (defaultSelected.indexOf(curr.sku) > -1) {
+          prev.push(curr.name);
+        }
+        return prev;
+      }, []).join("、"));
     });
   });
 

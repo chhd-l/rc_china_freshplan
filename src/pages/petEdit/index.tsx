@@ -40,11 +40,9 @@ const petEdit = () => {
   const handleSave = async () => {
     const res = await addPet(pet);
     if (res) {
-      Taro.navigateTo({
+      Taro.setStorageSync("petItem", pet);
+      Taro.redirectTo({
         url: '/pages/foodRecom/index',
-        success: (res) => {
-          res.eventChannel.emit('petForRecommend', pet);
-        }
       })
     } else {
       Taro.showToast({ title: '保存失败' });

@@ -139,19 +139,18 @@ const PetDetail = () => {
 
   const savePet = async () => {
     const res = await updatePet(pet, originalPet);
+    // const [res] = await Promise.all([updatePet(pet, originalPet), new Promise((resolve) => setTimeout(() => resolve(true), 3000))]);
     if (res) {
-      Taro.navigateTo({ url: '/pages/petList/index' });
+      Taro.navigateBack();
     } else {
       Taro.showToast({ title: '保存失败' });
     }
   }
 
   const handleSub = () => {
-    Taro.navigateTo({
+    Taro.setStorageSync("petItem", pet);
+    Taro.redirectTo({
       url: '/pages/foodRecom/index',
-      success: (res) => {
-        res.eventChannel.emit('petForRecommend', pet);
-      }
     });
   }
 
