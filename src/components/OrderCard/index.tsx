@@ -19,7 +19,7 @@ const OrderCard = ({ order, cancel }: { order: Order; cancel: Function }) => {
       className="p-1 bg-white mt-1 orderCard"
       onClick={() =>
         Taro.navigateTo({
-          url: '/pages/orderDetail/index?id=' + order.orderNumber,
+          url: '/pages/packageA/orderDetail/index?id=' + order.orderNumber,
         })
       }
     >

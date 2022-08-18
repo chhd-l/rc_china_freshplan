@@ -61,7 +61,7 @@ const FoodRecom = () => {
       Taro.showToast({ title: '请选择套餐' });
     } else {
       Taro.navigateTo({
-        url: '/pages/checkout/index',
+        url: '/pages/packageA/checkout/index',
         success: (res) => {
           res.eventChannel.emit('checkoutItems', selectedItems);
         },

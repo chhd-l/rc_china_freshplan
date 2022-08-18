@@ -116,7 +116,7 @@ const PetList = (props: Props) => {
     //   url: `/pages/packageB/petList/index?petNumber=${petList.length}`,
     // })
 
-    Taro.navigateTo({ url: `/pages/petList/index` })
+    Taro.navigateTo({ url: `/pages/packageA/petList/index` })
   }
   const CheckBoxItem = ({ id, idx }: { id: string; idx?: number }) => {
     return props.showCheckBox ? (

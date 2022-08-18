@@ -46,7 +46,7 @@ const FreshFoodExperience = () => {
               className="w-10/12"
               onClick={() =>
                 Taro.navigateTo({
-                  url: `/pages/petDiet/index`,
+                  url: `/pages/packageA/petDiet/index`,
                 })
               }
             >
