@@ -1,23 +1,30 @@
-import { useGlobalIconFont } from './components/iconfont/helper'
+// import { useGlobalIconFont } from './components/iconfont/helper'
 
 export default defineAppConfig({
   pages: [
     'pages/subscription/index',
     'pages/account/index',
-    'pages/elencoOrdini/index',
-    'pages/orderDetail/index',
-    'pages/addressManage/index',
-    'pages/newAddress/index',
-    'pages/petList/index',
-    'pages/petEdit/index',
-    'pages/petDetail/index',
-    'pages/breedList/index',
     'pages/foodRecom/index',
-    'pages/checkout/index',
     'pages/testView/index',
-    'pages/petDiet/index',
     'pages/freshPlanDetails/index',
     'pages/schedule/index',
+  ],
+  subPackages: [
+    {
+      root: 'pages/packageA',
+      pages: [
+        'elencoOrdini/index',
+        'orderDetail/index',
+        'addressManage/index',
+        'newAddress/index',
+        'petList/index',
+        'petEdit/index',
+        'petDetail/index',
+        'breedList/index',
+        'checkout/index',
+        'petDiet/index',
+      ],
+    }
   ],
   window: {
     navigationBarBackgroundColor: '#fff',
@@ -44,6 +51,6 @@ export default defineAppConfig({
   },
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  usingComponents: Object.assign(useGlobalIconFont()),
+  // usingComponents: Object.assign(useGlobalIconFont()),
 })
 

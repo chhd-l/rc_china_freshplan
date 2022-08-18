@@ -61,7 +61,7 @@ const Subscription = () => {
             className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
             type="primary"
             onClick={() => {
-              Taro.navigateTo({ url: '/pages/petEdit/index' });
+              Taro.navigateTo({ url: '/pages/packageA/petEdit/index' });
             }}
           >
             <AtIcon className="mr-1" value="clock" size="26" />
@@ -73,7 +73,7 @@ const Subscription = () => {
             scope="phoneNumber"
             onGetAuthorize={() => {
               handleLogin(() => {
-                Taro.navigateTo({ url: '/pages/petEdit/index' });
+                Taro.navigateTo({ url: '/pages/packageA/petEdit/index' });
               })
             }}
           >
@@ -97,7 +97,7 @@ const Subscription = () => {
             className="mx-4 rounded-full flex items-center bg-color-primary border-0 justify-center"
             type="primary"
             onClick={() => {
-              Taro.navigateTo({ url: '/pages/petEdit/index' });
+              Taro.navigateTo({ url: '/pages/packageA/petEdit/index' });
             }}
           >
             <AtIcon className="mr-1" value="clock" size="26" />
@@ -109,7 +109,7 @@ const Subscription = () => {
             scope="phoneNumber"
             onGetAuthorize={() => {
               handleLogin(() => {
-                Taro.navigateTo({ url: '/pages/petEdit/index' });
+                Taro.navigateTo({ url: '/pages/packageA/petEdit/index' });
               })
             }}
           >

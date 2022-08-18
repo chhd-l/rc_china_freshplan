@@ -1,10 +1,10 @@
 const routers = {
   cart: '/pages/cart/index',
-  checkout: '/pages/checkout/index',
-  newAddress: '/pages/newAddress/index',
-  addressManage: '/pages/addressManage/index',
+  checkout: '/pages/packageA/checkout/index',
+  newAddress: '/pages/packageA/newAddress/index',
+  addressManage: '/pages/packageA/addressManage/index',
   orderList: '/pages/orderList/index',
-  orderDetail: '/pages/orderDetail/index',
+  orderDetail: '/pages/packageA/orderDetail/index',
   voucherList: '/pages/voucherList/index',
   officialAccount: '/pages/officialAccount/index'
 }
