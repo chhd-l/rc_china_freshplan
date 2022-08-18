@@ -11,7 +11,7 @@ const Step = () => {
         </PetTitle>
       </View>
       <View className=" mx-[20px] h-h-28">
-        <Image src={step_line} />
+        <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/step_line.png" />
       </View>
     </View>
   )

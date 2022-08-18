@@ -1,5 +1,5 @@
 import { Image, Text, View } from '@tarojs/components'
-import foodbg from '@/assets/img/foodbg.png'
+// import foodbg from '@/assets/img/foodbg.png'
 import { AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 
@@ -42,7 +42,7 @@ const Formula = () => {
           B6）、核黄素（维生素 B2）、胆钙化醇（来源维生素 D3)、碘化钾、叶酸、维生素 B12 补充剂。
         </View>
       </View>
-      <Image src={foodbg} className="absolute z-0 top-0" />
+      <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/foodbg.png" className="absolute z-0 top-0" />
     </View>
   )
 }
