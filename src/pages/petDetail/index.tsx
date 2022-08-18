@@ -139,7 +139,6 @@ const PetDetail = () => {
 
   const savePet = async () => {
     const res = await updatePet(pet, originalPet);
-    // const [res] = await Promise.all([updatePet(pet, originalPet), new Promise((resolve) => setTimeout(() => resolve(true), 3000))]);
     if (res) {
       Taro.navigateBack();
     } else {
