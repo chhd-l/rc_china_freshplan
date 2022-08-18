@@ -67,7 +67,7 @@ const Checkout = () => {
     return prev + curr.price;
   }, 0);
 
-  const nextThursday = moment().isoWeekday() < 4 ? moment().isoWeekday(4).format('YYYY-MM-DD') : moment().add(1, 'weeks').isoWeekday(4).format('YYYY-MM-DD');
+  // const nextThursday = moment().isoWeekday() < 4 ? moment().isoWeekday(4).format('YYYY-MM-DD') : moment().add(1, 'weeks').isoWeekday(4).format('YYYY-MM-DD');
 
   return (
     <View className="checkout-page pt-2 pb-12">
@@ -118,14 +118,6 @@ const Checkout = () => {
           <Text>商品金额</Text>
           <Text>{formatMoney(subtotal)}</Text>
         </View>
-        <View className="mt-1 flex justify-between items-center text-30">
-          <Text>促销折扣</Text>
-          <Text>-￥0.00</Text>
-        </View>
-        <View className="mt-1 flex justify-between items-center text-30">
-          <Text>新人折扣</Text>
-          <Text>-￥0.00</Text>
-        </View>
         <View className="mt-2 flex justify-between items-center text-30">
           <Text>运费</Text>
           <Text>￥0.00</Text>
@@ -146,12 +138,12 @@ const Checkout = () => {
 
       <View className="bg-white rounded-sm mx-1 mt-1 p-1">
         <View className="flex items-center">
-          <Text className="mr-1 rcciconfont rccicon-timer text-color-primary text-30" />
+          <Text className="mr-1 rcciconfont rccicon-ontime text-color-primary text-30" />
           <Text className="flex-1 text-28 text-gray-400">我们将每四周扣款发货一次，请注意!</Text>
         </View>
         <View className="mt-1 flex items-center">
           <Text className="mr-1 rcciconfont rccicon-ship text-color-primary text-28" />
-          <Text className="flex-1 text-28 text-gray-400">本次订单将在{nextThursday}发货，请注意查收!</Text>
+          <Text className="flex-1 text-28 text-gray-400">本次订单将在{moment().add(1, 'days').format('YYYY-MM-DD')}发货，请注意查收!</Text>
         </View>
       </View>
 

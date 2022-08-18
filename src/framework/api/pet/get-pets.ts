@@ -10,9 +10,10 @@ export const getPets = async ({ consumerId }) => {
     const pets = await ApiRoot({ url: apis?.common_pet }).pets().getPets({ consumerId })
     // const pets = mockPetlist;
     console.info('petspetspetspets', pets)
-    return pets.map((pet) => normalizePetsForFe(pet))
+    return (pets || []).map((pet) => normalizePetsForFe(pet))
   } catch (err) {
     console.log(err, 'err')
+    return []
   }
 }
 
@@ -24,5 +25,6 @@ export const getPet = async (id: string) => {
     return data?.consumerPetGet ? normalizePetsForFe(data.consumerPetGet) : null
   } catch (err) {
     console.log(err, 'err')
+    return null;
   }
 }

@@ -23,6 +23,16 @@ const orderTypeList = [
 const Account = () => {
   const [consumer, setConsumer] = useAtom(consumerAtom)
   const [petList, setPetList] = useState<PetListItemProps[]>([])
+  const [isLogin, setIsLogin] = useState<boolean>(false)
+
+  const getAuthentication = async (callback?: Function) => {
+    if (!isLogin) {
+      // loginWithAlipay(callback);
+      Taro.showToast({ title: '请先授权登录' });
+    } else {
+      callback && callback()
+    }
+  }
 
   const getList = async (consumerId: string) => {
     let res = (await getPets({ consumerId })) || []
@@ -35,28 +45,27 @@ const Account = () => {
   }
 
   const loginInit = async () => {
-    if (my.getStorageSync({ key: 'wxLoginRes' })) {
+    const _storeRes: any = Taro.getStorageSync("wxLoginRes");
+    if (_storeRes?.userInfo?.id) {
       // Taro.setStorageSync('commerce-loading', 1)
       const data = await wxLogin()
       setConsumer(data)
       getList(data.id)
-      // setRefreshed(true)//兼容token过期报错
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
     }
   }
 
-  useEffect(() => {
-    // const res: any = my.getStorageSync({ key: 'wxLoginRes' })
-    // if (!res.error && res.success && res.data?.userInfo?.id) {
-    //   setConsumer(res.data.userInfo)
-    // }
+  Taro.useDidShow(() => {
     loginInit()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  })
 
   const handleLogin = () => {
     loginWithAlipay((data) => {
       setConsumer(data)
       getList(data.id)
+      setIsLogin(true);
     })
   }
 
@@ -102,8 +111,10 @@ const Account = () => {
               arrow="right"
               extraText="查看全部订单"
               onClick={() =>
-                Taro.navigateTo({
-                  url: '/pages/elencoOrdini/index?status=ALL',
+                getAuthentication(() => {
+                  Taro.navigateTo({
+                    url: '/pages/elencoOrdini/index?status=ALL',
+                  })
                 })
               }
             />
@@ -113,8 +124,10 @@ const Account = () => {
                   key={key}
                   className="inline-block py-1 flex flex-col items-center justify-center"
                   onClick={() =>
-                    Taro.navigateTo({
-                      url: str.url,
+                    getAuthentication(() => {
+                      Taro.navigateTo({
+                        url: str.url,
+                      })
                     })
                   }
                 >
@@ -134,7 +147,19 @@ const Account = () => {
         </View>
         {/* 宠物列表 */}
         <View className="my-1">
-          <RotationChartList list={petList} />
+          <RotationChartList
+            list={petList}
+            onClickPetList={() => {
+              getAuthentication(() => {
+                Taro.navigateTo({ url: '/pages/petList/index' })
+              })
+            }}
+            onClickPetAdd={() => {
+              getAuthentication(() => {
+                Taro.navigateTo({ url: '/pages/petEdit/index' })
+              })
+            }}
+          />
         </View>
         {/* 计划列表 */}
         <AtList hasBorder={false} className="mt-1">
@@ -144,8 +169,10 @@ const Account = () => {
             title="计划列表"
             arrow="right"
             onClick={() => {
-              Taro.navigateTo({
-                url: `/pages/testView/index`,
+              getAuthentication(() => {
+                Taro.navigateTo({
+                  url: `/pages/testView/index`,
+                })
               })
             }}
           />
@@ -159,8 +186,10 @@ const Account = () => {
             title="收货地址"
             arrow="right"
             onClick={() => {
-              Taro.navigateTo({
-                url: `/pages/addressManage/index`,
+              getAuthentication(() => {
+                Taro.navigateTo({
+                  url: `/pages/addressManage/index`,
+                })
               })
             }}
           />
