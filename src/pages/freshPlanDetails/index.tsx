@@ -4,6 +4,7 @@ import { CDNIMGURL } from '@/lib/constants'
 import { getAge } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
 import './index.less'
@@ -17,7 +18,10 @@ const FreshPlanDetails = () => {
       birthday: '',
       image: '',
     },
-    productList: [{ name: '', defaultImage: '' }],
+    productList: [{ variants: { name: '', defaultImage: '' } }],
+    no: '',
+    createNextDeliveryTime: 0,
+    consumer: { phone: '' },
   })
   const getSubscriptionDetails = async () => {
     let res = await getSubscriptionDetail('a7390fc6-3d30-0e54-6db4-4ab822c2564a')
@@ -44,16 +48,16 @@ const FreshPlanDetails = () => {
         >
           <View className="flex justify-between items-end">
             <Text className="text-[34px]">订单信息</Text>
-            <Text className="text-[22px] text-[#666]">Fresh编号:20185275063697</Text>
+            <Text className="text-[22px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
           </View>
           <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
         <View className="flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center text-[20px] h-[190px]" key={key}>
-              <Image className="mx-1 h-full" src={el?.defaultImage} style={{ width: '1.9rem' }} />
+              <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.9rem' }} />
               <View className="h-full flex flex-col justify-center flex-1">
-                <View className="font-bold text-[30px] text-[#96CC39]">{el?.name}</View>
+                <View className="font-bold text-[30px] text-[#96CC39]">{el?.variants?.name}</View>
                 <View className="flex items-center justify-between mt-1.5 text-[#666]">
                   牛肉、土豆、鸡蛋、胡萝卜、豌豆
                 </View>
@@ -73,7 +77,9 @@ const FreshPlanDetails = () => {
             }}
             src={`${CDNIMGURL}order%20logistics.png`}
           />
-          <Text className="ml-1.5">下一次将在2022-08-23发货，请注意查收!</Text>
+          <Text className="ml-1.5">
+            下一次将在{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}发货，请注意查收!
+          </Text>
         </View>
         <View className="flex justify-end">
           <AtButton
@@ -111,7 +117,7 @@ const FreshPlanDetails = () => {
             }}
             src={`${CDNIMGURL}order%20logistics.png`}
           />
-          <Text className="ml-1">签约账户：132*****23</Text>
+          <Text className="ml-1">签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>
       </View>
     </View>

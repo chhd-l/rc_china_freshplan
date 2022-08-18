@@ -1,37 +1,84 @@
+import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
+import { formatMoney } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { useState } from 'react'
+import moment from 'moment'
+import { useEffect, useState } from 'react'
 import { AtButton, AtIcon, AtList, AtListItem } from 'taro-ui'
 
 const Schedule = () => {
   const [PopupOpne, setPopupOpne] = useState(false)
+  const [subscriptionDetails, setSubscriptionDetails] = useState({
+    productList: [{ variants: { name: '', defaultImage: '', num: 0, subscriptionPrice: 0 } }],
+    no: '',
+    createNextDeliveryTime: 0,
+    consumer: { phone: '' },
+    address: {
+      city: '',
+      region: '',
+      detail: '',
+    },
+    price: {
+      deliveryPrice: 0,
+      discountsPrice: 0,
+      productPrice: 0,
+      totalPrice: 0,
+    },
+  })
+  const getSubscriptionDetails = async () => {
+    let res = await getSubscriptionDetail('a7390fc6-3d30-0e54-6db4-4ab822c2564a')
+    console.log('res', res)
+    setSubscriptionDetails(res)
+  }
+
+  useEffect(() => {
+    getSubscriptionDetails()
+  }, [])
 
   return (
     <View className="p-1 pb-4 Schedule">
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
         <View className="py-1">
           <View className="flex justify-between items-end">
-            <Text className="text-[34px]">订单信息</Text>
-            <Text className="text-[22px] text-[#666]">Fresh编号:20185275063697</Text>
+            <Text className="text-[34px]">下次发货</Text>
+            <Text className="text-[22px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
           </View>
           <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
         <View className="flex flex flex-col">
-          {[1, 2].map((_, key) => (
+          {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center h-[160px]" key={key}>
-              <Image className="mx-1 h-full" src="https://jdc.jd.com/img/200" style={{ width: '1.6rem' }} />
+              <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.6rem' }} />
               <View className="h-full flex flex-col justify-center flex-1">
-                <View className="font-bold text-[30px]">牛肉泥</View>
-                <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">¥129.00</View>
-                <View className="flex items-center justify-end mt-1 text-[20px] text-[#9D9D9D]">X 1</View>
+                <View className="font-bold text-[30px]">{el?.variants?.name}</View>
+                <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
+                  {formatMoney(el?.variants?.subscriptionPrice)}
+                </View>
+                <View className="flex items-center justify-end mt-1 text-[20px] text-[#9D9D9D]">
+                  X {el?.variants?.num}
+                </View>
               </View>
             </View>
           ))}
         </View>
-        <AtList hasBorder={false} className="mb-1">
-          <AtListItem title="商品金额" hasBorder={false} extraText="¥150.00" />
-          <AtListItem title="促销折扣" hasBorder={false} extraText="-¥40.00" />
-          <AtListItem title="运费" extraText="¥0.00" />
+        <AtList hasBorder={false} className="my-2">
+          <AtListItem
+            className="py-0.5"
+            title="商品金额"
+            hasBorder={false}
+            extraText={formatMoney(subscriptionDetails.price.productPrice + subscriptionDetails.price.deliveryPrice)}
+          />
+          <AtListItem
+            className="py-0.5"
+            title="促销折扣"
+            hasBorder={false}
+            extraText={formatMoney(subscriptionDetails.price.discountsPrice)}
+          />
+          <AtListItem
+            className="py-0.5"
+            title="运费"
+            extraText={formatMoney(subscriptionDetails.price.deliveryPrice)}
+          />
           <View className="flex items-center justify-between py-1.5">
             <View
               className="underline text-[24px]"
@@ -48,7 +95,7 @@ const Schedule = () => {
                 合计：
               </Text>
               <Text className="item-extra__info" style={{ color: '#D49D28' }}>
-                ￥110.00
+                {formatMoney(subscriptionDetails?.price?.totalPrice)}
               </Text>
             </View>
           </View>
@@ -57,8 +104,13 @@ const Schedule = () => {
       <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[24px]">
         <View className="text-[34px]">发货信息</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
-        <View className="mt-1">发货日期&nbsp;&nbsp;&nbsp;2022-08-23</View>
-        <View className="mt-1">收货地址&nbsp;&nbsp;&nbsp;重庆市渝中区 恒大名都11栋32-16</View>
+        <View className="mt-1">
+          发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
+        </View>
+        <View className="mt-1">
+          收货地址&nbsp;&nbsp;&nbsp;{subscriptionDetails?.address?.city} {subscriptionDetails?.address?.region}{' '}
+          {subscriptionDetails?.address?.detail}
+        </View>
         <View className="flex mt-2 justify-end">
           <AtButton circle className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0" type="primary">
             修改地址
@@ -66,7 +118,7 @@ const Schedule = () => {
         </View>
       </View>
       <View className="bg-white mt-1 p-1 boxShadow">
-        <View className="text-[34px]">发货信息</View>
+        <View className="text-[34px]">历史订单</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         <View className="rounded-[10px] mt-1 text-[22px] text-[#999] border border-solid border-[#E2E2E2]">
           <View className="flex items-center justify-between p-1">

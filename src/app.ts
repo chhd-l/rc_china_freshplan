@@ -13,7 +13,35 @@ const App = (props) => {
     Taro.onAppShow(() => {
       console.log('aaaaaaaaa', 'onAppShow')
       // Taro.clearStorageSync()
+      // my.onError((message, stack) => {
+      //   my.showToast({
+      //     type: "fail",
+      //     content: message,
+      //     duration: 10000,
+      //   })
+      // })
     })
+    // my.onError((error) => {
+    //   my.showToast({
+    //     type: "fail",
+    //     content: error,
+    //     duration: 10000,
+    //   })
+    // });
+    // my.onComponentError((error) => {
+    //   my.showToast({
+    //     type: "fail",
+    //     content: error.message,
+    //     duration: 10000,
+    //   });
+    // });
+    // my.onUnhandledRejection((res) => {
+    //   my.showToast({
+    //     type: "fail",
+    //     content: (res?.reason || res?.reason?.message || 'Promise error'),
+    //     duration: 10000,
+    //   })
+    // });
   }, [])
 
   return props.children

@@ -139,19 +139,18 @@ const PetDetail = () => {
 
   const savePet = async () => {
     const res = await updatePet(pet, originalPet);
+    // const [res] = await Promise.all([updatePet(pet, originalPet), new Promise((resolve) => setTimeout(() => resolve(true), 3000))]);
     if (res) {
-      Taro.navigateTo({ url: '/pages/petList/index' });
+      Taro.navigateBack();
     } else {
       Taro.showToast({ title: '保存失败' });
     }
   }
 
   const handleSub = () => {
-    Taro.navigateTo({
+    Taro.setStorageSync("petItem", pet);
+    Taro.redirectTo({
       url: '/pages/foodRecom/index',
-      success: (res) => {
-        res.eventChannel.emit('petForRecommend', pet);
-      }
     });
   }
 
@@ -234,7 +233,7 @@ const PetDetail = () => {
         </View>
         <View className="tab2 px-1" style={{display: tab === 2 ? 'block' : 'none'}}>
           <View className="mt-2">
-            <PetTitle>{pet.name}近期的体重<Text className="ml-1 text-22 text-gray-800">(kg)</Text></PetTitle>
+            <PetTitle>{pet.name}近期的体重<Text className="ml-1 text-22 text-gray-200">(kg)</Text></PetTitle>
           </View>
           <View className="mt-2 choose-other-breed bg-white flex items-center" onClick={() => setShow(true)}>
             <Text className="text-28 mx-1 flex-1 font-bold">{pet.recentWeight ? pet.recentWeight : '请选择'}</Text>
@@ -244,28 +243,28 @@ const PetDetail = () => {
             <PetTitle>{pet.name}近期的体态</PetTitle>
           </View>
           <View className="mt-2 flex items-center pet-situation bg-white">
-            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Emaciated ? 'active' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Emaciated})}>
-              <Image className="my-2" src={`${CDNIMGURL2}weight-thin.png`} />
+            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Emaciated ? 'active font-bold' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Emaciated})}>
+              <Image className="my-1" src={`${CDNIMGURL2}weight-thin.png`} />
               <View className="text-24 mb-1">瘦弱</View>
             </View>
-            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Standard ? 'active' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Standard})}>
-              <Image className="my-2" src={`${CDNIMGURL2}weight-std.png`} />
+            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Standard ? 'active font-bold' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Standard})}>
+              <Image className="my-1" src={`${CDNIMGURL2}weight-std.png`} />
               <View className="text-24 mb-1">标准</View>
             </View>
-            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Obesity ? 'active' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Obesity})}>
-              <Image className="my-2" src={`${CDNIMGURL2}weight-fat.png`} />
+            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Obesity ? 'active font-bold' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Obesity})}>
+              <Image className="my-1" src={`${CDNIMGURL2}weight-fat.png`} />
               <View className="text-24 mb-1">超重</View>
             </View>
           </View>
           <View className="mt-2">
-            <PetTitle>{pet.name}近期的成年目标体重<Text className="ml-1 text-22 text-gray-800">(kg)</Text></PetTitle>
+            <PetTitle>{pet.name}近期的成年目标体重<Text className="ml-1 text-22 text-gray-200">(kg)</Text></PetTitle>
           </View>
           <View className="mt-2 choose-other-breed bg-white flex items-center" onClick={() => setShow1(true)}>
             <Text className="text-28 mx-1 flex-1 font-bold">{pet.targetWeight ? pet.targetWeight : '请选择'}</Text>
             <Text className="rcciconfont rccicon-right text-34 mx-1" />
           </View>
           <View className="mt-2">
-            <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-22 text-gray-800">(可多选)</Text></PetTitle>
+            <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-22 text-gray-200">(可多选)</Text></PetTitle>
           </View>
           <View>
             <View
@@ -352,15 +351,17 @@ const PetDetail = () => {
             <PickerView
               value={val}
               onChange={handleChangeCurrentWeight}
+              className="my-1 mx-6"
+              indicatorStyle="height: 50px;"
             >
               <PickerViewColumn>
-                {arr1.map(item => <View>{item}</View>)}
+                {arr1.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr2.map(item => <View>{item}</View>)}
+                {arr2.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr3.map(item => <View>{item}</View>)}
+                {arr3.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
             </PickerView>
           </View>
@@ -380,15 +381,17 @@ const PetDetail = () => {
             <PickerView
               value={val1}
               onChange={handleChangeTargetWeight}
+              className="my-1 mx-6"
+              indicatorStyle="height: 50px;"
             >
               <PickerViewColumn>
-                {arr1.map(item => <View>{item}</View>)}
+                {arr1.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr2.map(item => <View>{item}</View>)}
+                {arr2.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
               <PickerViewColumn>
-                {arr3.map(item => <View>{item}</View>)}
+                {arr3.map(item => <View className="text-34 font-bold">{item}</View>)}
               </PickerViewColumn>
             </PickerView>
           </View>

@@ -8,4 +8,5 @@ src/custom-tab-bar/
 .idea/
 
 # rc_commerce
-src/rc-china-commerce
+/src/rc-china-commerce
+/src/rc-china-commerce/node_modules

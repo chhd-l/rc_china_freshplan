@@ -32,6 +32,7 @@ export type Consumer = {
 export interface PetListItemProps {
   age: string
   id: string
+  breedName?: string
   name: string
   type?: PetType
   gender?: PetGender

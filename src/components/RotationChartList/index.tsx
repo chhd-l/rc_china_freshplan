@@ -5,17 +5,17 @@ import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 import './index.less'
 
-const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
+const RotationChartList = ({ list, onClickPetList, onClickPetAdd }: { list: PetListItemProps[], onClickPetList?: Function, onClickPetAdd?: Function }) => {
   const [current, setCurrent] = useState(list.length === 1 ? 0 : 1)
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
 
   const handlePetList = () => {
-    Taro.navigateTo({ url: '/pages/petList/index' })
+    onClickPetList && onClickPetList()
   }
 
   const handleAddPet = () => {
-    Taro.navigateTo({ url: '/pages/petEdit/index' })
+    onClickPetAdd && onClickPetAdd()
   }
 
   const returnPetdefaultImage = (petType: any) => {
@@ -81,7 +81,7 @@ const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
                           boxShadow: '-0.5px 0.5px 10px -3px #999',
                         }}
                         className="rounded-full"
-                        src={`${CDNIMGURL}${pet.image ? pet.image : returnPetdefaultImage(pet.type)}`}
+                        src={pet.image ? pet.image : `${CDNIMGURL}${returnPetdefaultImage(pet.type)}`}
                       />
                     </View>
                   </SwiperItem>
@@ -124,6 +124,7 @@ const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
                   }}
                 />
                 <Text className="mr-0.5">{list[current].breed}</Text>
+                <Text>{list[current]?.breedName}</Text>
                 <Text>{list[current].age}</Text>
               </View>
             )}
