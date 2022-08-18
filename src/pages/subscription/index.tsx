@@ -43,7 +43,7 @@ const Subscription = () => {
   })
   
   return (
-    <View className="subscription">
+    <View className="subscription bg-white">
       <View className="TitleSwiper relative">
         <Swiper current={current} circular autoplay interval={2000} onChange={(e) => setCurrent(e.detail.current)}>
           {titleSwiperList.map((item, key) => (
@@ -117,7 +117,7 @@ const Subscription = () => {
             开始定制
           </Button>}
         </View>
-        <View className="w-full h-[750px]">
+        <View className="w-full h-[750px] ">
           <Image src={home_foot_img} />
         </View>
       </View>
