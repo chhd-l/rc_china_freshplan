@@ -72,10 +72,10 @@ const FreshPlanDetails = () => {
         <View className="flex items-center text-[22px] my-1">
           <Image
             style={{
-              width: '1.012rem',
-              height: '0.66rem',
+              width: '0.912rem',
+              height: '0.76rem',
             }}
-            src={`${CDNIMGURL}order%20logistics.png`}
+            src={`${CDNIMGURL}post.png`}
           />
           <Text className="ml-1.5">
             下一次将在{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}发货，请注意查收!
@@ -102,20 +102,20 @@ const FreshPlanDetails = () => {
         <View className="flex items-center mt-1 ml-0.5">
           <Image
             style={{
-              width: '0.3022rem',
-              height: '0.2807rem',
+              width: '0.5022rem',
+              height: '0.3807rem',
             }}
-            src={`${CDNIMGURL}order%20logistics.png`}
+            src={`${CDNIMGURL}plateform.png`}
           />
           <Text className="ml-1">签约平台：支付宝</Text>
         </View>
         <View className="flex items-center mt-1 ml-0.5">
           <Image
             style={{
-              width: '0.3022rem',
-              height: '0.2807rem',
+              width: '0.5022rem',
+              height: '0.3807rem',
             }}
-            src={`${CDNIMGURL}order%20logistics.png`}
+            src={`${CDNIMGURL}account-sig.png`}
           />
           <Text className="ml-1">签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>

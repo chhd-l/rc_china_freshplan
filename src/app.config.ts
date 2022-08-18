@@ -2,6 +2,7 @@ import { useGlobalIconFont } from './components/iconfont/helper'
 
 export default defineAppConfig({
   pages: [
+    'pages/schedule/index',
     'pages/subscription/index',
     'pages/account/index',
     'pages/elencoOrdini/index',
@@ -17,7 +18,6 @@ export default defineAppConfig({
     'pages/testView/index',
     'pages/petDiet/index',
     'pages/freshPlanDetails/index',
-    'pages/schedule/index',
   ],
   window: {
     navigationBarBackgroundColor: '#fff',
