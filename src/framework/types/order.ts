@@ -52,6 +52,7 @@ export interface OrderState {
   lastModifiedBy: string
   createdAt: string
   createdBy: string
+  orderSource: string
 }
 
 export interface Logs {

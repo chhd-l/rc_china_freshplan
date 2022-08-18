@@ -5,7 +5,15 @@ import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 import './index.less'
 
-const RotationChartList = ({ list, onClickPetList, onClickPetAdd }: { list: PetListItemProps[], onClickPetList?: Function, onClickPetAdd?: Function }) => {
+const RotationChartList = ({
+  list,
+  onClickPetList,
+  onClickPetAdd,
+}: {
+  list: PetListItemProps[]
+  onClickPetList?: Function
+  onClickPetAdd?: Function
+}) => {
   const [current, setCurrent] = useState(list.length === 1 ? 0 : 1)
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
@@ -35,7 +43,11 @@ const RotationChartList = ({ list, onClickPetList, onClickPetAdd }: { list: PetL
       <View className="PetTitle flex items-center justify-between p-1">
         我的宠物
         {!!list.length && (
-          <Image onClick={handlePetList} style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />
+          <Image
+            onClick={handlePetList}
+            style={{ width: '20px', height: '20px' }}
+            src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_edit_2.png"
+          />
         )}
       </View>
       <View className="splitline ml-1" />
@@ -43,12 +55,14 @@ const RotationChartList = ({ list, onClickPetList, onClickPetAdd }: { list: PetL
         <View className="box-border overflow-hidden">
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
             {!!list.length && (
-              <View className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10" onClick={handleAddPet}>
-                <View
-                  className="bg-no-repeat bg-contain w-full h-full rounded-full bg-white"
+              <View
+                className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10 bg-white flex items-center justify-center rounded-full"
+                onClick={handleAddPet}
+              >
+                <Text
+                  className="rcciconfont text-[#D49D28] rccicon-add"
                   style={{
-                    backgroundImage: `url(${CDNIMGURL}small_add.svg)`,
-                    boxShadow: '0px 0 8px 2px #eaeaea',
+                    fontSize: '0.3rem',
                   }}
                 />
               </View>

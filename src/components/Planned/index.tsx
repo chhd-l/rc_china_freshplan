@@ -1,34 +1,18 @@
-import { getSubscriptionFindByConsumerId } from '@/framework/api/subscription/subscription'
 import { CDNIMGURL } from '@/lib/constants'
-import { getAgeYear } from '@/utils/utils'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AtAvatar, AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 
-const TextView = () => {
+const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
   const [current, setCurrent] = useState(0)
-  const [subscriptionList, setSubscriptionList] = useState<any[]>([])
-
-  const getSubscriptionList = async () => {
-    const res = await getSubscriptionFindByConsumerId()
-    console.log('res', res)
-    res.forEach((item) => {
-      item.pet.age = getAgeYear(item.pet.birthday)
-    })
-    setSubscriptionList(res)
-  }
 
   const returnPetdefaultImage = (petType: string) => {
     if (petType === 'CAT') return 'cat-default.png'
     else return 'dog-default.png'
   }
-
-  useEffect(() => {
-    getSubscriptionList()
-  }, [])
 
   return (
     <View className="oldUserPlan">
