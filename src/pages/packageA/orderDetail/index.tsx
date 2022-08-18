@@ -166,7 +166,8 @@ const OrderDetails = () => {
         </View>
         {orderDetail?.orderState?.orderState !== 'VOID' && <TimeLine type={orderDetail?.orderState?.orderState} />}
         <View className="pl-4 py-1 mt-0.5 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
-          {orderDetail?.orderState?.orderState !== 'VOID' && (
+          {(orderDetail?.orderState?.orderState === 'SHIPPED' ||
+            orderDetail?.orderState?.orderState === 'COMPLETED') && (
             <View className="express">
               <View className="flex items-center relative">
                 <Image className="absolute orderDetailsIcon" src={`${CDNIMGURL}order%20logistics.png`} />

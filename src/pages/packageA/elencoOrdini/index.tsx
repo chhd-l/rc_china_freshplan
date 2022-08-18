@@ -36,6 +36,7 @@ const OrderList = () => {
       offset,
       sample: orderState !== 'ALL' ? { orderState } : {},
     })
+    console.log('res', res)
     setIsNoMore(res?.total < offset + 10)
     setOrderList(records.concat(res?.records))
   }
