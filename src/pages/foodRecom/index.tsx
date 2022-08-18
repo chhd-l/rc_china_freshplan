@@ -14,7 +14,7 @@ import './index.less';
 
 const FoodRecom = () => {
   const [consumer] = useAtom(consumerAtom);
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<any[]>([]);
   const [pet, setPet] = useState<PetListItemProps | undefined>();
   const [selected, setSelected] = useState<string[]>([]);
   const [recommendProductNames, setRecommendProductNames] = useState('');
@@ -35,9 +35,12 @@ const FoodRecom = () => {
     ]).then(([res1, res2]) => {
       const defaultSelected = (res1?.productList ?? []).map(p => p?.productVariantInfo?.variants?.[0].id);
       setSelected(defaultSelected);
-      setList(res2?.productList || []);
+      setList((res2?.productList || []).map((item: any) => {
+        item.subscriptionRecommendRuleId = ((res1?.productList ?? []).find(p => p?.productVariantInfo?.variants?.[0].id === item?.variants?.id) ?? {})['subscriptionRecommendRuleId'];
+        return item;
+      }));
       setRecommendProductNames((res2?.productList || []).reduce((prev: string[], curr: any) => {
-        if (defaultSelected.indexOf(curr.sku) > -1) {
+        if (defaultSelected.indexOf(curr?.variants?.id) > -1) {
           prev.push(curr.name);
         }
         return prev;
@@ -56,7 +59,7 @@ const FoodRecom = () => {
   }
 
   const handleCheckout = () => {
-    const selectedItems = list.filter((t: any) => selected.indexOf(t.sku) > -1);
+    const selectedItems = list.filter((t: any) => selected.indexOf(t?.variants?.id) > -1);
     if (!selectedItems || selectedItems.length === 0) {
       Taro.showToast({ title: '请选择套餐' });
     } else {
@@ -70,8 +73,8 @@ const FoodRecom = () => {
   }
 
   const total_price = list.reduce((prev: number, curr: any) => {
-    if (selected.indexOf(curr.sku) > -1) {
-      return prev + curr.price;
+    if (selected.indexOf(curr?.variants?.id) > -1) {
+      return prev + curr?.variants?.subscriptionPrice;
     } else {
       return prev;
     }
@@ -79,20 +82,20 @@ const FoodRecom = () => {
 
   return (
     <View className="pet-food-recom pt-2 pb-12">
-      <View className="my-1 text-32 font-bold text-center">{pet?.name}的专属健康食谱</View>
+      <View className="my-1 text-34 font-bold text-center">{pet?.name}的专属健康食谱</View>
       <View className="my-1 text-28 text-center">专家根据您的宠物信息推荐<Text className="text-color-primary">{recommendProductNames}</Text>套餐</View>
       <View className="my-1 text-22 light-gray-text text-center">最多选择<Text className="text-color-primary">两个</Text>套餐</View>
       <View className="pet-food-list mx-2 my-1">
         {list.map((item: any, idx: number) => (
-          <View key={idx} className={`pet-food-item my-1 py-2 ${selected.indexOf(item.sku) > -1 ? 'active' : ''}`} onClick={() => handleSelect(item.sku)}>
+          <View key={idx} className={`pet-food-item my-1 py-2 ${selected.indexOf(item?.variants?.id) > -1 ? 'active' : ''}`} onClick={() => handleSelect(item?.variants?.id)}>
             <View className="image mx-4 text-center">
-              <Image src={item.img}></Image>
+              <Image src={item?.variants?.defaultImage}></Image>
             </View>
             <View className="my-1 mx-2 flex items-end">
-              <Text className="name text-28 font-bold">{item.name}</Text>
-              <Text className="price ml-1 text-22">{formatMoney(item.price)}</Text>
+              <Text className="name text-28 font-bold">{item?.name}</Text>
+              <Text className="price ml-1 text-22">{formatMoney(item?.variants?.subscriptionPrice)}</Text>
             </View>
-            <View className="mx-2 text-22 text-gray-400">{(item?.description ?? "").replaceAll(/<[^>]+>/ig, "")}</View>
+            <View className="mx-2 text-22 text-gray-400">{(item?.description ?? "").replace(/<[^>]+>/ig, "")}</View>
             <View className="rectangle">
               <Text className="rcciconfont rccicon-check text-color-primary"></Text>
             </View>

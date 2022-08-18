@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro'
 import omit from 'lodash/omit'
 import { formatDateToApi } from '@/utils/utils'
 import { pay } from '@/framework/api/payment/pay'
+import { normalizePetsForApi } from '@/framework/api/lib/normalize'
 import routers from '@/routers'
 import ApiRoot from '../fetcher'
 
@@ -24,51 +25,39 @@ export const getSubscriptionSimpleRecommend = async (params: any) => {
 
 export const subscriptionCreateAndPay = async ({
   orderItems,
-  giftItems,
-  voucher,
   address,
-  orderType,
-  subscriptionInfo,
-  couponItems,
   remark,
   deliveryTime,
-  isWXGroupVip,
+  pet,
 }) => {
   try {
     const productList = orderItems.map((el) => {
-      if (el.skuGoodInfo.variants?.length > 0) {
-        el.skuGoodInfo.variants = Object.assign(el.skuGoodInfo.variants[0], {
-          num: el.productNum,
+      if (el?.variants?.id) {
+        el.variants = Object.assign(omit(el.variants, ['isDeleted', 'variantBundles']), {
+          num: 1,
         })
       }
-      return el.skuGoodInfo
-    })
-    const benefits = giftItems.map((el) => {
-      if (el.skuGoodInfo.variants?.length > 0) {
-        el.skuGoodInfo.variants = Object.assign(el.skuGoodInfo.variants[0], {
-          num: el.productNum,
+      if (el?.specifications?.length > 0) {
+        el.specifications = el.specifications.map((item: any) => {
+          if (item?.specificationDetails?.length > 0) {
+            item.specificationDetails = item.specificationDetails.map((t: any) => {
+              return omit(t, ['isDeleted']);
+            })
+          }
+          return omit(item, ['isDeleted']);
         })
       }
-      return el.skuGoodInfo
+      el = omit(el, ['isDeleted', 'subscriptionRecommendRuleId', 'asserts'])
+      return el
     })
-    let finalVoucher =
-      voucher && JSON.stringify(voucher) !== '{}'
-        ? {
-          ...voucher,
-          voucherStatus: 'Ongoing',
-        }
-        : null
-    finalVoucher = finalVoucher
-      ? omit(finalVoucher, ['consumerId', 'productInfoIds', 'orderCode', 'isDeleted', 'isGetStatus'])
-      : null
     const addressInfo = omit(address, ['consumerId', 'storeId', 'isDefault'])
     let wxLoginRes = Taro.getStorageSync('wxLoginRes')
     const subscriptionInput = {
       description: 'description',
-      type: orderType,
-      cycle: subscriptionInfo.cycleObj?.cycle,
-      freshType: subscriptionInfo.freshType,
-      voucher: finalVoucher,
+      type: "FRESH_PLAN",
+      cycle: null,
+      freshType: null,
+      voucher: null,
       consumer: {
         id: wxLoginRes?.userInfo?.id,
         avatarUrl: wxLoginRes?.userInfo?.avatarUrl,
@@ -81,36 +70,22 @@ export const subscriptionCreateAndPay = async ({
         account: {
           unionId: wxLoginRes?.consumerAccount?.unionId,
           openId: wxLoginRes?.consumerAccount?.openId,
-          isWXGroupVip
+          isWXGroupVip: false,
         },
       },
-      pet: subscriptionInfo.pet,
+      pet: normalizePetsForApi(pet),
       address: addressInfo.id !== '' ? addressInfo : null,
       productList,
-      benefits,
-      coupons: couponItems.map((el) => {
-        let couponInfo = el.couponInfo
-        delete couponInfo.isDeleted
-        delete couponInfo.isGetStatus
-        return {
-          id: el.id,
-          subscriptionRecommendRuleId: el.subscriptionRecommendRuleId,
-          couponId: el.couponId,
-          quantityRule: el.quantityRule,
-          quantity: el.quantity,
-          voucher: couponInfo,
-          sequence: el.sequence,
-          num: el.quantity,
-        }
-      }),
+      benefits: null,
+      coupons: null,
       remark,
       firstDeliveryTime: formatDateToApi(deliveryTime),
-      totalDeliveryTimes: subscriptionInfo.cycleObj.quantity, //配送次数
+      totalDeliveryTimes: 1, //配送次数
     }
     let params = {
       input: subscriptionInput,
-      payWayId: '241e2f4e-e975-6e14-a62a-71fcd435e7e9',
-      storeId: '12345678',
+      payWayId: 'e47dfb0f-1d3f-11ed-8ae8-00163e02a658',
+      storeId: wxLoginRes?.userInfo?.storeId,
       operator: wxLoginRes?.userInfo?.nickName || '',
     }
     console.log('create order params', params)
@@ -125,48 +100,32 @@ export const subscriptionCreateAndPay = async ({
       })
       setTimeout(() => {
         let url = `${routers.orderList}?status=TO_SHIP&isFromSubscription=true`
-        if (couponItems?.length) {
-          url = `${routers.orderList}?status=TO_SHIP&isFromSubscription=true&isSendCoupon=true`
-        }
         Taro.redirectTo({
           url,
         })
       }, 1000)
       return
     }
-    let paymentInfo = res.paymentStartResult?.payment
-    if (paymentInfo) {
+    let aliPaymentReq = res.paymentStartResult?.aliPaymentRequest
+    if (aliPaymentReq) {
       console.log(res, 'subscriptionCreateAndPayressssss')
       Taro.removeStorageSync('select-product')
-      pay({
-        params: {
-          consumerId: wxLoginRes?.userInfo?.id || '',
-          consumerOpenId: wxLoginRes?.consumerAccount?.openId,
-          orderId: paymentInfo?.orderNo,
-          orderNo: paymentInfo?.orderNo,
-          orderDescription: '商品',
-          payWayId: '241e2f4e-e975-6e14-a62a-71fcd435e7e9',
-          amount: paymentInfo?.amount * 100,
-          currency: 'CNY',
-          storeId: '12345678',
-          operator: wxLoginRes?.userInfo?.nickName || '',
-        },
-        success: () => {
-          let url = `${routers.orderList}?status=TO_SHIP&isFromSubscription=true`
-          if (couponItems?.length) {
-            url = `${routers.orderList}?status=TO_SHIP&isFromSubscription=true&isSendCoupon=true`
-          }
+      my.tradePay({
+        // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
+        tradeNO: aliPaymentReq?.payWayOrderId,
+        success: (res) => {
+          console.log(res);
           Taro.redirectTo({
-            url,
+            url: `${routers.orderList}?status=TO_SHIP&isFromSubscription=true`,
           })
         },
-        fail: () => {
+        fail: (res) => {
+          console.log(res);
           Taro.redirectTo({
             url: `${routers.orderList}?status=UNPAID&isFromSubscription=true`,
           })
-        },
-        paymentRequest: res.paymentStartResult,
-      })
+        }
+      });
     }
     return res
   } catch (err) {

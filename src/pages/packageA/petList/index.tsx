@@ -4,8 +4,9 @@ import { consumerAtom } from '@/store/consumer'
 import { petInfoListAuto } from '@/store/pets'
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getAge } from '@/utils/utils'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
+import { CDNIMGURL } from '@/lib/constants'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
@@ -62,6 +63,12 @@ const PetList = () => {
             />
           )
         })}
+        {petList.length === 0 ? <View className="noOrders flex flex-col items-center justify-center pt-8">
+          <Image className="noOrdersImage" src={`${CDNIMGURL}Empty%20orders.png`} />
+          <View className="mt-2 flex justify-center">
+            <Text className="ml-0.5">汪汪~啥也没有!</Text>
+          </View>
+        </View> : null}
         <View className="add-pet-btn">
           <View className="px-1 mt-1 mb-2 flex items-center">
             <View className="flex-1 mx-1 py-0.8 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={addPet}>

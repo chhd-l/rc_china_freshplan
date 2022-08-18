@@ -88,8 +88,8 @@ const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPe
           areaWidth={my.getSystemInfoSync().windowWidth * 0.9}
         >
           <View
-            className="text-center w-screen bg-cover bg-no-repeat"
-            style={{ backgroundImage: `url(${CDNIMGURL}Pet_Bg.png)`, padding: '30px 0' }}
+            className="text-center w-screen bg-white bg-cover bg-no-repeat"
+            style={{ padding: '30px 0' }}
             onClick={() => {
               showEdit(petIdx)
             }}
