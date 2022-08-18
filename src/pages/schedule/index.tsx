@@ -1,4 +1,5 @@
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
+import { CDNIMGURL } from '@/lib/constants'
 import { formatMoney } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
@@ -104,12 +105,23 @@ const Schedule = () => {
       <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[24px]">
         <View className="text-[34px]">发货信息</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
-        <View className="mt-1">
-          发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
+        <View className="mt-1 flex">
+          <AtIcon value="calendar" size="22" color="#D49D28" />
+          <Text className="ml-[6px]">
+            发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
+          </Text>
         </View>
-        <View className="mt-1">
-          收货地址&nbsp;&nbsp;&nbsp;{subscriptionDetails?.address?.city} {subscriptionDetails?.address?.region}{' '}
-          {subscriptionDetails?.address?.detail}
+        <View className="mt-1 flex">
+          <Text
+            className="rcciconfont rccicon-location text-[#D49D28]"
+            style={{
+              fontSize: '0.42rem',
+            }}
+          />
+          <Text className="ml-[6px] flex-1 leading-[28px]">
+            收货地址&nbsp;&nbsp;&nbsp;{subscriptionDetails?.address?.city} {subscriptionDetails?.address?.region}{' '}
+            {subscriptionDetails?.address?.detail}
+          </Text>
         </View>
         <View className="flex mt-2 justify-end">
           <AtButton circle className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0" type="primary">
@@ -173,7 +185,7 @@ const Schedule = () => {
               e.stopPropagation()
             }}
           >
-            <Image className="mt-2" src="https://jdc.jd.com/img/200" style={{ width: '2.36rem', height: '2.36rem' }} />
+            <Image className="mt-2" src={`${CDNIMGURL}pop.png`} style={{ width: '2.36rem', height: '2.36rem' }} />
             <View className="text-[29px] text-[#333] mt-2">您确定要取消这个计划嘛？</View>
             <View className="flex items-center justify-between my-2">
               <AtButton
