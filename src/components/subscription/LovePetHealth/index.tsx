@@ -1,8 +1,6 @@
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle'
-import IconFont from '@/components/iconfont'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import { useState } from 'react'
-import freshFood from '../../../assets/img/freshFoodbg.png'
 import './index.less'
 import { swiperList } from './index.modules'
 
