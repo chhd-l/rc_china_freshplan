@@ -43,7 +43,11 @@ const RotationChartList = ({
       <View className="PetTitle flex items-center justify-between p-1">
         我的宠物
         {!!list.length && (
-          <Image onClick={handlePetList} style={{ width: '20px', height: '20px' }} src={`${CDNIMGURL}pet_edit.png`} />
+          <Image
+            onClick={handlePetList}
+            style={{ width: '20px', height: '20px' }}
+            src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_edit_2.png"
+          />
         )}
       </View>
       <View className="splitline ml-1" />

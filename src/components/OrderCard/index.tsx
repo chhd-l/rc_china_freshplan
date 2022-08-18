@@ -1,4 +1,5 @@
 import { Order } from '@/framework/types/order'
+import { CDNIMGURL } from '@/lib/constants'
 import { formatMoney } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
@@ -13,7 +14,18 @@ const orderStatusType = {
   VOID: '交易取消',
 }
 
-const OrderCard = ({ order, cancel }: { order: Order; cancel: Function }) => {
+const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function }) => {
+  const returnTypeImage = () => {
+    switch (order?.orderState?.orderSource) {
+      case 'WECHAT_MINI_PROGRAM':
+        return 'WX.png'
+      case 'ALIPAY_MINI_PROGRAM':
+        return 'zhi.png'
+      default:
+        return 'WX.png'
+    }
+  }
+
   return (
     <View
       className="p-1 bg-white mt-1 orderCard"
@@ -24,7 +36,17 @@ const OrderCard = ({ order, cancel }: { order: Order; cancel: Function }) => {
       }
     >
       <View className="flex items-center justify-between">
-        <Text className="orderNo">订单编号: {order.orderNumber}</Text>
+        <Text className="orderNo flex items-center">
+          <Image
+            className="mr-[11px]"
+            style={{
+              width: '0.3117rem',
+              height: '0.3117rem',
+            }}
+            src={`${CDNIMGURL}${returnTypeImage()}`}
+          />
+          订单编号: {order.orderNumber}
+        </Text>
         <Text className="orderState">{orderStatusType[order?.orderState?.orderState || '']}</Text>
       </View>
       <View className="mb-2 flex flex flex-col">
@@ -62,13 +84,13 @@ const OrderCard = ({ order, cancel }: { order: Order; cancel: Function }) => {
           {order?.orderState?.orderState === 'UNPAID' ? '需' : ''}付款：&nbsp;
           {formatMoney(order.orderPrice.totalPrice + order.orderPrice.deliveryPrice)}
         </View>
-        {order.orderState?.orderState === 'UNPAID' ? (
+        {order.orderState?.orderState === 'UNPAID' && (
           <View className="flex items-center">
             <AtButton
               className="rounded-full"
               onClick={(e) => {
                 e.stopPropagation()
-                cancel(order.orderNumber, order?.orderState?.orderState)
+                orderButton(order.orderNumber, order?.orderState?.orderState)
               }}
             >
               取消
@@ -83,7 +105,23 @@ const OrderCard = ({ order, cancel }: { order: Order; cancel: Function }) => {
               付款
             </AtButton>
           </View>
-        ) : (
+        )}
+        {order.orderState?.orderState === 'SHIPPED' && (
+          <View className="flex items-center">
+            <AtButton className="rounded-full">查看物流</AtButton>
+            <AtButton
+              type="primary"
+              className="mx-0.5 rounded-full"
+              onClick={(e) => {
+                e.stopPropagation()
+                orderButton(order.orderNumber, order?.orderState?.orderState)
+              }}
+            >
+              确认收货
+            </AtButton>
+          </View>
+        )}
+        {order.orderState?.orderState !== 'UNPAID' && order.orderState?.orderState !== 'SHIPPED' && (
           <View className="flex items-center">
             <AtButton className="rounded-full">查看详情</AtButton>
           </View>

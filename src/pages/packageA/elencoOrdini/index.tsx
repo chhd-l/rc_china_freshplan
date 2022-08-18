@@ -1,5 +1,5 @@
 import OrderCard from '@/components/OrderCard'
-import { cancelOrder, getOrderList } from '@/framework/api/order'
+import { cancelOrder, completedOrder, getOrderList } from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL } from '@/lib/constants'
 import { Image, Text, View } from '@tarojs/components'
@@ -47,10 +47,56 @@ const OrderList = () => {
     getOrderLists({ orderState: Object.keys(OrderStatusEnum)[cur] })
   }
 
-  const cancel = (id, type) => {
+  const orderButton = (id, type) => {
     setCurActionOrderId(id)
     setCurActionType(type)
     setShowActionTipModal(true)
+  }
+
+  const returnText = () => {
+    switch (curActionType) {
+      case 'UNPAID':
+        return '确定要取消该订单吗？'
+      case 'SHIPPED':
+        return '确定已经收到货物吗？'
+      default:
+        break
+    }
+  }
+
+  const cancal = async () => {
+    let res = await cancelOrder({
+      orderNum: curActionOrderId,
+      nowOrderState: curActionType,
+    })
+    setShowActionTipModal(false)
+    if (res) {
+      getOrderLists({ orderState: current })
+    }
+  }
+
+  //确认收货
+  const completed = async () => {
+    const res = await completedOrder({
+      orderNum: curActionOrderId,
+      nowOrderState: curActionType,
+    })
+    setShowActionTipModal(false)
+    if (res) {
+      getOrderLists({ orderState: current })
+    }
+  }
+
+  const handleClickActionTipModal = async () => {
+    setShowActionTipModal(false)
+    switch (curActionType) {
+      case 'UNPAID':
+        await cancal()
+        break
+      case 'SHIPPED':
+        await completed()
+        break
+    }
   }
 
   useReachBottom(() => {
@@ -75,7 +121,7 @@ const OrderList = () => {
         {tabList.map((item, index) => (
           <AtTabsPane current={OrderStatusEnum[current]} index={index} key={item.title}>
             {orderList.map((order, key) => (
-              <OrderCard cancel={cancel} order={order} key={key} />
+              <OrderCard orderButton={orderButton} order={order} key={key} />
             ))}
           </AtTabsPane>
         ))}
@@ -91,7 +137,7 @@ const OrderList = () => {
       <AtModal
         isOpened={showActionTipModal}
         title="确认"
-        content="确定要取消该订单吗？"
+        content={returnText()}
         cancelText="取消"
         confirmText="确定"
         onClose={() => {
@@ -100,16 +146,7 @@ const OrderList = () => {
         onCancel={() => {
           setShowActionTipModal(false)
         }}
-        onConfirm={async () => {
-          const res = await cancelOrder({
-            orderNum: curActionOrderId,
-            nowOrderState: curActionType,
-          })
-          if (res) {
-            setShowActionTipModal(false)
-            getOrderLists({ orderState: current })
-          }
-        }}
+        onConfirm={handleClickActionTipModal}
         className="rc_modal"
       />
     </View>

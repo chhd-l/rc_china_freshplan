@@ -209,6 +209,16 @@ export const cancelOrder = async (params: any) => {
   }
 }
 
+export const deleteOrder = async (orderNum: string) => {
+  try {
+    let res = await ApiRoot({ url: apis?.order_action }).orders().deleteOrder(orderNum)
+    return res
+  } catch (e) {
+    console.log(e)
+    return false
+  }
+}
+
 export const calculateOrderPrice = async ({
   orderItems,
   voucher,
