@@ -16,7 +16,7 @@ const CommonProblem = () => {
       {commonProblems.map((item, key) => (
         <View key={key} className="shadow mb-[22px] p-[28px] flex flex-col">
           <View className="flex flex-row items-center h-[75px]">
-            <View className="w-[50px] h-[50px] mr-[25px]">
+            <View className="w-[50px] h-[50px] mr-[25px] flex-shrink-0">
               <Image src={Q_icon} />
             </View>
             <View className="text-[24px]  font-bold divide h-full leading-[75px]">{item.question}</View>

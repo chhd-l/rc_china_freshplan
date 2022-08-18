@@ -10,7 +10,8 @@ const FreshFoodExperience = () => {
     <View>
       <View className="ml-[20px] mb-[70px] mt-[73px]">
         <PetTitle>
-          <Text className="text-[48px]">我们专注为您的爱宠 提供营养健康的鲜食体验</Text>
+          <View className="text-[48px]">我们专注为您的爱宠 </View>
+          <View className="text-[48px]">提供营养健康的鲜食体验</View>
         </PetTitle>
       </View>
       <View className="flex flex-col ">
