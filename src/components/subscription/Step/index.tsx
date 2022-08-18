@@ -4,7 +4,7 @@ import step_line from '../../../assets/img/step_line.png'
 
 const Step = () => {
   return (
-    <View>
+    <View className="bg-white">
       <View className="ml-[20px] mb-[70px]">
         <PetTitle>
           <Text className="text-[48px]">仅三步即可开启鲜食计划</Text>
