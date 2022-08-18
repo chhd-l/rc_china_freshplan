@@ -124,6 +124,7 @@ const RotationChartList = ({ list }: { list: PetListItemProps[] }) => {
                   }}
                 />
                 <Text className="mr-0.5">{list[current].breed}</Text>
+                <Text>{list[current]?.breedName}</Text>
                 <Text>{list[current].age}</Text>
               </View>
             )}
