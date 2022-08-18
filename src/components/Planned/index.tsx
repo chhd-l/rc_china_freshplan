@@ -1,34 +1,19 @@
-import { getSubscriptionFindByConsumerId } from '@/framework/api/subscription/subscription'
 import { CDNIMGURL } from '@/lib/constants'
-import { getAgeYear } from '@/utils/utils'
 import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AtAvatar, AtButton, AtIcon } from 'taro-ui'
+import { PetPosture } from '@/framework/types/consumer'
 import './index.less'
 
-const TextView = () => {
+const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
   const [current, setCurrent] = useState(0)
-  const [subscriptionList, setSubscriptionList] = useState<any[]>([])
-
-  const getSubscriptionList = async () => {
-    const res = await getSubscriptionFindByConsumerId()
-    console.log('res', res)
-    res.forEach((item) => {
-      item.pet.age = getAgeYear(item.pet.birthday)
-    })
-    setSubscriptionList(res)
-  }
 
   const returnPetdefaultImage = (petType: string) => {
     if (petType === 'CAT') return 'cat-default.png'
     else return 'dog-default.png'
   }
-
-  useEffect(() => {
-    getSubscriptionList()
-  }, [])
 
   return (
     <View className="oldUserPlan">
@@ -55,7 +40,7 @@ const TextView = () => {
                       size="large"
                       circle
                       image={`${
-                        item?.pet?.image ? item?.pet?.image : CDNIMGURL + returnPetdefaultImage(item?.pet?.image)
+                        item?.pet?.image ? item?.pet?.image : CDNIMGURL + returnPetdefaultImage(item?.pet?.type)
                       }`}
                     />
                   </View>
@@ -71,14 +56,14 @@ const TextView = () => {
                         }}
                       />
                     </View>
-                    <View className="mt-1.5">正常体重&nbsp;&nbsp;{item?.pet?.age}</View>
-                    <View className="mt-1">{item?.pet?.breedName}&nbsp;&nbsp;5kg</View>
+                    <View className="mt-1.5">{item?.pet?.recentHealth === PetPosture.Emaciated ? '瘦弱' : item?.pet?.recentHealth === PetPosture.Obesity ? '超重' : '标准'}体重&nbsp;&nbsp;{item?.pet?.age}</View>
+                    <View className="mt-1">{item?.pet?.breedName}&nbsp;&nbsp;{item?.pet?.recentWeight}kg</View>
                   </View>
                 </View>
                 <AtButton
                   onClick={() => {
                     Taro.navigateTo({
-                      url: `/pages/freshPlanDetails/index`,
+                      url: `/pages/freshPlanDetails/index?id=${item?.id}`,
                     })
                   }}
                   className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[24px]"
@@ -103,13 +88,13 @@ const TextView = () => {
                               width: '100%',
                               height: '100%',
                             }}
-                            src={item?.productList[0]?.defaultImage}
+                            src={item?.productList?.[0]?.defaultImage}
                           />
                         </View>
                         <View className="ml-1 flex-1">
                           <View className="text=[28px] font-medium">专属鲜食</View>
-                          <View className="font-medium text-[24px] mt-1">牛肉泥</View>
-                          <View className="text-[16px] text-[#666] mt-0.5">牛肉、土豆、鸡蛋、胡萝卜、豌豆</View>
+                          <View className="font-medium text-[24px] mt-1">{item?.productList?.[0]?.name}</View>
+                          <View className="text-[16px] text-[#666] mt-0.5">{(item?.productList?.[0]?.description ?? "").replace(/<[^>]+>/ig, "")}</View>
                         </View>
                       </View>
                     </View>

@@ -1,9 +1,15 @@
-import { getExpressCompanyList, getOrderDetail, getOrderSetting } from '@/framework/api/order'
+import {
+  completedOrder,
+  deleteOrder,
+  getExpressCompanyList,
+  getOrderDetail,
+  getOrderSetting,
+} from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL } from '@/lib/constants'
 import { formatMoney, getDateDiff, handleReturnTime } from '@/utils/utils'
 import { Image, ScrollView, Text, View } from '@tarojs/components'
-import { getCurrentInstance } from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 import { AtButton, AtCountdown, AtList, AtListItem, AtModal } from 'taro-ui'
 import CopyText from './copyText'
@@ -78,6 +84,28 @@ const OrderDetails = () => {
     const carriers = carrierTypes.filter((item) => item?.code === orderDetail?.delivery?.shippingCompany)
     return carriers.length > 0 ? carriers[0].name : ''
   }
+
+  //确认收货
+  const completed = async () => {
+    const res = await completedOrder({
+      orderNum: orderId,
+      nowOrderState: orderDetail?.orderState?.orderState,
+    })
+    setShowActionTipModal(false)
+    if (res) {
+      getOrder()
+    }
+  }
+
+  //删除订单
+  const deleteOrders = async () => {
+    let res = await deleteOrder(orderId)
+    setShowActionTipModal(false)
+    if (res) {
+      Taro.navigateBack()
+    }
+  }
+
   useEffect(() => {
     if (router?.params?.id) {
       setOrderId(router.params.id)
@@ -136,6 +164,8 @@ const OrderDetails = () => {
     switch (orderDetail?.orderState?.orderState) {
       case 'TO_SHIP':
         return '已提醒发货，请耐心等待'
+      case 'SHIPPED':
+        return '确定已经收到货物吗？'
       case 'VOID':
         return '确定要删除该订单吗？'
       default:
@@ -147,10 +177,23 @@ const OrderDetails = () => {
     switch (orderDetail?.orderState?.orderState) {
       case 'TO_SHIP':
         return setShowActionTipModal(false)
+      case 'SHIPPED':
+        return completed()
       case 'VOID':
-        return ''
+        return deleteOrders()
       default:
         break
+    }
+  }
+
+  const returnTypeImage = () => {
+    switch (orderDetail?.orderState?.orderSource) {
+      case 'WECHAT_MINI_PROGRAM':
+        return 'WX.png'
+      case 'ALIPAY_MINI_PROGRAM':
+        return 'zhi.png'
+      default:
+        return 'WX.png'
     }
   }
 
@@ -166,7 +209,8 @@ const OrderDetails = () => {
         </View>
         {orderDetail?.orderState?.orderState !== 'VOID' && <TimeLine type={orderDetail?.orderState?.orderState} />}
         <View className="pl-4 py-1 mt-0.5 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
-          {orderDetail?.orderState?.orderState !== 'VOID' && (
+          {(orderDetail?.orderState?.orderState === 'SHIPPED' ||
+            orderDetail?.orderState?.orderState === 'COMPLETED') && (
             <View className="express">
               <View className="flex items-center relative">
                 <Image className="absolute orderDetailsIcon" src={`${CDNIMGURL}order%20logistics.png`} />
@@ -197,7 +241,17 @@ const OrderDetails = () => {
         </View>
       </View>
       <View className="bg-white mt-1 pb-1 orderAtCard px-1">
-        <View className="orderAtCardTitle py-1">订单信息</View>
+        <View className="orderAtCardTitle py-1 flex items-center">
+          <Image
+            className="mr-[11px]"
+            style={{
+              width: '0.3117rem',
+              height: '0.3117rem',
+            }}
+            src={`${CDNIMGURL}${returnTypeImage()}`}
+          />
+          订单信息
+        </View>
         <View className="flex flex flex-col">
           {(orderDetail?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
@@ -303,6 +357,17 @@ const OrderDetails = () => {
               删除订单
             </AtButton>
             <AtButton className="rounded-full m-0 mx-1 px-1.5 py-0">再来一单</AtButton>
+          </View>
+        )}
+        {orderDetail?.orderState?.orderState === 'SHIPPED' && (
+          <View className="flex items-center justify-end">
+            <AtButton
+              className="rounded-full m-0 px-1.5 py-0 mr-1"
+              type="primary"
+              onClick={() => setShowActionTipModal(true)}
+            >
+              确认收获
+            </AtButton>
           </View>
         )}
       </View>

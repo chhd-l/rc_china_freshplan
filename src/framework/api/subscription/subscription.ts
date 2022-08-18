@@ -74,6 +74,7 @@ export const subscriptionCreateAndPay = async ({
         },
       },
       pet: normalizePetsForApi(pet),
+      source: 'ALIPAY_MINI_PROGRAM',
       address: addressInfo.id !== '' ? addressInfo : null,
       productList,
       benefits: null,
@@ -116,7 +117,7 @@ export const subscriptionCreateAndPay = async ({
         success: (res) => {
           console.log(res);
           Taro.redirectTo({
-            url: `${routers.orderList}?status=TO_SHIP&isFromSubscription=true`,
+            url: `${routers.orderList}?status=ALL&isFromSubscription=true`,
           })
         },
         fail: (res) => {

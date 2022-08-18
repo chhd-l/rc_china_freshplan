@@ -5,7 +5,6 @@ export default defineAppConfig({
     'pages/subscription/index',
     'pages/account/index',
     'pages/foodRecom/index',
-    'pages/testView/index',
     'pages/freshPlanDetails/index',
     'pages/schedule/index',
   ],

@@ -1,6 +1,5 @@
 import { deleteAddress, updateAddress } from '@/framework/api/consumer/address'
 import { Address } from '@/framework/types/consumer'
-import { CDNIMGURL } from '@/lib/constants'
 import routers from '@/routers'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
@@ -98,7 +97,7 @@ const AddressItem = ({
           <Text className="text-black font-semibold">{receiverName}</Text>
           <Text className="text-gray-400">{phone}</Text>
         </View>
-        <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #D8D8D8' }}>
+        <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #E7E7E7' }}>
           <Text className="">
             {province} {city} {region} {detail}
           </Text>
@@ -113,11 +112,15 @@ const AddressItem = ({
           />
         </View>
         <View className="flex flex-row items-center">
-          <Image style={{ width: '26px', height: '26px' }} src={`${CDNIMGURL}edit_address.png`} onClick={editAddress} />
+          <Image
+            style={{ width: '26px', height: '26px' }}
+            src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_edit.png"
+            onClick={editAddress}
+          />
           <Image
             className="ml-1"
-            style={{ width: '20px', height: '24px' }}
-            src={`${CDNIMGURL}remove_address.png`}
+            style={{ width: '26px', height: '24px' }}
+            src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_delete.png"
             onClick={() => {
               setShowDelTip(true)
             }}

@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle'
 import Formula from '@/components/petDiet/Formula'
 import './index.less'
+import FreshPlan from '@/components/petDiet/FreshPlan'
 
 const PetDiet = () => {
   useEffect(() => {
@@ -19,8 +20,8 @@ const PetDiet = () => {
         <PetTitle>
           <Text className="text-[48px]">顶级兽医营养师专研配方</Text>
         </PetTitle>
-
         <Formula />
+        <FreshPlan />
       </View>
     </View>
   )

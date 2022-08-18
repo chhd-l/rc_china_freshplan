@@ -45,7 +45,7 @@ const AddRessManage = () => {
   }
 
   return (
-    <View className="AddRessManage">
+    <View className="AddRessManage pb-[1.5rem]">
       <View className={`px-1 ${!addressList.length && 'pt-10'} pb-1`}>
         {addressList.length ? (
           addressList.map((item: Address, key: number) => (
@@ -65,7 +65,7 @@ const AddRessManage = () => {
             </View>
           </View>
         )}
-        <View className="w-full pt-1 pb-3 fixed bottom-0 left-0 bg-white">
+        <View className="w-full pt-1 pb-2 fixed bottom-0 left-0 bg-white">
           <AtButton
             className="mx-4 rounded-full"
             type="primary"

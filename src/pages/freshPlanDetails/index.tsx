@@ -3,7 +3,7 @@ import { getSubscriptionDetail } from '@/framework/api/subscription/subscription
 import { CDNIMGURL } from '@/lib/constants'
 import { getAge } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { AtButton } from 'taro-ui'
@@ -18,20 +18,23 @@ const FreshPlanDetails = () => {
       birthday: '',
       image: '',
     },
-    productList: [{ variants: { name: '', defaultImage: '' } }],
+    productList: [{ variants: { name: '', defaultImage: '' }, description: '' }],
+    id: '',
     no: '',
     createNextDeliveryTime: 0,
     consumer: { phone: '' },
   })
-  const getSubscriptionDetails = async () => {
-    let res = await getSubscriptionDetail('a7390fc6-3d30-0e54-6db4-4ab822c2564a')
+  const getSubscriptionDetails = async (id: string) => {
+    let res = await getSubscriptionDetail(id)
     res.pet.age = getAge(res.pet.birthday)
     setSubscriptionDetails(res)
     console.log('res', res)
   }
 
   useEffect(() => {
-    getSubscriptionDetails()
+    const { router } = getCurrentInstance()
+    const subscriptionId = router?.params?.id ?? "";
+    getSubscriptionDetails(subscriptionId)
   }, [])
 
   return (
@@ -59,7 +62,7 @@ const FreshPlanDetails = () => {
               <View className="h-full flex flex-col justify-center flex-1">
                 <View className="font-bold text-[30px] text-[#96CC39]">{el?.variants?.name}</View>
                 <View className="flex items-center justify-between mt-1.5 text-[#666]">
-                  牛肉、土豆、鸡蛋、胡萝卜、豌豆
+                  {(el?.description ?? "").replace(/<[^>]+>/ig, "")}
                 </View>
               </View>
             </View>
@@ -85,7 +88,7 @@ const FreshPlanDetails = () => {
           <AtButton
             onClick={() => {
               Taro.navigateTo({
-                url: `/pages/schedule/index`,
+                url: `/pages/schedule/index?id=${subscriptionDetails?.id}`,
               })
             }}
             circle

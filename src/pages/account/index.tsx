@@ -161,23 +161,6 @@ const Account = () => {
             }}
           />
         </View>
-        {/* 计划列表 */}
-        <AtList hasBorder={false} className="mt-1">
-          <AtListItem
-            thumb={`${CDNIMGURL}my-address.png`}
-            hasBorder={false}
-            title="计划列表"
-            arrow="right"
-            onClick={() => {
-              getAuthentication(() => {
-                Taro.navigateTo({
-                  url: `/pages/testView/index`,
-                })
-              })
-            }}
-          />
-        </AtList>
-        {/* <RotationChartList list={[1]} type="plan" /> */}
         {/* 其他选项 */}
         <AtList hasBorder={false} className="mt-1">
           <AtListItem

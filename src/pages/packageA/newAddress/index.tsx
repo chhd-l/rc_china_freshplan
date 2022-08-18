@@ -157,14 +157,14 @@ const NewAddress = () => {
               ]}
               selectedList={[addressInfo.isDefault]}
               onChange={(e) => {
-                if (e.length === 0) return null
+                if (e.length === 0 && router?.params.type === 'edit') return null
                 updateAddressInfo(!addressInfo.isDefault, 'isDefault')
               }}
             />
           </View>
         </View>
       </AtForm>
-      <View className="w-full pt-1 pb-3 fixed bottom-0 left-0 bg-white">
+      <View className="w-full pt-1 pb-2 fixed bottom-0 left-0 bg-white">
         <AtButton
           className="mx-4 rounded-full"
           customStyle={{ backgroundColor: '#96CC39', borderColor: '#96CC39' }}

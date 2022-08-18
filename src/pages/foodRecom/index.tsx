@@ -38,6 +38,12 @@ const FoodRecom = () => {
       setList((res2?.productList || []).map((item: any) => {
         item.subscriptionRecommendRuleId = ((res1?.productList ?? []).find(p => p?.productVariantInfo?.variants?.[0].id === item?.variants?.id) ?? {})['subscriptionRecommendRuleId'];
         return item;
+      }).sort((a: any) => {
+        if (a.subscriptionRecommendRuleId) {
+          return -1;
+        } else {
+          return 1;
+        }
       }));
       setRecommendProductNames((res2?.productList || []).reduce((prev: string[], curr: any) => {
         if (defaultSelected.indexOf(curr?.variants?.id) > -1) {

@@ -2,7 +2,7 @@ import { getSubscriptionDetail } from '@/framework/api/subscription/subscription
 import { CDNIMGURL } from '@/lib/constants'
 import { formatMoney } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { AtButton, AtIcon, AtList, AtListItem } from 'taro-ui'
@@ -27,14 +27,16 @@ const Schedule = () => {
     },
     completedDeliveries: [],
   })
-  const getSubscriptionDetails = async () => {
-    let res = await getSubscriptionDetail('a7390fc6-3d30-0e54-6db4-4ab822c2564a')
+  const getSubscriptionDetails = async (id: string) => {
+    let res = await getSubscriptionDetail(id);
     console.log('res', res)
     setSubscriptionDetails(res)
   }
 
   useEffect(() => {
-    getSubscriptionDetails()
+    const { router } = getCurrentInstance();
+    const subId = router?.params?.id ?? "";
+    getSubscriptionDetails(subId);
   }, [])
 
   return (
@@ -132,7 +134,7 @@ const Schedule = () => {
 
       {/* 历史订单 */}
 
-      {subscriptionDetails.completedDeliveries.length && (
+      {subscriptionDetails.completedDeliveries && subscriptionDetails.completedDeliveries.length ? (
         <View className="bg-white mt-1 p-1 boxShadow">
           <View className="text-[34px]">历史订单</View>
           <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
@@ -183,7 +185,7 @@ const Schedule = () => {
             </View>
           ))}
         </View>
-      )}
+      ) : null}
 
       {/* 弹出层 */}
 
