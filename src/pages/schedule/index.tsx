@@ -25,6 +25,7 @@ const Schedule = () => {
       productPrice: 0,
       totalPrice: 0,
     },
+    completedDeliveries: [],
   })
   const getSubscriptionDetails = async () => {
     let res = await getSubscriptionDetail('a7390fc6-3d30-0e54-6db4-4ab822c2564a')
@@ -42,7 +43,6 @@ const Schedule = () => {
         <View className="py-1">
           <View className="flex justify-between items-end">
             <Text className="text-[34px]">下次发货</Text>
-            <Text className="text-[22px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
           </View>
           <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
@@ -106,7 +106,7 @@ const Schedule = () => {
         <View className="text-[34px]">发货信息</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         <View className="mt-1 flex">
-          <AtIcon value="calendar" size="22" color="#D49D28" />
+          <AtIcon value="calendar" size="16" color="#D49D28" />
           <Text className="ml-[6px]">
             发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
           </Text>
@@ -115,7 +115,7 @@ const Schedule = () => {
           <Text
             className="rcciconfont rccicon-location text-[#D49D28]"
             style={{
-              fontSize: '0.42rem',
+              fontSize: '0.32rem',
             }}
           />
           <Text className="ml-[6px] flex-1 leading-[28px]">
@@ -129,45 +129,64 @@ const Schedule = () => {
           </AtButton>
         </View>
       </View>
-      <View className="bg-white mt-1 p-1 boxShadow">
-        <View className="text-[34px]">历史订单</View>
-        <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
-        <View className="rounded-[10px] mt-1 text-[22px] text-[#999] border border-solid border-[#E2E2E2]">
-          <View className="flex items-center justify-between p-1">
-            <View>
-              订单编号: 201852750697
-              <Text
-                className="rounded-[8px] text-black bg-[#EAEAEA] mx-0.5 px-0.5"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  Taro.setClipboardData({
-                    data: 'xx',
-                  })
-                }}
-              >
-                复制
-              </Text>
+
+      {/* 历史订单 */}
+
+      {subscriptionDetails.completedDeliveries.length && (
+        <View className="bg-white mt-1 p-1 boxShadow">
+          <View className="text-[34px]">历史订单</View>
+          <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
+          {subscriptionDetails.completedDeliveries.map((el: any, key) => (
+            <View
+              key={key}
+              className="rounded-[10px] mt-1 text-[22px] text-[#999] border border-solid border-[#E2E2E2]"
+            >
+              <View className="flex items-center justify-between p-1">
+                <View>
+                  订单编号: {el?.orderId}
+                  <Text
+                    className="rounded-[8px] text-black bg-[#EAEAEA] mx-0.5 px-0.5"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      Taro.setClipboardData({
+                        data: el?.orderId,
+                      })
+                    }}
+                  >
+                    复制
+                  </Text>
+                </View>
+                第{key + 1}笔
+              </View>
+              {el?.lineItems.map((item, index) => (
+                <View
+                  className="flex item-center h-[160px] p-1"
+                  key={index}
+                  style={{
+                    borderBottom: '1px solid #E2E2E2',
+                    borderTop: '1px solid #E2E2E2',
+                  }}
+                >
+                  <Image className="mr-1 h-full" src={item?.pic} style={{ width: '1.6rem' }} />
+                  <View className="h-full flex flex-col justify-center flex-1">
+                    <View className="font-bold text-[30px]">{item?.skuName}</View>
+                    <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
+                      {formatMoney(item?.price)}
+                    </View>
+                    <View className="flex items-center justify-end mt-1 text-[20px] text-[#9D9D9D]">X {item?.num}</View>
+                  </View>
+                </View>
+              ))}
+              <View className="p-1 text-right text-[24px] text-[#666]">
+                发货日期:{moment(el?.shipmentDate).format('YYYY-MM-DD')}
+              </View>
             </View>
-            第2笔
-          </View>
-          <View
-            className="flex item-center h-[160px] p-1"
-            style={{
-              borderBottom: '1px solid #E2E2E2',
-              borderTop: '1px solid #E2E2E2',
-            }}
-          >
-            <Image className="mr-1 h-full" src="https://jdc.jd.com/img/200" style={{ width: '1.6rem' }} />
-            <View className="h-full flex flex-col justify-center flex-1">
-              <View className="font-bold text-[30px]">牛肉泥</View>
-              <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">¥129.00</View>
-              <View className="flex items-center justify-end mt-1 text-[20px] text-[#9D9D9D]">X 1</View>
-            </View>
-          </View>
-          <View className="p-1 text-right text-[24px] text-[#666]">发货日期:2022-08-23</View>
+          ))}
         </View>
-      </View>
+      )}
+
       {/* 弹出层 */}
+
       <View
         className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
         style={{

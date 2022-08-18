@@ -71,7 +71,6 @@ const OrderDetails = () => {
 
   const getExpressCompanys = async () => {
     const res = await getExpressCompanyList()
-    console.log('getExpressCompanyList', res)
     setCarrierTypes(res)
   }
 

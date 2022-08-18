@@ -10,7 +10,7 @@ import { getAge } from '@/utils/utils'
 import { Button, Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useAtom } from 'jotai'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import './index.less'
 
@@ -28,7 +28,7 @@ const Account = () => {
   const getAuthentication = async (callback?: Function) => {
     if (!isLogin) {
       // loginWithAlipay(callback);
-      Taro.showToast({ title: '请先授权登录' });
+      Taro.showToast({ title: '请先授权登录' })
     } else {
       callback && callback()
     }
@@ -45,15 +45,15 @@ const Account = () => {
   }
 
   const loginInit = async () => {
-    const _storeRes: any = Taro.getStorageSync("wxLoginRes");
+    const _storeRes: any = Taro.getStorageSync('wxLoginRes')
     if (_storeRes?.userInfo?.id) {
       // Taro.setStorageSync('commerce-loading', 1)
       const data = await wxLogin()
       setConsumer(data)
       getList(data.id)
-      setIsLogin(true);
+      setIsLogin(true)
     } else {
-      setIsLogin(false);
+      setIsLogin(false)
     }
   }
 
@@ -65,7 +65,7 @@ const Account = () => {
     loginWithAlipay((data) => {
       setConsumer(data)
       getList(data.id)
-      setIsLogin(true);
+      setIsLogin(true)
     })
   }
 
