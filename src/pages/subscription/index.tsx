@@ -17,6 +17,7 @@ const Index = () => {
 
   const getSubscriptionList = async () => {
     const res = await getSubscriptionFindByConsumerId()
+    console.log('res', res)
     res.forEach((item) => {
       item.pet.age = getAgeYear(item.pet.birthday)
     })
@@ -41,7 +42,7 @@ const Index = () => {
       <Image
         src={customerServiceImg}
         mode="widthFix"
-        className="fixed bottom-[200px] right-0 !w-[141px] z-50"
+        className="fixed top-[1140px] right-0 !w-[141px] z-50"
         onClick={() => {
           Taro.navigateTo({ url: '/pages/packageA/customerService/index' })
         }}
