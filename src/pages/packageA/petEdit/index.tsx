@@ -57,7 +57,7 @@ const petEdit = () => {
       </View>
       {
         step === PetStep.STEP1
-          ? <Step1 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
+          ? <Step1 pet={pet} onStepChange={setStep} onChange={handleSetPet} onChangeAll={handleSetPetAll} />
           : step === PetStep.STEP2
           ? <Step2 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
           : step === PetStep.STEP3
