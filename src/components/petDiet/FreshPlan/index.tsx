@@ -5,14 +5,14 @@ import fresh_icon from '@/assets/icons/fresh_icon.png'
 import plan_icon from '@/assets/icons/plan_icon.png'
 import wrong from '@/assets/icons/wrong.png'
 import right from '@/assets/icons/right.png'
-
 import '../Formula/index.less'
 import { freshPlanList } from './index.modules'
+import './index.less'
 
 const FreshPlan = () => {
-  const [status, setStatus] = useState('noMore')
+  const [status, setStatus] = useState('more')
   return (
-    <View className="mt-[90px]">
+    <View className="mt-[90px] fresh">
       <View className="text-[64px] font-bold">Fresh Plan </View>
       <View className="flex flex-row justify-end mr-[30px]">
         <View className="w-[96px] h-[29px]">
@@ -43,14 +43,16 @@ const FreshPlan = () => {
         </View>
       ))}
       <AtLoadMore
-        onClick={() => {
-          setStatus('loading')
-          // 模拟异步请求数据
-          setTimeout(() => {
-            // 没有更多了
-            setStatus('noMore')
-          }, 2000)
-        }}
+        moreText="没有更多了"
+        moreBtnStyle={{ border: 'none', fontSize: '0.24rem' }}
+        // onClick={() => {
+        //   setStatus('loading')
+        //   // 模拟异步请求数据
+        //   setTimeout(() => {
+        //     // 没有更多了
+        //     setStatus('noMore')
+        //   }, 2000)
+        // }}
         status={status}
       />
     </View>
