@@ -10,11 +10,13 @@ const RotationChartList = ({
   onClickPetList,
   onClickPetAdd,
   onSelectPet,
+  newOpen = true,
 }: {
   list: PetListItemProps[]
   onClickPetList?: Function
   onClickPetAdd?: Function
   onSelectPet?: (pet: PetListItemProps) => void
+  newOpen?: boolean
 }) => {
   const [current, setCurrent] = useState(0)
   const [nextMargin, setNextMargin] = useState(0)
@@ -61,7 +63,7 @@ const RotationChartList = ({
       <View className="box-border px-2">
         <View className="box-border overflow-hidden">
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
-            {!!list.length && (
+            {!!list.length && newOpen && (
               <View
                 className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10 bg-white flex items-center justify-center rounded-full"
                 onClick={handleAddPet}
@@ -129,7 +131,6 @@ const RotationChartList = ({
                         backgroundImage: `url(${CDNIMGURL}add-pet.png)`,
                         width: '90%',
                         height: '90%',
-                        boxShadow: '-0.5px 0.5px 10px -3px #999',
                       }}
                       className="m-auto w-full h-full rounded-full bg-no-repeat bg-contain text-gray-300"
                     />

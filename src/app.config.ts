@@ -23,6 +23,7 @@ export default defineAppConfig({
         'checkout/index',
         'petDiet/index',
         'choosePet/index',
+	'customerService/index',
       ],
     }
   ],

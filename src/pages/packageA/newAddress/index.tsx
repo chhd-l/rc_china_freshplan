@@ -114,7 +114,7 @@ const NewAddress = () => {
           />
           <View
             className="pt-1 pb-2 text-28 border-b border-t-0 border-l-0 border-r-0 border-solid flex items-center"
-            style={{ borderColor: '#d6e4ef' }}
+            style={{ borderColor: '#ebf2f7' }}
           >
             <Text>所在地区</Text>
             <Text
@@ -148,7 +148,7 @@ const NewAddress = () => {
           />
           <View className="text-gray-400 flex items-center">
             <AtCheckbox
-              className="radioText border-0"
+              className="radioText"
               options={[
                 {
                   value: true,

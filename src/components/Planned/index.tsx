@@ -16,9 +16,8 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
   }
 
   return (
-    <View className="oldUserPlan">
-      {/* <IconFont name="icon-riqi" size={40} /> */}
-      <View className="px-3 py-2 title">
+    <View className="oldUserPlan bg-white">
+      <View className="px-3 py-2 title flex items-center">
         <Image className="mr-0.5" src={`${CDNIMGURL}claws.png`} />
         <Text>{subscriptionList[current]?.pet?.name}</Text>的专属鲜食食谱
       </View>
@@ -35,9 +34,10 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
               <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
               <View className="swiperItemCard px-1 pt-2 pb-1.5 flex flex-col justify-between text-white">
                 <View className="flex text-[24px]">
-                  <View className="pt-1 ml-0.5 mr-1.5">
+                  <View className="pt-0.5 ml-0.5 mr-1.5">
                     <AtAvatar
                       size="large"
+                      className="w-[1.4rem] h-[1.4rem]"
                       circle
                       image={`${
                         item?.pet?.image ? item?.pet?.image : CDNIMGURL + returnPetdefaultImage(item?.pet?.type)
@@ -56,8 +56,17 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         }}
                       />
                     </View>
-                    <View className="mt-1.5">{item?.pet?.recentHealth === PetPosture.Emaciated ? '瘦弱' : item?.pet?.recentHealth === PetPosture.Obesity ? '超重' : '标准'}体重&nbsp;&nbsp;{item?.pet?.age}</View>
-                    <View className="mt-1">{item?.pet?.breedName}&nbsp;&nbsp;{item?.pet?.recentWeight}kg</View>
+                    <View className="mt-1.5 text-[28px]">
+                      {item?.pet?.recentHealth === PetPosture.Emaciated
+                        ? '瘦弱'
+                        : item?.pet?.recentHealth === PetPosture.Obesity
+                        ? '超重'
+                        : '标准'}
+                      体重&nbsp;&nbsp;{item?.pet?.age}
+                    </View>
+                    <View className="mt-1">
+                      {item?.pet?.breedName}&nbsp;&nbsp;{item?.pet?.recentWeight}kg
+                    </View>
                   </View>
                 </View>
                 <AtButton
@@ -92,9 +101,10 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                           />
                         </View>
                         <View className="ml-1 flex-1">
-                          <View className="text=[28px] font-medium">专属鲜食</View>
-                          <View className="font-medium text-[24px] mt-1">{item?.productList?.[0]?.name}</View>
-                          <View className="text-[16px] text-[#666] mt-0.5">{(item?.productList?.[0]?.description ?? "").replace(/<[^>]+>/ig, "")}</View>
+                          <View className="text=[28px] font-medium mt-1">{item?.productList?.[0]?.name}</View>
+                          <View className="text-[22px] text-[#666] mt-0.5">
+                            {(item?.productList?.[0]?.description ?? '').replace(/<[^>]+>/gi, '')}
+                          </View>
                         </View>
                       </View>
                     </View>
@@ -147,8 +157,8 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           })
         }}
       >
-        <AtIcon className="mr-1" value="clock" size="26" />
-        更多定制
+        <AtIcon className="mr-1" value="clock" size="20" />
+        <Text>更多定制</Text>
       </AtButton>
     </View>
   )

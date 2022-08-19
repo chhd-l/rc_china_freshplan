@@ -7,10 +7,10 @@ import wrong from '@/assets/icons/wrong.png'
 import right from '@/assets/icons/right.png'
 
 import '../Formula/index.less'
-import { frshPlanList } from './index.modules'
+import { freshPlanList } from './index.modules'
 
 const FreshPlan = () => {
-  const [status, setStatus] = useState('more')
+  const [status, setStatus] = useState('noMore')
   return (
     <View className="mt-[90px]">
       <View className="text-[64px] font-bold">Fresh Plan </View>
@@ -26,7 +26,7 @@ const FreshPlan = () => {
         </View>
         <Text className="text-[30px] leading-[30px] ml-[99px]">品牌</Text>
       </View>
-      {frshPlanList.map((item, key) => (
+      {freshPlanList.map((item, key) => (
         <View key={key}>
           <View className="line " />
           <View className="flex flex-row justify-between my-[34px] ">

@@ -1,10 +1,11 @@
 import { deleteAddress, updateAddress } from '@/framework/api/consumer/address'
 import { Address } from '@/framework/types/consumer'
+import { CDNIMGURL } from '@/lib/constants'
 import routers from '@/routers'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
-import { AtCheckbox, AtModal } from 'taro-ui'
+import { AtButton, AtCheckbox, AtIcon } from 'taro-ui'
 import './index.less'
 
 const AddressItem = ({
@@ -113,13 +114,13 @@ const AddressItem = ({
         </View>
         <View className="flex flex-row items-center">
           <Image
-            style={{ width: '26px', height: '26px' }}
+            style={{ width: '0.5rem', height: '0.5rem' }}
             src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_edit.png"
             onClick={editAddress}
           />
           <Image
             className="ml-1"
-            style={{ width: '26px', height: '24px' }}
+            style={{ width: '0.5rem', height: '0.5rem' }}
             src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_delete.png"
             onClick={() => {
               setShowDelTip(true)
@@ -127,21 +128,52 @@ const AddressItem = ({
           />
         </View>
       </View>
-      <AtModal
-        isOpened={showDelTip}
-        title="提示"
-        content="确定删除地址信息？"
-        cancelText="再想想"
-        confirmText="狠心删除"
-        onClose={() => {
+
+      {/* 弹出层 */}
+      <View
+        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
+        style={{
+          display: showDelTip ? 'flex' : 'none',
+        }}
+        onClick={(e) => {
+          e.stopPropagation()
           setShowDelTip(false)
         }}
-        onCancel={() => {
-          setShowDelTip(false)
-        }}
-        onConfirm={() => delAddress()}
-        className="rc_modal"
-      />
+      >
+        <View>
+          <View
+            className="w-[650px] bg-white rounded-[50px] flex flex-col items-center"
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Image className="mt-2" src={`${CDNIMGURL}pop.png`} style={{ width: '2.36rem', height: '2.36rem' }} />
+            <View className="text-[29px] text-[#333] mt-2">您确定要删除这个地址嘛？</View>
+            <View className="flex items-center justify-between my-2">
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39]"
+                onClick={delAddress}
+              >
+                确定
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399] ml-2"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowDelTip(false)
+                }}
+              >
+                取消
+              </AtButton>
+            </View>
+          </View>
+          <View className="flex justify-center mt-3">
+            <AtIcon value="close-circle" size={30} color="#fff" />
+          </View>
+        </View>
+      </View>
     </View>
   )
 }
