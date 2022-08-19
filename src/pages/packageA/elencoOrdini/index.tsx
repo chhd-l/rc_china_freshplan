@@ -1,5 +1,5 @@
 import OrderCard from '@/components/OrderCard'
-import { cancelOrder, completedOrder, getOrderList } from '@/framework/api/order'
+import { cancelOrder, completedOrder, deleteOrder, getOrderList } from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL } from '@/lib/constants'
 import { Image, Text, View } from '@tarojs/components'
@@ -59,6 +59,8 @@ const OrderList = () => {
         return '确定要取消该订单吗？'
       case 'SHIPPED':
         return '确定已经收到货物吗？'
+      case 'VOID':
+        return '确定要删除该订单吗？'
       default:
         break
     }
@@ -86,6 +88,14 @@ const OrderList = () => {
       getOrderLists({ orderState: current })
     }
   }
+  //删除订单
+  const deleteOrders = async () => {
+    let res = await deleteOrder(curActionOrderId)
+    setShowActionTipModal(false)
+    if (res) {
+      getOrderLists({ orderState: current })
+    }
+  }
 
   const handleClickActionTipModal = async () => {
     setShowActionTipModal(false)
@@ -95,6 +105,8 @@ const OrderList = () => {
         break
       case 'SHIPPED':
         await completed()
+      case 'VOID':
+        await deleteOrders()
         break
     }
   }
