@@ -326,7 +326,7 @@ const OrderDetails = () => {
           onClick={() => {
             if (orderDetail.subscriptionNo?.length)
               Taro.navigateTo({
-                url: '/pages/freshPlanDetails/index?id=' + orderDetail.subscriptionNo,
+                url: '/pages/freshPlanDetails/index?id=S202208190517143',
               })
           }}
         >
