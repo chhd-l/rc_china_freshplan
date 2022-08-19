@@ -22,20 +22,16 @@ const Checkout = () => {
   }
 
   Taro.useReady(() => {
-    const pages = Taro.getCurrentPages()
-    const current = pages[pages.length - 1]
-    const eventChannel = current.getOpenerEventChannel()
-    eventChannel.on('checkoutItems', (data: any) => {
-      setItems(data);
-      calculateOrderPrice({
-        orderItems: data,
-        voucher: null,
-        subscriptionType: "FRESH_PLAN",
-        subscriptionCycle: null,
-        isWXGroupVip: null,
-      }).then(res => {
-        setPrices(res)
-      });
+    const data: any = Taro.getStorageSync("checkoutItems");
+    setItems(data);
+    calculateOrderPrice({
+      orderItems: data,
+      voucher: null,
+      subscriptionType: "FRESH_PLAN",
+      subscriptionCycle: null,
+      isWXGroupVip: null,
+    }).then(res => {
+      setPrices(res)
     });
     getAddressList();
   });
@@ -75,7 +71,7 @@ const Checkout = () => {
   // const nextThursday = moment().isoWeekday() < 4 ? moment().isoWeekday(4).format('YYYY-MM-DD') : moment().add(1, 'weeks').isoWeekday(4).format('YYYY-MM-DD');
 
   return (
-    <View className="checkout-page pt-2 pb-12">
+    <View className="checkout-page pt-2 pb-8">
 
       <View className="bg-white rounded-sm mx-1 py-1 px-1">
         <View className="flex justify-between items-center" onClick={handleChooseAddress}>
@@ -154,8 +150,8 @@ const Checkout = () => {
 
       <View className="pet-food-footer">
         <View className="mx-2 flex justify-between items-center">
-          <View className="text-28">应付：<Text className="font-bold text-color-price">{formatMoney(prices?.totalPrice ?? 0)}</Text></View>
-          <View className="px-4 py-0.8 text-white text-28 bg-color-primary rounded-full" onClick={handlePayment}>支 付</View>
+          <View className="text-32">应付：<Text className="font-bold text-color-price">{formatMoney(prices?.totalPrice ?? 0)}</Text></View>
+          <View className="px-4 py-0.8 text-white text-32 bg-color-primary rounded-full" onClick={handlePayment}>支 付</View>
         </View>
       </View>
 

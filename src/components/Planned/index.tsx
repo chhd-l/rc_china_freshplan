@@ -148,7 +148,15 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           />
         ))}
       </View>
-      <AtButton className="mx-4 rounded-full flex items-center" type="primary">
+      <AtButton
+        className="mx-4 rounded-full flex items-center"
+        type="primary"
+        onClick={() => {
+          Taro.navigateTo({
+            url: '/pages/packageA/choosePet/index',
+          })
+        }}
+      >
         <AtIcon className="mr-1" value="clock" size="20" />
         <Text>更多定制</Text>
       </AtButton>
