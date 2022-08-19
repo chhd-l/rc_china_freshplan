@@ -1,5 +1,5 @@
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle'
-import { Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
+import { Image, Swiper, SwiperItem, View } from '@tarojs/components'
 import { useState } from 'react'
 import './index.less'
 import { swiperList } from './index.modules'
@@ -26,7 +26,7 @@ const LovePetHealth = () => {
         >
           {swiperList.map((item, key) => (
             <SwiperItem key={key}>
-              <View className=" flex flex-col justify-center items-center shadow w-[465px] m-auto h-[550px]">
+              <View className=" flex flex-col justify-center items-center shadow w-[465px] m-auto h-[550px] bg-[#FAFAFA]">
                 <View className="w-[205px] h-[205px] rounded-[50%] overflow-hidden">
                   <Image src={item.imgUrl} className="w-full h-full" />
                 </View>

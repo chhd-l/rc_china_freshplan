@@ -1,7 +1,7 @@
 
 
 
-export const frshPlanList = [
+export const freshPlanList = [
   {
     text: '由我们内部董事会认证的兽医营养师配制'
   },
