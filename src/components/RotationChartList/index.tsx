@@ -65,7 +65,7 @@ const RotationChartList = ({
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
             {!!list.length && newOpen && (
               <View
-                className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10 bg-white flex items-center justify-center rounded-full"
+                className="add-new-icon absolute w-2 h-2 m-auto right-0.1 top-2.5 z-10 bg-white flex items-center justify-center rounded-full"
                 onClick={handleAddPet}
               >
                 <Text

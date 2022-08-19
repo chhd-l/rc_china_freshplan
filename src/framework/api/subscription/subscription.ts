@@ -117,12 +117,14 @@ export const subscriptionCreateAndPay = async ({
         tradeNO: aliPaymentReq?.payWayOrderId,
         success: async (res) => {
           console.log(res);
-          await ApiRoot({ url: apis?.payment }).payments().syncOrder({
-            input: {
-              paymentId: paymentObj?.id,
-              storeId: wxLoginRes?.userInfo?.storeId,
-            },
-          });
+          if (res.resultCode === "9000" || res.resultCode === "8000") {
+            await ApiRoot({ url: apis?.payment }).payments().syncOrder({
+              input: {
+                paymentId: paymentObj?.id,
+                storeId: wxLoginRes?.userInfo?.storeId,
+              },
+            });
+          }
           Taro.redirectTo({
             url: `${routers.orderList}?status=ALL&isFromSubscription=true`,
           })
