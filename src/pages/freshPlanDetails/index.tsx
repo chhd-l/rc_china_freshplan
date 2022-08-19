@@ -112,7 +112,7 @@ const FreshPlanDetails = () => {
         </View>
       </View>
       <View className="bg-white boxShadow p-1 mt-1">
-        <View className="text-[34px]">发货驿站</View>
+        <View className="text-[34px]">签约信息</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         <View className="flex items-center mt-1 ml-0.5">
           <Image

@@ -28,29 +28,29 @@ const Schedule = () => {
     completedDeliveries: [],
   })
   const getSubscriptionDetails = async (id: string) => {
-    let res = await getSubscriptionDetail(id);
+    let res = await getSubscriptionDetail(id)
     console.log('res', res)
     setSubscriptionDetails(res)
   }
 
   useEffect(() => {
-    const { router } = getCurrentInstance();
-    const subId = router?.params?.id ?? "";
-    getSubscriptionDetails(subId);
+    const { router } = getCurrentInstance()
+    const subId = router?.params?.id ?? ''
+    getSubscriptionDetails(subId)
   }, [])
 
   return (
     <View className="p-1 pb-4 Schedule">
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
-        <View className="py-1">
+        <View className="pt-1">
           <View className="flex justify-between items-end">
             <Text className="text-[34px]">下次发货</Text>
           </View>
           <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
-        <View className="flex flex flex-col">
+        <View className="mt-1 flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
-            <View className="mt-1 flex item-center h-[160px]" key={key}>
+            <View className="flex item-center h-[160px]" key={key}>
               <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.6rem' }} />
               <View className="h-full flex flex-col justify-center flex-1">
                 <View className="font-bold text-[30px]">{el?.variants?.name}</View>
@@ -66,19 +66,19 @@ const Schedule = () => {
         </View>
         <AtList hasBorder={false} className="my-2">
           <AtListItem
-            className="py-0.5"
+            className="py-0.5 text-[24px]"
             title="商品金额"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.productPrice + subscriptionDetails.price.deliveryPrice)}
           />
           <AtListItem
-            className="py-0.5"
+            className="py-0.5 text-[24px]"
             title="促销折扣"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.discountsPrice)}
           />
           <AtListItem
-            className="py-0.5"
+            className="py-0.5 text-[24px]"
             title="运费"
             extraText={formatMoney(subscriptionDetails.price.deliveryPrice)}
           />
@@ -90,7 +90,7 @@ const Schedule = () => {
                 setPopupOpne(true)
               }}
             >
-              <AtIcon className="ml-[30px] mr-[10px]" value="close-circle" size="22" />
+              <AtIcon className="ml-[30px] mr-[10px]" value="close-circle" size="18" />
               取消计划
             </View>
             <View className="TotalPrice">
@@ -107,13 +107,13 @@ const Schedule = () => {
       <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[24px]">
         <View className="text-[34px]">发货信息</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
-        <View className="mt-1 flex">
+        <View className="mt-1 flex pl-[24px]">
           <AtIcon value="calendar" size="16" color="#D49D28" />
           <Text className="ml-[6px]">
             发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
           </Text>
         </View>
-        <View className="mt-1 flex">
+        <View className="mt-1 flex pl-[24px]">
           <Text
             className="rcciconfont rccicon-location text-[#D49D28]"
             style={{

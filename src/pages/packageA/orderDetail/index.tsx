@@ -351,7 +351,7 @@ const OrderDetails = () => {
           <View className="flex items-center justify-end">
             <View>
               <Text style={{ fontWeight: 700 }}>合计：</Text>
-              <Text className="footerPrice">￥7.50</Text>
+              <Text className="footerPrice">{formatMoney(orderDetail.orderPrice.totalPrice)}</Text>
             </View>
             <AtButton className="rounded-full m-0 ml-1 px-2" type="primary">
               去支付
