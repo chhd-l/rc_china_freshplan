@@ -5,6 +5,7 @@ import PetTitle from '@/components/consumer/EditPet/components/PetTitle'
 import Formula from '@/components/petDiet/Formula'
 import './index.less'
 import FreshPlan from '@/components/petDiet/FreshPlan'
+import { formulaData } from './index.module'
 
 const PetDiet = () => {
   useEffect(() => {
@@ -20,7 +21,9 @@ const PetDiet = () => {
         <PetTitle>
           <Text className="text-[48px]">顶级兽医营养师专研配方</Text>
         </PetTitle>
-        <Formula />
+        {formulaData.map((item, key) => (
+          <Formula data={item} key={key} />
+        ))}
         <FreshPlan />
       </View>
     </View>
