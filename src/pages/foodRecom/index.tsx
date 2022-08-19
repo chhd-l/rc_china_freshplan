@@ -69,11 +69,9 @@ const FoodRecom = () => {
     if (!selectedItems || selectedItems.length === 0) {
       Taro.showToast({ title: '请选择套餐' });
     } else {
-      Taro.navigateTo({
+      Taro.setStorageSync("checkoutItems", selectedItems);
+      Taro.redirectTo({
         url: '/pages/packageA/checkout/index',
-        success: (res) => {
-          res.eventChannel.emit('checkoutItems', selectedItems);
-        },
       });
     }
   }
@@ -110,8 +108,8 @@ const FoodRecom = () => {
       </View>
       <View className="pet-food-footer">
         <View className="mx-2 flex justify-between items-center">
-          <View className="text-28">合计：<Text className="price">{formatMoney(total_price)}</Text></View>
-          <View className="px-2 py-0.8 text-white text-28 bg-color-primary rounded-full" onClick={handleCheckout}>立即下单</View>
+          <View className="text-32">合计：<Text className="price font-bold">{formatMoney(total_price)}</Text></View>
+          <View className="px-4 py-0.8 text-white text-32 bg-color-primary rounded-full" onClick={handleCheckout}>立即下单</View>
         </View>
       </View>
     </View>

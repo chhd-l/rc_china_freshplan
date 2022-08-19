@@ -308,7 +308,7 @@ const PetDetail = () => {
           </View>
           {!pet?.subscriptionNo || pet.subscriptionNo.length === 0
             ? <View className="flex-1 mx-1 py-0.8 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={handleSub}>
-            <Text className="rcciconfont rccicon-timer text-32 mr-1"></Text>
+            <Text className="rcciconfont rccicon-timer text-32 font-bold mr-1"></Text>
             <Text className="text-28">开始定制</Text>
           </View> : null}
         </View>

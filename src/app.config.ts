@@ -22,6 +22,7 @@ export default defineAppConfig({
         'breedList/index',
         'checkout/index',
         'petDiet/index',
+        'choosePet/index',
       ],
     }
   ],
