@@ -38,7 +38,7 @@ const Subscription = () => {
         <Swiper current={current} circular autoplay interval={2000} onChange={(e) => setCurrent(e.detail.current)}>
           {titleSwiperList.map((item, key) => (
             <SwiperItem key={key}>
-              <View className="py-3 pl-3 pr-2">
+              <View className="py-3 pl-[40px] pr-2">
                 <View className="flex flex-row">
                   <View className="w-[60px] h-[60px]">
                     <Image src={Vector} />
