@@ -2,8 +2,8 @@
 
 export default defineAppConfig({
   pages: [
-    'pages/account/index',
     'pages/subscription/index',
+    'pages/account/index',
     'pages/foodRecom/index',
     'pages/freshPlanDetails/index',
     'pages/schedule/index',
@@ -22,7 +22,8 @@ export default defineAppConfig({
         'breedList/index',
         'checkout/index',
         'petDiet/index',
-        'customerService/index'
+        'choosePet/index',
+	'customerService/index',
       ],
     }
   ],

@@ -9,10 +9,14 @@ const RotationChartList = ({
   list,
   onClickPetList,
   onClickPetAdd,
+  onSelectPet,
+  newOpen = true,
 }: {
   list: PetListItemProps[]
   onClickPetList?: Function
   onClickPetAdd?: Function
+  onSelectPet?: (pet: PetListItemProps) => void
+  newOpen?: boolean
 }) => {
   const [current, setCurrent] = useState(0)
   const [nextMargin, setNextMargin] = useState(0)
@@ -24,6 +28,10 @@ const RotationChartList = ({
 
   const handleAddPet = () => {
     onClickPetAdd && onClickPetAdd()
+  }
+
+  const handleSelectPet = (idx: number) => {
+    onSelectPet && onSelectPet(list[idx]);
   }
 
   const returnPetdefaultImage = (petType: any) => {
@@ -55,7 +63,7 @@ const RotationChartList = ({
       <View className="box-border px-2">
         <View className="box-border overflow-hidden">
           <View className="w-full flex flex-col items-center mt-1 mb-2 overflow-hidden relative">
-            {!!list.length && (
+            {!!list.length && newOpen && (
               <View
                 className="absolute w-2 h-2 m-auto right-0 top-2.5 z-10 bg-white flex items-center justify-center rounded-full"
                 onClick={handleAddPet}
@@ -77,6 +85,7 @@ const RotationChartList = ({
               onChange={(e) => {
                 const index = e.detail.current === list.length ? 0 : e.detail.current
                 setCurrent(index)
+                handleSelectPet(index)
               }}
             >
               {list.length ? (
@@ -87,7 +96,7 @@ const RotationChartList = ({
                         width: '100px',
                         height: '100px',
                       }}
-                      className="flex items-center justify-center"
+                      className="flex items-center justify-center relative"
                     >
                       <Image
                         style={{
@@ -98,6 +107,9 @@ const RotationChartList = ({
                         className="rounded-full"
                         src={pet.image ? pet.image : `${CDNIMGURL}${returnPetdefaultImage(pet.type)}`}
                       />
+                      {onSelectPet ? <Text
+                        className={`pet-check rcciconfont rccicon-rcheck ${current === key ? 'active' : ''}`}
+                      /> : null}
                     </View>
                   </SwiperItem>
                 ))

@@ -16,7 +16,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
   }
 
   return (
-    <View className="oldUserPlan">
+    <View className="oldUserPlan bg-white">
       <View className="px-3 py-2 title flex items-center">
         <Image className="mr-0.5" src={`${CDNIMGURL}claws.png`} />
         <Text>{subscriptionList[current]?.pet?.name}</Text>的专属鲜食食谱
@@ -101,9 +101,8 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                           />
                         </View>
                         <View className="ml-1 flex-1">
-                          <View className="text=[28px] font-medium">专属鲜食</View>
-                          <View className="font-medium text-[24px] mt-1">{item?.productList?.[0]?.name}</View>
-                          <View className="text-[16px] text-[#666] mt-0.5">
+                          <View className="text=[28px] font-medium mt-1">{item?.productList?.[0]?.name}</View>
+                          <View className="text-[22px] text-[#666] mt-0.5">
                             {(item?.productList?.[0]?.description ?? '').replace(/<[^>]+>/gi, '')}
                           </View>
                         </View>
@@ -149,7 +148,15 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           />
         ))}
       </View>
-      <AtButton className="mx-4 rounded-full flex items-center" type="primary">
+      <AtButton
+        className="mx-4 rounded-full flex items-center"
+        type="primary"
+        onClick={() => {
+          Taro.navigateTo({
+            url: '/pages/packageA/choosePet/index',
+          })
+        }}
+      >
         <AtIcon className="mr-1" value="clock" size="20" />
         <Text>更多定制</Text>
       </AtButton>
