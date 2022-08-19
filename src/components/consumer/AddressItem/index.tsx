@@ -113,13 +113,13 @@ const AddressItem = ({
         </View>
         <View className="flex flex-row items-center">
           <Image
-            style={{ width: '26px', height: '26px' }}
+            style={{ width: '0.5rem', height: '0.5rem' }}
             src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_edit.png"
             onClick={editAddress}
           />
           <Image
             className="ml-1"
-            style={{ width: '26px', height: '24px' }}
+            style={{ width: '0.5rem', height: '0.5rem' }}
             src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_delete.png"
             onClick={() => {
               setShowDelTip(true)

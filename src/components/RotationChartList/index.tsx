@@ -118,7 +118,6 @@ const RotationChartList = ({
                         backgroundImage: `url(${CDNIMGURL}add-pet.png)`,
                         width: '90%',
                         height: '90%',
-                        boxShadow: '-0.5px 0.5px 10px -3px #999',
                       }}
                       className="m-auto w-full h-full rounded-full bg-no-repeat bg-contain text-gray-300"
                     />
