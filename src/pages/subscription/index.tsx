@@ -5,8 +5,8 @@ import { getAgeYear } from '@/utils/utils'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
 import { wxLogin } from '@/framework/api/consumer/consumer'
-import { useAtom } from 'jotai';
-import { consumerAtom } from '@/store/consumer';
+import { useAtom } from 'jotai'
+import { consumerAtom } from '@/store/consumer'
 
 const Index = () => {
   const [SubscriptionList, setSubscriptionList] = useState([])
@@ -14,6 +14,7 @@ const Index = () => {
 
   const getSubscriptionList = async () => {
     const res = await getSubscriptionFindByConsumerId()
+    console.log('res', res)
     res.forEach((item) => {
       item.pet.age = getAgeYear(item.pet.birthday)
     })
@@ -33,11 +34,7 @@ const Index = () => {
     loginInit()
   })
 
-  return consumer?.id && SubscriptionList.length ? (
-    <Planned subscriptionList={SubscriptionList} />
-  ) : (
-    <NoPlan />
-  )
+  return consumer?.id && SubscriptionList.length ? <Planned subscriptionList={SubscriptionList} /> : <NoPlan />
 }
 
 export default Index
