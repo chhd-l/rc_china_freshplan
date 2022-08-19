@@ -6,6 +6,7 @@ import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { AtButton, AtIcon, AtList, AtListItem } from 'taro-ui'
+import './index.less'
 
 const Schedule = () => {
   const [PopupOpne, setPopupOpne] = useState(false)
