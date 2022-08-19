@@ -35,7 +35,7 @@ const Account = () => {
   }
 
   const getList = async (consumerId: string) => {
-    let res = (await getPets({ consumerId })) || []
+    let res = await getPets({ consumerId })
     res.forEach((item) => {
       item.age = getAge(item.birthday)
     })

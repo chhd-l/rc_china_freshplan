@@ -14,7 +14,7 @@ const RotationChartList = ({
   onClickPetList?: Function
   onClickPetAdd?: Function
 }) => {
-  const [current, setCurrent] = useState(list.length === 1 ? 0 : 1)
+  const [current, setCurrent] = useState(0)
   const [nextMargin, setNextMargin] = useState(0)
   const [previousMargin, setPreviousMargin] = useState(0)
 
@@ -38,6 +38,7 @@ const RotationChartList = ({
     setPreviousMargin(pw)
   }, [])
 
+  console.log('fjdjfkdf:', list, current)
   return (
     <View className="Pets bg-white">
       <View className="PetTitle flex items-center justify-between p-1">

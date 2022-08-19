@@ -5,7 +5,7 @@ import { ProductDetailProps } from '@/framework/types/products'
 import apis from '@/framework/config/api-config'
 // import { ProductDetailProps } from '@/framework/types/products'
 import ApiRoot from '../fetcher'
-import { normalizeCatOrDogAttr, normalizeProductForFe, normalizeProductsforFe } from '../lib/normalize'
+import { normalizeCatOrDogAttr, normalizeProductForFe, normalizeProductsforFe, normalizeForOrderCreate } from '../lib/normalize'
 
 export const getProduct = async ({ storeId, productId }) => {
   try {
@@ -30,7 +30,8 @@ export const getProducts = async (params: any) => {
     const res = await ApiRoot({ url: apis.productList }).products().getESProductLists(params)
     let list = res?.productFindPageByEs?.records || []
     console.info('test', res)
-    const productList = normalizeProductsforFe(list)
+    // const productList = normalizeProductsforFe(list)
+    const productList = normalizeForOrderCreate(list)
     console.info('productList res', productList)
     return {
       productList,
@@ -40,7 +41,7 @@ export const getProducts = async (params: any) => {
     console.info('err', err)
     return {
       productList: [],
-      totalPage: 0
+      total: 0
     }
   }
 }

@@ -228,40 +228,31 @@ export const calculateOrderPrice = async ({
 }) => {
   try {
     const productList = cloneDeep(orderItems).map((el) => {
-      if (el.skuGoodInfo.variants?.length > 0) {
-        el.skuGoodInfo.variants = Object.assign(omit(el.skuGoodInfo.variants[0], ['isDeleted', 'variantBundles']), {
-          num: el.productNum,
+      if (el?.variants?.id) {
+        el.variants = Object.assign(omit(el.variants, ['isDeleted', 'variantBundles']), {
+          num: 1,
         })
       }
-      // 一键续订有quantity，处理下
-      delete el.skuGoodInfo.quantity
-      delete el.skuGoodInfo.quantityRule
-      el.skuGoodInfo = omit(el.skuGoodInfo, ['isDeleted', 'subscriptionRecommendRuleId'])
-      return el.skuGoodInfo
+      if (el?.specifications?.length > 0) {
+        el.specifications = el.specifications.map((item: any) => {
+          if (item?.specificationDetails?.length > 0) {
+            item.specificationDetails = item.specificationDetails.map((t: any) => {
+              return omit(t, ['isDeleted']);
+            })
+          }
+          return omit(item, ['isDeleted']);
+        })
+      }
+      el = omit(el, ['isDeleted', 'subscriptionRecommendRuleId', 'asserts'])
+      return el
     })
-    let finalVoucher =
-      voucher && JSON.stringify(voucher) !== '{}'
-        ? {
-          ...voucher,
-          voucherStatus: 'Ongoing',
-        }
-        : null
-    finalVoucher = finalVoucher
-      ? omit(finalVoucher, ['consumerId', 'productInfoIds', 'orderCode', 'isDeleted', 'isGetStatus'])
-      : null
-    const params = Object.assign(
-      {
-        productList,
-        voucher: finalVoucher,
-        isWXGroupVip,
-      },
-      subscriptionType === 'FRESH_BUY'
-        ? {
-          subscriptionType,
-          subscriptionCycle,
-        }
-        : {},
-    )
+    const params = {
+      productList,
+      voucher,
+      isWXGroupVip,
+      subscriptionType,
+      subscriptionCycle,
+    };
     console.info('calculate order price view params', params)
     let res = await ApiRoot({ url: apis?.orderCreate }).orders().orderCalculatePrice(params)
     console.info('calculate order price data view data', res)

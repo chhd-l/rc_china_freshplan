@@ -11,7 +11,8 @@ const LovePetHealth = () => {
     <View className="petHealth">
       <View className="ml-[20px] mb-[70px] mt-[73px]">
         <PetTitle>
-          <Text className="text-[48px]">专业的科研团队 时刻守护您的爱宠健康</Text>
+          <View className="text-[48px]">专业的科研团队 </View>
+          <View className="text-[48px]">时刻守护您的爱宠健康</View>
         </PetTitle>
       </View>
       <View className="pt-[50px]  m-auto w-full relative">
@@ -25,7 +26,7 @@ const LovePetHealth = () => {
         >
           {swiperList.map((item, key) => (
             <SwiperItem key={key}>
-              <View className=" flex flex-col justify-center items-center shadow w-[465px] m-auto">
+              <View className=" flex flex-col justify-center items-center shadow w-[465px] m-auto h-[550px]">
                 <View className="w-[205px] h-[205px] rounded-[50%] overflow-hidden">
                   <Image src={item.imgUrl} className="w-full h-full" />
                 </View>

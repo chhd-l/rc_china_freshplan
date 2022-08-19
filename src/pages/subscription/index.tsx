@@ -4,10 +4,13 @@ import { getSubscriptionFindByConsumerId } from '@/framework/api/subscription/su
 import { getAgeYear } from '@/utils/utils'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
+import { wxLogin } from '@/framework/api/consumer/consumer'
+import { useAtom } from 'jotai';
+import { consumerAtom } from '@/store/consumer';
 
 const Index = () => {
   const [SubscriptionList, setSubscriptionList] = useState([])
-  const [consumer, setConsumer] = useState<any>(null)
+  const [consumer, setConsumer] = useAtom(consumerAtom)
 
   const getSubscriptionList = async () => {
     const res = await getSubscriptionFindByConsumerId()
@@ -17,13 +20,20 @@ const Index = () => {
     setSubscriptionList(res)
   }
 
-  Taro.useDidShow(() => {
+  const loginInit = async () => {
     let wxLoginRes = Taro.getStorageSync('wxLoginRes')
-    getSubscriptionList()
-    setConsumer(wxLoginRes)
+    if (wxLoginRes?.userInfo?.id) {
+      const data = await wxLogin()
+      setConsumer(data)
+      getSubscriptionList()
+    }
+  }
+
+  Taro.useDidShow(() => {
+    loginInit()
   })
 
-  return consumer?.userInfo?.id && SubscriptionList.length ? (
+  return consumer?.id && SubscriptionList.length ? (
     <Planned subscriptionList={SubscriptionList} />
   ) : (
     <NoPlan />

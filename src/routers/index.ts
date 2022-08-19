@@ -3,7 +3,7 @@ const routers = {
   checkout: '/pages/packageA/checkout/index',
   newAddress: '/pages/packageA/newAddress/index',
   addressManage: '/pages/packageA/addressManage/index',
-  orderList: '/pages/orderList/index',
+  orderList: '/pages/packageA/elencoOrdini/index',
   orderDetail: '/pages/packageA/orderDetail/index',
   voucherList: '/pages/voucherList/index',
   officialAccount: '/pages/officialAccount/index'

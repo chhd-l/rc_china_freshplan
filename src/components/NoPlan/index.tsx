@@ -3,9 +3,9 @@ import CommonProblem from '@/components/subscription/CommonProblem'
 import FreshFoodExperience from '@/components/subscription/Freshfoodexperience'
 import LovePetHealth from '@/components/subscription/LovePetHealth'
 import Step from '@/components/subscription/Step'
-import { wxLogin } from '@/framework/api/consumer/consumer'
 import { consumerAtom } from '@/store/consumer'
-import { Button, Image, Swiper, SwiperItem, View } from '@tarojs/components'
+import { Button, Image, Swiper, SwiperItem, Text, View } from '@tarojs/components'
+import Vector from '@/assets/icons/Vector.png'
 import Taro from '@tarojs/taro'
 import { useAtom } from 'jotai'
 import { useState } from 'react'
@@ -16,14 +16,6 @@ import { titleSwiperList } from './index.module'
 const Subscription = () => {
   const [current, setCurrent] = useState(0)
   const [consumer, setConsumer] = useAtom(consumerAtom)
-
-  const loginInit = async () => {
-    const _storeRes: any = Taro.getStorageSync('wxLoginRes')
-    if (_storeRes?.userInfo?.id) {
-      const data = await wxLogin()
-      setConsumer(data)
-    }
-  }
 
   const handleLogin = (callback?: Function) => {
     if (consumer?.id) {
@@ -38,7 +30,6 @@ const Subscription = () => {
 
   Taro.useDidShow(() => {
     my.setNavigationBar({ image: 'https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/fresh-plan-logo.png' })
-    loginInit()
   })
 
   return (
@@ -47,10 +38,15 @@ const Subscription = () => {
         <Swiper current={current} circular autoplay interval={2000} onChange={(e) => setCurrent(e.detail.current)}>
           {titleSwiperList.map((item, key) => (
             <SwiperItem key={key}>
-              <View className="p-3">
-                <View>{item.title}</View>
-                <View className="my-1">{item.p}</View>
-                <View>{item.span}</View>
+              <View className="py-3 pl-3 pr-2">
+                <View className="flex flex-row">
+                  <View className="w-[60px] h-[60px]">
+                    <Image src={Vector} />
+                  </View>
+                  <Text>{item.title}</Text>
+                </View>
+                <View className="my-1 ml-[60px]">{item.p}</View>
+                <View className="ml-[60px]">{item.span}</View>
               </View>
             </SwiperItem>
           ))}

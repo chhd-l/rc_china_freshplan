@@ -1,4 +1,4 @@
-import { ProductVariants } from '@/framework/schema/products.schema'
+// import { ProductVariants } from '@/framework/schema/products.schema'
 import { SkuItemProps } from '@/framework/types/products'
 import { dealDatasForApi, formatDateToApi } from '@/utils/utils'
 import moment from 'moment'
@@ -22,6 +22,9 @@ export const normalizePetsForApi = (petInfo: any) => {
   }
   if (data.targetWeight) {
     data.targetWeight = Number(data.targetWeight)
+  }
+  if (data.subscriptionNo) {
+    data.subscriptionNo = undefined
   }
   console.info('data', data)
   return data
@@ -112,7 +115,7 @@ export const normalizeProductForFe = (product: any): any => {
 }
 
 export const normalizeSkuForFe = (
-  sku: ProductVariants,
+  sku: any,
   index: number,
   attributeValueRelations: any,
   specifications,
@@ -163,6 +166,14 @@ export const normalizeProductsforFe = (data: any) => {
   })
   return list
 }
+
+export const normalizeForOrderCreate = (data: any[]) => {
+  return (data ?? []).map((item: any) => {
+    item.variants = Object.assign({}, (item?.variants?.[0] ?? {}), { num: 1 });
+    return item;
+  });
+}
+
 export const normalizeSpecText = (specificationRelations, specifications): string[] => {
   return specificationRelations?.map((el) => {
     let specObj = specifications.find((spec) => spec.id === el.specificationId)
