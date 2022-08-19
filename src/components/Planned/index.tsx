@@ -101,9 +101,8 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                           />
                         </View>
                         <View className="ml-1 flex-1">
-                          <View className="text=[28px] font-medium">专属鲜食</View>
-                          <View className="font-medium text-[24px] mt-1">{item?.productList?.[0]?.name}</View>
-                          <View className="text-[16px] text-[#666] mt-0.5">
+                          <View className="text=[28px] font-medium mt-1">{item?.productList?.[0]?.name}</View>
+                          <View className="text-[22px] text-[#666] mt-0.5">
                             {(item?.productList?.[0]?.description ?? '').replace(/<[^>]+>/gi, '')}
                           </View>
                         </View>

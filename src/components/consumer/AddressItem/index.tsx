@@ -130,7 +130,6 @@ const AddressItem = ({
       </View>
 
       {/* 弹出层 */}
-
       <View
         className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
         style={{
