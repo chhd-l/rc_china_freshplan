@@ -39,9 +39,8 @@ const Account = () => {
     res.forEach((item) => {
       item.age = getAge(item.birthday)
     })
-    if (res.length) {
-      setPetList(res)
-    }
+    console.log('account get list:', res);
+    setPetList(res ?? []);
   }
 
   const loginInit = async () => {

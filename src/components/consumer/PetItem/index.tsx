@@ -19,10 +19,8 @@ interface Props {
   showAddPetBtn: boolean
   getList: () => void
 }
-const PetItem = ({ pet, petIdx, petList, setPetList, SetshowAddPetBtn, showAddPetBtn, getList }: Props) => {
+const PetItem = ({ pet, petIdx, petList, setPetList, showAddPetBtn, getList }: Props) => {
   const [editActive, setEditActive] = useState<number>(-1)
-  const [imgUrl, setImgUrl] = useState<string>(pet.image)
-  const [item, setItem] = useState<any>(pet)
   const [showDelModal, setShowDelModal] = useState<boolean>(false)
   const [isEdit, setIsEdit] = useState<boolean>(false)
 
