@@ -7,6 +7,7 @@ import { getPets } from '@/framework/api/pet/get-pets';
 import { View, Image } from '@tarojs/components';
 import RotationChartList from '@/components/RotationChartList'
 import { CDNIMGURL2 } from '@/lib/constants';
+import { getAge } from '@/utils/utils';
 
 import './index.less';
 
@@ -16,6 +17,9 @@ const ChoosePet = () => {
 
   const getPetList = async (consumerId: string) => {
     const res = await getPets({ consumerId });
+    (res ?? []).forEach((item: PetListItemProps) => {
+      item.age = getAge(item.birthday);
+    });
     setPetList(res ?? []);
     if (!res || res.length === 0) {
       Taro.redirectTo({
@@ -58,7 +62,7 @@ const ChoosePet = () => {
       </View>
       <View className="mx-1 my-2 flex">
         <View
-          className="text-30 px-1 py-0.8 text-white bg-color-primary rounded-full text-center"
+          className="text-30 px-2 py-0.8 text-white bg-color-primary rounded-full text-center"
           onClick={handleRecom}
         >
           推荐食谱
