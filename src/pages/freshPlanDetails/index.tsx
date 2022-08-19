@@ -23,6 +23,7 @@ const FreshPlanDetails = () => {
     no: '',
     createNextDeliveryTime: 0,
     consumer: { phone: '' },
+    source: 'ALIPAY_MINI_PROGRAM',
   })
   const getSubscriptionDetails = async (id: string) => {
     let res = await getSubscriptionDetail(id)
@@ -31,16 +32,27 @@ const FreshPlanDetails = () => {
     console.log('res', res)
   }
 
+  const returnTypeText = () => {
+    switch (subscriptionDetails?.source) {
+      case 'WECHAT_MINI_PROGRAM':
+        return '微信'
+      case 'ALIPAY_MINI_PROGRAM':
+        return '支付宝'
+      default:
+        return '微信'
+    }
+  }
+
   useEffect(() => {
     const { router } = getCurrentInstance()
-    const subscriptionId = router?.params?.id ?? "";
+    const subscriptionId = router?.params?.id ?? ''
     getSubscriptionDetails(subscriptionId)
   }, [])
 
   return (
     <View className="freshPlanDetails p-1 pb-4">
-      <View className="headerPetCard boxShadow">
-        <RotationChartList list={[subscriptionDetails.pet]} />
+      <View className="boxShadow">
+        <RotationChartList newOpen={false} list={[subscriptionDetails.pet]} />
       </View>
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
         <View
@@ -51,7 +63,7 @@ const FreshPlanDetails = () => {
         >
           <View className="flex justify-between items-end">
             <Text className="text-[34px]">订单信息</Text>
-            <Text className="text-[22px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
+            <Text className="text-[24px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
           </View>
           <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
@@ -62,7 +74,7 @@ const FreshPlanDetails = () => {
               <View className="h-full flex flex-col justify-center flex-1">
                 <View className="font-bold text-[30px] text-[#96CC39]">{el?.variants?.name}</View>
                 <View className="flex items-center justify-between mt-1.5 text-[#666]">
-                  {(el?.description ?? "").replace(/<[^>]+>/ig, "")}
+                  {(el?.description ?? '').replace(/<[^>]+>/gi, '')}
                 </View>
               </View>
             </View>
@@ -110,7 +122,7 @@ const FreshPlanDetails = () => {
             }}
             src={`${CDNIMGURL}plateform.png`}
           />
-          <Text className="ml-1">签约平台：支付宝</Text>
+          <Text className="ml-1">签约平台：{returnTypeText()}</Text>
         </View>
         <View className="flex items-center mt-1 ml-0.5">
           <Image

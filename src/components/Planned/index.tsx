@@ -16,7 +16,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
   }
 
   return (
-    <View className="oldUserPlan">
+    <View className="oldUserPlan bg-white">
       <View className="px-3 py-2 title flex items-center">
         <Image className="mr-0.5" src={`${CDNIMGURL}claws.png`} />
         <Text>{subscriptionList[current]?.pet?.name}</Text>的专属鲜食食谱
