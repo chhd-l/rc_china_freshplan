@@ -1,5 +1,6 @@
 import RegionPicker from '@/components/WePicker/index'
 import { createAddress, updateAddress } from '@/framework/api/consumer/address'
+import { updateSubscriptionAddress } from '@/framework/api/subscription/subscription'
 import { Address } from '@/framework/types/consumer'
 import { pickForUpdate } from '@/utils/utils'
 import { Text, View } from '@tarojs/components'
@@ -59,10 +60,14 @@ const NewAddress = () => {
       setIsOpenPhone(true)
       return
     } else if (router?.params.type === 'edit') {
-      let params = pickForUpdate(addressInfo, initData)
-      actionRes = await updateAddress({
-        params: Object.assign(params, { id: addressInfo.id }),
-      })
+      if (router?.params?.subscriptionDetailsID) {
+        actionRes = await updateSubscriptionAddress(router.params.subscriptionDetailsID, addressInfo)
+      } else {
+        let params = pickForUpdate(addressInfo, initData)
+        actionRes = await updateAddress({
+          params: Object.assign(params, { id: addressInfo.id }),
+        })
+      }
     } else {
       actionRes = await createAddress(addressInfo)
     }
@@ -146,22 +151,24 @@ const NewAddress = () => {
             count={false}
             className="border-0 border-t-0 rc-text-area"
           />
-          <View className="text-gray-400 flex items-center">
-            <AtCheckbox
-              className="radioText"
-              options={[
-                {
-                  value: true,
-                  label: '默认地址',
-                },
-              ]}
-              selectedList={[addressInfo.isDefault]}
-              onChange={(e) => {
-                if (e.length === 0 && router?.params.type === 'edit') return null
-                updateAddressInfo(!addressInfo.isDefault, 'isDefault')
-              }}
-            />
-          </View>
+          {!router?.params?.subscriptionDetailsID && (
+            <View className="text-gray-400 flex items-center">
+              <AtCheckbox
+                className="radioText"
+                options={[
+                  {
+                    value: true,
+                    label: '默认地址',
+                  },
+                ]}
+                selectedList={[addressInfo.isDefault]}
+                onChange={(e) => {
+                  if (e.length === 0 && router?.params.type === 'edit') return null
+                  updateAddressInfo(!addressInfo.isDefault, 'isDefault')
+                }}
+              />
+            </View>
+          )}
         </View>
       </AtForm>
       <View className="w-full pt-1 pb-2 fixed bottom-0 left-0 bg-white">

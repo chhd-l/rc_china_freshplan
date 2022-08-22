@@ -5,6 +5,7 @@ import {
   getOrderDetail,
   getOrderSetting,
 } from '@/framework/api/order'
+import { payFromOrder } from '@/framework/api/payment/pay'
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL } from '@/lib/constants'
 import { formatMoney, getDateDiff, handleReturnTime } from '@/utils/utils'
@@ -16,7 +17,6 @@ import CopyText from './copyText'
 import ExpressLine from './expressLine'
 import './index.less'
 import TimeLine from './timeLine'
-import { payFromOrder } from '@/framework/api/payment/pay'
 
 const orderStatusType = {
   UNPAID: '等待买家付款',
@@ -261,7 +261,7 @@ const OrderDetails = () => {
         </View>
         <View className="flex flex flex-col">
           {(orderDetail?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
-            <View className="orderAtCardBody mt-2 flex item-center" key={key}>
+            <View className="orderAtCardBody mt-2 flex item-center pr-1" key={key}>
               <Image className="orderAtCardImage mx-1 h-full" src={el?.pic} />
               <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
                 <View>{el?.spuName}</View>
@@ -275,7 +275,7 @@ const OrderDetails = () => {
             </View>
           ))}
           {(orderDetail?.lineItem?.filter((el) => el.isGift) || []).map((el, key) => (
-            <View className="orderAtCardBody mt-2 flex item-center" key={key}>
+            <View className="orderAtCardBody mt-2 flex item-center pr-1" key={key}>
               <Image className="orderAtCardImage mx-1 rounded-full" src={el?.pic} />
               <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
                 <View>{el?.spuName}</View>
@@ -340,14 +340,18 @@ const OrderDetails = () => {
           <Text>Fresh编号：</Text>
           <CopyText str={orderDetail.subscriptionNo} />
         </View>
-        <View>
-          <Text>付款方式：</Text>
-          <Text className="copyText">{returnpayWayCode()}</Text>
-        </View>
-        <View>
-          <Text>付款时间：</Text>
-          <Text className="copyText">{handleReturnTime(orderDetail?.payment?.paymentFinishTime)}</Text>
-        </View>
+        {orderDetail?.orderState?.orderState !== 'UNPAID' && (
+          <View>
+            <Text>付款方式：</Text>
+            <Text className="copyText">{returnpayWayCode()}</Text>
+          </View>
+        )}
+        {orderDetail?.orderState?.orderState !== 'UNPAID' && (
+          <View>
+            <Text>付款时间：</Text>
+            <Text className="copyText">{handleReturnTime(orderDetail?.payment?.paymentFinishTime)}</Text>
+          </View>
+        )}
         <View>
           <Text>创建时间：</Text>
           <Text className="copyText">{handleReturnTime(orderDetail?.orderState?.createdAt)}</Text>

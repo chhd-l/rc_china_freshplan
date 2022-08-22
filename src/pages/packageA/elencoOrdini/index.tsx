@@ -5,7 +5,7 @@ import { CDNIMGURL } from '@/lib/constants'
 import { Image, Text, View } from '@tarojs/components'
 import { getCurrentInstance, useReachBottom } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { AtModal, AtTabs, AtTabsPane } from 'taro-ui'
+import { AtModal, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 
 const tabList = [{ title: '全部' }, { title: '待付款' }, { title: '待发货' }, { title: '待收货' }]
@@ -27,14 +27,29 @@ const OrderList = () => {
   const [curActionType, setCurActionType] = useState('')
   const [showActionTipModal, setShowActionTipModal] = useState(false)
 
-  const getOrderLists = async ({ orderState = current, curPage = currentPage }) => {
+  const getOrderLists = async ({
+    orderState = current,
+    curPage = currentPage,
+    queryParameters,
+  }: {
+    orderState?: string
+    curPage?: number
+    queryParameters?: any
+  }) => {
     let records: any[] = []
     const limit = 10
     let offset = curPage ? curPage * limit : 0
     const res = await getOrderList({
       limit,
       offset,
-      sample: orderState !== 'ALL' ? { orderState } : {},
+      sample:
+        orderState !== 'ALL'
+          ? queryParameters
+            ? { orderState, queryParameters }
+            : { orderState }
+          : queryParameters
+          ? { queryParameters }
+          : {},
     })
     console.log('res', res)
     setIsNoMore(res?.total < offset + 10)
@@ -132,9 +147,16 @@ const OrderList = () => {
 
   return (
     <View className="myOrderList pb-2">
-      {/* <View className="bg-white py-0.5">
-        <AtSearchBar value="" onChange={() => null} />
-      </View> */}
+      <View className="bg-white py-0.5">
+        <AtSearchBar
+          value=""
+          placeholder="搜索订单"
+          onChange={() => {}}
+          onConfirm={(e) => {
+            console.log('e', e)
+          }}
+        />
+      </View>
       <AtTabs current={OrderStatusEnum[current]} tabList={tabList} onClick={handleClick} swipeable>
         {tabList.map((item, index) => (
           <AtTabsPane current={OrderStatusEnum[current]} index={index} key={item.title}>

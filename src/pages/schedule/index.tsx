@@ -1,10 +1,11 @@
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
 import { CDNIMGURL } from '@/lib/constants'
+import routers from '@/routers'
 import { formatMoney } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AtButton, AtIcon, AtList, AtListItem } from 'taro-ui'
 import './index.less'
 
@@ -13,6 +14,7 @@ const Schedule = () => {
   const [subscriptionDetails, setSubscriptionDetails] = useState({
     productList: [{ name: '', variants: { name: '', defaultImage: '', num: 0, subscriptionPrice: 0 } }],
     no: '',
+    id: '',
     createNextDeliveryTime: 0,
     consumer: { phone: '' },
     address: {
@@ -34,11 +36,11 @@ const Schedule = () => {
     setSubscriptionDetails(res)
   }
 
-  useEffect(() => {
+  Taro.useDidShow(() => {
     const { router } = getCurrentInstance()
     const subId = router?.params?.id ?? ''
     getSubscriptionDetails(subId)
-  }, [])
+  })
 
   return (
     <View className="p-1 pb-4 Schedule">
@@ -127,7 +129,22 @@ const Schedule = () => {
           </Text>
         </View>
         <View className="flex mt-2 justify-end">
-          <AtButton circle className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0" type="primary">
+          <AtButton
+            circle
+            className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0"
+            type="primary"
+            onClick={() => {
+              Taro.setStorage({
+                key: 'current-address',
+                data: JSON.stringify(subscriptionDetails?.address),
+                success: function () {
+                  Taro.navigateTo({
+                    url: `${routers.newAddress}?type=edit&subscriptionDetailsID=${subscriptionDetails?.id}`,
+                  })
+                },
+              })
+            }}
+          >
             修改地址
           </AtButton>
         </View>
