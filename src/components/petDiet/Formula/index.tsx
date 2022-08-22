@@ -1,7 +1,6 @@
 import { FormulaData } from '@/pages/packageA/petDiet/index.module'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-// import foodbg from '@/assets/img/foodbg.png'
 import { AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 
@@ -50,7 +49,7 @@ const Formula = ({ data }: FormulaProps) => {
         <View className="divide_la relative my-[24px]" />
         <View className="text-[22px] leading-[26px]">{data.mixedIngredients}</View>
       </View>
-      <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/foodbg.png" className="absolute z-0 top-0" />
+      <Image src={data.image} className="absolute z-0 top-0" />
     </View>
   )
 }
