@@ -150,6 +150,7 @@ const OrderList = () => {
       <View className="bg-white py-0.5">
         <AtSearchBar
           value=""
+          placeholder="搜索订单"
           onChange={() => {}}
           onConfirm={(e) => {
             console.log('e', e)
