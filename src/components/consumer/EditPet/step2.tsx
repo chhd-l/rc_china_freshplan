@@ -10,20 +10,19 @@ import { IProps } from './step1';
 import './step.less';
 
 const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
-  const [visible, setVisible] = useState<boolean>(!!pet.name);
   const [show, setShow] = useState<boolean>(false);
 
   const handleGenderChange = (gender: PetGender) => {
+    if (!pet.name) {
+      Taro.showToast({ title: '请先设置宠物昵称' })
+      return;
+    }
     onChange("gender", gender);
     onStepChange(PetStep.STEP3);
   }
 
   const handleNameChange = (e) => {
     onChange('name', e?.detail?.value);
-  }
-
-  const handleComplete = () => {
-    setVisible(!!pet.name);
   }
 
   const handleUploadFromSource = (source: keyof Taro.chooseImage.sourceType) => {
@@ -65,10 +64,9 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
         <View className="flex-1">
           <Input value={pet.name} className="rcc-input" onInput={handleNameChange} />
         </View>
-        <Text onClick={handleComplete} className="rcciconfont rccicon-success text-color-primary ml-2 text-48"></Text>
       </View>
-      {visible ? <><View className="mt-2">
-        <PetTitle>{pet.name}的性别</PetTitle>
+      <View className="mt-2">
+        <PetTitle>您爱宠的性别</PetTitle>
       </View>
       <View className="mt-2 rcc-single-choice flex justify-between items-center">
         <Text
@@ -83,7 +81,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
         >
           小公主
         </Text>
-      </View></> : null}
+      </View>
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP1)}>上一步</Text>

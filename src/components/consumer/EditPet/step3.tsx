@@ -13,7 +13,7 @@ interface IProps3 extends IProps {
   onChangeAll: (obj: Partial<PetListItemProps>) => void;
 }
 
-const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
+const Step3 = ({ pet, onStepChange, onChangeAll }: IProps3) => {
   const [breedList, setBreedList] = useState<BreedListItemProps[]>([]);
 
   const getList = async () => {
@@ -36,6 +36,7 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
           console.log('返回的数据---', breed, code)
           //let newPetInfo = Object.assign({}, pet, { breed, code })
           onChangeAll({ breed, code });
+          onStepChange(PetStep.STEP4);
         },
       },
     })
@@ -44,15 +45,16 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
   const handleChooseBreed = (breed: string, code: string) => {
     console.log('xxxxxxx', breed, code);
     onChangeAll({ breed, code });
+    onStepChange(PetStep.STEP4);
   }
 
-  const handleNext = () => {
-    if (!pet.code) {
-      Taro.showToast({ title: '请先选择品种' });
-    } else {
-      onStepChange(PetStep.STEP4);
-    }
-  }
+  // const handleNext = () => {
+  //   if (!pet.code) {
+  //     Taro.showToast({ title: '请先选择品种' });
+  //   } else {
+  //     onStepChange(PetStep.STEP4);
+  //   }
+  // }
 
   const hotBreedList = breedList.filter(el => el.isHot).filter((el, idx) => idx < 9);
   const isOtherBreedSelected = !!pet.code && hotBreedList.map(el => el.code).indexOf(pet.code) === -1;
@@ -80,7 +82,6 @@ const Step3 = ({ pet, onStepChange, onChange, onChangeAll }: IProps3) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP2)}>上一步</Text>
-          <Text className={`btn-item ${!pet.code ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>
         </View>
       </View>
     </View>

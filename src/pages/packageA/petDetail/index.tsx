@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, Image, Input, Picker, PickerView, PickerViewColumn } from '@tarojs/components';
+import { View, Text, Image, Input, PickerView, PickerViewColumn } from '@tarojs/components';
 import { AtFloatLayout, AtButton } from 'taro-ui';
 import Taro from '@tarojs/taro';
 import { CDNIMGURL2, CDNIMGURL, UPLOADURL } from '@/lib/constants';
@@ -10,6 +10,7 @@ import { BreedListItemProps } from '@/pages/packageA/breedList';
 import { updatePet } from '@/framework/api/pet/update-pet';
 import { getPet } from '@/framework/api/pet/get-pets';
 import moment from 'moment';
+import RccDatePicker from '@/components/common/RccDatePicker';
 
 import '@/components/consumer/EditPet/step.less';
 import './index.less';
@@ -41,6 +42,7 @@ const PetDetail = () => {
   const [val, setVal] = useState<number[]>([0,0,0]);
   const [show1, setShow1] = useState<boolean>(false);
   const [val1, setVal1] = useState<number[]>([0,0,0]);
+  const [showBirth, setShowBirth] = useState<boolean>(false);
 
   const getBreedListInit = async (type: PetType | undefined) => {
     let res: any = await getBreedList()
@@ -181,18 +183,10 @@ const PetDetail = () => {
             <PetTitle>宠物生日</PetTitle>
           </View>
           <View className="mt-2">
-            <Picker
-              style={{ borderWidth: '0px !important', backgroundColor: 'transparent !important' }}
-              value={pet.birthday}
-              mode="date"
-              end={new Date().toLocaleString().split(' ')[0].replace(/\//g, '-')}
-              onChange={(e) => handlePetEdit({ 'birthday': moment(e.detail.value).format('YYYY-MM-DD') })}
-            >
-              <View className="choose-other-breed bg-white flex items-center">
-                <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
-                <Text className="rcciconfont rccicon-right text-34 mx-1" />
-              </View>
-            </Picker>
+            <View className="choose-other-breed bg-white flex items-center" onClick={() => setShowBirth(true)}>
+              <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
+              <Text className="rcciconfont rccicon-right text-34 mx-1" />
+            </View>
           </View>
           <View className="mt-2">
             <PetTitle>{pet.name}是</PetTitle>
@@ -313,6 +307,14 @@ const PetDetail = () => {
           </View> : null}
         </View>
       </View>
+
+      <RccDatePicker
+        visible={showBirth}
+        value={pet.birthday}
+        onClose={() => setShowBirth(false)}
+        onChange={(date) => handlePetEdit({ "birthday": date })}
+        onConfirm={() => setShowBirth(false)}
+      />
 
       <AtFloatLayout
         isOpened={showUpload}

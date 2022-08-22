@@ -5,6 +5,10 @@ import moment from 'moment'
 import { useState } from 'react'
 import { AtAvatar, AtButton, AtIcon } from 'taro-ui'
 import { PetPosture } from '@/framework/types/consumer'
+import CommonProblem from '@/components/subscription/CommonProblem'
+import FreshFoodExperience from '@/components/subscription/Freshfoodexperience'
+import LovePetHealth from '@/components/subscription/LovePetHealth'
+import Step from '@/components/subscription/Step'
 import './index.less'
 
 const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
@@ -32,9 +36,9 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           <SwiperItem key={key}>
             <View className="plan">
               <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
-              <View className="swiperItemCard px-1 pt-2 pb-1.5 flex flex-col justify-between text-white">
-                <View className="flex text-[24px]">
-                  <View className="pt-0.5 ml-0.5 mr-1.5">
+              <View className="swiperItemCard px-1 pt-1.5 pb-1 flex flex-col justify-between text-white">
+                <View className="flex items-center text-[24px]">
+                  <View className="ml-0.5 mr-1.5">
                     <AtAvatar
                       size="large"
                       className="w-[1.4rem] h-[1.4rem]"
@@ -149,18 +153,26 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           />
         ))}
       </View>
-      <AtButton
-        className="mx-4 rounded-full flex items-center"
-        type="primary"
+      <View
+        className="mx-4 py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
         onClick={() => {
           Taro.navigateTo({
             url: '/pages/packageA/choosePet/index',
           })
         }}
       >
-        <AtIcon className="mr-1" value="clock" size="20" />
-        <Text>更多定制</Text>
-      </AtButton>
+        <AtIcon className="mr-1" value="clock" size="26" />
+        <Text className="text-30">更多定制</Text>
+      </View>
+      <View className="mt-4 px-[20px]">
+        <Step />
+        <FreshFoodExperience />
+        <LovePetHealth />
+        <CommonProblem />
+        <View className="w-full h-[750px] ">
+          <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/home_foot_img.png" />
+        </View>
+      </View>
     </View>
   )
 }
