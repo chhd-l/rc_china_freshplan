@@ -4,6 +4,7 @@ import { formatMoney } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
+import { payFromOrder } from '@/framework/api/payment/pay'
 import './index.less'
 
 const orderStatusType = {
@@ -100,6 +101,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
               type="primary"
               onClick={(e) => {
                 e.stopPropagation()
+                payFromOrder(order)
               }}
             >
               付款

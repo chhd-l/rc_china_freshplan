@@ -50,6 +50,10 @@ const Checkout = () => {
   }
 
   const handlePayment = async () => {
+    if (!address?.id) {
+      Taro.showToast({ title: '请先选择收获地址' });
+      return;
+    }
     const pet: any = Taro.getStorageSync("petItem");
     const res: any = await subscriptionCreateAndPay({
       orderItems: items,

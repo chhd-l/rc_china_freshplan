@@ -16,6 +16,7 @@ import CopyText from './copyText'
 import ExpressLine from './expressLine'
 import './index.less'
 import TimeLine from './timeLine'
+import { payFromOrder } from '@/framework/api/payment/pay'
 
 const orderStatusType = {
   UNPAID: '等待买家付款',
@@ -359,7 +360,7 @@ const OrderDetails = () => {
               <Text style={{ fontWeight: 700 }}>合计：</Text>
               <Text className="footerPrice">{formatMoney(orderDetail.orderPrice.totalPrice)}</Text>
             </View>
-            <AtButton className="rounded-full m-0 ml-1 px-2" type="primary">
+            <AtButton className="rounded-full m-0 ml-1 px-2" type="primary" onClick={() => payFromOrder(orderDetail)}>
               去支付
             </AtButton>
           </View>
