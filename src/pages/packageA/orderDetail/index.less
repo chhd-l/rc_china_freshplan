@@ -1,6 +1,10 @@
 .OrderDetails {
   font-family: 'Roboto';
 
+  .at-button {
+    border: 1px solid #C3C3C3 !important;
+  }
+
   .header {
     text {
       &:first-child {
@@ -17,7 +21,9 @@
 
   .timeText {
     .at-countdown__time {
-      font-size: 26px !important;
+      font-family: 'Roboto' !important;
+      font-weight: normal !important;
+      font-size: 28px !important;
     }
   }
 
@@ -32,7 +38,7 @@
   }
 
   .expressLine {
-    font-size: 14px;
+    font-size: 20px;
 
     .dian {
       width: 15px;
@@ -42,7 +48,7 @@
 
     .title {
       >text:first-child {
-        font-size: 20px;
+        font-size: 24px;
       }
     }
 
@@ -184,6 +190,14 @@
       font-size: 28px;
       height: 75px;
       line-height: 75px;
+    }
+  }
+
+  .at-list {
+    .at-list__item {
+      &::after {
+        border-bottom: 5px solid #F3F3F3 !important;
+      }
     }
   }
 

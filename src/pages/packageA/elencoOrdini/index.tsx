@@ -57,6 +57,8 @@ const OrderList = () => {
     switch (curActionType) {
       case 'UNPAID':
         return '确定要取消该订单吗？'
+      case 'TO_SHIP':
+        return '已提醒发货，请耐心等待'
       case 'SHIPPED':
         return '确定已经收到货物吗？'
       case 'VOID':
@@ -103,8 +105,12 @@ const OrderList = () => {
       case 'UNPAID':
         await cancal()
         break
+      case 'TO_SHIP':
+        setShowActionTipModal(false)
+        break
       case 'SHIPPED':
         await completed()
+        break
       case 'VOID':
         await deleteOrders()
         break
