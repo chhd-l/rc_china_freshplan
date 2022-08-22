@@ -98,7 +98,7 @@ const Schedule = () => {
               <Text className="item-content__info-title" style={{ color: '#000' }}>
                 合计：
               </Text>
-              <Text className="item-extra__info" style={{ color: '#D49D28' }}>
+              <Text className="item-extra__info mr-[24px]" style={{ color: '#D49D28' }}>
                 {formatMoney(subscriptionDetails?.price?.totalPrice)}
               </Text>
             </View>

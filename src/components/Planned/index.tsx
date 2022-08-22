@@ -91,13 +91,14 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                       }}
                     >
                       <View className="m-auto flex">
-                        <View className="w-[126.63px] h-[126.63px] rounded-[12px] overflow-hidden">
+                        <View className="w-[126.63px] h-[126.63px] bg-white rounded-[12px] overflow-hidden">
                           <Image
                             style={{
                               width: '100%',
                               height: '100%',
                             }}
-                            src={item?.productList?.[0]?.defaultImage}
+                            className="bg-white"
+                            src={item?.productList?.[0]?.variants?.defaultImage}
                           />
                         </View>
                         <View className="ml-1 flex-1">

@@ -31,7 +31,7 @@ const RotationChartList = ({
   }
 
   const handleSelectPet = (idx: number) => {
-    onSelectPet && onSelectPet(list[idx]);
+    onSelectPet && onSelectPet(list[idx])
   }
 
   const returnPetdefaultImage = (petType: any) => {
@@ -49,7 +49,7 @@ const RotationChartList = ({
   console.log('fjdjfkdf:', list, current)
   return (
     <View className="Pets bg-white">
-      <View className="PetTitle flex items-center justify-between p-1">
+      <View className={`PetTitle flex items-center justify-between p-1 ${newOpen ? 'text-[28px]' : 'text-[34px]'}`}>
         我的宠物
         {!!list.length && (
           <Image
@@ -107,9 +107,9 @@ const RotationChartList = ({
                         className="rounded-full"
                         src={pet.image ? pet.image : `${CDNIMGURL}${returnPetdefaultImage(pet.type)}`}
                       />
-                      {onSelectPet ? <Text
-                        className={`pet-check rcciconfont rccicon-rcheck ${current === key ? 'active' : ''}`}
-                      /> : null}
+                      {onSelectPet ? (
+                        <Text className={`pet-check rcciconfont rccicon-rcheck ${current === key ? 'active' : ''}`} />
+                      ) : null}
                     </View>
                   </SwiperItem>
                 ))

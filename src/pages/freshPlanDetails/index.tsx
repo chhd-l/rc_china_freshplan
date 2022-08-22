@@ -118,7 +118,7 @@ const FreshPlanDetails = () => {
           <Image
             style={{
               width: '0.5022rem',
-              height: '0.3807rem',
+              height: '0.407rem',
             }}
             src={`${CDNIMGURL}plateform.png`}
           />
@@ -128,7 +128,7 @@ const FreshPlanDetails = () => {
           <Image
             style={{
               width: '0.5022rem',
-              height: '0.3807rem',
+              height: '0.4407rem',
             }}
             src={`${CDNIMGURL}account-sig.png`}
           />

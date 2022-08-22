@@ -192,11 +192,17 @@ const OrderDetails = () => {
         return 'WX.png'
       case 'ALIPAY_MINI_PROGRAM':
         return 'zhi.png'
-      default:
-        return 'WX.png'
     }
   }
 
+  const returnpayWayCode = () => {
+    switch (orderDetail?.payment?.payWayCode) {
+      case 'WECHAT_PAY':
+        return '微信'
+      case 'ALI_PAY':
+        return '支付宝'
+    }
+  }
   return (
     <ScrollView scrollY overflow-anchor={false} className="pb-1 OrderDetails">
       <View className="bg-white">
@@ -335,7 +341,7 @@ const OrderDetails = () => {
         </View>
         <View>
           <Text>付款方式：</Text>
-          <Text className="copyText">{orderDetail?.payment?.payWayCode}</Text>
+          <Text className="copyText">{returnpayWayCode()}</Text>
         </View>
         <View>
           <Text>付款时间：</Text>
