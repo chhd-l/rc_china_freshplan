@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { wxLogin } from '@/framework/api/consumer/consumer'
 import { useAtom } from 'jotai'
 import { consumerAtom } from '@/store/consumer'
-import { Image } from '@tarojs/components'
+import { Image, View } from '@tarojs/components'
 
 const Index = () => {
   const [SubscriptionList, setSubscriptionList] = useState([])
@@ -39,14 +39,15 @@ const Index = () => {
 
   return (
     <>
-      <Image
-        src={customerServiceImg}
-        mode="widthFix"
-        className="fixed top-[1140px] right-0 !w-[110px] z-50"
+      <View
+        className="w-[110px] fixed right-0  z-50 top-[1140px] "
         onClick={() => {
           Taro.navigateTo({ url: '/pages/packageA/customerService/index' })
         }}
-      />
+      >
+        <Image src={customerServiceImg} mode="widthFix" />
+      </View>
+
       {consumer?.id && SubscriptionList.length ? <Planned subscriptionList={SubscriptionList} /> : <NoPlan />}
     </>
   )
