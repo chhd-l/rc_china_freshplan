@@ -44,6 +44,7 @@ const API_CONFIG: IApiConfig = {
     storeSetting: 'https://fc-com-setting-dev-common-dmgwlxbcvr.cn-shanghai.fcapp.run/fc-com-store-setting/graphql',
     liveStreaming: 'https://fc-com-treaming-dev-common-unckjafhvm.cn-shanghai.fcapp.run/fc-com-live-streaming/graphql',
     sku_detail: 'https://fc-com-u-detail-dev-common-rfhybdgjkv.cn-shanghai.fcapp.run/fc-com-sku-detail/graphql',
+    sc_subscription: "https://fcdev.fivefen.com/fc-sc-subscription/graphql",
   },
   production: {
     auth: 'https://fc-mp-auth-dev-miniprogram-dkpsdvztiu.cn-shanghai.fcapp.run/fc-mp-auth/graphql',
@@ -70,6 +71,7 @@ const API_CONFIG: IApiConfig = {
     storeSetting: 'https://fc-com-setting-dev-common-dmgwlxbcvr.cn-shanghai.fcapp.run/fc-com-store-setting/graphql',
     liveStreaming: 'https://fc-com-treaming-dev-common-unckjafhvm.cn-shanghai.fcapp.run/fc-com-live-streaming/graphql',
     sku_detail: 'https://fc-com-u-detail-dev-common-rfhybdgjkv.cn-shanghai.fcapp.run/fc-com-sku-detail/graphql',
+    sc_subscription: "https://fcdev.fivefen.com/fc-sc-subscription/graphql",
   },
 }
 

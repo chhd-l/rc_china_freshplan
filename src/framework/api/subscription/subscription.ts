@@ -180,11 +180,7 @@ export const getSubscriptionScheduleNextDelivery = async (params: any) => {
 }
 
 export const updateSubscriptionAddress = async (id: string, address: any) => {
-  try {
-    const { updateSubscriptionAddresss } = await ApiRoot({ url: apis.common_subscription }).subscriptions().updateSubscriptionAddress(id, address)
-    return updateSubscriptionAddresss
-  } catch (err) {
-    return false
-  }
+  const res = await ApiRoot({ url: apis?.sc_subscription }).subscriptions().updateSubscriptionAddress(id, address)
+  console.log("update subscription address view data:", res)
+  return res?.subscriptionUpdateAddress || false
 }
-

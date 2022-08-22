@@ -114,3 +114,56 @@ export const pay = async ({ params, success, fail, paymentRequest }: { params: P
     console.log(e)
   }
 }
+
+export const payByAlipay = async (param: PayInput) => {
+  try {
+    const data = await ApiRoot({ url: apis?.payment }).payments().pay({ body: param });
+    const wxLoginRes = Taro.getStorageSync("wxLoginRes");
+    const aliPaymentReq = data?.aliPaymentRequest;
+    const paymentObj = data?.payment;
+    if (data?.isSuccess) {
+      my.tradePay({
+        // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
+        tradeNO: aliPaymentReq?.payWayOrderId,
+        success: async (res) => {
+          console.log(res);
+          if (res.resultCode === "9000" || res.resultCode === "8000") {
+            await ApiRoot({ url: apis?.payment }).payments().syncOrder({
+              input: {
+                paymentId: paymentObj?.id,
+                storeId: wxLoginRes?.userInfo?.storeId,
+              },
+            });
+          }
+          Taro.redirectTo({
+            url: `${routers.orderList}?status=ALL&isFromSubscription=true`,
+          })
+        },
+        fail: (res) => {
+          console.log(res);
+          Taro.redirectTo({
+            url: `${routers.orderList}?status=UNPAID&isFromSubscription=true`,
+          })
+        }
+      });
+    }
+  } catch (e) {
+    Taro.showToast({ title: '系统繁忙，请稍后再试' });
+  }
+}
+
+export const payFromOrder = async (order: any) => {
+  const wxLoginRes = Taro.getStorageSync("wxLoginRes");
+  const paymentParam: PayInput = {
+    consumerId: order?.consumer?.consumerId,
+    consumerOpenId: order?.consumer?.openId,
+    orderId: order?._id,
+    orderNo: order?.orderNumber,
+    orderDescription: '订单支付',
+    payWayId: 'e47dfb0f-1d3f-11ed-8ae8-00163e02a658',
+    amount: order?.orderPrice?.totalPrice * 100,
+    currency: 'CNY',
+    storeId: wxLoginRes?.userInfo?.storeId,
+  };
+  await payByAlipay(paymentParam);
+}
