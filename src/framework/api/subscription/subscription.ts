@@ -178,3 +178,9 @@ export const getSubscriptionScheduleNextDelivery = async (params: any) => {
     return false
   }
 }
+
+export const updateSubscriptionAddress = async (id: string, address: any) => {
+  const res = await ApiRoot({ url: apis?.sc_subscription }).subscriptions().updateSubscriptionAddress(id, address)
+  console.log("update subscription address view data:", res)
+  return res?.subscriptionUpdateAddress || false
+}
