@@ -1,5 +1,4 @@
 
-import Avatar1 from '../../../assets/img/Avatar1.png'
 
 export const swiperList = [
   {

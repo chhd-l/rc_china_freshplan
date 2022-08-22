@@ -21,7 +21,6 @@ const PetList = () => {
   const [petInfoList, setPetInfoList] = useAtom(petInfoListAuto)
 
   console.log('system', system, systemType)
-  let petNumber = router?.params?.petNumber || '1'
 
   const getList = async () => {
     let res = (await getPets({ consumerId: consumerInfo?.id })) || []
@@ -30,9 +29,7 @@ const PetList = () => {
       item.age = getAge(item.birthday)
     })
     setPetInfoList(res)
-    if (res.length) {
-      setPetList(res)
-    }
+    setPetList(res)
   }
 
   const addPet = () => {

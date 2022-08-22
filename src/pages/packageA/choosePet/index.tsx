@@ -23,7 +23,7 @@ const ChoosePet = () => {
     setPetList(res ?? []);
     if (!res || res.length === 0) {
       Taro.redirectTo({
-        url: '/pages/petEdit/index',
+        url: '/pages/packageA/petEdit/index',
       })
     } else {
       Taro.setStorageSync("petItem", res[0]);

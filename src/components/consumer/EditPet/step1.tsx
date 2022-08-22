@@ -1,6 +1,7 @@
 import { View, Text } from '@tarojs/components';
 import PetTitle from './components/PetTitle';
 import { PetListItemProps, PetType, PetStep } from '@/framework/types/consumer';
+import { CDNIMGURL } from '@/lib/constants';
 
 import './step.less';
 
@@ -10,10 +11,17 @@ export interface IProps {
   onChange: (key: keyof PetListItemProps, value: any) => void;
 }
 
-const Step1 = ({ pet, onStepChange, onChange }: IProps) => {
+interface IProps1 extends IProps {
+  onChangeAll: (obj: Partial<PetListItemProps>) => void;
+}
+
+const Step1 = ({ pet, onStepChange, onChangeAll }: IProps1) => {
 
   const handleTypeChange = (type: PetType) => {
-    onChange("type", type);
+    onChangeAll({
+      type: type,
+      image: type === PetType.Cat ? `${CDNIMGURL}cat-default.png` : `${CDNIMGURL}dog-default.png`,
+    })
     onStepChange(PetStep.STEP2);
   }
 
