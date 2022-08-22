@@ -24,7 +24,7 @@ const ExpressLine = ({ expressList }: { expressList: any[] }) => {
             <View className="h-full mr-0.5">
               <View className="h-full m-auto" />
             </View>
-            <View className="flex-1 overflow-hidden">{express?.context}</View>
+            <View className="flex-1 break-all overflow-y-auto">{express?.context}</View>
           </View>
         </View>
       ))}

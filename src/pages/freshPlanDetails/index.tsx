@@ -18,7 +18,7 @@ const FreshPlanDetails = () => {
       birthday: '',
       image: '',
     },
-    productList: [{ variants: { name: '', defaultImage: '' }, description: '' }],
+    productList: [{ name: '', variants: { name: '', defaultImage: '' }, description: '' }],
     id: '',
     no: '',
     createNextDeliveryTime: 0,
@@ -72,7 +72,7 @@ const FreshPlanDetails = () => {
             <View className="mt-1 flex item-center text-[20px] h-[190px]" key={key}>
               <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.9rem' }} />
               <View className="h-full flex flex-col justify-center flex-1">
-                <View className="font-bold text-[30px] text-[#96CC39]">{el?.variants?.name}</View>
+                <View className="font-bold text-[30px] text-[#96CC39]">{el?.name}</View>
                 <View className="flex items-center justify-between mt-1.5 text-[#666]">
                   {(el?.description ?? '').replace(/<[^>]+>/gi, '')}
                 </View>

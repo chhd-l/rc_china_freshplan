@@ -11,7 +11,7 @@ import './index.less'
 const Schedule = () => {
   const [PopupOpne, setPopupOpne] = useState(false)
   const [subscriptionDetails, setSubscriptionDetails] = useState({
-    productList: [{ variants: { name: '', defaultImage: '', num: 0, subscriptionPrice: 0 } }],
+    productList: [{ name: '', variants: { name: '', defaultImage: '', num: 0, subscriptionPrice: 0 } }],
     no: '',
     createNextDeliveryTime: 0,
     consumer: { phone: '' },
@@ -54,7 +54,7 @@ const Schedule = () => {
             <View className="flex item-center h-[160px]" key={key}>
               <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.6rem' }} />
               <View className="h-full flex flex-col justify-center flex-1">
-                <View className="font-bold text-[30px]">{el?.variants?.name}</View>
+                <View className="font-bold text-[30px]">{el?.name}</View>
                 <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
                   {formatMoney(el?.variants?.subscriptionPrice)}
                 </View>

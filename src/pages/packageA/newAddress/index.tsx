@@ -101,7 +101,7 @@ const NewAddress = () => {
             placeholder="请输入姓名"
             value={addressInfo['receiverName']}
             onChange={(value) => updateAddressInfo(value, 'receiverName')}
-            className="rc-address-input ml-0"
+            className="rc-address-input ml-0 receiverName"
           />
           <AtInput
             name="phone"

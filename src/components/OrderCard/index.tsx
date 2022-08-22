@@ -55,7 +55,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
           <View className="orderBody mt-2 flex item-center" key={key}>
             <Image className="orderImage mx-1 h-full" src={el?.pic} />
             <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
-              <View className="text-[26px] leading-[28px]">{el?.skuName}</View>
+              <View className="text-[26px] leading-[28px]">{el?.spuName}</View>
               <View className="flex items-center justify-between">
                 <Text>
                   <Text className="orderPrice">{formatMoney(Number(el?.price))}</Text>
@@ -69,7 +69,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
           <View className="orderBody mt-2 flex item-center" key={key}>
             <Image className="orderImage mx-1 rounded-full" src={el?.pic} />
             <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
-              <View className="text-[26px] leading-[28px]">{el?.skuName}</View>
+              <View className="text-[26px] leading-[28px]">{el?.spuName}</View>
               <View className="flex items-center justify-between">
                 <Text>
                   <Text className="orderPrice">{el?.price}</Text>
@@ -123,9 +123,22 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
             </AtButton>
           </View>
         )}
-        {(order.orderState?.orderState === 'COMPLETED' || order.orderState?.orderState === 'TO_SHIP') && (
+        {order.orderState?.orderState === 'COMPLETED' && (
           <View className="flex items-center">
             <AtButton className="rounded-full">查看详情</AtButton>
+          </View>
+        )}
+        {order.orderState?.orderState === 'TO_SHIP' && (
+          <View className="flex items-center">
+            <AtButton
+              className="rounded-full"
+              onClick={(e) => {
+                e.stopPropagation()
+                orderButton(order.orderNumber, order?.orderState?.orderState)
+              }}
+            >
+              待发货
+            </AtButton>
           </View>
         )}
         {order.orderState?.orderState === 'VOID' && (

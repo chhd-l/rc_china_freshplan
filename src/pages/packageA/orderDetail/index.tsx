@@ -121,7 +121,7 @@ const OrderDetails = () => {
       case 'UNPAID':
         return (
           <View className="flex items-center">
-            请于
+            请于&nbsp;
             <AtCountdown
               className="timeText"
               format={{ hours: ':', minutes: ':', seconds: '' }}
@@ -264,7 +264,7 @@ const OrderDetails = () => {
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
               <Image className="orderAtCardImage mx-1 h-full" src={el?.pic} />
               <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
-                <View>{el?.skuName}</View>
+                <View>{el?.spuName}</View>
                 <View className="flex items-center justify-between">
                   <Text>
                     <Text className="orderAtCardPrice">{formatMoney(Number(el?.price))}</Text>
@@ -278,7 +278,7 @@ const OrderDetails = () => {
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
               <Image className="orderAtCardImage mx-1 rounded-full" src={el?.pic} />
               <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
-                <View>{el?.skuName}</View>
+                <View>{el?.spuName}</View>
                 <View className="flex items-center justify-between">
                   <Text>
                     <Text className="orderAtCardPrice">{el?.price}</Text>
