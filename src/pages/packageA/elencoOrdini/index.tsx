@@ -26,6 +26,10 @@ const OrderList = () => {
   const [curActionOrderId, setCurActionOrderId] = useState('')
   const [curActionType, setCurActionType] = useState('')
   const [showActionTipModal, setShowActionTipModal] = useState(false)
+  const [searchOrder, setSearchOrder] = useState({
+    fieldName: 'orderNoOrProductName',
+    fieldValue: '',
+  })
 
   const getOrderLists = async ({
     orderState = current,
@@ -44,10 +48,10 @@ const OrderList = () => {
       offset,
       sample:
         orderState !== 'ALL'
-          ? queryParameters
+          ? queryParameters?.fieldValue
             ? { orderState, queryParameters }
             : { orderState }
-          : queryParameters
+          : queryParameters?.fieldValue
           ? { queryParameters }
           : {},
     })
@@ -149,11 +153,16 @@ const OrderList = () => {
     <View className="myOrderList pb-2">
       <View className="bg-white py-0.5">
         <AtSearchBar
-          value=""
+          value={searchOrder.fieldValue}
           placeholder="搜索订单"
-          onChange={() => {}}
-          onConfirm={(e) => {
-            console.log('e', e)
+          onChange={(e) =>
+            setSearchOrder({
+              fieldName: 'orderNoOrProductName',
+              fieldValue: e,
+            })
+          }
+          onActionClick={() => {
+            getOrderList({ current, currentPage, searchOrder })
           }}
         />
       </View>
