@@ -69,7 +69,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                       体重&nbsp;&nbsp;{item?.pet?.age}
                     </View>
                     <View className="mt-0.5">
-                      {item?.pet?.breedName}&nbsp;&nbsp;{item?.pet?.recentWeight}kg
+                      {item?.pet?.breed}&nbsp;&nbsp;{item?.pet?.recentWeight}kg
                     </View>
                   </View>
                 </View>

@@ -1,4 +1,5 @@
 import RotationChartList from '@/components/RotationChartList'
+import { getPets } from '@/framework/api/pet/get-pets'
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
 import { CDNIMGURL } from '@/lib/constants'
 import { getAge } from '@/utils/utils'
@@ -27,9 +28,11 @@ const FreshPlanDetails = () => {
   })
   const getSubscriptionDetails = async (id: string) => {
     let res = await getSubscriptionDetail(id)
+    const _storeRes: any = Taro.getStorageSync('wxLoginRes')
+    const pets = (await getPets({ consumerId: _storeRes?.userInfo?.id })) || []
+    res.pet = pets.filter((item) => item.id === res.pet.id)[0]
     res.pet.age = getAge(res.pet.birthday)
     setSubscriptionDetails(res)
-    console.log('res', res)
   }
 
   const returnTypeText = () => {
