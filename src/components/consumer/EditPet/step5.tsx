@@ -15,7 +15,7 @@ const arr2 = ['.'];
 const arr3 = genSeriesNumberArr(0, 9);
 
 const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
-  const [show, setShow] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(!pet.recentWeight);
   const [val, setVal] = useState<number[]>([arr1.indexOf((pet?.recentWeight ?? '')[0]) ?? 0, 0, arr3.indexOf((pet?.recentWeight ?? '')[2]) ?? 0]);
   const [show1, setShow1] = useState<boolean>(false);
   const [val1, setVal1] = useState<number[]>([arr1.indexOf((pet?.targetWeight ?? '')[0]) ?? 0, 0, arr3.indexOf((pet?.targetWeight ?? '')[2]) ?? 0]);
@@ -155,7 +155,7 @@ const Step5 = ({ pet, onStepChange, onChange }: IProps) => {
             </PickerView>
           </View>
           <View className="mb-3">
-            <View onClick={() => setShow1(false)} className="cancel-btn rounded-full text-center h-3 bg-color-primary text-32 text-white">确定</View>
+            <View onClick={handleNext} className="cancel-btn rounded-full text-center h-3 bg-color-primary text-32 text-white">确定</View>
           </View>
         </View>
       </AtFloatLayout>

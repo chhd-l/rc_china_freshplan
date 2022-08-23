@@ -1,25 +1,21 @@
-import { View, Text, Picker } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 import { PetStep } from '@/framework/types/consumer';
 import PetTitle from './components/PetTitle';
 import { IProps } from './step1';
-import moment from 'moment';
-import Taro from '@tarojs/taro';
+import { useState } from 'react';
+import RccDatePicker from '@/components/common/RccDatePicker';
 
 import './step.less';
 
 const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
+  const [show, setShow] = useState<boolean>(!pet.birthday);
 
-  const handleChangeDate = (e) => {
-    const d = moment(e.detail.value);
-    onChange('birthday', d.format('YYYY-MM-DD'));
+  const handleChangeDate = (date: string) => {
+    onChange('birthday', date);
   }
 
   const handleNext = () => {
-    if (!pet.birthday) {
-      Taro.showToast({ title: '请先选择生日' });
-    } else {
-      onStepChange(PetStep.STEP5);
-    }
+    onStepChange(PetStep.STEP5);
   }
 
   return (
@@ -27,7 +23,18 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="mt-2">
         <PetTitle>{pet.name}多大了<Text className="ml-1 text-22 text-gray-200">(请选择出生日期)</Text></PetTitle>
       </View>
-      <View>
+      <View className="mt-1 choose-other-breed flex items-center" onClick={() => setShow(true)}>
+        <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
+        <Text className="rcciconfont rccicon-right text-34 mx-1" />
+      </View>
+      <RccDatePicker
+        visible={show}
+        value={pet.birthday}
+        onChange={handleChangeDate}
+        onClose={() => setShow(false)}
+        onConfirm={handleNext}
+      />
+      {/* <View>
         <Picker
           style={{ borderWidth: '0px !important', backgroundColor: 'transparent !important' }}
           value={pet.birthday}
@@ -35,12 +42,9 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
           end={new Date().toLocaleString().split(' ')[0].replace(/\//g, '-')}
           onChange={handleChangeDate}
         >
-          <View className="mt-1 choose-other-breed flex items-center">
-            <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
-            <Text className="rcciconfont rccicon-right text-34 mx-1" />
-          </View>
+          
         </Picker>
-      </View>
+      </View> */}
       
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
