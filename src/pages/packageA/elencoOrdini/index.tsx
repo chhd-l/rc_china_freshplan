@@ -55,7 +55,6 @@ const OrderList = () => {
           ? { queryParameters }
           : {},
     })
-    console.log('res', res)
     setIsNoMore(res?.total < offset + 10)
     setOrderList(records.concat(res?.records))
   }
@@ -161,8 +160,22 @@ const OrderList = () => {
               fieldValue: e,
             })
           }
+          onClear={() => {
+            setSearchOrder({
+              fieldName: 'orderNoOrProductName',
+              fieldValue: '',
+            })
+            getOrderLists({
+              orderState: current,
+              curPage: currentPage,
+              queryParameters: {
+                fieldName: 'orderNoOrProductName',
+                fieldValue: '',
+              },
+            })
+          }}
           onActionClick={() => {
-            getOrderList({ current, currentPage, searchOrder })
+            getOrderLists({ orderState: current, curPage: currentPage, queryParameters: searchOrder })
           }}
         />
       </View>
