@@ -36,12 +36,12 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           <SwiperItem key={key}>
             <View className="plan">
               <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
-              <View className="swiperItemCard px-1 pt-1.5 pb-1 flex flex-col justify-between text-white">
+              <View className="swiperItemCard px-1 py-1 flex flex-col justify-between text-white">
                 <View className="flex items-center text-[24px]">
                   <View className="ml-0.5 mr-1.5">
                     <AtAvatar
                       size="large"
-                      className="w-[1.4rem] h-[1.4rem]"
+                      className="w-[1.2rem] h-[1.2rem]"
                       circle
                       image={`${
                         item?.pet?.image ? item?.pet?.image : CDNIMGURL + returnPetdefaultImage(item?.pet?.type)
@@ -60,7 +60,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         }}
                       />
                     </View>
-                    <View className="mt-1.5 text-[28px]">
+                    <View className="mt-1 text-[28px]">
                       {item?.pet?.recentHealth === PetPosture.Emaciated
                         ? '瘦弱'
                         : item?.pet?.recentHealth === PetPosture.Obesity
@@ -68,7 +68,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         : '标准'}
                       体重&nbsp;&nbsp;{item?.pet?.age}
                     </View>
-                    <View className="mt-1">
+                    <View className="mt-0.5">
                       {item?.pet?.breedName}&nbsp;&nbsp;{item?.pet?.recentWeight}kg
                     </View>
                   </View>
