@@ -36,12 +36,12 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           <SwiperItem key={key}>
             <View className="plan">
               <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
-              <View className="swiperItemCard px-1 pt-1.5 pb-[0.3rem] flex flex-col justify-between text-white">
+              <View className="swiperItemCard px-1 py-1 flex flex-col justify-between text-white">
                 <View className="flex items-center text-[24px]">
                   <View className="ml-0.5 mr-1.5">
                     <AtAvatar
                       size="large"
-                      className="w-[1.4rem] h-[1.4rem]"
+                      className="w-[1.2rem] h-[1.2rem]"
                       circle
                       image={`${
                         item?.pet?.image ? item?.pet?.image : CDNIMGURL + returnPetdefaultImage(item?.pet?.type)
