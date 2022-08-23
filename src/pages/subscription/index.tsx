@@ -10,6 +10,7 @@ import { wxLogin } from '@/framework/api/consumer/consumer'
 import { useAtom } from 'jotai'
 import { consumerAtom } from '@/store/consumer'
 import { Image, View } from '@tarojs/components'
+import { getPets } from '@/framework/api/pet/get-pets'
 
 const Index = () => {
   const [SubscriptionList, setSubscriptionList] = useState([])
@@ -17,10 +18,18 @@ const Index = () => {
 
   const getSubscriptionList = async () => {
     const res = await getSubscriptionFindByConsumerId()
-    console.log('res', res)
-    res.forEach((item) => {
-      item.pet.age = getAgeYear(item.pet.birthday)
-    })
+    const _storeRes: any = Taro.getStorageSync('wxLoginRes')
+    const pet = (await getPets({ consumerId: _storeRes?.userInfo?.id })) || []
+    if (pet.length) {
+      res.forEach((item) => {
+        pet.forEach((p: any) => {
+          if (p.id === item.pet.id) {
+            p.age = getAgeYear(p.birthday)
+            item.pet = p
+          }
+        })
+      })
+    }
     setSubscriptionList(res)
   }
 

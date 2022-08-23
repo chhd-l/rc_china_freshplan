@@ -107,7 +107,7 @@ export const getAgeYear = (birthdayStr) => {
   })
 
   let yearStr = age[0] ? `${age[0]}岁` : ''
-  let ageStr = age[0] > 0 ? yearStr : '不到一岁'
+  let ageStr = age[0] > 0 ? yearStr : '不到1岁'
   return ageStr
 }
 

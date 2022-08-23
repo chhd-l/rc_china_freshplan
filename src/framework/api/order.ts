@@ -136,6 +136,7 @@ export const getOrderSetting = async () => {
 }
 
 export const getOrderList = async (queryOrderListParams: any) => {
+  console.log('queryOrderListParams', queryOrderListParams)
   try {
     let wxLoginRes = Taro.getStorageSync('wxLoginRes')
     const params = Object.assign(queryOrderListParams, {

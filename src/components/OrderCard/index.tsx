@@ -137,7 +137,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 orderButton(order.orderNumber, order?.orderState?.orderState)
               }}
             >
-              待发货
+              催发货
             </AtButton>
           </View>
         )}
