@@ -45,7 +45,7 @@ const PetList = () => {
 
   return (
     <>
-      <View className="pet-list pb-12" style={{ backgroundColor: '#eee', minHeight: '100vh' }}>
+      <View className="pet-list pb-12" style={{ backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
         {petList.map((pet, idx) => {
           return (
             <PetItem

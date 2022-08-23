@@ -108,7 +108,7 @@ const RotationChartList = ({
                         src={pet.image ? pet.image : `${CDNIMGURL}${returnPetdefaultImage(pet.type)}`}
                       />
                       {onSelectPet ? (
-                        <Text className={`pet-check rcciconfont rccicon-rcheck ${current === key ? 'active' : ''}`} />
+                        <Image src={current === key ? `${CDNIMGURL}selected-s.png` : `${CDNIMGURL}unselected.png`} className={`pet-check ${current === key ? 'active' : ''}`} />
                       ) : null}
                     </View>
                   </SwiperItem>
