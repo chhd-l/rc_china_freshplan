@@ -48,7 +48,7 @@ const Subscription = () => {
 
   return (
     <View>
-      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} z-10 `}>
+      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} z-10 py-1`}>
         {consumer?.id ? (
           <Button
             className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
@@ -76,11 +76,6 @@ const Subscription = () => {
             开始定制
           </Button>
         )}
-        <View className="flex my-1 items-center justify-center">
-          {titleSwiperList.map((_, key) => (
-            <View key={key} className={`${current === key && 'selectInd'} rounded-full`} />
-          ))}
-        </View>
       </View>
       <ScrollView
         className="scrollview"
