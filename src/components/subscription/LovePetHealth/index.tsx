@@ -15,7 +15,7 @@ const LovePetHealth = () => {
           <View className="text-[48px]">时刻守护您的爱宠健康</View>
         </PetTitle>
       </View>
-      <View className="pt-[50px] m-auto w-full relative">
+      <View className="m-auto w-full relative">
         <Swiper
           circular
           autoplay

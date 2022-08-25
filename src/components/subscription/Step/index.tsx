@@ -10,7 +10,7 @@ const Step = () => {
         </PetTitle>
       </View>
       <View className=" mx-[20px] h-h-28">
-        <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/step_line.png" />
+        <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/steps.png" />
       </View>
     </View>
   )

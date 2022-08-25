@@ -1,9 +1,12 @@
-import fesh_icon_1 from '../../../assets/icons/freshFood/fesh_icon_1.png';
-import fesh_icon_2 from '../../../assets/icons/freshFood/fesh_icon_2.png';
-import fesh_icon_3 from '../../../assets/icons/freshFood/fesh_icon_3.png';
-import fesh_icon_4 from '../../../assets/icons/freshFood/fesh_icon_4.png';
-import fesh_icon_5 from '../../../assets/icons/freshFood/fesh_icon_5.png';
-import fesh_icon_6 from '../../../assets/icons/freshFood/fesh_icon_6.png';
+import { CDNIMGURL2 } from "@/lib/constants";
+
+const fesh_icon_1 = CDNIMGURL2 + 'Group 1194.png';
+const fesh_icon_2 = CDNIMGURL2 + 'Group 1193.png';
+const fesh_icon_3 = CDNIMGURL2 + 'Group 1192.png';
+const fesh_icon_4 = CDNIMGURL2 + 'Group 1196.png';
+const fesh_icon_5 = CDNIMGURL2 + 'Group 1195.png';
+const fesh_icon_6 = CDNIMGURL2 + 'Group 344.png';
+
 
 export const freshFood_left = [
   {
