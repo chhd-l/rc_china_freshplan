@@ -163,7 +163,6 @@ const NewAddress = () => {
       <View
         className="text-gray-400 flex items-center justify-between p-1 bg-white rounded mt-1"
         onClick={() => {
-          if (!!addressInfo.isDefault && router?.params.type === 'edit') return null
           updateAddressInfo(!addressInfo.isDefault, 'isDefault')
         }}
       >

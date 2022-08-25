@@ -13,13 +13,13 @@ const CommonProblem = () => {
         </PetTitle>
       </View>
       {commonProblems.map((item, key) => (
-        <View key={key} className="shadow mb-[22px] p-[28px] flex flex-col">
-          <View className="flex flex-row items-center pl-[15px]">
+        <View key={key} className="bg-[#FAFAFA] border-[16px] mb-[22px] p-[26px] flex flex-col">
+          <View className="flex flex-row items-center pl-[8px]">
             <View className="w-[50px] h-[50px] flex-shrink-0 -mr-[5px]" style={{ zIndex: 2 }}>
               <Image src={CDNIMGURL2 + 'Group 363.png'} />
             </View>
             <View
-              className="text-[28px] font-bold leading-[33px] h-[33px] pl-[15px]"
+              className="text-[28px] font-bold leading-[45px] h-[45px] pl-[15px]"
               style={{
                 background: 'linear-gradient(90deg, #DFEEC5 43.66%, rgba(233, 242, 218, 0) 100%)',
                 zIndex: 1,
@@ -30,7 +30,7 @@ const CommonProblem = () => {
           </View>
           <View />
           <View className="flex flex-row items-start pt-[21px]">
-            <View className="w-[50px] h-[50px] mr-[25px] flex-shrink-0" />
+            <View className="w-[50px] h-[50px] mr-[18px] flex-shrink-0" />
             <View className="text-[26px] leading-[30px]">{item.answer}</View>
           </View>
         </View>

@@ -1,4 +1,4 @@
-import { CDNIMGURL } from '@/lib/constants'
+import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { Image, Swiper, SwiperItem, Text, View, BaseEventOrig, ScrollView, ScrollViewProps } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import moment from 'moment'
@@ -71,7 +71,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         className="w-[1.2rem] h-[1.2rem]"
                         circle
                         image={`${
-                          item?.pet?.image ? item?.pet?.image : CDNIMGURL + returnPetdefaultImage(item?.pet?.type)
+                          item?.pet?.image ? item?.pet?.image : CDNIMGURL2 + returnPetdefaultImage(item?.pet?.type)
                         }`}
                       />
                     </View>
