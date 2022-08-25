@@ -14,16 +14,19 @@ const CommonProblem = () => {
       </View>
       {commonProblems.map((item, key) => (
         <View key={key} className="shadow mb-[22px] p-[28px] flex flex-col">
-          <View
-            className="flex flex-row items-center my-[25px]"
-            style={{
-              background: 'linear-gradient(90deg, #DFEEC5 43.66%, rgba(233, 242, 218, 0) 100%)',
-            }}
-          >
-            <View className="w-[50px] h-[50px] mr-[25px] flex-shrink-0">
+          <View className="flex flex-row items-center pl-[15px]">
+            <View className="w-[50px] h-[50px] flex-shrink-0 -mr-[5px]" style={{ zIndex: 2 }}>
               <Image src={CDNIMGURL2 + 'Group 363.png'} />
             </View>
-            <View className="text-[28px] font-bold h-full">{item.question}</View>
+            <View
+              className="text-[28px] font-bold leading-[33px] h-[33px] pl-[15px]"
+              style={{
+                background: 'linear-gradient(90deg, #DFEEC5 43.66%, rgba(233, 242, 218, 0) 100%)',
+                zIndex: 1,
+              }}
+            >
+              {item.question}
+            </View>
           </View>
           <View />
           <View className="flex flex-row items-start pt-[21px]">
