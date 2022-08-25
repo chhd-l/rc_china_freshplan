@@ -5,7 +5,7 @@ import { pickForUpdate } from '@/utils/utils'
 import { Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { AtButton, AtCheckbox, AtForm, AtInput, AtTextarea, AtToast } from 'taro-ui'
+import { AtButton, AtForm, AtInput, AtTextarea, AtToast } from 'taro-ui'
 import './index.less'
 
 const NewAddress = () => {
@@ -90,6 +90,18 @@ const NewAddress = () => {
     }
   }, [router?.params.type])
 
+  Taro.useDidShow(() => {
+    if (router?.params.type === 'edit') {
+      my.setNavigationBar({
+        title: '修改地址',
+      })
+    } else {
+      my.setNavigationBar({
+        title: '新增地址',
+      })
+    }
+  })
+
   return (
     <View className="NewAddress bg-gray-eee p-1 h-screen ">
       <AtForm className="p-1 rounded" onSubmit={() => saveNewAddress()}>
@@ -144,28 +156,28 @@ const NewAddress = () => {
             maxLength={200}
             placeholder="请输入详细地址"
             count={false}
-            className="border-0 border-t-0 rc-text-area"
+            className="border-0 border-t-0 rc-text-area p-0 mt-0.5"
           />
-          {!router?.params?.subscriptionDetailsID && (
-            <View className="text-gray-400 flex items-center">
-              <AtCheckbox
-                className="radioText"
-                options={[
-                  {
-                    value: true,
-                    label: '默认地址',
-                  },
-                ]}
-                selectedList={[addressInfo.isDefault]}
-                onChange={(e) => {
-                  if (e.length === 0 && router?.params.type === 'edit') return null
-                  updateAddressInfo(!addressInfo.isDefault, 'isDefault')
-                }}
-              />
-            </View>
-          )}
         </View>
       </AtForm>
+      <View
+        className="text-gray-400 flex items-center justify-between p-1 bg-white rounded mt-1"
+        onClick={() => {
+          if (!!addressInfo.isDefault && router?.params.type === 'edit') return null
+          updateAddressInfo(!addressInfo.isDefault, 'isDefault')
+        }}
+      >
+        <Text className="text-[30px] text-black">默认地址</Text>
+        <View className="rounded-full switch w-[83px] h-[40px] bg-[#B7B7B7]">
+          <View
+            className={`${
+              addressInfo.isDefault ? 'w-full' : 'w-[40px]'
+            } rounded-full h-full bg-[#96CC39] flex justify-end`}
+          >
+            <View className="rounded-full h-full w-[40px] bg-white" />
+          </View>
+        </View>
+      </View>
       <View className="w-full pt-1 pb-2 fixed bottom-0 left-0 bg-white">
         <AtButton
           className="mx-4 rounded-full"
