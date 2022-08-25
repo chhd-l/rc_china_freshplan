@@ -1,28 +1,31 @@
 .gender-choice {
   .dog, .cat {
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: .2rem;
-    color: #d0d0d0;
-    background-color: #f6f6f6;
-    .rcciconfont {
-      font-size: 1.1rem;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background-color: #efeff0;
+    .choice {
+      position: absolute;
+      width: .4rem;
+      height: .4rem;
+      right: 10%;
+      bottom: 0;
     }
   }
   &.active {
     .dog, .cat {
-      color: #96CC39;
-      background-color: #CEEA9E;
+      background-color: #ffb038;
     }
   }
 }
 
 .pet-avatar {
   position: relative;
-  width: 1.6rem;
-  height: 1.6rem;
-  border-radius: 1.6rem;
-  background-color: #CEEA9E;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  background-color: #ffb038;
   color: #96CC39;
   .a-image {
     width: 100%;
@@ -35,42 +38,44 @@
   }
   .up-alert {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    right: 10px;
-    bottom: 10px;
-    border-radius: 30px;
-    background-color: #96CC39;
+    width: 40px;
+    height: 40px;
+    right: 10%;
+    bottom: 0;
+    border-radius: 40px;
+    background-color: #cbcbcb;
+    border: 1PX solid #fff;
     color: #fff;
-    font-size: 14px;
-    line-height: 30px;
+    font-size: 20px;
+    line-height: 40px;
     text-align: center;
   }
 }
 
 .rcc-single-choice {
   .rcc-choice-item {
-    height: 80px;
+    height: 92px;
     border-radius: 20px;
     background-color: #f6f6f6;
-    line-height: 80px;
+    line-height: 92px;
     text-align: center;
     &.bg-white {
       background-color: #ffffff;
     }
     &.active {
+      color: #ffffff;
       background-color: #96CC39;
     }
   }
   &.grid-cols-3 {
-    gap: .25rem;
+    gap: .2rem;
   }
 }
 
 .choose-other-breed {
-  height: 80px;
+  height: 92px;
   border-radius: 20px;
-  line-height: 80px;
+  line-height: 92px;
   background-color: #f6f6f6;
   &.bg-white {
     background-color: #ffffff;
@@ -87,14 +92,15 @@
   bottom: 1rem;
   background-color: #fff;
   .btn-item {
-    height: 80px;
-    line-height: 80px;
+    height: 92px;
+    line-height: 92px;
     margin: 0 .2rem;
     color: #fff;
     text-align: center;
-    font-size: 28px;
+    font-size: 32px;
+    font-weight: bold;
     background-color: #D9D9D9;
-    border-radius: 40px;
+    border-radius: 46px;
     &.active {
       background-color: #C2E686;
     }
@@ -120,10 +126,7 @@
     height: 1.2rem;
     line-height: 1.2rem;
     border-radius: 1.2rem;
-    background-color: #CEEA9E;
-  }
-  .cancel-btn {
-    line-height: .75rem;
+    background-color: #F0FCDB;
   }
 }
 
@@ -142,14 +145,14 @@
     }
 
     &.active {
-      background-color: #96CC39;
+      background-color: #E0F1C4;
     }
   }
 }
 
 .pet-health-item {
-  height: 80px;
-  line-height: 80px;
+  height: 92px;
+  line-height: 92px;
   text-align: center;
   background-color: #f6f6f6;
   border-radius: 20px;
@@ -157,6 +160,7 @@
     background-color: #ffffff;
   }
   &.active {
+    color: #ffffff;
     background-color: #96CC39;
   }
 }
@@ -182,4 +186,9 @@
   &.pet-fat::before {
     left: 83%;
   }
+}
+
+.poper-btn {
+  height: 92px;
+  line-height: 92px;
 }

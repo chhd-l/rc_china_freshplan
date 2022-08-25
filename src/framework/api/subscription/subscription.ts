@@ -34,7 +34,7 @@ export const subscriptionCreateAndPay = async ({
     const productList = orderItems.map((el) => {
       if (el?.variants?.id) {
         el.variants = Object.assign(omit(el.variants, ['isDeleted', 'variantBundles']), {
-          num: 1,
+          num: 6,
         })
       }
       if (el?.specifications?.length > 0) {
@@ -81,7 +81,7 @@ export const subscriptionCreateAndPay = async ({
       coupons: null,
       remark,
       firstDeliveryTime: formatDateToApi(deliveryTime),
-      totalDeliveryTimes: 1, //配送次数
+      totalDeliveryTimes: 6, //配送次数
     }
     let params = {
       input: subscriptionInput,

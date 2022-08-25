@@ -20,12 +20,12 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
 
   return (
     <View className="mx-1 pt-2">
-      <View className="mt-2">
-        <PetTitle>{pet.name}多大了<Text className="ml-1 text-22 text-gray-200">(请选择出生日期)</Text></PetTitle>
+      <View className="mt-3">
+        <PetTitle>{pet.name}多大了<Text className="ml-1 text-26 font-normal text-gray-400">(请选择出生日期)</Text></PetTitle>
       </View>
-      <View className="mt-1 choose-other-breed flex items-center" onClick={() => setShow(true)}>
+      <View className="mt-1.5 choose-other-breed flex items-center" onClick={() => setShow(true)}>
         <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
-        <Text className="rcciconfont rccicon-right text-34 mx-1" />
+        <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
       </View>
       <RccDatePicker
         visible={show}

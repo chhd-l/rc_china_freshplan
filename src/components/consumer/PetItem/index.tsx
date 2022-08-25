@@ -1,12 +1,12 @@
-import { View, Image, Button } from '@tarojs/components'
-import { AtIcon, AtModal, AtModalAction, AtModalContent, AtSwipeAction } from 'taro-ui'
-import { UPLOADURL, CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
+import { View, Image } from '@tarojs/components'
+import { AtModal, AtSwipeAction } from 'taro-ui'
+import { CDNIMGURL } from '@/lib/constants'
 import Taro from '@tarojs/taro'
 import cloneDeep from 'lodash.cloneDeep'
 import { useEffect, useState } from 'react'
-import EditPet from '@/components/consumer/EditPet'
 import { editPetButton } from '@/lib/consumer'
 import { deletePet } from '@/framework/api/pet/delete-pet'
+import { getSubsByPetId } from '@/framework/api/pet/get-pets'
 import { PetListItemProps, PetType } from '@/framework/types/consumer'
 import './index.less'
 
@@ -46,7 +46,13 @@ const PetItem = ({ pet, petIdx, petList, setPetList, showAddPetBtn, getList }: P
   }
 
   const comfirmDel = async () => {
-    let { id } = petList[editActive]
+    let { id, name } = petList[editActive]
+    const subscriptionNos = await getSubsByPetId(id);
+    if (subscriptionNos && subscriptionNos.length > 0) {
+      Taro.showToast({ title: `${name}包含定制，暂无法删除` })
+      setShowDelModal(false)
+      return;
+    }
     const res = await deletePet({ id })
     setShowDelModal(false)
     if (res) {
@@ -87,7 +93,7 @@ const PetItem = ({ pet, petIdx, petList, setPetList, showAddPetBtn, getList }: P
         >
           <View
             className="text-center w-screen bg-white bg-cover bg-no-repeat"
-            style={{ padding: '30px 0' }}
+            style={{ backgroundImage: `url(${CDNIMGURL}pet%20background.png)`, padding: '30px 0' }}
             onClick={() => {
               showEdit(petIdx)
             }}

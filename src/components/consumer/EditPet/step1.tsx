@@ -1,7 +1,7 @@
-import { View, Text } from '@tarojs/components';
+import { View, Text, Image } from '@tarojs/components';
 import PetTitle from './components/PetTitle';
 import { PetListItemProps, PetType, PetStep } from '@/framework/types/consumer';
-import { CDNIMGURL } from '@/lib/constants';
+import { CDNIMGURL2, CDNIMGURL } from '@/lib/constants';
 
 import './step.less';
 
@@ -20,28 +20,32 @@ const Step1 = ({ pet, onStepChange, onChangeAll }: IProps1) => {
   const handleTypeChange = (type: PetType) => {
     onChangeAll({
       type: type,
-      image: type === PetType.Cat ? `${CDNIMGURL}cat-default.png` : `${CDNIMGURL}dog-default.png`,
+      image: type === PetType.Cat ? `${CDNIMGURL2}cat-default.png` : `${CDNIMGURL2}dog-default.png`,
     })
     onStepChange(PetStep.STEP2);
   }
 
   return (
     <View className="mx-1 pt-2">
-      <View className="mt-1"></View>
+      <View className="mt-2"></View>
       <PetTitle>您的爱宠是</PetTitle>
-      <Text className="text-24" style={{marginLeft: '14PX'}}>爱宠的健康之旅，从这里开始。</Text>
+      <View className="mt-1">
+        <Text className="text-26 text-gray-600" style={{marginLeft: '14PX'}}>爱宠的健康之旅，从这里开始。</Text>
+      </View>
       <View className="mt-3 flex justify-around items-center">
         <View className={`gender-choice text-center ${pet.type === PetType.Cat ? 'active' : ''}`} onClick={() => handleTypeChange(PetType.Cat)}>
           <View className="cat flex items-center justify-center">
-            <Text className="rcciconfont rccicon-cat1"></Text>
+            <Image src={`${CDNIMGURL2}cat-default.png`} mode="widthFix" />
+            <Image className="choice" mode="widthFix" src={pet.type === PetType.Cat ? `${CDNIMGURL}selected-s.png` : `${CDNIMGURL}unselected.png`} />
           </View>
-          <View className="mt-1 text-28">猫</View>
+          <View className="mt-1 text-32 text-gray-400">猫猫</View>
         </View>
         <View className={`gender-choice text-center ${pet.type === PetType.Dog ? 'active' : ''}`} onClick={() => handleTypeChange(PetType.Dog)}>
           <View className="dog flex items-center justify-center">
-            <Text className="rcciconfont rccicon-dog1"></Text>
+            <Image src={`${CDNIMGURL2}dog-default.png`} mode="widthFix" />
+            <Image className="choice" mode="widthFix" src={pet.type === PetType.Dog ? `${CDNIMGURL}selected-s.png` : `${CDNIMGURL}unselected.png`} />
           </View>
-          <View className="mt-1 text-28">狗</View>
+          <View className="mt-1 text-32 text-gray-400">狗狗</View>
         </View>
       </View>
     </View>

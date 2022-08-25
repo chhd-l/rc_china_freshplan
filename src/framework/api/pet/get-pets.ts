@@ -28,3 +28,13 @@ export const getPet = async (id: string) => {
     return null;
   }
 }
+
+export const getSubsByPetId = async (petId: string) => {
+  try {
+    const data = await ApiRoot({ url: apis?.common_pet }).pets().getSubscriptionsByPet(petId)
+    return data;
+  } catch (err) {
+    console.log(err, 'err')
+    return [];
+  }
+}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { AtProgress } from 'taro-ui';
-import { PetListItemProps, PetStep, PetPosture } from '@/framework/types/consumer';
+import { PetListItemProps, PetStep } from '@/framework/types/consumer';
 import { addPet } from '@/framework/api/pet/add-pet';
 import Taro from '@tarojs/taro';
 import Step1 from '@/components/consumer/EditPet/step1';
@@ -26,7 +26,6 @@ const petEdit = () => {
     isSterilized: false,
     name: '',
     type: undefined,
-    recentPosture: PetPosture.Standard,
   });
 
   const handleSetPet = (key: keyof PetListItemProps, value: any) => {
@@ -39,8 +38,9 @@ const petEdit = () => {
 
   const handleSave = async () => {
     const res = await addPet(pet);
+    console.log('add pet response:', res);
     if (res) {
-      Taro.setStorageSync("petItem", pet);
+      Taro.setStorageSync("petItem", { ...pet, id: res?.id });
       Taro.redirectTo({
         url: '/pages/foodRecom/index',
       })
@@ -65,7 +65,7 @@ const petEdit = () => {
           : step === PetStep.STEP4
           ? <Step4 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
           : step === PetStep.STEP5
-          ? <Step5 pet={pet} onStepChange={setStep} onChange={handleSetPet} />
+          ? <Step5 pet={pet} onStepChange={setStep} onChange={handleSetPet} onChangeAll={handleSetPetAll} />
           : step === PetStep.STEP6
           ? <Step6 pet={pet} onStepChange={setStep} onChange={handleSetPet} onSave={handleSave} />
           : null

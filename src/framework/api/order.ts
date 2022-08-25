@@ -231,7 +231,7 @@ export const calculateOrderPrice = async ({
     const productList = cloneDeep(orderItems).map((el) => {
       if (el?.variants?.id) {
         el.variants = Object.assign(omit(el.variants, ['isDeleted', 'variantBundles']), {
-          num: 1,
+          num: 6,
         })
       }
       if (el?.specifications?.length > 0) {

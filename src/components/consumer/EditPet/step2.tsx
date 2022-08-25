@@ -54,30 +54,30 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="mt-3 text-center flex justify-center">
         <View className="pet-avatar flex justify-center items-center" onClick={() => setShow(true)}>
           <Image src={pet.image} />
-          <Text className={`up-alert rcciconfont ${pet.image ? 'rccicon-edit' : 'rccicon-add'}`} />
+          <Text className={`up-alert rcciconfont rccicon-cam`} />
         </View>
       </View>
       <View className="mt-4">
         <PetTitle>您爱宠的昵称是</PetTitle>
       </View>
-      <View className="mt-2 flex justify-between items-center">
+      <View className="mt-1.5 flex justify-between items-center">
         <View className="flex-1">
           <Input value={pet.name} className="rcc-input" onInput={handleNameChange} />
         </View>
       </View>
-      <View className="mt-2">
+      <View className="mt-3">
         <PetTitle>您爱宠的性别</PetTitle>
       </View>
-      <View className="mt-2 rcc-single-choice flex justify-between items-center">
+      <View className="mt-1.5 rcc-single-choice flex justify-between items-center">
         <Text
           onClick={() => handleGenderChange(PetGender.Male)}
-          className={`rcc-choice-item flex-1 mr-1 text-28 font-bold ${pet.gender === PetGender.Male ? 'active' : ''}`}
+          className={`rcc-choice-item flex-1 mr-1 text-30 ${pet.gender === PetGender.Male ? 'active' : ''}`}
         >
           小鲜肉
         </Text>
         <Text
           onClick={() => handleGenderChange(PetGender.Female)}
-          className={`rcc-choice-item flex-1 ml-1 text-28 font-bold ${pet.gender === PetGender.Female ? 'active' : ''}`}
+          className={`rcc-choice-item flex-1 ml-1 text-30 ${pet.gender === PetGender.Female ? 'active' : ''}`}
         >
           小公主
         </Text>
@@ -92,23 +92,23 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
         onClose={() => setShow(false)}
       >
         <View className="upload-avatar">
-          <View className="mt-2 text-28 font-bold text-center">上传宠物头像</View>
+          <View className="mt-2 text-32 font-bold text-center">上传宠物头像</View>
           <View className="mt-3 flex">
             <View className="flex-1 text-center">
               <View className="upload-item" onClick={() => handleUploadFromSource('camera')}>
                 <Text className="rcciconfont rccicon-camera text-48 text-color-primary"/>
               </View>
-              <View className="mt-1 text-28">去拍照</View>
+              <View className="mt-1 text-30">去拍照</View>
             </View>
             <View className="flex-1 text-center">
               <View className="upload-item" onClick={() => handleUploadFromSource('album')}>
                 <Text className="rcciconfont rccicon-picture text-48 text-color-primary"/>
               </View>
-              <View className="mt-1 text-28">相册选择</View>
+              <View className="mt-1 text-30">相册选择</View>
             </View>
           </View>
           <View className="mt-3">
-            <View onClick={() => setShow(false)} className="cancel-btn rounded-full text-center h-3 bg-color-primary text-32 text-white">取消</View>
+            <View onClick={() => setShow(false)} className="poper-btn rounded-full text-center bg-color-primary text-32 font-bold text-white">取 消</View>
           </View>
         </View>
       </AtFloatLayout>
