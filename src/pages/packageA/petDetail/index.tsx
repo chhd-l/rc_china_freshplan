@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, Text, Image, Input, PickerView, PickerViewColumn } from '@tarojs/components';
-import { AtFloatLayout, AtButton } from 'taro-ui';
+import { AtFloatLayout } from 'taro-ui';
 import Taro from '@tarojs/taro';
 import { CDNIMGURL2, CDNIMGURL, UPLOADURL } from '@/lib/constants';
 import { getBreedList } from '@/framework/api/pet/get-breeds';
@@ -11,13 +11,14 @@ import { updatePet } from '@/framework/api/pet/update-pet';
 import { getPet } from '@/framework/api/pet/get-pets';
 import moment from 'moment';
 import RccDatePicker from '@/components/common/RccDatePicker';
+import { genSeriesNumberArr } from '@/utils/utils';
 
 import '@/components/consumer/EditPet/step.less';
 import './index.less';
 
-const arr1 = ['0','1','2','3','4','5','6','7','8','9','10'];
+const arr1 = genSeriesNumberArr(0, 70);
 const arr2 = ['.'];
-const arr3 = ['0','1','2','3','4','5','6','7','8','9'];
+const arr3 = genSeriesNumberArr(0, 9);
 
 let originalPet: any = {};
 
@@ -122,6 +123,17 @@ const PetDetail = () => {
     handlePetEdit({'targetWeight': arr1[cv[0] > -1 ? cv[0] : 0] + '.' + arr3[cv[2] > -1 ? cv[2] : 0]});
   }
 
+  const handlePostureChange = (posture: PetPosture) => {
+    if (moment().diff(moment(pet.birthday, 'YYYY-MM-DD'), 'years') >= 1 && posture === PetPosture.Standard) {
+      handlePetEdit({
+        recentPosture: posture,
+        targetWeight: undefined,
+      });
+    } else {
+      handlePetEdit({ recentPosture: posture });
+    }
+  }
+
   const handleChooseHealth = (health: PetHealth) => {
     let healthes = pet.recentHealth ?? [];
     const idx = healthes.indexOf(health);
@@ -140,6 +152,22 @@ const PetDetail = () => {
   }
 
   const savePet = async () => {
+    if (!pet.name) {
+      Taro.showToast({ title: '请先设置宠物昵称' });
+      return;
+    }
+    if ((moment().diff(moment(pet.birthday, 'YYYY-MM-DD'), 'years') < 1 || pet.recentPosture !== PetPosture.Standard) && !pet.targetWeight) {
+      Taro.showToast({ title: '请先设置目标体重' });
+      return;
+    }
+    if (pet.recentPosture === PetPosture.Emaciated && Number(pet.targetWeight) <= Number(pet.recentWeight)) {
+      Taro.showToast({ title: '成年目标体重应大于近期体重' });
+      return;
+    }
+    if (pet.recentPosture === PetPosture.Obesity && Number(pet.targetWeight) >= Number(pet.recentWeight)) {
+      Taro.showToast({ title: '成年目标体重应小于近期体重' });
+      return;
+    }
     const res = await updatePet(pet, originalPet);
     if (res) {
       Taro.navigateBack();
@@ -173,46 +201,46 @@ const PetDetail = () => {
       </View>
       <View className="pb-12">
         <View className="tab1 px-1" style={{display: tab === 1 ? 'block' : 'none'}}>
-          <View className="mt-2">
+          <View className="mt-3">
             <PetTitle>宠物昵称</PetTitle>
           </View>
-          <View className="mt-2">
+          <View className="mt-1.5">
             <Input className="rcc-input bg-white" value={pet.name} onInput={(e) => handlePetEdit({ name: e.detail.value })} />
           </View>
-          <View className="mt-2">
+          <View className="mt-3">
             <PetTitle>宠物生日</PetTitle>
           </View>
-          <View className="mt-2">
+          <View className="mt-1.5">
             <View className="choose-other-breed bg-white flex items-center" onClick={() => setShowBirth(true)}>
-              <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
-              <Text className="rcciconfont rccicon-right text-34 mx-1" />
+              <Text className="text-28 mx-1 flex-1">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
+              <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
             </View>
           </View>
-          <View className="mt-2">
+          <View className="mt-3">
             <PetTitle>{pet.name}是</PetTitle>
           </View>
-          <View className="mt-2 rcc-single-choice flex justify-between items-center">
+          <View className="mt-1.5 rcc-single-choice flex justify-between items-center">
             <Text
               onClick={() => handlePetEdit({ 'gender': PetGender.Male})}
-              className={`rcc-choice-item bg-white flex-1 mr-1 text-28 font-bold ${pet.gender === PetGender.Male ? 'active' : ''}`}
+              className={`rcc-choice-item bg-white flex-1 mr-1 text-30 ${pet.gender === PetGender.Male ? 'active' : ''}`}
             >
               小鲜肉
             </Text>
             <Text
               onClick={() => handlePetEdit({ 'gender': PetGender.Female})}
-              className={`rcc-choice-item bg-white flex-1 ml-1 text-28 font-bold ${pet.gender === PetGender.Female ? 'active' : ''}`}
+              className={`rcc-choice-item bg-white flex-1 ml-1 text-30 ${pet.gender === PetGender.Female ? 'active' : ''}`}
             >
               小公主
             </Text>
           </View>
-          <View className="mt-2">
+          <View className="mt-3">
             <PetTitle>{pet.name}的品种是</PetTitle>
           </View>
-          <View className="mt-2 rcc-single-choice grid grid-cols-3">
+          <View className="mt-1.5 rcc-single-choice grid grid-cols-3">
             {hotBreedList.map((item: BreedListItemProps, index: number) => (
                 <Text
                   key={index}
-                  className={`rcc-choice-item bg-white text-28 font-bold truncate ${pet.code === item.code ? 'active' : ''}`}
+                  className={`rcc-choice-item bg-white text-28 truncate ${pet.code === item.code ? 'active' : ''}`}
                   onClick={() => handlePetEdit({ breed: item.name, code: item.code})}
                 >
                   {item.name}
@@ -220,72 +248,72 @@ const PetDetail = () => {
             ))}
           </View>
           <View className={`mt-1 choose-other-breed bg-white flex items-center ${isOtherBreedSelected ? 'active' : ''}`} onClick={handleBreed}>
-            <Text className="text-28 mx-1 flex-1 font-bold">{isOtherBreedSelected ? pet.breed : '选择其他品种'}</Text>
-            <Text className="rcciconfont rccicon-right text-34 mx-1" />
+            <Text className="text-28 mx-1 flex-1">{isOtherBreedSelected ? pet.breed : '选择其他品种'}</Text>
+            <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
           </View>
         </View>
         <View className="tab2 px-1" style={{display: tab === 2 ? 'block' : 'none'}}>
-          <View className="mt-2">
-            <PetTitle>{pet.name}近期的体重<Text className="ml-1 text-22 text-gray-200">(kg)</Text></PetTitle>
+          <View className="mt-3">
+            <PetTitle>{pet.name}近期的体重<Text className="ml-1 text-26 font-normal text-gray-400">(kg)</Text></PetTitle>
           </View>
-          <View className="mt-2 choose-other-breed bg-white flex items-center" onClick={() => setShow(true)}>
-            <Text className="text-28 mx-1 flex-1 font-bold">{pet.recentWeight ? pet.recentWeight : '请选择'}</Text>
-            <Text className="rcciconfont rccicon-right text-34 mx-1" />
+          <View className="mt-1.5 choose-other-breed bg-white flex items-center" onClick={() => setShow(true)}>
+            <Text className="text-28 mx-1 flex-1">{pet.recentWeight ? pet.recentWeight : '请选择'}</Text>
+            <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
           </View>
-          <View className="mt-2">
+          <View className="mt-3">
             <PetTitle>{pet.name}近期的体态</PetTitle>
           </View>
-          <View className="mt-2 flex items-center pet-situation bg-white">
-            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Emaciated ? 'active font-bold' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Emaciated})}>
+          <View className="mt-1.5 flex items-center pet-situation bg-white">
+            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Emaciated ? 'active font-bold' : ''}`} onClick={() => handlePostureChange(PetPosture.Emaciated)}>
               <Image className="my-1" src={`${CDNIMGURL2}weight-thin.png`} />
               <View className="text-24 mb-1">瘦弱</View>
             </View>
-            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Standard ? 'active font-bold' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Standard})}>
+            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Standard ? 'active font-bold' : ''}`} onClick={() => handlePostureChange(PetPosture.Standard)}>
               <Image className="my-1" src={`${CDNIMGURL2}weight-std.png`} />
               <View className="text-24 mb-1">标准</View>
             </View>
-            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Obesity ? 'active font-bold' : ''}`} onClick={() => handlePetEdit({ 'recentPosture': PetPosture.Obesity})}>
+            <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Obesity ? 'active font-bold' : ''}`} onClick={() => handlePostureChange(PetPosture.Obesity)}>
               <Image className="my-1" src={`${CDNIMGURL2}weight-fat.png`} />
               <View className="text-24 mb-1">超重</View>
             </View>
           </View>
-          <View className="mt-2">
-            <PetTitle>{pet.name}近期的成年目标体重<Text className="ml-1 text-22 text-gray-200">(kg)</Text></PetTitle>
+          {moment().diff(moment(pet.birthday, 'YYYY-MM-DD'), 'years') >= 1 && pet.recentPosture === PetPosture.Standard ? null : <><View className="mt-3">
+            <PetTitle>{pet.name}近期的成年目标体重<Text className="ml-1 text-26 font-normal text-gray-400">(kg)</Text></PetTitle>
           </View>
-          <View className="mt-2 choose-other-breed bg-white flex items-center" onClick={() => setShow1(true)}>
-            <Text className="text-28 mx-1 flex-1 font-bold">{pet.targetWeight ? pet.targetWeight : '请选择'}</Text>
-            <Text className="rcciconfont rccicon-right text-34 mx-1" />
+          <View className="mt-1.5 choose-other-breed bg-white flex items-center" onClick={() => setShow1(true)}>
+            <Text className="text-28 mx-1 flex-1">{pet.targetWeight ? pet.targetWeight : '请选择'}</Text>
+            <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
+          </View></>}
+          <View className="mt-3">
+            <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-26 font-normal text-gray-400">(可多选)</Text></PetTitle>
           </View>
-          <View className="mt-2">
-            <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-22 text-gray-200">(可多选)</Text></PetTitle>
-          </View>
-          <View>
+          <View className="pt-0.5">
             <View
-              className={`pet-health-item bg-white my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.PICKY_EATER) > -1 ? 'active' : ''}`}
+              className={`pet-health-item bg-white my-1 text-28 ${(pet.recentHealth ?? []).indexOf(PetHealth.PICKY_EATER) > -1 ? 'active' : ''}`}
               onClick={() => handleChooseHealth(PetHealth.PICKY_EATER)}
             >
               对食物很挑剔
             </View>
             <View
-              className={`pet-health-item bg-white my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES) > -1 ? 'active' : ''}`}
+              className={`pet-health-item bg-white my-1 text-28 ${(pet.recentHealth ?? []).indexOf(PetHealth.FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES) > -1 ? 'active' : ''}`}
               onClick={() => handleChooseHealth(PetHealth.FOOD_ALLERGIES_OR_STOMACH_SENSITIVITIES)}
             >
               食物过敏或胃敏感
             </View>
             <View
-              className={`pet-health-item bg-white my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.DULL_OR_FLAKY_FUR) > -1 ? 'active' : ''}`}
+              className={`pet-health-item bg-white my-1 text-28 ${(pet.recentHealth ?? []).indexOf(PetHealth.DULL_OR_FLAKY_FUR) > -1 ? 'active' : ''}`}
               onClick={() => handleChooseHealth(PetHealth.DULL_OR_FLAKY_FUR)}
             >
               无光泽或片状被毛
             </View>
             <View
-              className={`pet-health-item bg-white my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.ARTHRITIS_OR_JOINT_PAIN) > -1 ? 'active' : ''}`}
+              className={`pet-health-item bg-white my-1 text-28 ${(pet.recentHealth ?? []).indexOf(PetHealth.ARTHRITIS_OR_JOINT_PAIN) > -1 ? 'active' : ''}`}
               onClick={() => handleChooseHealth(PetHealth.ARTHRITIS_OR_JOINT_PAIN)}
             >
               关节炎或关节痛
             </View>
             <View
-              className={`pet-health-item bg-white my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.NONE) > -1 ? 'active' : ''}`}
+              className={`pet-health-item bg-white my-1 text-28 ${(pet.recentHealth ?? []).indexOf(PetHealth.NONE) > -1 ? 'active' : ''}`}
               onClick={() => handleChooseHealth(PetHealth.NONE)}
             >
               以上都没有
@@ -321,7 +349,7 @@ const PetDetail = () => {
         onClose={() => setShowUpload(false)}
       >
         <View className="upload-avatar">
-          <View className="mt-2 text-28 font-bold text-center">上传宠物头像</View>
+          <View className="mt-2 text-32 font-bold text-center">上传宠物头像</View>
           <View className="mt-3 flex">
             <View className="flex-1 text-center">
               <View className="upload-item" onClick={() => handleUploadFromSource('camera')}>
@@ -337,7 +365,7 @@ const PetDetail = () => {
             </View>
           </View>
           <View className="mt-3">
-            <View onClick={() => setShowUpload(false)} className="cancel-btn rounded-full text-center h-3 bg-color-primary text-32 text-white">取消</View>
+            <View onClick={() => setShowUpload(false)} className="poper-btn rounded-full text-center bg-color-primary text-32 font-bold text-white">取 消</View>
           </View>
         </View>
       </AtFloatLayout>
@@ -347,7 +375,7 @@ const PetDetail = () => {
         onClose={() => setShow(false)}
       >
         <View className="upload-avatar">
-          <View className="mt-2 text-28 font-bold text-center">选择爱宠近期体重（公斤）</View>
+          <View className="mt-2 text-32 font-bold text-center">选择爱宠近期体重（公斤）</View>
           <View>
             <PickerView
               value={val}
@@ -367,7 +395,7 @@ const PetDetail = () => {
             </PickerView>
           </View>
           <View className="mb-3">
-            <View onClick={() => setShow(false)} className="cancel-btn rounded-full text-center h-3 bg-color-primary text-32 text-white">确定</View>
+            <View onClick={() => setShow(false)} className="poper-btn rounded-full text-center bg-color-primary text-32 font-bold text-white">确 定</View>
           </View>
         </View>
       </AtFloatLayout>
@@ -377,7 +405,7 @@ const PetDetail = () => {
         onClose={() => setShow1(false)}
       >
         <View className="upload-avatar">
-          <View className="mt-2 text-28 font-bold text-center">选择爱宠目标体重（公斤）</View>
+          <View className="mt-2 text-32 font-bold text-center">选择爱宠目标体重（公斤）</View>
           <View>
             <PickerView
               value={val1}
@@ -397,7 +425,7 @@ const PetDetail = () => {
             </PickerView>
           </View>
           <View className="mb-3">
-            <View onClick={() => setShow1(false)} className="cancel-btn rounded-full text-center h-3 bg-color-primary text-32 text-white">确定</View>
+            <View onClick={() => setShow1(false)} className="poper-btn rounded-full text-center bg-color-primary text-32 font-bold text-white">确 定</View>
           </View>
         </View>
       </AtFloatLayout>

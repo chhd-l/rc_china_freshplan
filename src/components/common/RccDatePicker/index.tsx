@@ -53,7 +53,7 @@ const RccDatePicker = ({ visible, value, onChange, onClose, onConfirm }: IProps)
       onClose={onClose}
     >
       <View className="upload-avatar">
-        <View className="mt-2 text-28 font-bold text-center">选择爱宠生日</View>
+        <View className="mt-2 text-32 font-bold text-center">选择爱宠生日</View>
         <View>
           <PickerView
             value={selected}
@@ -72,7 +72,7 @@ const RccDatePicker = ({ visible, value, onChange, onClose, onConfirm }: IProps)
           </PickerView>
         </View>
         <View className="mb-3">
-          <View onClick={handleConfirm} className="cancel-btn rounded-full text-center h-3 bg-color-primary text-32 text-white">确定</View>
+          <View onClick={handleConfirm} className="poper-btn rounded-full text-center bg-color-primary text-32 font-bold text-white">确 定</View>
         </View>
       </View>
     </AtFloatLayout>

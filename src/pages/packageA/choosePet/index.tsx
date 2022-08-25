@@ -48,7 +48,7 @@ const ChoosePet = () => {
   return (
     <View className="py-1">
       <View className="my-1 px-1 text-34 font-bold">选择您的宠物！</View>
-      <View className="px-1">
+      <View className="mx-1 rounded-lg box-shadow overflow-hidden">
         <RotationChartList
           list={petList}
           onClickPetList={() => {

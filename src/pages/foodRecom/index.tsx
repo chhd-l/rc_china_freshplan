@@ -76,30 +76,31 @@ const FoodRecom = () => {
     }
   }
 
-  const total_price = list.reduce((prev: number, curr: any) => {
-    if (selected.indexOf(curr?.variants?.id) > -1) {
-      return prev + curr?.variants?.subscriptionPrice;
-    } else {
-      return prev;
-    }
-  }, 0);
+  // const total_price = list.reduce((prev: number, curr: any) => {
+  //   if (selected.indexOf(curr?.variants?.id) > -1) {
+  //     return prev + (curr?.variants?.subscriptionPrice ?? 0) * 6;
+  //   } else {
+  //     return prev;
+  //   }
+  // }, 0);
 
   return (
     <View className="pet-food-recom pt-2 pb-12">
-      <View className="my-1 text-34 font-bold text-center">{pet?.name}的专属健康食谱</View>
-      <View className="my-1 text-28 text-center">专家根据您的宠物信息推荐<Text className="text-color-primary">{recommendProductNames}</Text>套餐</View>
-      <View className="my-1 text-22 light-gray-text text-center">最多选择<Text className="text-color-primary">两个</Text>套餐</View>
+      <View className="my-1 text-42 font-bold text-center">{pet?.name}的专属健康食谱</View>
+      <View className="my-1 text-32 text-center">专家根据您的宠物信息推荐<Text className="text-color-primary">{recommendProductNames}</Text>套餐</View>
+      <View className="my-1 text-28 light-gray-text text-center">最多选择<Text className="text-color-primary">两个</Text>套餐</View>
       <View className="pet-food-list mx-2 my-1">
         {list.map((item: any, idx: number) => (
-          <View key={idx} className={`pet-food-item my-1 py-2 ${selected.indexOf(item?.variants?.id) > -1 ? 'active' : ''}`} onClick={() => handleSelect(item?.variants?.id)}>
-            <View className="image mx-4 text-center">
-              <Image src={item?.variants?.defaultImage}></Image>
+          <View key={idx} className={`pet-food-item overflow-hidden my-1.5 ${selected.indexOf(item?.variants?.id) > -1 ? 'active' : ''}`} onClick={() => handleSelect(item?.variants?.id)}>
+            <View className="flex items-center">
+              <View className="image text-center">
+                <Image src={item?.variants?.defaultImage}></Image>
+              </View>
+              <View className="flex-1 mx-1">
+                <View className="text-36 font-bold my-2">{item?.name}</View>
+                <View className="my-2 text-26 text-gray-400">{(item?.description ?? "").replace(/<[^>]+>/ig, "")}</View>
+              </View>
             </View>
-            <View className="my-1 mx-2 flex items-end">
-              <Text className="name text-28 font-bold">{item?.name}</Text>
-              <Text className="price ml-1 text-22">{formatMoney(item?.variants?.subscriptionPrice)}</Text>
-            </View>
-            <View className="mx-2 text-22 text-gray-400">{(item?.description ?? "").replace(/<[^>]+>/ig, "")}</View>
             <View className="rectangle">
               <Text className="rcciconfont rccicon-check text-color-primary"></Text>
             </View>
@@ -107,10 +108,7 @@ const FoodRecom = () => {
         ))}
       </View>
       <View className="pet-food-footer">
-        <View className="mx-2 flex justify-between items-center">
-          <View className="text-32">合计：<Text className="price font-bold">{formatMoney(total_price)}</Text></View>
-          <View className="px-4 py-0.8 text-white text-32 bg-color-primary rounded-full" onClick={handleCheckout}>立即下单</View>
-        </View>
+        <View className="footer-btn mx-2 text-white text-34 bg-color-primary rounded-full" onClick={handleCheckout}>立即购买</View>
       </View>
     </View>
   );
