@@ -1,14 +1,5 @@
 import { CDNIMGURL } from '@/lib/constants'
-import { 
-  Image, 
-  Swiper, 
-  SwiperItem, 
-  Text, 
-  View,
-  BaseEventOrig,
-  ScrollView,
-  ScrollViewProps, 
-} from '@tarojs/components'
+import { Image, Swiper, SwiperItem, Text, View, BaseEventOrig, ScrollView, ScrollViewProps } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import moment from 'moment'
 import { useState } from 'react'
@@ -72,7 +63,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             <SwiperItem key={key}>
               <View className="plan">
                 <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
-                <View className="swiperItemCard px-1 py-1 flex flex-col justify-between text-white">
+                <View className="swiperItemCard px-1 pt-0.5 pb-[0.3rem] flex flex-col justify-between text-white">
                   <View className="flex items-center text-[24px]">
                     <View className="ml-0.5 mr-1.5">
                       <AtAvatar
@@ -84,19 +75,21 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         }`}
                       />
                     </View>
-                    <View className="flex-1 pr-2">
+                    <View className="flex-1 mt-1 pr-2">
                       <View className="text-[36px] flex items-center justify-between">
                         {item?.pet?.name}{' '}
                         <Text
                           className={`rcciconfont ${
-                            item?.pet?.gender === 'MALE' ? 'rccicon-male text-[#FFE3B9]' : 'rccicon-female text-[#D49D28]'
+                            item?.pet?.gender === 'MALE'
+                              ? 'rccicon-male text-[#FFE3B9]'
+                              : 'rccicon-female text-[#D49D28]'
                           } translateText`}
                           style={{
                             fontSize: '0.3rem',
                           }}
                         />
                       </View>
-                      <View className="mt-1 text-[28px]">
+                      <View className="mt-[17px] text-[26px]">
                         {item?.pet?.recentHealth === PetPosture.Emaciated
                           ? '瘦弱'
                           : item?.pet?.recentHealth === PetPosture.Obesity
@@ -104,7 +97,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                           : '标准'}
                         体重&nbsp;&nbsp;{item?.pet?.age}
                       </View>
-                      <View className="mt-0.5">
+                      <View className="mt-[0.17rem] text-[26px]">
                         {item?.pet?.breed}&nbsp;&nbsp;{item?.pet?.recentWeight}kg
                       </View>
                     </View>
@@ -115,7 +108,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         url: `/pages/freshPlanDetails/index?id=${item?.id}`,
                       })
                     }}
-                    className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[24px]"
+                    className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[26px]"
                   >
                     管理计划
                   </AtButton>
@@ -197,8 +190,8 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             })
           }}
         >
-          <AtIcon className="mr-1" value="clock" size="26" />
-          <Text className="text-30">更多定制</Text>
+          <AtIcon className="mr-0.5" value="clock" size="25" />
+          <Text className="text-[34px]">更多定制</Text>
         </View>
         <View className="mt-4 px-[20px]">
           <Step />

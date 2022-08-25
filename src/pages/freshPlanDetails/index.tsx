@@ -117,7 +117,7 @@ const FreshPlanDetails = () => {
       <View className="bg-white boxShadow p-1 mt-1">
         <View className="text-[34px]">签约信息</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
-        <View className="flex items-center mt-1 ml-0.5">
+        <View className="flex text-[22px] items-center mt-1 ml-0.5">
           <Image
             style={{
               width: '0.5022rem',
@@ -127,7 +127,7 @@ const FreshPlanDetails = () => {
           />
           <Text className="ml-1">签约平台：{returnTypeText()}</Text>
         </View>
-        <View className="flex items-center mt-1 ml-0.5">
+        <View className="flex text-[22px] items-center mt-1 ml-0.5">
           <Image
             style={{
               width: '0.5022rem',

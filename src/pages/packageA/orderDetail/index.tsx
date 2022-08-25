@@ -338,7 +338,7 @@ const OrderDetails = () => {
           }}
         >
           <Text>Fresh编号：</Text>
-          <CopyText str={orderDetail.subscriptionNo} />
+          <CopyText str={orderDetail.subscriptionNo + '>'} />
         </View>
         {orderDetail?.orderState?.orderState !== 'UNPAID' && (
           <View>
@@ -378,10 +378,14 @@ const OrderDetails = () => {
         )}
         {orderDetail?.orderState?.orderState === 'VOID' && (
           <View className="flex items-center justify-end">
-            <AtButton className="rounded-full m-0 px-1.5 py-0" onClick={() => setShowActionTipModal(true)}>
+            <AtButton className="rounded-full m-0 px-1.5 mx-1 py-0" onClick={() => setShowActionTipModal(true)}>
               删除订单
             </AtButton>
-            <AtButton className="rounded-full m-0 mx-1 px-1.5 py-0">再来一单</AtButton>
+          </View>
+        )}
+        {orderDetail?.orderState?.orderState === 'COMPLETED' && (
+          <View className="flex items-center justify-end">
+            <AtButton className="rounded-full m-0 px-1.5 mx-1 py-0">查看发票</AtButton>
           </View>
         )}
         {orderDetail?.orderState?.orderState === 'SHIPPED' && (

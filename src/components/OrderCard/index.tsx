@@ -82,7 +82,8 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
       </View>
       <View className="flex flex-col items-end">
         <View className="mb-1">
-          {order?.orderState?.orderState === 'UNPAID' ? '需' : ''}付款：&nbsp;
+          {order?.orderState?.orderState === 'UNPAID' || order?.orderState?.orderState === 'VOID' ? '需' : ''}
+          付款：&nbsp;
           {formatMoney(order.orderPrice.totalPrice + order.orderPrice.deliveryPrice)}
         </View>
         {order.orderState?.orderState === 'UNPAID' && (
@@ -125,7 +126,8 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         )}
         {order.orderState?.orderState === 'COMPLETED' && (
           <View className="flex items-center">
-            <AtButton className="rounded-full">查看详情</AtButton>
+            <AtButton className="rounded-full m-0">查看详情</AtButton>
+            <AtButton className="rounded-full ml-1">申请开票</AtButton>
           </View>
         )}
         {order.orderState?.orderState === 'TO_SHIP' && (
