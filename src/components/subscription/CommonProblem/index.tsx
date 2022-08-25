@@ -8,7 +8,7 @@ import '../LovePetHealth/index.less'
 const CommonProblem = () => {
   return (
     <View>
-      <View className="ml-[20px] mb-[70px] mt-[73px]">
+      <View className="ml-[20px]">
         <PetTitle>
           <Text className="text-[48px]">常见问题为您提供解答</Text>
         </PetTitle>

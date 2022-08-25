@@ -4,7 +4,7 @@ import { Image, Text, View } from '@tarojs/components'
 const Step = () => {
   return (
     <View className="bg-white">
-      <View className="ml-[20px] mb-[70px]">
+      <View className="ml-[20px]">
         <PetTitle>
           <Text className="text-[48px]">仅三步即可开启鲜食计划</Text>
         </PetTitle>

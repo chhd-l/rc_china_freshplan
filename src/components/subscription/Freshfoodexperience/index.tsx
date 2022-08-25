@@ -8,7 +8,7 @@ import { freshFood_left, freshFood_right } from './index.modules'
 const FreshFoodExperience = () => {
   return (
     <View>
-      <View className="ml-[20px] mb-[70px] mt-[73px]">
+      <View className="ml-[20px]">
         <PetTitle>
           <View className="text-[48px]">我们专注为您的爱宠 </View>
           <View className="text-[48px]">提供营养健康的鲜食体验</View>
@@ -44,7 +44,7 @@ const FreshFoodExperience = () => {
               type="secondary"
               circle
               size="normal"
-              className="w-10/12"
+              className="w-10/12 text-[26px]"
               onClick={() =>
                 Taro.navigateTo({
                   url: `/pages/packageA/petDiet/index`,
