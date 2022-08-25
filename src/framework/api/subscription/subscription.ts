@@ -184,3 +184,24 @@ export const updateSubscriptionAddress = async (id: string, address: any) => {
   console.log("update subscription address view data:", res)
   return res?.subscriptionUpdateAddress || false
 }
+
+export const cancelSubscription = async ({
+  subscriptionId,
+  subscriptionType,
+  agreementNo,
+  aliPayUserId
+}: {
+  subscriptionId: string,
+  subscriptionType: string,
+  agreementNo?: string,
+  aliPayUserId?: string
+}) => {
+  const res = await ApiRoot({ url: apis?.sc_subscription }).subscriptions().cancelSubscription({
+    subscriptionId,
+    subscriptionType,
+    agreementNo,
+    aliPayUserId,
+  });
+  console.log("cancel subscription view data:", res);
+  return res?.subscriptionCancel ?? false;
+}
