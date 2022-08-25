@@ -8,7 +8,7 @@ import { freshFood_left, freshFood_right } from './index.modules'
 const FreshFoodExperience = () => {
   return (
     <View>
-      <View className="ml-[20px] mb-[70px] mt-[73px]">
+      <View className="ml-[20px]">
         <PetTitle>
           <View className="text-[48px]">我们专注为您的爱宠 </View>
           <View className="text-[48px]">提供营养健康的鲜食体验</View>
@@ -20,18 +20,28 @@ const FreshFoodExperience = () => {
           <View className="flex flex-row mb-[40px]">
             <View className="flex flex-col  flex-1 pl-[55px] divider">
               {freshFood_left.map((item, key) => (
-                <View className="flex flex-row mb-[55px] justify-start items-center" key={key}>
-                  <View className="w-[56px] h-[56px] mr-[19px]">
+                <View
+                  className={`flex flex-row ${
+                    key !== freshFood_right.length - 1 && 'mb-[65px]'
+                  } justify-start items-center`}
+                  key={key}
+                >
+                  <View className="w-[40px] h-[40px] mr-[19px]">
                     <Image src={item.icon} className="w-full h-full" />
                   </View>
                   <Text className="text-[#96CC39] text-[24px]">{item.text}</Text>
                 </View>
               ))}
             </View>
-            <View className="flex flex-col  flex-1 pl-[55px]">
+            <View className="flex flex-col flex-1 pl-[55px]">
               {freshFood_right.map((item, key) => (
-                <View className="flex flex-row mb-[55px] justify-start items-center" key={key}>
-                  <View className="w-[56px] h-[56px] mr-[19px]">
+                <View
+                  className={`flex flex-row ${
+                    key !== freshFood_right.length - 1 && 'mb-[65px]'
+                  } justify-start items-center`}
+                  key={key}
+                >
+                  <View className="w-[40px] h-[40px] mr-[19px]">
                     <Image src={item.icon} className="w-full h-full" />
                   </View>
                   <Text className="text-[#96CC39] text-[24px]">{item.text}</Text>
@@ -44,7 +54,7 @@ const FreshFoodExperience = () => {
               type="secondary"
               circle
               size="normal"
-              className="w-10/12"
+              className="w-10/12 text-[26px]"
               onClick={() =>
                 Taro.navigateTo({
                   url: `/pages/packageA/petDiet/index`,
