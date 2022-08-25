@@ -1,5 +1,6 @@
 import { AddressItem } from '@/components/consumer'
 import { deleteAddress, getAddresses } from '@/framework/api/consumer/address'
+import { updateSubscriptionAddress } from '@/framework/api/subscription/subscription'
 import { Address } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
 import routers from '@/routers'
@@ -46,12 +47,18 @@ const AddRessManage = () => {
     }
   }
 
-  const handleChooseAddress = (address: Address) => {
+  const handleChooseAddress = async (address: Address) => {
     if (router?.params?.method === 'select') {
       const pages = Taro.getCurrentPages()
       const current = pages[pages.length - 1]
       const eventChannel = current.getOpenerEventChannel()
       eventChannel.emit('chooseAddress', Object.assign({}, address))
+      Taro.navigateBack()
+    } else if (router?.params?.subscriptionDetailsID) {
+      delete address.consumerId
+      delete address.isDefault
+      delete address.storeId
+      await updateSubscriptionAddress(router.params.subscriptionDetailsID, address)
       Taro.navigateBack()
     }
   }

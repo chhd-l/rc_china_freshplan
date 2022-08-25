@@ -139,7 +139,7 @@ const Schedule = () => {
                 data: JSON.stringify(subscriptionDetails?.address),
                 success: function () {
                   Taro.navigateTo({
-                    url: `${routers.newAddress}?type=edit&subscriptionDetailsID=${subscriptionDetails?.id}`,
+                    url: `${routers.addressManage}?type=edit&subscriptionDetailsID=${subscriptionDetails?.id}`,
                   })
                 },
               })

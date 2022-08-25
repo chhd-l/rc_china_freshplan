@@ -1,6 +1,5 @@
 import RegionPicker from '@/components/WePicker/index'
 import { createAddress, updateAddress } from '@/framework/api/consumer/address'
-import { updateSubscriptionAddress } from '@/framework/api/subscription/subscription'
 import { Address } from '@/framework/types/consumer'
 import { pickForUpdate } from '@/utils/utils'
 import { Text, View } from '@tarojs/components'
@@ -60,14 +59,10 @@ const NewAddress = () => {
       setIsOpenPhone(true)
       return
     } else if (router?.params.type === 'edit') {
-      if (router?.params?.subscriptionDetailsID) {
-        actionRes = await updateSubscriptionAddress(router.params.subscriptionDetailsID, addressInfo)
-      } else {
-        let params = pickForUpdate(addressInfo, initData)
-        actionRes = await updateAddress({
-          params: Object.assign(params, { id: addressInfo.id }),
-        })
-      }
+      let params = pickForUpdate(addressInfo, initData)
+      actionRes = await updateAddress({
+        params: Object.assign(params, { id: addressInfo.id }),
+      })
     } else {
       actionRes = await createAddress(addressInfo)
     }
