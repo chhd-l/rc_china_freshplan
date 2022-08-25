@@ -1,6 +1,5 @@
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle'
 import { Image, Text, View } from '@tarojs/components'
-import step_line from '../../../assets/img/step_line.png'
 
 const Step = () => {
   return (

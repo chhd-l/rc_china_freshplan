@@ -44,7 +44,7 @@ const Schedule = () => {
 
   return (
     <View className="p-1 pb-4 Schedule">
-      <View className="bg-white mt-1 pb-1 px-1 boxShadow">
+      <View className="bg-white mt-1 px-1 boxShadow">
         <View className="pt-1">
           <View className="flex justify-between items-end">
             <Text className="text-[34px]">下次发货</Text>
@@ -139,7 +139,7 @@ const Schedule = () => {
                 data: JSON.stringify(subscriptionDetails?.address),
                 success: function () {
                   Taro.navigateTo({
-                    url: `${routers.newAddress}?type=edit&subscriptionDetailsID=${subscriptionDetails?.id}`,
+                    url: `${routers.addressManage}?type=edit&subscriptionDetailsID=${subscriptionDetails?.id}`,
                   })
                 },
               })
