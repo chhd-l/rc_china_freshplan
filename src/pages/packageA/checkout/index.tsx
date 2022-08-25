@@ -1,9 +1,10 @@
 import { View, Text, Image, Input } from '@tarojs/components';
 import { Address } from '@/framework/types/consumer';
+import { addPet } from '@/framework/api/pet/add-pet';
 import { getAddresses } from '@/framework/api/consumer/address';
 import { subscriptionCreateAndPay } from '@/framework/api/subscription/subscription';
 import { calculateOrderPrice } from '@/framework/api/order';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { formatMoney } from '@/utils/utils';
 import Taro from '@tarojs/taro';
 import moment from 'moment';
@@ -17,8 +18,15 @@ const Checkout = () => {
   const [remark, setRemark] = useState<string>("");
 
   const getAddressList = async () => {
-    const res: Address[] = await getAddresses()
-    setAddress(res.find(addr => addr.isDefault));
+    const reflag = Taro.getStorageSync("select-address");
+    if (!reflag) {
+      const res: Address[] = await getAddresses()
+      if (address?.id && res.findIndex(addr => addr.id === address.id) > -1) {
+        setAddress(res.find(addr => addr.id === address.id));
+      } else {
+        setAddress(res.find(addr => addr.isDefault) || res[0]);
+      }      
+    }
   }
 
   Taro.useReady(() => {
@@ -33,8 +41,15 @@ const Checkout = () => {
     }).then(res => {
       setPrices(res)
     });
+  });
+
+  Taro.useDidShow(() => {
     getAddressList();
   });
+
+  Taro.useDidHide(() => {
+    Taro.removeStorageSync("select-address")
+  })
 
   const handleChooseAddress = () => {
     Taro.navigateTo({
@@ -54,23 +69,31 @@ const Checkout = () => {
       Taro.showToast({ title: '请先选择收获地址' });
       return;
     }
+    Taro.showLoading();
     const pet: any = Taro.getStorageSync("petItem");
-    const res: any = await subscriptionCreateAndPay({
-      orderItems: items,
-      address,
-      remark,
-      deliveryTime: moment().add(1, 'days').format('YYYY-MM-DD'),
-      pet,
-    });
-    console.log("payment result:", res);
-    // Taro.redirectTo({
-    //   url: '/pages/packageA/elencoOrdini/index?status=ALL',
-    // })
+    // 如果有pet有id，说明是详情页过来的，不执行添加宠物操作
+    const addPetRes = pet.id && pet.id !== '-1' ? { id: pet.id } : await addPet(pet);
+    if (addPetRes?.id) {
+      const res: any = await subscriptionCreateAndPay({
+        orderItems: items,
+        address,
+        remark,
+        deliveryTime: moment().add(1, 'days').format('YYYY-MM-DD'),
+        pet: { ...pet, id: addPetRes.id },
+      });
+      Taro.hideLoading();
+      console.log("payment result:", res);
+      // Taro.redirectTo({
+      //   url: '/pages/packageA/elencoOrdini/index?status=ALL',
+      // })
+    } else {
+      Taro.hideLoading();
+    }
   }
 
-  const subtotal = items.reduce((prev: number, curr: any) => {
-    return prev + (curr?.variants?.subscriptionPrice ?? 0);
-  }, 0);
+  // const subtotal = items.reduce((prev: number, curr: any) => {
+  //   return prev + (curr?.variants?.subscriptionPrice ?? 0);
+  // }, 0);
 
   // const nextThursday = moment().isoWeekday() < 4 ? moment().isoWeekday(4).format('YYYY-MM-DD') : moment().add(1, 'weeks').isoWeekday(4).format('YYYY-MM-DD');
 
@@ -120,7 +143,7 @@ const Checkout = () => {
       <View className="bg-white rounded-sm mx-1 mt-1 p-1">
         <View className="flex justify-between items-center text-30">
           <Text className="text-30 text-gray-400">商品金额</Text>
-          <Text>{formatMoney(subtotal)}</Text>
+          <Text>{formatMoney(prices?.productPrice ?? 0)}</Text>
         </View>
         <View className="mt-2 flex justify-between items-center text-30">
           <Text className="text-30 text-gray-400">运费</Text>

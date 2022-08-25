@@ -34,7 +34,7 @@ const Formula = ({ data }: FormulaProps) => {
             className=" rounded-full flex items-center bg-color-primary justify-center border-0"
             type="primary"
             onClick={() => {
-              Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
+              Taro.navigateTo({ url: '/pages/packageA/choosePet/index' })
             }}
           >
             <AtIcon
@@ -50,7 +50,7 @@ const Formula = ({ data }: FormulaProps) => {
             scope="phoneNumber"
             onGetAuthorize={() => {
               handleLogin(() => {
-                Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
+                Taro.navigateTo({ url: '/pages/packageA/choosePet/index' })
               })
             }}
           >

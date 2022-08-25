@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { PetStep, PetHealth } from '@/framework/types/consumer';
-import PetTitle from './components/PetTitle';
+import PetTitle from './components/PetAddTitle';
 import { IProps } from './step1';
 import Taro from '@tarojs/taro';
 
@@ -40,10 +40,10 @@ const Step6 = ({ pet, onStepChange, onChange, onSave }: Iprops6) => {
 
   return (
     <View className="mx-1 pt-2">
-      <View className="mt-3">
+      <View className="mt-1">
         <PetTitle>{pet.name}近期的健康情况<Text className="ml-1 text-26 font-normal text-gray-400">(可多选)</Text></PetTitle>
       </View>
-      <View className="pt-0.5">
+      <View>
         <View
           className={`pet-health-item my-1 text-28 font-bold ${(pet.recentHealth ?? []).indexOf(PetHealth.PICKY_EATER) > -1 ? 'active' : ''}`}
           onClick={() => handleChooseHealth(PetHealth.PICKY_EATER)}

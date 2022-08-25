@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import { AtProgress } from 'taro-ui';
 import { PetListItemProps, PetStep } from '@/framework/types/consumer';
-import { addPet } from '@/framework/api/pet/add-pet';
+// import { addPet } from '@/framework/api/pet/add-pet';
 import Taro from '@tarojs/taro';
 import Step1 from '@/components/consumer/EditPet/step1';
 import Step2 from '@/components/consumer/EditPet/step2';
@@ -37,16 +37,17 @@ const petEdit = () => {
   }
 
   const handleSave = async () => {
-    const res = await addPet(pet);
-    console.log('add pet response:', res);
-    if (res) {
-      Taro.setStorageSync("petItem", { ...pet, id: res?.id });
-      Taro.redirectTo({
+    // 修改成下订阅前创建宠物
+    // const res = await addPet(pet);
+    //console.log('add pet response:', res);
+    //if (res) {
+      Taro.setStorageSync("petItem", pet);
+      Taro.navigateTo({
         url: '/pages/foodRecom/index',
       })
-    } else {
-      Taro.showToast({ title: '保存失败' });
-    }
+    //} else {
+    //  Taro.showToast({ title: '保存失败' });
+    //}
   }
 
   return (

@@ -1,5 +1,5 @@
 import { View, Text, Image } from '@tarojs/components';
-import PetTitle from './components/PetTitle';
+import PetTitle from './components/PetAddTitle';
 import { PetListItemProps, PetType, PetStep } from '@/framework/types/consumer';
 import { CDNIMGURL2, CDNIMGURL } from '@/lib/constants';
 
@@ -27,9 +27,9 @@ const Step1 = ({ pet, onStepChange, onChangeAll }: IProps1) => {
 
   return (
     <View className="mx-1 pt-2">
-      <View className="mt-2"></View>
+      <View className="mt-1"></View>
       <PetTitle>您的爱宠是</PetTitle>
-      <View className="mt-1">
+      <View>
         <Text className="text-26 text-gray-600" style={{marginLeft: '14PX'}}>爱宠的健康之旅，从这里开始。</Text>
       </View>
       <View className="mt-3 flex justify-around items-center">

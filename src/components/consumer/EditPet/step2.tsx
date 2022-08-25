@@ -4,7 +4,7 @@ import { PetGender, PetStep, PetType } from '@/framework/types/consumer';
 import { AtFloatLayout } from 'taro-ui';
 import { UPLOADURL, CDNIMGURL } from '@/lib/constants';
 import Taro from '@tarojs/taro';
-import PetTitle from './components/PetTitle';
+import PetTitle from './components/PetAddTitle';
 import { IProps } from './step1';
 
 import './step.less';
@@ -23,6 +23,14 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
 
   const handleNameChange = (e) => {
     onChange('name', e?.detail?.value);
+  }
+
+  const handleNext = () => {
+    if (!pet.gender) {
+      Taro.showToast({ title: '请先选择宠物性别' })
+      return;
+    }
+    onStepChange(PetStep.STEP3);
   }
 
   const handleUploadFromSource = (source: keyof Taro.chooseImage.sourceType) => {
@@ -60,7 +68,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="mt-4">
         <PetTitle>您爱宠的昵称是</PetTitle>
       </View>
-      <View className="mt-1.5 flex justify-between items-center">
+      <View className="mt-1 flex justify-between items-center">
         <View className="flex-1">
           <Input value={pet.name} className="rcc-input" onInput={handleNameChange} />
         </View>
@@ -68,7 +76,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="mt-3">
         <PetTitle>您爱宠的性别</PetTitle>
       </View>
-      <View className="mt-1.5 rcc-single-choice flex justify-between items-center">
+      <View className="mt-1 rcc-single-choice flex justify-between items-center">
         <Text
           onClick={() => handleGenderChange(PetGender.Male)}
           className={`rcc-choice-item flex-1 mr-1 text-30 ${pet.gender === PetGender.Male ? 'active' : ''}`}
@@ -85,6 +93,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP1)}>上一步</Text>
+          <Text className={`btn-item ${!pet.name || !pet.gender ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>
         </View>
       </View>
       <AtFloatLayout

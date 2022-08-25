@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text, Image, PickerView, PickerViewColumn } from '@tarojs/components';
 import { PetStep, PetPosture, PetListItemProps } from '@/framework/types/consumer';
 import { CDNIMGURL2 } from '@/lib/constants';
-import PetTitle from './components/PetTitle';
+import PetTitle from './components/PetAddTitle';
 import { AtFloatLayout } from 'taro-ui';
 import { IProps } from './step1';
 import Taro from '@tarojs/taro';
@@ -67,10 +67,10 @@ const Step5 = ({ pet, onStepChange, onChange, onChangeAll }: IProps1) => {
 
   return (
     <View className="mx-1 pt-2">
-      <View className="mt-3">
+      <View className="mt-1">
         <PetTitle>{pet.name}近期的体重<Text className="ml-1 text-26 font-normal text-gray-400">(kg)</Text></PetTitle>
       </View>
-      <View className="mt-1.5 choose-other-breed flex items-center" onClick={() => setShow(true)}>
+      <View className="mt-1 choose-other-breed flex items-center" onClick={() => setShow(true)}>
         <Text className="text-28 mx-1 flex-1 font-bold">{pet.recentWeight ? pet.recentWeight : '请选择'}</Text>
         <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
       </View>
@@ -78,7 +78,7 @@ const Step5 = ({ pet, onStepChange, onChange, onChangeAll }: IProps1) => {
         <View className="mt-3">
           <PetTitle>{pet.name}近期的体态</PetTitle>
         </View>
-        <View className="mt-1.5 flex items-center pet-situation">
+        <View className="mt-1 flex items-center pet-situation">
           <View className={`flex-1 pet-situation-item ${pet.recentPosture === PetPosture.Emaciated ? 'active font-bold' : ''}`} onClick={() => handlePostureChange(PetPosture.Emaciated)}>
             <Image className="my-1" src={`${CDNIMGURL2}weight-thin.png`} />
             <View className="text-24 mb-1">瘦弱</View>
@@ -106,7 +106,7 @@ const Step5 = ({ pet, onStepChange, onChange, onChangeAll }: IProps1) => {
         {moment().diff(moment(pet.birthday, 'YYYY-MM-DD'), 'years') >= 1 && pet.recentPosture === PetPosture.Standard ? null : <><View className="mt-3">
           <PetTitle>{pet.name}近期的成年目标体重<Text className="ml-1 text-26 font-normal text-gray-400">(kg)</Text></PetTitle>
         </View>
-        <View className="mt-1.5 choose-other-breed flex items-center" onClick={() => setShow1(true)}>
+        <View className="mt-1 choose-other-breed flex items-center" onClick={() => setShow1(true)}>
           <Text className="text-28 mx-1 flex-1 font-bold">{pet.targetWeight ? pet.targetWeight : '请选择'}</Text>
           <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
         </View></>}

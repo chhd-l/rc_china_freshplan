@@ -3,7 +3,7 @@ import { View, Text } from '@tarojs/components';
 import { getBreedList } from '@/framework/api/pet/get-breeds';
 import { BreedListItemProps } from '@/pages/packageA/breedList';
 import { PetStep, PetListItemProps } from '@/framework/types/consumer';
-import PetTitle from './components/PetTitle';
+import PetTitle from './components/PetAddTitle';
 import { IProps } from './step1';
 import Taro from '@tarojs/taro';
 
@@ -48,23 +48,23 @@ const Step3 = ({ pet, onStepChange, onChangeAll }: IProps3) => {
     onStepChange(PetStep.STEP4);
   }
 
-  // const handleNext = () => {
-  //   if (!pet.code) {
-  //     Taro.showToast({ title: '请先选择品种' });
-  //   } else {
-  //     onStepChange(PetStep.STEP4);
-  //   }
-  // }
+  const handleNext = () => {
+    if (!pet.code) {
+      Taro.showToast({ title: '请先选择品种' });
+    } else {
+      onStepChange(PetStep.STEP4);
+    }
+  }
 
   const hotBreedList = breedList.filter(el => el.isHot).filter((el, idx) => idx < 9);
   const isOtherBreedSelected = !!pet.code && hotBreedList.map(el => el.code).indexOf(pet.code) === -1;
 
   return (
     <View className="mx-1 pt-2">
-      <View className="mt-3">
+      <View className="mt-1">
         <PetTitle>{pet.name}的品种是</PetTitle>
       </View>
-      <View className="mt-1.5 rcc-single-choice grid grid-cols-3">
+      <View className="mt-1 rcc-single-choice grid grid-cols-3">
         {hotBreedList.map((item: BreedListItemProps, index: number) => (
             <Text
               key={index}
@@ -82,6 +82,7 @@ const Step3 = ({ pet, onStepChange, onChangeAll }: IProps3) => {
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP2)}>上一步</Text>
+          <Text className={`btn-item ${!pet.code ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>
         </View>
       </View>
     </View>

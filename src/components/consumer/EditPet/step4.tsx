@@ -1,6 +1,6 @@
 import { View, Text } from '@tarojs/components';
 import { PetStep } from '@/framework/types/consumer';
-import PetTitle from './components/PetTitle';
+import PetTitle from './components/PetAddTitle';
 import { IProps } from './step1';
 import { useState } from 'react';
 import RccDatePicker from '@/components/common/RccDatePicker';
@@ -20,10 +20,10 @@ const Step4 = ({ pet, onStepChange, onChange }: IProps) => {
 
   return (
     <View className="mx-1 pt-2">
-      <View className="mt-3">
+      <View className="mt-1">
         <PetTitle>{pet.name}多大了<Text className="ml-1 text-26 font-normal text-gray-400">(请选择出生日期)</Text></PetTitle>
       </View>
-      <View className="mt-1.5 choose-other-breed flex items-center" onClick={() => setShow(true)}>
+      <View className="mt-1 choose-other-breed flex items-center" onClick={() => setShow(true)}>
         <Text className="text-28 mx-1 flex-1 font-bold">{pet.birthday ? pet.birthday.replace('-', '年').replace('-', '月') + '日' : '请选择'}</Text>
         <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
       </View>

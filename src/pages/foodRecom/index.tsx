@@ -70,7 +70,7 @@ const FoodRecom = () => {
       Taro.showToast({ title: '请选择套餐' });
     } else {
       Taro.setStorageSync("checkoutItems", selectedItems);
-      Taro.redirectTo({
+      Taro.navigateTo({
         url: '/pages/packageA/checkout/index',
       });
     }

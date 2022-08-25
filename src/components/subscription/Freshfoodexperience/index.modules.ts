@@ -10,16 +10,16 @@ const fesh_icon_6 = CDNIMGURL2 + 'Group 1195.png';
 
 export const freshFood_left = [
   {
-    icon: fesh_icon_6,
+    icon: fesh_icon_5,
     text: '肉类和蔬菜单独烹制'
   },
 
   {
-    icon: fesh_icon_5,
+    icon: fesh_icon_4,
     text: '分批混合'
   },
   {
-    icon: fesh_icon_4,
+    icon: fesh_icon_6,
     text: '锁住营养物质'
   },
 

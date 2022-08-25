@@ -52,6 +52,7 @@ const AddRessManage = () => {
       const pages = Taro.getCurrentPages()
       const current = pages[pages.length - 1]
       const eventChannel = current.getOpenerEventChannel()
+      Taro.setStorageSync('select-address', true);
       eventChannel.emit('chooseAddress', Object.assign({}, address))
       Taro.navigateBack()
     } else if (router?.params?.subscriptionDetailsID) {
