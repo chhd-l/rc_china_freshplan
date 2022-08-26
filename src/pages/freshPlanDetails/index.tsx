@@ -1,6 +1,7 @@
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
 import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
+import { PetGender } from '@/framework/types/consumer'
 import { getAge } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
@@ -19,6 +20,7 @@ const FreshPlanDetails = () => {
       image: '',
       gender: '',
       type: '',
+      breed: '',
     },
     productList: [{ name: '', variants: { name: '', defaultImage: '' }, description: '' }],
     id: '',
@@ -54,10 +56,18 @@ const FreshPlanDetails = () => {
     getSubscriptionDetails(subscriptionId)
   })
 
-  const returnPetdefaultImage = () => {
-    if (subscriptionDetails?.pet?.image) return subscriptionDetails.pet.image
-    else if (subscriptionDetails?.pet?.type === 'CAT') return 'cat-default.png'
-    else return 'dog-default.png'
+  // const returnPetdefaultImage = () => {
+  //   if (subscriptionDetails?.pet?.image) return subscriptionDetails.pet.image
+  //   else if (subscriptionDetails?.pet?.type === 'CAT') return 'cat-default.png'
+  //   else return 'dog-default.png'
+  // }
+  const handlePetDetail = (pet: any) => {
+    Taro.navigateTo({
+      url: '/pages/packageA/petDetail/index',
+      success: (res) => {
+        res.eventChannel.emit('petFromList', pet);
+      }
+    });
   }
 
   return (
@@ -76,32 +86,29 @@ const FreshPlanDetails = () => {
           />
           我的宠物
         </View>
-        <View className="flex items-center justify-between">
+        <View className="flex items-center justify-between" onClick={() => handlePetDetail(subscriptionDetails?.pet)}>
           <View className="h-[116px] flex items-cneter">
             <Image
               className="mr-1 h-full rounded-full bg-[#FFB038]"
-              src={`${returnPetdefaultImage()}`}
+              src={subscriptionDetails?.pet?.image}
               style={{ width: '1.16rem' }}
             />
             <View className="flex flex-col justify-center">
               <Text className="text-[30px] flex items-center">
-                球球{' '}
+                {subscriptionDetails?.pet?.name}{' '}
                 <Text
                   className={`mx-0.5 rcciconfont text-[#D49D28] ${
-                    subscriptionDetails?.pet?.gender === 'MALE' ? 'rccicon-male' : 'rccicon-female'
+                    subscriptionDetails?.pet?.gender === PetGender.Male ? 'rccicon-male' : 'rccicon-female'
                   }`}
                   style={{
                     fontSize: '0.18rem',
                   }}
                 />
               </Text>
-              <Text className="text-[24px] text-[#999] mt-[16px]">英国短毛猫 1岁1个月</Text>
+              <Text className="text-[24px] text-[#999] mt-[16px]">{subscriptionDetails?.pet?.breed} {subscriptionDetails?.pet?.age}</Text>
             </View>
           </View>
           <AtIcon
-            onClick={() => {
-              Taro.navigateTo({ url: '/pages/packageA/petList/index' })
-            }}
             className="font-thin -mr-[5px]"
             value="chevron-right"
             color="#999"

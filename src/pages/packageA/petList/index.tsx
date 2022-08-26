@@ -6,7 +6,7 @@ import { getPets } from '@/framework/api/pet/get-pets'
 import { getAge } from '@/utils/utils'
 import { View, Text, Image } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
-import { CDNIMGURL } from '@/lib/constants'
+import { CDNIMGURL2 } from '@/lib/constants'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { AtIcon } from 'taro-ui'
@@ -84,10 +84,10 @@ const PetList = () => {
             </View>
           )
         })}
-        {petList.length === 0 ? <View className="noOrders flex flex-col items-center justify-center pt-8">
-          <Image className="noOrdersImage" src={`${CDNIMGURL}Empty%20orders.png`} />
+        {petList.length === 0 ? <View className="noOrders flex flex-col items-center justify-center mt-8">
+          <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
           <View className="mt-2 flex justify-center">
-            <Text className="ml-0.5">汪汪~啥也没有!</Text>
+            <Text className="ml-0.5">啥也没有~</Text>
           </View>
         </View> : null}
         <View className="add-pet-btn">
