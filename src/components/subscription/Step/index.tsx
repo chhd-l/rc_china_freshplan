@@ -1,9 +1,13 @@
 import PetTitle from '@/components/consumer/EditPet/components/PetTitle'
 import { Image, Text, View } from '@tarojs/components'
+import './index.less'
 
 const Step = () => {
   return (
     <View className="bg-white">
+      <View className="flex justify-center">
+        <Text className="rcciconfont rccicon-down IconDownAnimo" />
+      </View>
       <View className="ml-[20px]">
         <PetTitle>
           <Text className="text-[48px]">仅三步即可开启鲜食计划</Text>
