@@ -1,7 +1,7 @@
 import OrderCard from '@/components/OrderCard'
 import { cancelOrder, completedOrder, deleteOrder, getOrderList } from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
-import { CDNIMGURL } from '@/lib/constants'
+import { CDNIMGURL2 } from '@/lib/constants'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance, useReachBottom } from '@tarojs/taro'
 import { useState } from 'react'
@@ -189,9 +189,9 @@ const OrderList = () => {
       </AtTabs>
       {!orderList.length && (
         <View className="noOrders flex flex-col items-center justify-center mt-8">
-          <Image className="noOrdersImage" src={`${CDNIMGURL}Empty%20orders.png`} />
+          <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
           <View className="mt-2 flex justify-center">
-            <Text className="ml-0.5">汪汪~啥也没有!</Text>
+            <Text className="ml-0.5">啥也没有~</Text>
           </View>
         </View>
       )}

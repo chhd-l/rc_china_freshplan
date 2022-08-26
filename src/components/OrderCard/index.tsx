@@ -8,11 +8,11 @@ import { payFromOrder } from '@/framework/api/payment/pay'
 import './index.less'
 
 const orderStatusType = {
-  UNPAID: '等待买家付款',
-  TO_SHIP: '等待卖家发货',
-  SHIPPED: '等待买家收货',
+  UNPAID: '待付款',
+  TO_SHIP: '待发货',
+  SHIPPED: '待收货',
   COMPLETED: '交易成功',
-  VOID: '交易取消',
+  VOID: '交易关闭',
 }
 
 const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function }) => {
@@ -25,6 +25,14 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
       default:
         return 'WX.png'
     }
+  }
+
+  const nums = () => {
+    let num = 0
+    order?.lineItem?.forEach((item) => {
+      num += Number(item.num)
+    })
+    return num
   }
 
   return (
@@ -81,10 +89,15 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         ))}
       </View>
       <View className="flex flex-col items-end">
-        <View className="mb-1">
-          {order?.orderState?.orderState === 'UNPAID' || order?.orderState?.orderState === 'VOID' ? '需' : ''}
-          付款：&nbsp;
-          {formatMoney(order.orderPrice.totalPrice + order.orderPrice.deliveryPrice)}
+        <View className="w-full flex items-center justify-between text-[28px]">
+          <View className="text-[#999]">共{nums()}件商品</View>
+          <View className="mb-1">
+            {order?.orderState?.orderState === 'UNPAID' || order?.orderState?.orderState === 'VOID'
+              ? '需付款'
+              : '实际支付'}
+            ：&nbsp;
+            {formatMoney(order.orderPrice.totalPrice + order.orderPrice.deliveryPrice)}
+          </View>
         </View>
         {order.orderState?.orderState === 'UNPAID' && (
           <View className="flex items-center">
