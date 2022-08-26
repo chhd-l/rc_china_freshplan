@@ -190,8 +190,8 @@ const OrderList = () => {
       {!orderList.length && (
         <View className="noOrders flex flex-col items-center justify-center mt-8">
           <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
-          <View className="mt-2 flex justify-center">
-            <Text className="ml-0.5">啥也没有~</Text>
+          <View className="mt-1 flex justify-center">
+            <Text className="ml-0.5 text-[#666]">啥也没有~</Text>
           </View>
         </View>
       )}
