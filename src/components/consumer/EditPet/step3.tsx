@@ -76,8 +76,8 @@ const Step3 = ({ pet, onStepChange, onChangeAll }: IProps3) => {
         ))}
       </View>
       <View className={`mt-1 choose-other-breed flex items-center ${isOtherBreedSelected ? 'active' : ''}`} onClick={handleBreed}>
-        <Text className="text-28 mx-1 flex-1">{isOtherBreedSelected ? pet.breed : '选择其他品种'}</Text>
-        <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
+        <Text className={`text-28 mx-1 flex-1 ${isOtherBreedSelected ? 'text-white' : ''}`}>{isOtherBreedSelected ? pet.breed : '选择其他品种'}</Text>
+        <Text className={`rcciconfont rccicon-right text-30 mx-1 ${isOtherBreedSelected ? 'text-white' : 'text-gray-400'}`} />
       </View>
       <View className="pet-edit-btns">
         <View className="grid grid-cols-2">
