@@ -17,7 +17,7 @@ const ExpressLine = ({ expressList }: { expressList: any[] }) => {
           <View className="flex items-center">
             <View className={`dian rounded-full mr-0.5 ${key === 0 && 'selectBackground'}`} />
             <View className={`title ${key === 0 && 'selectedWord'}`}>
-              <Text>{express?.status}</Text> <Text>{express?.time}</Text>
+              <Text className={`${key === 0 && 'text-black'}`}>{express?.status}</Text> <Text>{express?.time}</Text>
             </View>
           </View>
           <View className={`flex line ${key !== expressList.length - 1 && 'selectLine'}`}>

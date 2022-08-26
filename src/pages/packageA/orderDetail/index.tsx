@@ -206,16 +206,18 @@ const OrderDetails = () => {
   }
   return (
     <ScrollView scrollY overflow-anchor={false} className="pb-1 OrderDetails">
-      <View className="bg-white">
-        <View className="mx-2 mt-1 py-0.5 flex items-center header">
-          <Image className="h-full mr-1 headerImage" src={`${CDNIMGURL}${titleImageType()}`} />
+      <View className="body">
+        <View className="mt-1 px-2 pt-1.5 pb-2 flex items-center header">
+          <Image className="mr-1 headerImage" src={`${CDNIMGURL}${titleImageType()}`} />
           <View className="flex flex-col">
-            <Text>{orderStatusType[orderDetail?.orderState?.orderState || '']}</Text>
-            <Text>{titleType()}</Text>
+            <Text className="mb-[15px] leading-[32px]">
+              {orderStatusType[orderDetail?.orderState?.orderState || '']}
+            </Text>
+            <Text className="leading-[30px]">{titleType()}</Text>
           </View>
         </View>
         {orderDetail?.orderState?.orderState !== 'VOID' && <TimeLine type={orderDetail?.orderState?.orderState} />}
-        <View className="pl-4 py-1 mt-0.5 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
+        <View className="pl-4 py-1 my-1 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
           {(orderDetail?.orderState?.orderState === 'SHIPPED' ||
             orderDetail?.orderState?.orderState === 'COMPLETED') && (
             <View className="express">
@@ -227,24 +229,28 @@ const OrderDetails = () => {
               <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} />
             </View>
           )}
-          <View>
+          <View className="my-0.5">
             <View className="receivingUser relative">
               <Image
                 className="absolute orderDetailsIcon"
                 style={{
                   width: '0.35rem',
-                  bottom: '-0.05rem',
+                  transform: 'translateY(50%)',
                 }}
                 src={`${CDNIMGURL}order%20address.png`}
               />
-              收货人： {orderDetail.shippingAddress.receiverName} {orderDetail.shippingAddress.phone}
-            </View>
-            <View className="receivingAddress mt-0.5">
-              收货地址：{orderDetail.shippingAddress.city} {orderDetail.shippingAddress.region}{' '}
-              {orderDetail.shippingAddress.detail}
+              <View>
+                <View>
+                  <Text className="text-[30px]">{orderDetail.shippingAddress.receiverName}</Text>{' '}
+                  <Text className="text-[26px] text-[#999]">{orderDetail.shippingAddress.phone}</Text>
+                </View>
+                <View className="receivingAddress mt-0.5 text-[26px]">
+                  {orderDetail.shippingAddress.city} {orderDetail.shippingAddress.region}{' '}
+                  {orderDetail.shippingAddress.detail}
+                </View>
+              </View>
             </View>
           </View>
-          <View className="receivingBorder w-full absolute left-0 bottom-0" />
         </View>
       </View>
       <View className="bg-white mt-1 pb-1 orderAtCard px-1">
@@ -263,13 +269,13 @@ const OrderDetails = () => {
           {(orderDetail?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-2 flex item-center pr-1" key={key}>
               <Image className="orderAtCardImage mx-1 h-full" src={el?.pic} />
-              <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
-                <View>{el?.spuName}</View>
-                <View className="flex items-center justify-between">
-                  <Text>
-                    <Text className="orderAtCardPrice">{formatMoney(Number(el?.price))}</Text>
-                  </Text>
+              <View className="h-full flex flex-col flex-1" style={{ fontWeight: 700 }}>
+                <View className="flex item-center justify-between">
+                  <Text>{el?.spuName}</Text>
                   <Text style={{ color: '#9D9D9D', fontWeight: 400 }}>X {el?.num}</Text>
+                </View>
+                <View className="mt-[28px]">
+                  <Text className="orderAtCardPrice">{formatMoney(Number(el?.price))}</Text>
                 </View>
               </View>
             </View>
@@ -292,44 +298,44 @@ const OrderDetails = () => {
       </View>
       <AtList hasBorder={false} className="my-1">
         <AtListItem
-          className="py-[10px]"
+          className="py-[17px]"
           title="配送方式"
           extraText={'快递' + formatMoney(orderDetail.orderPrice.deliveryPrice)}
         />
-        <AtListItem className="py-[10px]" hasBorder={false} title="买家留言" extraText={orderDetail.remark || '无'} />
+        <AtListItem className="py-[17px]" hasBorder={false} title="买家留言" extraText={orderDetail.remark || '无'} />
       </AtList>
       <AtList hasBorder={false} className="mb-1">
         <AtListItem
           title="商品金额"
-          className="py-[10px]"
+          className="py-[17px]"
           hasBorder={false}
           extraText={formatMoney(orderDetail.orderPrice.productPrice + orderDetail.orderPrice.deliveryPrice)}
         />
         <AtListItem
           title="折扣"
-          className="py-[10px]"
+          className="py-[17px]"
           hasBorder={false}
           extraText={formatMoney(orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice)}
         />
-        <AtListItem className="py-[10px]" title="运费" extraText={formatMoney(orderDetail.orderPrice.deliveryPrice)} />
+        <AtListItem className="py-[17px]" title="运费" extraText={formatMoney(orderDetail.orderPrice.deliveryPrice)} />
         <View className="flex justify-end py-1.5">
           <Text className="TotalPrice">
-            <Text className="item-content__info-title" style={{ color: '#000' }}>
+            <Text className="text-[30px]" style={{ color: '#000' }}>
               合计：
             </Text>
-            <Text className="item-extra__info" style={{ color: '#D49D28' }}>
+            <Text className="text-[40px]" style={{ color: '#D49D28' }}>
               {formatMoney(orderDetail.orderPrice.totalPrice)}
             </Text>
           </Text>
         </View>
       </AtList>
-      <View className="orderInfo bg-white px-1 py-1.5 mb-3">
-        <View className="flex items-center">
+      <View className="orderInfo pl-[24px] pr-[0.54rem] bg-white py-1.5 mb-3">
+        <View className="flex items-center justify-between">
           <Text>订单编号：</Text>
           <CopyText str={orderDetail.orderNumber} />
         </View>
         <View
-          className="flex items-center"
+          className="flex items-center justify-between"
           onClick={() => {
             if (orderDetail.subscriptionNo?.length)
               Taro.navigateTo({
@@ -341,18 +347,18 @@ const OrderDetails = () => {
           <CopyText str={orderDetail.subscriptionNo} />
         </View>
         {orderDetail?.orderState?.orderState !== 'UNPAID' && (
-          <View>
+          <View className="flex items-center justify-between">
             <Text>付款方式：</Text>
             <Text className="copyText">{returnpayWayCode()}</Text>
           </View>
         )}
         {orderDetail?.orderState?.orderState !== 'UNPAID' && (
-          <View>
+          <View className="flex items-center justify-between">
             <Text>付款时间：</Text>
             <Text className="copyText">{handleReturnTime(orderDetail?.payment?.paymentFinishTime)}</Text>
           </View>
         )}
-        <View>
+        <View className="flex items-center justify-between">
           <Text>创建时间：</Text>
           <Text className="copyText">{handleReturnTime(orderDetail?.orderState?.createdAt)}</Text>
         </View>
@@ -390,6 +396,7 @@ const OrderDetails = () => {
         )}
         {orderDetail?.orderState?.orderState === 'SHIPPED' && (
           <View className="flex items-center justify-end">
+            <AtButton className="rounded-full m-0 px-1.5 mx-1 py-0">申请开票</AtButton>
             <AtButton
               className="rounded-full m-0 px-1.5 py-0 mr-1"
               type="primary"
