@@ -4,7 +4,7 @@ import Taro from '@tarojs/taro'
 const CopyText = ({ str }: { str: string | undefined }) => {
   return (
     <Text className="copyText flex items-center">
-      {str}
+      {str + '>'}
       <Text
         className="copyTextSpan px-0.5"
         onClick={(e) => {
