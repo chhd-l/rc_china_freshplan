@@ -1,10 +1,11 @@
 // import Announcement from '@/components/common/Announcement'
 import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import RotationChartList from '@/components/RotationChartList'
+import PetNavigation from '@/components/PetNavigation'
 import { wxLogin } from '@/framework/api/consumer/consumer'
 import { getPets } from '@/framework/api/pet/get-pets'
 import { PetListItemProps } from '@/framework/types/consumer'
-import { CDNIMGURL } from '@/lib/constants'
+import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
 import { getAge } from '@/utils/utils'
 import { Button, Image, Text, View } from '@tarojs/components'
@@ -105,6 +106,7 @@ const Account = () => {
         <View>
           <AtList hasBorder={false} className="orderAtList">
             <AtListItem
+              thumb={`${CDNIMGURL2}orderlist-icon.png`}
               title="我的订单"
               hasBorder={false}
               arrow="right"
@@ -145,7 +147,32 @@ const Account = () => {
           </AtList>
         </View>
         {/* 宠物列表 */}
-        <View className="my-1">
+        <AtList hasBorder={false} className="my-1 bg-white orderAtList">
+          <AtListItem
+            thumb={`${CDNIMGURL2}pet-foot.png`}
+            title="我的宠物"
+            hasBorder={false}
+            arrow="right"
+            extraText="宠物管理"
+            onClick={() => {
+              getAuthentication(() => {
+                Taro.navigateTo({ url: '/pages/packageA/petList/index' })
+              })
+            }}
+          />
+          <View className="p-1">
+            <PetNavigation
+              petList={petList}
+              hasAdd={true}
+              onAdd={() => {
+                getAuthentication(() => {
+                  Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
+                })
+              }}
+            />
+          </View>
+        </AtList>
+        {/* <View className="my-1">
           <RotationChartList
             list={petList}
             onClickPetList={() => {
@@ -159,7 +186,7 @@ const Account = () => {
               })
             }}
           />
-        </View>
+        </View> */}
         {/* 其他选项 */}
         <AtList hasBorder={false} className="mt-1">
           <AtListItem

@@ -248,8 +248,8 @@ const PetDetail = () => {
             ))}
           </View>
           <View className={`mt-1 choose-other-breed bg-white flex items-center ${isOtherBreedSelected ? 'active' : ''}`} onClick={handleBreed}>
-            <Text className="text-28 mx-1 flex-1">{isOtherBreedSelected ? pet.breed : '选择其他品种'}</Text>
-            <Text className="rcciconfont rccicon-right text-30 mx-1 text-gray-400" />
+            <Text className={`text-28 mx-1 flex-1 ${isOtherBreedSelected ? 'text-white' : ''}`}>{isOtherBreedSelected ? pet.breed : '选择其他品种'}</Text>
+            <Text className={`rcciconfont rccicon-right text-30 mx-1 ${isOtherBreedSelected ? 'text-white' : 'text-gray-400'}`} />
           </View>
         </View>
         <View className="tab2 px-1" style={{display: tab === 2 ? 'block' : 'none'}}>
