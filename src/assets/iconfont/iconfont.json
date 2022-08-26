@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "31487902",
+      "name": "down",
+      "font_class": "down",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "31487568",
+      "name": "ilist",
+      "font_class": "ilist",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "31487570",
+      "name": "ifoot",
+      "font_class": "ifoot",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "31487571",
+      "name": "idelete",
+      "font_class": "idelete",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "31487572",
+      "name": "iedit",
+      "font_class": "iedit",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
       "icon_id": "31467936",
       "name": "cam",
       "font_class": "cam",
