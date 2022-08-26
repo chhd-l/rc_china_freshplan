@@ -150,8 +150,7 @@ const Checkout = () => {
           <Text className="text-30 text-gray-400">运费</Text>
           <Text>{formatMoney(prices?.deliveryPrice ?? 0)}</Text>
         </View>
-        <View className="mt-1 border-solid border-gray-100" style={{borderTopWidth: '1PX'}}></View>
-        <View className="mt-1 text-right">
+        <View className="total-price-container mt-1 pt-1 text-right">
           <Text className="text-30">合计：</Text>
           <Text className="text-30 text-color-price font-bold">{formatMoney(prices?.totalPrice ?? 0)}</Text>
         </View>
