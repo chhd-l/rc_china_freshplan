@@ -1,4 +1,4 @@
-import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
+import { cancelSubscription, getSubscriptionDetail } from '@/framework/api/subscription/subscription'
 import { CDNIMGURL } from '@/lib/constants'
 import routers from '@/routers'
 import { formatMoney } from '@/utils/utils'
@@ -230,6 +230,18 @@ const Schedule = () => {
               <AtButton
                 circle
                 className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+                onClick={async () => {
+                  let res = await cancelSubscription({
+                    subscriptionId: subscriptionDetails?.id,
+                    subscriptionType: 'FRESH_PLAN',
+                  })
+                  setPopupOpne(false)
+                  if (res) {
+                    Taro.switchTab({
+                      url: '/pages/subscription/index',
+                    })
+                  }
+                }}
               >
                 确定
               </AtButton>
