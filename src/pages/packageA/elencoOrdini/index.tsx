@@ -3,8 +3,8 @@ import { cancelOrder, completedOrder, deleteOrder, getOrderList } from '@/framew
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL } from '@/lib/constants'
 import { Image, Text, View } from '@tarojs/components'
-import { getCurrentInstance, useReachBottom } from '@tarojs/taro'
-import { useEffect, useState } from 'react'
+import Taro, { getCurrentInstance, useReachBottom } from '@tarojs/taro'
+import { useState } from 'react'
 import { AtModal, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 
@@ -143,10 +143,9 @@ const OrderList = () => {
     }
   })
 
-  useEffect(() => {
+  Taro.useDidShow(() => {
     getOrderLists({ orderState: router?.params?.status })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router?.params?.status])
+  })
 
   return (
     <View className="myOrderList pb-2">

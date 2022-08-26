@@ -338,7 +338,7 @@ const OrderDetails = () => {
           }}
         >
           <Text>Fresh编号：</Text>
-          <CopyText str={orderDetail.subscriptionNo + '>'} />
+          <CopyText str={orderDetail.subscriptionNo} />
         </View>
         {orderDetail?.orderState?.orderState !== 'UNPAID' && (
           <View>
