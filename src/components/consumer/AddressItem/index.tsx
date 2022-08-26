@@ -1,7 +1,7 @@
 import { updateAddress } from '@/framework/api/consumer/address'
 import { Address } from '@/framework/types/consumer'
 import routers from '@/routers'
-import { Image, Text, View } from '@tarojs/components'
+import { Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtCheckbox } from 'taro-ui'
 import './index.less'
@@ -102,20 +102,31 @@ const AddressItem = ({
           />
         </View>
         <View className="flex flex-row items-center">
-          <Image
-            style={{ width: '0.45rem', height: '0.45rem' }}
-            src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_edit.png"
+          <View
+            className="w-[50px] h-[50px] bg-[#F3F3F3] rounded-full flex items-center justify-center"
             onClick={editAddress}
-          />
-          <Image
-            className="ml-1"
-            style={{ width: '0.45rem', height: '0.45rem' }}
-            src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/icon_delete.png"
+          >
+            <Text
+              className="rcciconfont rccicon-iedit"
+              style={{
+                fontSize: '14px',
+              }}
+            ></Text>
+          </View>
+          <View
+            className="w-[50px] h-[50px] bg-[#F3F3F3] rounded-full flex items-center justify-center ml-1"
             onClick={() => {
               setShowDelTip(true)
               setAddressId(addressInfo?.id)
             }}
-          />
+          >
+            <Text
+              className="rcciconfont rccicon-idelete"
+              style={{
+                fontSize: '14px',
+              }}
+            ></Text>
+          </View>
         </View>
       </View>
     </View>
