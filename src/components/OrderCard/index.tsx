@@ -62,13 +62,17 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         {(order?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
           <View className="orderBody mt-2 flex item-center" key={key}>
             <Image className="orderImage mx-1 h-full" src={el?.pic} />
-            <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
-              <View className="text-[26px] leading-[28px]">{el?.spuName}</View>
-              <View className="flex items-center justify-between">
+            <View className="h-full flex flex-col flex-1" style={{ fontWeight: 700 }}>
+              <View className="flex justify-between">
+                <Text className="text-[26px] leading-[33px]">{el?.spuName}</Text>
+                <Text className="text-[20px] leading-[23px] mt-[10px]" style={{ color: '#9D9D9D', fontWeight: 400 }}>
+                  X {el?.num}
+                </Text>
+              </View>
+              <View className="flex items-center justify-between mt-1.5">
                 <Text>
                   <Text className="orderPrice">{formatMoney(Number(el?.price))}</Text>
                 </Text>
-                <Text style={{ color: '#9D9D9D', fontWeight: 400 }}>X {el?.num}</Text>
               </View>
             </View>
           </View>
