@@ -193,7 +193,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           <AtIcon className="mr-0.5" value="clock" size="25" />
           <Text className="text-[34px]">更多定制</Text>
         </View>
-        <View className="mt-4 px-[20px]">
+        <View className="mt-1 px-[20px]">
           <Step />
           <FreshFoodExperience />
           <LovePetHealth />

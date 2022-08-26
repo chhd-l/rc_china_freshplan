@@ -11,6 +11,7 @@ import './index.less'
 
 const Schedule = () => {
   const [PopupOpne, setPopupOpne] = useState(false)
+  const { router } = getCurrentInstance()
   const [subscriptionDetails, setSubscriptionDetails] = useState({
     productList: [{ name: '', variants: { name: '', defaultImage: '', num: 0, subscriptionPrice: 0 } }],
     no: '',
@@ -28,6 +29,7 @@ const Schedule = () => {
       productPrice: 0,
       totalPrice: 0,
     },
+    status: '',
     completedDeliveries: [],
   })
   const getSubscriptionDetails = async (id: string) => {
@@ -37,7 +39,6 @@ const Schedule = () => {
   }
 
   Taro.useDidShow(() => {
-    const { router } = getCurrentInstance()
     const subId = router?.params?.id ?? ''
     getSubscriptionDetails(subId)
   })
@@ -47,7 +48,10 @@ const Schedule = () => {
       <View className="bg-white mt-1 px-1 boxShadow">
         <View className="pt-1">
           <View className="flex justify-between items-end">
-            <Text className="text-[34px]">下次发货</Text>
+            <Text className="text-[34px] font-bold">
+              {subscriptionDetails.status !== 'VOID' ? '下次发货' : 'Fresh Plan商品'}
+            </Text>
+            {subscriptionDetails.status === 'VOID' && <Text className="text-[#EE2737] text-[28px]">计划已取消</Text>}
           </View>
           <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
@@ -69,61 +73,71 @@ const Schedule = () => {
         </View>
         <AtList hasBorder={false} className="my-2">
           <AtListItem
-            className="py-0.5 text-[24px]"
+            className="py-0.5 text-[28px]"
             title="商品金额"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.productPrice + subscriptionDetails.price.deliveryPrice)}
           />
           <AtListItem
-            className="py-0.5 text-[24px]"
+            className="py-0.5 text-[28px]"
             title="促销折扣"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.discountsPrice)}
           />
           <AtListItem
-            className="py-0.5 text-[24px]"
+            className="py-0.5 text-[28px]"
             title="运费"
             extraText={formatMoney(subscriptionDetails.price.deliveryPrice)}
           />
-          <View className="flex items-center justify-between py-1.5">
+          <View
+            className="flex items-center justify-end py-1"
+            style={{
+              borderBottom: subscriptionDetails.status !== 'VOID' ? '1px solid #E2E2E2' : '',
+            }}
+          >
+            <View>
+              <Text className="text-[28px]" style={{ color: '#000' }}>
+                商品小计：
+              </Text>
+              <Text className="text-[40px] mr-[40px]" style={{ color: '#D49D28' }}>
+                <Text className="text-[26px]">￥</Text>
+                {subscriptionDetails?.price?.totalPrice.toFixed(2)}
+              </Text>
+            </View>
+          </View>
+          {subscriptionDetails.status !== 'VOID' && (
             <View
-              className="underline text-[24px]"
+              className="text-[24px] flex items-center justify-center text-[#999] py-1"
               onClick={(e) => {
                 e.stopPropagation()
                 setPopupOpne(true)
               }}
             >
-              <AtIcon className="ml-[30px] mr-[10px]" value="close-circle" size="18" />
-              取消计划
+              <AtIcon className="ml-[30px] mr-[10px]" color="#999" value="close-circle" size="16" />
+              <Text className="leading-[33px]">取消计划</Text>
             </View>
-            <View className="TotalPrice">
-              <Text className="item-content__info-title" style={{ color: '#000' }}>
-                合计：
-              </Text>
-              <Text className="item-extra__info mr-[24px]" style={{ color: '#D49D28' }}>
-                {formatMoney(subscriptionDetails?.price?.totalPrice)}
-              </Text>
-            </View>
-          </View>
+          )}
         </AtList>
       </View>
-      <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[24px]">
+      <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[28px]">
         <View className="text-[34px]">发货信息</View>
         <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
-        <View className="mt-1 flex pl-[24px]">
-          <AtIcon value="calendar" size="16" color="#D49D28" />
-          <Text className="ml-[6px]">
-            发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
-          </Text>
-        </View>
-        <View className="mt-1 flex pl-[24px]">
+        {subscriptionDetails.status !== 'VOID' && (
+          <View className="mt-1 flex pr-[18px]">
+            <AtIcon value="calendar" size="16" />
+            <Text className="ml-[6px] text-[#666]">
+              发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
+            </Text>
+          </View>
+        )}
+        <View className="mt-1 flex pr-[18px]">
           <Text
-            className="rcciconfont rccicon-location text-[#D49D28]"
+            className="rcciconfont rccicon-location"
             style={{
               fontSize: '0.32rem',
             }}
           />
-          <Text className="ml-[6px] flex-1 leading-[28px]">
+          <Text className="ml-[6px] flex-1 leading-[28px] text-[#666]">
             收货地址&nbsp;&nbsp;&nbsp;{subscriptionDetails?.address?.city} {subscriptionDetails?.address?.region}{' '}
             {subscriptionDetails?.address?.detail}
           </Text>
@@ -131,8 +145,7 @@ const Schedule = () => {
         <View className="flex mt-2 justify-end">
           <AtButton
             circle
-            className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0"
-            type="primary"
+            className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0 flex items-center justify-center border-[#ECEEF1]"
             onClick={() => {
               Taro.setStorage({
                 key: 'current-address',
@@ -189,7 +202,7 @@ const Schedule = () => {
                 >
                   <Image className="mr-1 h-full" src={item?.pic} style={{ width: '1.6rem' }} />
                   <View className="h-full flex flex-col justify-center flex-1">
-                    <View className="font-bold text-[30px]">{item?.skuName}</View>
+                    <View className="font-bold text-[30px] text-[#000]">{item?.skuName}</View>
                     <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
                       {formatMoney(item?.price)}
                     </View>
@@ -237,9 +250,7 @@ const Schedule = () => {
                   })
                   setPopupOpne(false)
                   if (res) {
-                    Taro.switchTab({
-                      url: '/pages/subscription/index',
-                    })
+                    getSubscriptionDetails(router?.params?.id || '')
                   }
                 }}
               >

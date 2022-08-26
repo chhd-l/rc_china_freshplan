@@ -7,7 +7,7 @@ import {
 } from '@/framework/api/order'
 import { payFromOrder } from '@/framework/api/payment/pay'
 import { Order } from '@/framework/types/order'
-import { CDNIMGURL } from '@/lib/constants'
+import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { formatMoney, getDateDiff, handleReturnTime } from '@/utils/utils'
 import { Image, ScrollView, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
@@ -147,15 +147,15 @@ const OrderDetails = () => {
   const titleImageType = () => {
     switch (orderDetail?.orderState?.orderState) {
       case 'UNPAID':
-        return 'to%20be%20paid.png'
+        return 'wait-pay.png'
       case 'TO_SHIP':
-        return 'order%20shipped.png'
+        return 'wait-ship.png'
       case 'SHIPPED':
-        return 'order%20shipped.png'
+        return 'shipped.png'
       case 'COMPLETED':
-        return 'order%20completed.png'
+        return 'completed.png'
       case 'VOID':
-        return 'order%20cancel.png'
+        return 'closed.png'
       default:
         break
     }
@@ -208,7 +208,7 @@ const OrderDetails = () => {
     <ScrollView scrollY overflow-anchor={false} className="pb-1 OrderDetails">
       <View className="body">
         <View className="mt-1 px-2 pt-1.5 pb-2 flex items-center header">
-          <Image className="mr-1 headerImage" src={`${CDNIMGURL}${titleImageType()}`} />
+          <Image className="mr-1 headerImage rounded-[17px]" src={`${CDNIMGURL2}${titleImageType()}`} />
           <View className="flex flex-col">
             <Text className="mb-[15px] leading-[32px]">
               {orderStatusType[orderDetail?.orderState?.orderState || '']}
@@ -217,37 +217,44 @@ const OrderDetails = () => {
           </View>
         </View>
         {orderDetail?.orderState?.orderState !== 'VOID' && <TimeLine type={orderDetail?.orderState?.orderState} />}
-        <View className="pl-4 py-1 my-1 pr-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
+        <View className="px-1 py-1 my-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
           {(orderDetail?.orderState?.orderState === 'SHIPPED' ||
             orderDetail?.orderState?.orderState === 'COMPLETED') && (
-            <View className="express">
-              <View className="flex items-center relative">
-                <Image className="absolute orderDetailsIcon" src={`${CDNIMGURL}order%20logistics.png`} />
-                <Text className="mr-0.5">{getCarrierType()}</Text>
-                <CopyText str={orderDetail.delivery.trackingId} />
+            <View className="express mb-1">
+              <View className="flex items-end">
+                <Image
+                  className="mr-[15px]"
+                  style={{
+                    height: '0.45rem',
+                    width: '0.45rem',
+                  }}
+                  src={`${CDNIMGURL}order%20logistics.png`}
+                />
+                <View className="flex items-center leading-[35px]">
+                  <Text className="mr-0.5 text-[30px]">{getCarrierType()}</Text>
+                  <CopyText str={orderDetail.delivery.trackingId} />
+                </View>
               </View>
               <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} />
             </View>
           )}
-          <View className="my-0.5">
-            <View className="receivingUser relative">
-              <Image
-                className="absolute orderDetailsIcon"
-                style={{
-                  width: '0.35rem',
-                  transform: 'translateY(50%)',
-                }}
-                src={`${CDNIMGURL}order%20address.png`}
-              />
+          <View className="my-0.5 receivingUser flex items-center">
+            <Image
+              className="mr-1"
+              style={{
+                height: '0.4rem',
+                width: '0.35rem',
+              }}
+              src={`${CDNIMGURL}order%20address.png`}
+            />
+            <View>
               <View>
-                <View>
-                  <Text className="text-[30px]">{orderDetail.shippingAddress.receiverName}</Text>{' '}
-                  <Text className="text-[26px] text-[#999]">{orderDetail.shippingAddress.phone}</Text>
-                </View>
-                <View className="receivingAddress mt-0.5 text-[26px]">
-                  {orderDetail.shippingAddress.city} {orderDetail.shippingAddress.region}{' '}
-                  {orderDetail.shippingAddress.detail}
-                </View>
+                <Text className="text-[30px]">{orderDetail.shippingAddress.receiverName}</Text>{' '}
+                <Text className="text-[26px] text-[#999]">{orderDetail.shippingAddress.phone}</Text>
+              </View>
+              <View className="receivingAddress mt-0.5 text-[26px]">
+                {orderDetail.shippingAddress.city} {orderDetail.shippingAddress.region}{' '}
+                {orderDetail.shippingAddress.detail}
               </View>
             </View>
           </View>
