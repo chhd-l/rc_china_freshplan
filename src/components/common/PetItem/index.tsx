@@ -20,12 +20,12 @@ const PetItem = ({ pet, hasSelect = false, selected = false, isAdd = false, onCl
 
   return (
     <View className={`rcc-pet-item ${isAdd ? 'add' : ''}`} onClick={handleClick}>
-      <View className="rcc-pet-item-image">
-        {isAdd ? <Image mode="widthFix" src={pet?.image ?? ""} /> : <Text className="rcciconfont rccicon-add" />}
+      <View className="rcc-pet-item-image text-center">
+        {isAdd ? <Text className="rcciconfont rccicon-add text-42" /> : <Image mode="widthFix" src={pet?.image ?? ""} />}
       </View>
-      <View className="rcc-pet-item-name text-center text-gray-600 text-26 truncate">{pet?.name ?? "添加爱宠"}</View>
+      <View className="rcc-pet-item-name text-center text-gray-600 text-26 rounded-full truncate">{pet?.name ?? "添加爱宠"}</View>
       {hasSelect ? <View className="rcc-pet-item-select">
-        <Image src={selected ? `${CDNIMGURL}selected-s.png` : `${CDNIMGURL}un-selected.png`} mode="widthFix" />
+        <Image src={selected ? `${CDNIMGURL}selected-s.png` : `${CDNIMGURL}unselected.png`} mode="widthFix" />
       </View> : null}
     </View>
   )
