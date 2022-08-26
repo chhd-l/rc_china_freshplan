@@ -20,7 +20,7 @@ const PetItem = ({ pet, hasSelect = false, selected = false, isAdd = false, onCl
 
   return (
     <View className={`rcc-pet-item ${isAdd ? 'add' : ''}`} onClick={handleClick}>
-      <View className="rcc-pet-item-image text-center">
+      <View className="rcc-pet-item-image overflow-hidden text-center">
         {isAdd ? <Text className="rcciconfont rccicon-add text-42" /> : <Image mode="widthFix" src={pet?.image ?? ""} />}
       </View>
       <View className="rcc-pet-item-name text-center text-gray-600 text-26 rounded-full truncate">{pet?.name ?? "添加爱宠"}</View>

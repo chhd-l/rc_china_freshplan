@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, Text, Image, Input, PickerView, PickerViewColumn } from '@tarojs/components';
-import { AtFloatLayout } from 'taro-ui';
+import { AtFloatLayout, AtIcon, AtButton } from 'taro-ui';
 import Taro from '@tarojs/taro';
 import { CDNIMGURL2, CDNIMGURL, UPLOADURL } from '@/lib/constants';
 import { getBreedList } from '@/framework/api/pet/get-breeds';
@@ -9,6 +9,7 @@ import { PetListItemProps, PetType, PetGender, PetHealth, PetPosture } from '@/f
 import { BreedListItemProps } from '@/pages/packageA/breedList';
 import { updatePet } from '@/framework/api/pet/update-pet';
 import { getPet } from '@/framework/api/pet/get-pets';
+import { deletePet } from '@/framework/api/pet/delete-pet';
 import moment from 'moment';
 import RccDatePicker from '@/components/common/RccDatePicker';
 import { genSeriesNumberArr } from '@/utils/utils';
@@ -44,6 +45,7 @@ const PetDetail = () => {
   const [show1, setShow1] = useState<boolean>(false);
   const [val1, setVal1] = useState<number[]>([0,0,0]);
   const [showBirth, setShowBirth] = useState<boolean>(false);
+  const [showDel, setShowDel] = useState<boolean>(false);
 
   const getBreedListInit = async (type: PetType | undefined) => {
     let res: any = await getBreedList()
@@ -183,6 +185,21 @@ const PetDetail = () => {
     });
   }
 
+  const handleOpenDelete = () => {
+    if (pet.subscriptionNo && pet.subscriptionNo.length > 0) {
+      Taro.showToast({ title: `${pet.name}有定制计划，暂无法删除` })
+      return;
+    }
+    setShowDel(true);
+  }
+
+  const handleDelete = async () => {
+    const res = await deletePet({ id: pet.id });
+    if (res) {
+      Taro.navigateBack();
+    }
+  }
+
   const hotBreedList = breedList.filter(el => el.isHot).filter((el, idx) => idx < 9);
   const isOtherBreedSelected = !!pet.code && hotBreedList.map(el => el.code).indexOf(pet.code) === -1;
 
@@ -192,8 +209,13 @@ const PetDetail = () => {
         <View className="head w-6 h-6" onClick={() => setShowUpload(true)}>
           <Image className="rounded-full" src={pet.image || `${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`}></Image>
         </View>
-        <Text className="ml-2 text-32">{pet.name}</Text>
-        <Text className={`ml-1 rcciconfont text-30 ${pet.gender === PetGender.Female ? 'text-color-primary rccicon-female' : 'text-gray-400 rccicon-male'}`}></Text>
+        <View className="flex-1">
+          <Text className="ml-2 text-32">{pet.name}</Text>
+          <Text className={`ml-1 rcciconfont text-30 ${pet.gender === PetGender.Female ? 'text-color-primary rccicon-female' : 'text-gray-400 rccicon-male'}`}></Text>
+        </View>
+        <View className="pet-delete self-start flex items-center justify-center" onClick={handleOpenDelete}>
+          <Text className="rcciconfont rccicon-idelete text-30" />
+        </View>
       </View>
       <View className="py-1 bg-white flex justify-around items-center">
         <Text className={`pet-tab-item text-32 ${tab === 1 ? 'active' : ''}`} onClick={() => setTab(1)}>基本信息</Text>
@@ -429,6 +451,53 @@ const PetDetail = () => {
           </View>
         </View>
       </AtFloatLayout>
+
+      {/* 弹出层 */}
+      <View
+        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
+        style={{
+          display: showDel ? 'flex' : 'none',
+          zIndex: 999,
+        }}
+        onClick={(e) => {
+          e.stopPropagation()
+          setShowDel(false)
+        }}
+      >
+        <View>
+          <View
+            className="w-[650px] bg-white rounded-[50px] flex flex-col items-center"
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Image className="mt-2" src={pet.image} style={{ width: '2.36rem', height: '2.36rem' }} />
+            <View className="text-[29px] text-[#333] mt-2">您确定要删除{pet.name}这个宠物嘛？</View>
+            <View className="flex items-center justify-between my-2">
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39]"
+                onClick={handleDelete}
+              >
+                确定
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399] ml-2"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowDel(false)
+                }}
+              >
+                取消
+              </AtButton>
+            </View>
+          </View>
+          <View className="flex justify-center mt-3">
+            <AtIcon value="close-circle" size={30} color="#fff" />
+          </View>
+        </View>
+      </View>
     </View>
   );
 }

@@ -1,4 +1,5 @@
-import { View, Text, Image, Input } from '@tarojs/components';
+import { View, Text, Image, Textarea } from '@tarojs/components';
+import { AtTextarea } from 'taro-ui';
 import { Address } from '@/framework/types/consumer';
 import { addPet } from '@/framework/api/pet/add-pet';
 import { getAddresses } from '@/framework/api/consumer/address';
@@ -78,7 +79,7 @@ const Checkout = () => {
         orderItems: items,
         address,
         remark,
-        deliveryTime: moment().add(1, 'days').format('YYYY-MM-DD'),
+        deliveryTime: moment().format('YYYY-MM-DD'),
         pet: { ...pet, id: addPetRes.id },
       });
       Taro.hideLoading();
@@ -159,7 +160,15 @@ const Checkout = () => {
       <View className="bg-white rounded-sm mx-1 mt-1 p-1 flex items-center">
         <View className="mr-1 text-30 text-gray-400">买家留言</View>
         <View className="flex-1">
-          <Input value={remark} onInput={(e) => setRemark(e.detail.value)} className="rcc-input small bg-white text-right text-30" placeholder="留言建议提前协商 (250字内)" />
+          <Textarea
+            style={{paddingBottom: 0, height: remark.length > 0 ? 'auto' : '.5rem'}}
+            autoHeight={remark.length > 0} 
+            value={remark} 
+            onInput={(e) => setRemark(e.detail.value)} 
+            className="bg-white text-right text-30" 
+            placeholder="留言建议提前协商 (250字内)" 
+            maxlength={-1}
+          />
         </View>
       </View>
 

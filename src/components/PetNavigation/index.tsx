@@ -26,7 +26,7 @@ const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selected
           <View className="text-28 text-gray-400">给它定制专属食物</View>
         </View>
         <View>
-          <AtIcon size="28" value="chevron-right text-gray-400" />
+          <AtIcon size="28" value="chevron-right" className="text-gray-400" />
         </View>
       </View>
     )
@@ -45,7 +45,7 @@ const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selected
         {petList.map((item: PetListItemProps, idx: number) => (
           <PetItem key={idx} pet={item} hasSelect={!!onSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
         ))}
-        {hasAdd ? <PetItem isAdd={true} /> : null}
+        {hasAdd ? <PetItem isAdd={true} onClick={() => onAdd && onAdd()} /> : null}
       </View>
     )
   } else {
