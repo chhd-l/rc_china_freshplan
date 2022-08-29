@@ -27,12 +27,18 @@ const Step5 = ({ pet, onStepChange, onChange, onChangeAll }: IProps1) => {
 
   const handleChangeCurrentWeight = (e) => {
     const cv = e.detail.value;
+    if (cv[0] <= 0 && cv[2] <= 0) {
+      cv[0] = 1;
+    }
     setVal(cv);
     onChange('recentWeight', arr1[cv[0] > -1 ? cv[0] : 0] + '.' + arr3[cv[2] > -1 ? cv[2] : 0]);
   }
 
   const handleChangeTargetWeight = (e) => {
     const cv = e.detail.value;
+    if (cv[0] <= 0 && cv[2] <= 0) {
+      cv[0] = 1;
+    }
     setVal1(cv);
     onChange('targetWeight', arr1[cv[0] > -1 ? cv[0] : 0] + '.' + arr3[cv[2] > -1 ? cv[2] : 0]);
   }

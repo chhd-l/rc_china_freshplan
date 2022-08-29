@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from '@tarojs/components'
+import { View, Text, Swiper, SwiperItem } from '@tarojs/components'
 import PetItem from '../common/PetItem'
 import { AtIcon } from 'taro-ui'
 import { PetListItemProps } from '@/framework/types/consumer'
@@ -50,14 +50,14 @@ const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selected
     )
   } else {
     return (
-      <ScrollView scrollX className="whitespace-nowrap">
+      <Swiper displayMultipleItems={4} className="w-full overflow-hidden">
         {petList.map((item: PetListItemProps, idx: number) => (
-          <View key={idx} className="mr-2 inline-block">
+          <SwiperItem key={idx} className="mr-2 inline-block">
             <PetItem pet={item} hasSelect={!!onSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
-          </View>
+          </SwiperItem>
         ))}
-        {hasAdd ? <View className="inline-block"  onClick={() => onAdd && onAdd()}><PetItem isAdd={true} /></View> : null}
-      </ScrollView>
+        {hasAdd ? <SwiperItem><PetItem isAdd={true} onClick={() => onAdd && onAdd()} /></SwiperItem> : null}
+      </Swiper>
     )
   }
 }

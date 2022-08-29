@@ -115,12 +115,18 @@ const PetDetail = () => {
 
   const handleChangeCurrentWeight = (e) => {
     const cv = e.detail.value;
+    if (cv[0] <= 0 && cv[2] <= 0) {
+      cv[0] = 1;
+    }
     setVal(cv);
     handlePetEdit({'recentWeight': arr1[cv[0] > -1 ? cv[0] : 0] + '.' + arr3[cv[2] > -1 ? cv[2] : 0]});
   }
 
   const handleChangeTargetWeight = (e) => {
     const cv = e.detail.value;
+    if (cv[0] <= 0 && cv[2] <= 0) {
+      cv[0] = 1;
+    }
     setVal1(cv);
     handlePetEdit({'targetWeight': arr1[cv[0] > -1 ? cv[0] : 0] + '.' + arr3[cv[2] > -1 ? cv[2] : 0]});
   }
