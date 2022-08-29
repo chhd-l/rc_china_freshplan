@@ -12,7 +12,7 @@ import { formatMoney, getDateDiff, handleReturnTime } from '@/utils/utils'
 import { Image, ScrollView, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { AtButton, AtCountdown, AtList, AtListItem, AtModal } from 'taro-ui'
+import { AtButton, AtCountdown, AtIcon, AtList, AtListItem } from 'taro-ui'
 import CopyText from './copyText'
 import ExpressLine from './expressLine'
 import './index.less'
@@ -28,7 +28,7 @@ const orderStatusType = {
 
 const OrderDetails = () => {
   const [orderId, setOrderId] = useState('')
-  const [showActionTipModal, setShowActionTipModal] = useState(false)
+  const [showDelTip, setShowDelTip] = useState(false)
   const { router } = getCurrentInstance()
   const [orderCancelMinute, setOrderCancelMinute] = useState(30)
   const [carrierTypes, setCarrierTypes] = useState<any[]>([])
@@ -92,7 +92,7 @@ const OrderDetails = () => {
       orderNum: orderId,
       nowOrderState: orderDetail?.orderState?.orderState,
     })
-    setShowActionTipModal(false)
+    setShowDelTip(false)
     if (res) {
       getOrder()
     }
@@ -101,7 +101,7 @@ const OrderDetails = () => {
   //删除订单
   const deleteOrders = async () => {
     let res = await deleteOrder(orderId)
-    setShowActionTipModal(false)
+    setShowDelTip(false)
     if (res) {
       Taro.navigateBack()
     }
@@ -177,7 +177,7 @@ const OrderDetails = () => {
   const handleClickActionTipModal = () => {
     switch (orderDetail?.orderState?.orderState) {
       case 'TO_SHIP':
-        return setShowActionTipModal(false)
+        return setShowDelTip(false)
       case 'SHIPPED':
         return completed()
       case 'VOID':
@@ -217,7 +217,7 @@ const OrderDetails = () => {
           </View>
         </View>
         {orderDetail?.orderState?.orderState !== 'VOID' && <TimeLine type={orderDetail?.orderState?.orderState} />}
-        <View className="px-1 py-1 my-1 receiving relative" style={{ borderTop: '1px solid #EBEBEB' }}>
+        <View className="px-1 py-1 my-1 receiving relative">
           {(orderDetail?.orderState?.orderState === 'SHIPPED' ||
             orderDetail?.orderState?.orderState === 'COMPLETED') && (
             <View className="express mb-1">
@@ -253,8 +253,8 @@ const OrderDetails = () => {
                 <Text className="text-[26px] text-[#999]">{orderDetail.shippingAddress.phone}</Text>
               </View>
               <View className="receivingAddress mt-0.5 text-[26px]">
-                {orderDetail.shippingAddress.city} {orderDetail.shippingAddress.region}{' '}
-                {orderDetail.shippingAddress.detail}
+                {orderDetail.shippingAddress.province} {orderDetail.shippingAddress.city}{' '}
+                {orderDetail.shippingAddress.region} {orderDetail.shippingAddress.detail}
               </View>
             </View>
           </View>
@@ -353,18 +353,20 @@ const OrderDetails = () => {
           <Text>Fresh编号：</Text>
           <CopyText str={orderDetail.subscriptionNo} />
         </View>
-        {orderDetail?.orderState?.orderState !== 'UNPAID' && (
+        {orderDetail?.orderState?.orderState !== 'UNPAID' && orderDetail?.orderState?.orderState !== 'VOID' && (
           <View className="flex items-center justify-between">
             <Text>付款方式：</Text>
             <Text className="copyText">{returnpayWayCode()}</Text>
           </View>
         )}
-        {orderDetail?.orderState?.orderState !== 'UNPAID' && (
-          <View className="flex items-center justify-between">
-            <Text>付款时间：</Text>
-            <Text className="copyText">{handleReturnTime(orderDetail?.payment?.paymentFinishTime)}</Text>
-          </View>
-        )}
+        {orderDetail?.orderState?.orderState !== 'UNPAID' &&
+          orderDetail?.orderState?.orderState !== 'VOID' &&
+          orderDetail?.payment?.paymentFinishTime && (
+            <View className="flex items-center justify-between">
+              <Text>付款时间：</Text>
+              <Text className="copyText">{handleReturnTime(orderDetail?.payment?.paymentFinishTime)}</Text>
+            </View>
+          )}
         <View className="flex items-center justify-between">
           <Text>创建时间：</Text>
           <Text className="copyText">{handleReturnTime(orderDetail?.orderState?.createdAt)}</Text>
@@ -372,26 +374,26 @@ const OrderDetails = () => {
       </View>
       <View className="pt-1 pb-1.5 bg-white orderFooter">
         {orderDetail?.orderState?.orderState === 'UNPAID' && (
-          <View className="flex items-center justify-end">
-            <View>
+          <View className="flex items-center justify-between">
+            <View className="ml-1">
               <Text style={{ fontWeight: 700 }}>合计：</Text>
               <Text className="footerPrice">{formatMoney(orderDetail.orderPrice.totalPrice)}</Text>
             </View>
-            <AtButton className="rounded-full m-0 ml-1 px-2" type="primary" onClick={() => payFromOrder(orderDetail)}>
+            <AtButton className="rounded-full m-0 mr-1 px-2" type="primary" onClick={() => payFromOrder(orderDetail)}>
               去支付
             </AtButton>
           </View>
         )}
         {orderDetail?.orderState?.orderState === 'TO_SHIP' && (
           <View className="flex items-center justify-end">
-            <AtButton className="rounded-full m-0 mr-1 px-1.5 py-0" onClick={() => setShowActionTipModal(true)}>
+            <AtButton className="rounded-full m-0 mr-1 px-1.5 py-0" onClick={() => setShowDelTip(true)}>
               催发货
             </AtButton>
           </View>
         )}
         {orderDetail?.orderState?.orderState === 'VOID' && (
           <View className="flex items-center justify-end">
-            <AtButton className="rounded-full m-0 px-1.5 mx-1 py-0" onClick={() => setShowActionTipModal(true)}>
+            <AtButton className="rounded-full m-0 px-1.5 mx-1 py-0" onClick={() => setShowDelTip(true)}>
               删除订单
             </AtButton>
           </View>
@@ -404,31 +406,58 @@ const OrderDetails = () => {
         {orderDetail?.orderState?.orderState === 'SHIPPED' && (
           <View className="flex items-center justify-end">
             <AtButton className="rounded-full m-0 px-1.5 mx-1 py-0">申请开票</AtButton>
-            <AtButton
-              className="rounded-full m-0 px-1.5 py-0 mr-1"
-              type="primary"
-              onClick={() => setShowActionTipModal(true)}
-            >
-              确认收获
+            <AtButton className="rounded-full m-0 px-1.5 py-0 mr-1" type="primary" onClick={() => setShowDelTip(true)}>
+              确认收货
             </AtButton>
           </View>
         )}
       </View>
-      <AtModal
-        isOpened={showActionTipModal}
-        title="确认"
-        content={getModalContent()}
-        cancelText="取消"
-        confirmText="确定"
-        onClose={() => {
-          setShowActionTipModal(false)
+
+      {/* 弹出层 */}
+      <View
+        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
+        style={{
+          display: showDelTip ? 'flex' : 'none',
         }}
-        onCancel={() => {
-          setShowActionTipModal(false)
+        onClick={(e) => {
+          e.stopPropagation()
+          setShowDelTip(false)
         }}
-        onConfirm={() => handleClickActionTipModal()}
-        className="rc_modal"
-      />
+      >
+        <View>
+          <View
+            className="w-[650px] bg-white rounded-[50px] flex flex-col items-center"
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Image className="mt-2" src={`${CDNIMGURL}pop.png`} style={{ width: '2.36rem', height: '2.36rem' }} />
+            <View className="text-[29px] text-[#333] mt-2">{getModalContent()}</View>
+            <View className="flex items-center justify-between my-2">
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowDelTip(false)
+                }}
+              >
+                取消
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
+                onClick={handleClickActionTipModal}
+              >
+                确定
+              </AtButton>
+            </View>
+          </View>
+          <View className="flex justify-center mt-3">
+            <AtIcon value="close-circle" size={30} color="#fff" />
+          </View>
+        </View>
+      </View>
     </ScrollView>
   )
 }

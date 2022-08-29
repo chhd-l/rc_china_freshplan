@@ -65,9 +65,9 @@ const FreshPlanDetails = () => {
     Taro.navigateTo({
       url: '/pages/packageA/petDetail/index',
       success: (res) => {
-        res.eventChannel.emit('petFromList', pet);
-      }
-    });
+        res.eventChannel.emit('petFromList', pet)
+      },
+    })
   }
 
   return (
@@ -105,15 +105,12 @@ const FreshPlanDetails = () => {
                   }}
                 />
               </Text>
-              <Text className="text-[24px] text-[#999] mt-[16px]">{subscriptionDetails?.pet?.breed} {subscriptionDetails?.pet?.age}</Text>
+              <Text className="text-[24px] text-[#999] mt-[16px]">
+                {subscriptionDetails?.pet?.breed} {subscriptionDetails?.pet?.age}
+              </Text>
             </View>
           </View>
-          <AtIcon
-            className="font-thin -mr-[5px]"
-            value="chevron-right"
-            color="#999"
-            size="22"
-          />
+          <AtIcon className="font-thin -mr-[5px]" value="chevron-right" color="#9D9D9D" size="22" />
         </View>
       </View>
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
@@ -124,17 +121,20 @@ const FreshPlanDetails = () => {
           }}
         >
           <View className="flex justify-between items-end">
-            <Text className="text-[34px]">订单信息</Text>
+            <Text className="text-[34px]">Fresh Plan商品</Text>
             <Text className="text-[24px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
           </View>
-          <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
         <View className="flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center text-[20px] h-[190px]" key={key}>
-              <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.9rem' }} />
+              <Image
+                className="mx-1 h-full border border-solid border-[#E2E2E2]"
+                src={el?.variants?.defaultImage}
+                style={{ width: '1.9rem' }}
+              />
               <View className="h-full flex flex-col justify-center flex-1">
-                <View className="font-bold text-[30px] text-[#96CC39]">{el?.name}</View>
+                <View className="font-bold text-[30px] text-[#000]">{el?.name}</View>
                 <View className="flex items-center justify-between mt-1.5 text-[#666]">
                   {(el?.description ?? '').replace(/<[^>]+>/gi, '')}
                 </View>
@@ -145,14 +145,13 @@ const FreshPlanDetails = () => {
       </View>
       <View className="bg-white boxShadow px-1 pt-1 pb-2 mt-1">
         <View className="text-[34px]">发货驿站</View>
-        <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         {subscriptionDetails.status !== 'VOID' ? (
           <View className="flex items-center my-1">
             <Image
               style={{
                 width: '1.1rem',
                 height: '0.86rem',
-                backgroundSize: '103% 110%',
+                backgroundSize: '103% 100%',
               }}
               src={`${CDNIMGURL}post.png`}
             />
@@ -189,24 +188,23 @@ const FreshPlanDetails = () => {
       </View>
       <View className="bg-white boxShadow p-1 mt-1">
         <View className="text-[34px]">签约信息</View>
-        <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         <View className="flex text-[28px] items-center mt-1 ml-0.5">
           <Image
             style={{
-              width: '0.5022rem',
-              height: '0.407rem',
+              width: '0.3022rem',
+              height: '0.2807rem',
             }}
-            src={`${CDNIMGURL}plateform.png`}
+            src={`${CDNIMGURL2}Group 1240.png`}
           />
           <Text className="ml-1">签约平台：{returnTypeText()}</Text>
         </View>
         <View className="flex text-[28px] items-center mt-1 ml-0.5">
           <Image
             style={{
-              width: '0.5022rem',
-              height: '0.4407rem',
+              width: '0.2997rem',
+              height: '0.2162rem',
             }}
-            src={`${CDNIMGURL}account-sig.png`}
+            src={`${CDNIMGURL2}Group 1239.png`}
           />
           <Text className="ml-1">签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>

@@ -13,7 +13,7 @@ const CommonProblem = () => {
         </PetTitle>
       </View>
       {commonProblems.map((item, key) => (
-        <View key={key} className="bg-[#FAFAFA] border-[16px] mb-[22px] p-[26px] flex flex-col">
+        <View key={key} className="bg-[#FAFAFA] border-[16px] mb-[22px] p-[26px] flex flex-col rounded-[16px]">
           <View className="flex flex-row items-center pl-[8px]">
             <View className="w-[50px] h-[50px] flex-shrink-0 -mr-[5px]" style={{ zIndex: 2 }}>
               <Image src={CDNIMGURL2 + 'Group 363.png'} />
