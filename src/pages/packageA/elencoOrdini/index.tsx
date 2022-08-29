@@ -1,11 +1,11 @@
 import OrderCard from '@/components/OrderCard'
 import { cancelOrder, completedOrder, deleteOrder, getOrderList } from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
-import { CDNIMGURL2 } from '@/lib/constants'
+import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance, useReachBottom } from '@tarojs/taro'
 import { useState } from 'react'
-import { AtModal, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
+import { AtButton, AtIcon, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 
 const tabList = [{ title: '全部' }, { title: '待付款' }, { title: '待发货' }, { title: '待收货' }]
@@ -55,9 +55,19 @@ const OrderList = () => {
           ? { queryParameters }
           : {},
     })
+    console.log('res.total', res.total)
+    console.log('offset + 10', offset + 10, res?.total < offset + 10)
     setIsNoMore(res?.total < offset + 10)
     setOrderList(records.concat(res?.records))
   }
+
+  useReachBottom(() => {
+    if (isNoMore) {
+      let page = currentPage + 1
+      setCurrentPage(page)
+      getOrderLists({ curPage: page })
+    }
+  })
 
   const handleClick = (value) => {
     const cur = Object.values(OrderStatusEnum).filter((item) => item === value)[0]
@@ -135,14 +145,6 @@ const OrderList = () => {
     }
   }
 
-  useReachBottom(() => {
-    if (!isNoMore) {
-      let page = currentPage + 1
-      setCurrentPage(page)
-      getOrderLists({ curPage: page })
-    }
-  })
-
   Taro.useDidShow(() => {
     getOrderLists({ orderState: router?.params?.status })
   })
@@ -195,21 +197,52 @@ const OrderList = () => {
           </View>
         </View>
       )}
-      <AtModal
-        isOpened={showActionTipModal}
-        title="确认"
-        content={returnText()}
-        cancelText="取消"
-        confirmText="确定"
-        onClose={() => {
+
+      {/* 弹出层 */}
+      <View
+        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
+        style={{
+          display: showActionTipModal ? 'flex' : 'none',
+        }}
+        onClick={(e) => {
+          e.stopPropagation()
           setShowActionTipModal(false)
         }}
-        onCancel={() => {
-          setShowActionTipModal(false)
-        }}
-        onConfirm={handleClickActionTipModal}
-        className="rc_modal"
-      />
+      >
+        <View>
+          <View
+            className="w-[650px] bg-white rounded-[50px] flex flex-col items-center"
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <Image className="mt-2" src={`${CDNIMGURL}pop.png`} style={{ width: '2.36rem', height: '2.36rem' }} />
+            <View className="text-[29px] text-[#333] mt-2">{returnText()}</View>
+            <View className="flex items-center justify-between my-2">
+              <AtButton
+                circle
+                className="text-white m-0 border-0 bg-[#C8E399]"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setShowActionTipModal(false)
+                }}
+              >
+                取消
+              </AtButton>
+              <AtButton
+                circle
+                className="text-white m-0 border-0 bg-[#96CC39] ml-2"
+                onClick={handleClickActionTipModal}
+              >
+                确定
+              </AtButton>
+            </View>
+          </View>
+          <View className="flex justify-center mt-3">
+            <AtIcon value="close-circle" size={30} color="#fff" />
+          </View>
+        </View>
+      </View>
     </View>
   )
 }

@@ -48,14 +48,17 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
         lowerThreshold={Threshold}
         onScroll={onScroll}
       >
-        <View className="px-3 py-2 title flex items-center">
+        <View className="px-3 py-2 title flex items-center -mb-[2px] z-20">
           <Image className="mr-0.5" src={`${CDNIMGURL}claws.png`} />
-          <Text>{subscriptionList[current]?.pet?.name}</Text>的专属鲜食食谱
+          <Text className={`${subscriptionList[current]?.pet?.name.length > 3 && 'w-[120px]'} truncate`}>
+            {subscriptionList[current]?.pet?.name}
+          </Text>
+          的专属鲜食食谱
         </View>
         <Swiper
           current={current}
           onChange={(e) => setCurrent(e.detail.current)}
-          className="w-full flex items-center overflow-hidden"
+          className="w-full flex items-center overflow-hidden z-10"
           nextMargin="10px"
           previousMargin="32px"
         >
@@ -77,7 +80,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                     </View>
                     <View className="flex-1 mt-1 pr-2">
                       <View className="text-[36px] flex items-center justify-between">
-                        {item?.pet?.name}{' '}
+                        <Text className="w-[250px] truncate">{item?.pet?.name}</Text>{' '}
                         <Text
                           className={`rcciconfont ${
                             item?.pet?.gender === 'MALE'
@@ -108,7 +111,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         url: `/pages/freshPlanDetails/index?id=${item?.id}`,
                       })
                     }}
-                    className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[26px]"
+                    className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[26px] border-0"
                   >
                     管理计划
                   </AtButton>
@@ -172,16 +175,6 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             </SwiperItem>
           ))}
         </Swiper>
-        <View className="flex mt-1 mb-2 items-center justify-center">
-          {subscriptionList.map((_, key) => (
-            <View
-              key={key}
-              className={`${
-                current === key ? 'bg-[#96CC39] w-[25px]' : 'bg-[#e5e5e5] mx-[0.1rem]'
-              } w-[15px] h-[15px]  rounded-full`}
-            />
-          ))}
-        </View>
         <View
           className="mx-4 py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
           onClick={() => {
@@ -193,6 +186,18 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           <AtIcon className="mr-0.5" value="clock" size="25" />
           <Text className="text-[34px]">更多定制</Text>
         </View>
+        {subscriptionList.length > 1 && (
+          <View className="flex mt-1 mb-2 items-center justify-center">
+            {subscriptionList.map((_, key) => (
+              <View
+                key={key}
+                className={`${
+                  current === key ? 'bg-[#96CC39] w-[25px]' : 'bg-[#e5e5e5] w-[15px]'
+                } mx-[0.1rem] h-[15px]  rounded-full`}
+              />
+            ))}
+          </View>
+        )}
         <View className="mt-1 px-[20px]">
           <Step />
           <FreshFoodExperience />

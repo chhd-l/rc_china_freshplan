@@ -28,12 +28,14 @@ const TimeLine = ({
         />
         <View className={`lineSpot rounded-full ml-0.5 ${type === 'COMPLETED' && 'selectBackground'}`} />
       </View>
-      <View className="flex items-center justify-between mt-1">
-        <View className={`${(type === 'TO_SHIP' || type === 'SHIPPED' || type === 'COMPLETED') && 'selectedWord'}`}>
+      <View className="flex items-center justify-between mt-1 text-[#999]">
+        <View
+          className={`${(type === 'TO_SHIP' || type === 'SHIPPED' || type === 'COMPLETED') && 'text-[#000] font-bold'}`}
+        >
           买家付款
         </View>
-        <View className={`${(type === 'SHIPPED' || type === 'COMPLETED') && 'selectedWord'}`}>商家发货</View>
-        <View className={`${type === 'COMPLETED' && 'selectedWord'}`}>交易完成</View>
+        <View className={`${(type === 'SHIPPED' || type === 'COMPLETED') && 'text-[#000] font-bold'}`}>商家发货</View>
+        <View className={`${type === 'COMPLETED' && 'text-[#000] font-bold'}`}>交易完成</View>
       </View>
     </View>
   )

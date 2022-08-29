@@ -22,6 +22,7 @@ const Schedule = () => {
       city: '',
       region: '',
       detail: '',
+      province: '',
     },
     price: {
       deliveryPrice: 0,
@@ -45,33 +46,43 @@ const Schedule = () => {
 
   return (
     <View className="p-1 pb-4 Schedule">
-      <View className="bg-white mt-1 px-1 boxShadow">
-        <View className="pt-1">
+      <View className="bg-white px-1 boxShadow">
+        <View
+          className="py-1"
+          style={{
+            borderBottom: '1px solid #E2E2E2',
+          }}
+        >
           <View className="flex justify-between items-end">
             <Text className="text-[34px] font-bold">
               {subscriptionDetails.status !== 'VOID' ? '下次发货' : 'Fresh Plan商品'}
             </Text>
             {subscriptionDetails.status === 'VOID' && <Text className="text-[#EE2737] text-[28px]">计划已取消</Text>}
           </View>
-          <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
         </View>
-        <View className="mt-1 flex flex flex-col">
+        <View className="flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
-            <View className="flex item-center h-[160px]" key={key}>
-              <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.6rem' }} />
-              <View className="h-full flex flex-col justify-center flex-1">
-                <View className="font-bold text-[30px]">{el?.name}</View>
+            <View className="mt-1 flex item-center h-[160px]" key={key}>
+              <Image
+                className="mx-1 h-full border border-solid border-[#E2E2E2]"
+                src={el?.variants?.defaultImage}
+                style={{ width: '1.6rem' }}
+              />
+              <View className="h-full flex flex-col flex-1">
+                <View className="font-bold text-[30px] flex items-center justify-between">
+                  <View>{el?.name}</View>
+                  <View className="flex items-center justify-end text-[20px] text-[#9D9D9D]">
+                    X {el?.variants?.num}
+                  </View>
+                </View>
                 <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
                   {formatMoney(el?.variants?.subscriptionPrice)}
-                </View>
-                <View className="flex items-center justify-end mt-1 text-[20px] text-[#9D9D9D]">
-                  X {el?.variants?.num}
                 </View>
               </View>
             </View>
           ))}
         </View>
-        <AtList hasBorder={false} className="my-2">
+        <AtList hasBorder={false} className="my-1">
           <AtListItem
             className="py-0.5 text-[28px]"
             title="商品金额"
@@ -86,6 +97,7 @@ const Schedule = () => {
           />
           <AtListItem
             className="py-0.5 text-[28px]"
+            hasBorder={false}
             title="运费"
             extraText={formatMoney(subscriptionDetails.price.deliveryPrice)}
           />
@@ -99,9 +111,9 @@ const Schedule = () => {
               <Text className="text-[28px]" style={{ color: '#000' }}>
                 商品小计：
               </Text>
-              <Text className="text-[40px] mr-[40px]" style={{ color: '#D49D28' }}>
+              <Text className="text-[40px] mr-[24px]" style={{ color: '#D49D28' }}>
                 <Text className="text-[26px]">￥</Text>
-                {subscriptionDetails?.price?.totalPrice.toFixed(2)}
+                <Text className="font-bold">{subscriptionDetails?.price?.totalPrice.toFixed(2)}</Text>
               </Text>
             </View>
           </View>
@@ -120,8 +132,14 @@ const Schedule = () => {
         </AtList>
       </View>
       <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[28px]">
-        <View className="text-[34px]">发货信息</View>
-        <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
+        <View
+          className="text-[34px] pb-1"
+          style={{
+            borderBottom: '1px solid #E2E2E2',
+          }}
+        >
+          发货信息
+        </View>
         {subscriptionDetails.status !== 'VOID' && (
           <View className="mt-1 flex pr-[18px]">
             <AtIcon value="calendar" size="16" />
@@ -138,8 +156,8 @@ const Schedule = () => {
             }}
           />
           <Text className="ml-[6px] flex-1 leading-[28px] text-[#666]">
-            收货地址&nbsp;&nbsp;&nbsp;{subscriptionDetails?.address?.city} {subscriptionDetails?.address?.region}{' '}
-            {subscriptionDetails?.address?.detail}
+            收货地址&nbsp;&nbsp;&nbsp;{subscriptionDetails?.address?.province} {subscriptionDetails?.address?.city}{' '}
+            {subscriptionDetails?.address?.region} {subscriptionDetails?.address?.detail}
           </Text>
         </View>
         {subscriptionDetails.status !== 'VOID' && (
@@ -168,50 +186,36 @@ const Schedule = () => {
       {/* 历史订单 */}
 
       {subscriptionDetails.completedDeliveries && subscriptionDetails.completedDeliveries.length ? (
-        <View className="bg-white mt-1 p-1 boxShadow">
+        <View className="mt-1 p-1 boxShadow">
           <View className="text-[34px]">历史订单</View>
-          <View className="w-[30px] h-[4px] bg-[#96CC39] mt-1" />
           {subscriptionDetails.completedDeliveries.map((el: any, key) => (
-            <View
-              key={key}
-              className="rounded-[10px] mt-1 text-[22px] text-[#999] border border-solid border-[#E2E2E2]"
-            >
+            <View key={key} className="rounded-[10px] mt-1 text-[24px] text-[#999] bg-white">
               <View className="flex items-center justify-between p-1">
-                <View>
-                  订单编号: {el?.orderId}
-                  <Text
-                    className="rounded-[8px] text-black bg-[#EAEAEA] mx-0.5 px-0.5"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      Taro.setClipboardData({
-                        data: el?.orderId,
-                      })
-                    }}
-                  >
-                    复制
-                  </Text>
-                </View>
-                第{key + 1}笔
+                <View>订单编号: {el?.orderId}</View>第{key + 1}笔
               </View>
-              {el?.lineItems.map((item, index) => (
-                <View
-                  className="flex item-center h-[160px] p-1"
-                  key={index}
-                  style={{
-                    borderBottom: '1px solid #E2E2E2',
-                    borderTop: '1px solid #E2E2E2',
-                  }}
-                >
-                  <Image className="mr-1 h-full" src={item?.pic} style={{ width: '1.6rem' }} />
-                  <View className="h-full flex flex-col justify-center flex-1">
-                    <View className="font-bold text-[30px] text-[#000]">{item?.skuName}</View>
-                    <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
-                      {formatMoney(item?.price)}
+              <View
+                style={{
+                  borderBottom: '1px solid #E2E2E2',
+                  borderTop: '1px solid #E2E2E2',
+                }}
+              >
+                {el?.lineItems.map((item, index) => (
+                  <View className="flex item-center h-[160px] p-1" key={index}>
+                    <Image className="mr-1 h-full" src={item?.pic} style={{ width: '1.6rem' }} />
+                    <View className="h-full flex flex-col justify-center flex-1">
+                      <View className="font-bold text-[28px] text-[#000] flex justify-between">
+                        <Text>{item?.skuName}</Text>
+                        <View className="flex items-center justify-end mt-[10px] text-[20px] text-[#9D9D9D]">
+                          X {item?.num}
+                        </View>
+                      </View>
+                      <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
+                        {formatMoney(item?.price)}
+                      </View>
                     </View>
-                    <View className="flex items-center justify-end mt-1 text-[20px] text-[#9D9D9D]">X {item?.num}</View>
                   </View>
-                </View>
-              ))}
+                ))}
+              </View>
               <View className="p-1 text-right text-[24px] text-[#666]">
                 发货日期:{moment(el?.shipmentDate).format('YYYY-MM-DD')}
               </View>
