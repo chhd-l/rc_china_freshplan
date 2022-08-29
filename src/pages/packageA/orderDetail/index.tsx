@@ -386,6 +386,12 @@ const OrderDetails = () => {
         )}
         {orderDetail?.orderState?.orderState === 'TO_SHIP' && (
           <View className="flex items-center justify-end">
+            <AtButton
+              className="rounded-full m-0 px-1.5 mx-[24px]] py-0"
+              onClick={() => {
+                Taro.navigateTo({ url: `/pages/packageA/invoiceDetail/index?orderno=${orderDetail.orderNumber}` })
+              }}
+            >申请开票</AtButton>
             <AtButton className="rounded-full m-0 mr-[24px] px-1.5 py-0" onClick={() => setShowDelTip(true)}>
               催发货
             </AtButton>

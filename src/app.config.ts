@@ -24,6 +24,8 @@ export default defineAppConfig({
         'petDiet/index',
         'choosePet/index',
         'customerService/index',
+        'invoiceManage/index',
+        'invoiceDetail/index',
       ],
     }
   ],
