@@ -330,7 +330,7 @@ const OrderDetails = () => {
             <Text className="text-[30px]" style={{ color: '#000' }}>
               合计：
             </Text>
-            <Text className="text-[40px]" style={{ color: '#D49D28' }}>
+            <Text className="text-[40px] font-bold" style={{ color: '#D49D28' }}>
               {formatMoney(orderDetail.orderPrice.totalPrice)}
             </Text>
           </Text>

@@ -142,25 +142,27 @@ const Schedule = () => {
             {subscriptionDetails?.address?.detail}
           </Text>
         </View>
-        <View className="flex mt-2 justify-end">
-          <AtButton
-            circle
-            className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0 flex items-center justify-center border-[#ECEEF1]"
-            onClick={() => {
-              Taro.setStorage({
-                key: 'current-address',
-                data: JSON.stringify(subscriptionDetails?.address),
-                success: function () {
-                  Taro.navigateTo({
-                    url: `${routers.addressManage}?type=edit&subscriptionDetailsID=${subscriptionDetails?.id}`,
-                  })
-                },
-              })
-            }}
-          >
-            修改地址
-          </AtButton>
-        </View>
+        {subscriptionDetails.status !== 'VOID' && (
+          <View className="flex mt-2 justify-end">
+            <AtButton
+              circle
+              className="w-[228px] h-[64px] leading-[64px] text-[24px] m-0 flex items-center justify-center border-[#ECEEF1]"
+              onClick={() => {
+                Taro.setStorage({
+                  key: 'current-address',
+                  data: JSON.stringify(subscriptionDetails?.address),
+                  success: function () {
+                    Taro.navigateTo({
+                      url: `${routers.addressManage}?type=edit&subscriptionDetailsID=${subscriptionDetails?.id}`,
+                    })
+                  },
+                })
+              }}
+            >
+              修改地址
+            </AtButton>
+          </View>
+        )}
       </View>
 
       {/* 历史订单 */}
