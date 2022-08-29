@@ -6,7 +6,7 @@ import { PetListItemProps } from '@/framework/types/consumer';
 import { getPets } from '@/framework/api/pet/get-pets';
 import { View, Image } from '@tarojs/components';
 import { AtList, AtListItem } from 'taro-ui';
-import RotationChartList from '@/components/RotationChartList';
+// import RotationChartList from '@/components/RotationChartList';
 import PetNavigation from "@/components/PetNavigation";
 import { CDNIMGURL2 } from '@/lib/constants';
 import { getAge } from '@/utils/utils';
@@ -20,17 +20,21 @@ const ChoosePet = () => {
 
   const getPetList = async (consumerId: string) => {
     const res = await getPets({ consumerId });
+    const pets: PetListItemProps[] = [];
     (res ?? []).forEach((item: PetListItemProps) => {
-      item.age = getAge(item.birthday);
+      if ((item.subscriptionNo ?? []).length === 0) {
+        item.age = getAge(item.birthday);
+        pets.push(item);
+      }
     });
-    setPetList(res ?? []);
-    if (!res || res.length === 0) {
+    setPetList(pets);
+    if (pets.length === 0) {
       Taro.redirectTo({
         url: '/pages/packageA/petEdit/index',
       })
     } else {
-      setPet(res[0]);
-      Taro.setStorageSync("petItem", res[0]);
+      setPet(pets[0]);
+      Taro.setStorageSync("petItem", pets[0]);
     }
   }
 
