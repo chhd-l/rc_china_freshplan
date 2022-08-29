@@ -221,7 +221,7 @@ const OrderList = () => {
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+                className="text-white m-0 border-0 bg-[#C8E399]"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowActionTipModal(false)
@@ -231,7 +231,7 @@ const OrderList = () => {
               </AtButton>
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
+                className="text-white m-0 border-0 bg-[#96CC39] ml-2"
                 onClick={handleClickActionTipModal}
               >
                 确定

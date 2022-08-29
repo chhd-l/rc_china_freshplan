@@ -44,13 +44,18 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         })
       }
     >
-      <View className="flex items-center justify-between">
+      <View
+        className="flex items-center justify-between pb-1"
+        style={{
+          borderBottom: '1px solid #E2E2E2',
+        }}
+      >
         <Text className="orderNo flex items-center">
           <Image
             className="mr-[11px]"
             style={{
-              width: '0.3117rem',
-              height: '0.3117rem',
+              width: '0.4rem',
+              height: '0.4rem',
             }}
             src={`${CDNIMGURL}${returnTypeImage()}`}
           />
@@ -58,10 +63,10 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         </Text>
         <Text className="orderState">{orderStatusType[order?.orderState?.orderState || '']}</Text>
       </View>
-      <View className="mb-2 flex flex flex-col">
+      <View className="mb-1 flex flex flex-col">
         {(order?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
-          <View className="orderBody mt-2 flex item-center" key={key}>
-            <Image className="orderImage mx-1 h-full" src={el?.pic} />
+          <View className="orderBody mt-1 flex item-center" key={key}>
+            <Image className="orderImage mx-1 h-full border border-solid border-[#E2E2E2]" src={el?.pic} />
             <View className="h-full flex flex-col flex-1" style={{ fontWeight: 700 }}>
               <View className="flex justify-between">
                 <Text className="text-[26px] leading-[33px]">{el?.spuName}</Text>
@@ -93,9 +98,9 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         ))}
       </View>
       <View className="flex flex-col items-end">
-        <View className="w-full flex items-center justify-between text-[28px]">
+        <View className="w-full flex items-center justify-between text-[28px] mb-1">
           <View className="text-[#999]">共{nums()}件商品</View>
-          <View className="mb-1">
+          <View>
             {order?.orderState?.orderState === 'UNPAID' || order?.orderState?.orderState === 'VOID'
               ? '需付款'
               : '实际支付'}
