@@ -144,7 +144,14 @@ const FreshPlanDetails = () => {
         </View>
       </View>
       <View className="bg-white boxShadow px-1 pt-1 pb-2 mt-1">
-        <View className="text-[34px]">发货驿站</View>
+        <View
+          className="text-[34px] pb-1"
+          style={{
+            borderBottom: '1px solid #E2E2E2',
+          }}
+        >
+          发货驿站
+        </View>
         {subscriptionDetails.status !== 'VOID' ? (
           <View className="flex items-center my-1">
             <Image
@@ -187,7 +194,14 @@ const FreshPlanDetails = () => {
         </View>
       </View>
       <View className="bg-white boxShadow p-1 mt-1">
-        <View className="text-[34px]">签约信息</View>
+        <View
+          className="text-[34px] pb-1"
+          style={{
+            borderBottom: '1px solid #E2E2E2',
+          }}
+        >
+          签约信息
+        </View>
         <View className="flex text-[28px] items-center mt-1 ml-0.5">
           <Image
             style={{

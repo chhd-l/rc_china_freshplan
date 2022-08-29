@@ -46,8 +46,13 @@ const Schedule = () => {
 
   return (
     <View className="p-1 pb-4 Schedule">
-      <View className="bg-white mt-1 px-1 boxShadow">
-        <View className="pt-1">
+      <View className="bg-white px-1 boxShadow">
+        <View
+          className="py-1"
+          style={{
+            borderBottom: '1px solid #E2E2E2',
+          }}
+        >
           <View className="flex justify-between items-end">
             <Text className="text-[34px] font-bold">
               {subscriptionDetails.status !== 'VOID' ? '下次发货' : 'Fresh Plan商品'}
@@ -55,10 +60,14 @@ const Schedule = () => {
             {subscriptionDetails.status === 'VOID' && <Text className="text-[#EE2737] text-[28px]">计划已取消</Text>}
           </View>
         </View>
-        <View className="mt-1 flex flex flex-col">
+        <View className="flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
-            <View className="flex item-center h-[160px]" key={key}>
-              <Image className="mx-1 h-full" src={el?.variants?.defaultImage} style={{ width: '1.6rem' }} />
+            <View className="mt-1 flex item-center h-[160px]" key={key}>
+              <Image
+                className="mx-1 h-full border border-solid border-[#E2E2E2]"
+                src={el?.variants?.defaultImage}
+                style={{ width: '1.6rem' }}
+              />
               <View className="h-full flex flex-col flex-1">
                 <View className="font-bold text-[30px] flex items-center justify-between">
                   <View>{el?.name}</View>
@@ -73,7 +82,7 @@ const Schedule = () => {
             </View>
           ))}
         </View>
-        <AtList hasBorder={false} className="my-2">
+        <AtList hasBorder={false} className="my-1">
           <AtListItem
             className="py-0.5 text-[28px]"
             title="商品金额"
@@ -88,6 +97,7 @@ const Schedule = () => {
           />
           <AtListItem
             className="py-0.5 text-[28px]"
+            hasBorder={false}
             title="运费"
             extraText={formatMoney(subscriptionDetails.price.deliveryPrice)}
           />
@@ -103,7 +113,7 @@ const Schedule = () => {
               </Text>
               <Text className="text-[40px] mr-[24px]" style={{ color: '#D49D28' }}>
                 <Text className="text-[26px]">￥</Text>
-                {subscriptionDetails?.price?.totalPrice.toFixed(2)}
+                <Text className="font-bold">{subscriptionDetails?.price?.totalPrice.toFixed(2)}</Text>
               </Text>
             </View>
           </View>
@@ -122,7 +132,14 @@ const Schedule = () => {
         </AtList>
       </View>
       <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[28px]">
-        <View className="text-[34px]">发货信息</View>
+        <View
+          className="text-[34px] pb-1"
+          style={{
+            borderBottom: '1px solid #E2E2E2',
+          }}
+        >
+          发货信息
+        </View>
         {subscriptionDetails.status !== 'VOID' && (
           <View className="mt-1 flex pr-[18px]">
             <AtIcon value="calendar" size="16" />
@@ -169,13 +186,10 @@ const Schedule = () => {
       {/* 历史订单 */}
 
       {subscriptionDetails.completedDeliveries && subscriptionDetails.completedDeliveries.length ? (
-        <View className="bg-white mt-1 p-1 boxShadow">
+        <View className="mt-1 p-1 boxShadow">
           <View className="text-[34px]">历史订单</View>
           {subscriptionDetails.completedDeliveries.map((el: any, key) => (
-            <View
-              key={key}
-              className="rounded-[10px] mt-1 text-[24px] text-[#999] border border-solid border-[#E2E2E2]"
-            >
+            <View key={key} className="rounded-[10px] mt-1 text-[24px] text-[#999] bg-white">
               <View className="flex items-center justify-between p-1">
                 <View>订单编号: {el?.orderId}</View>第{key + 1}笔
               </View>
