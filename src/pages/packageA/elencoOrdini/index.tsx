@@ -40,7 +40,6 @@ const OrderList = () => {
     curPage?: number
     queryParameters?: any
   }) => {
-    let records: any[] = []
     const limit = 10
     let offset = curPage ? curPage * limit : 0
     const res = await getOrderList({
@@ -56,7 +55,7 @@ const OrderList = () => {
           : {},
     })
     setIsNoMore(res?.total <= offset + 10)
-    setOrderList(records.concat(res?.records))
+    setOrderList(orderList.concat(res?.records))
   }
 
   useReachBottom(() => {
