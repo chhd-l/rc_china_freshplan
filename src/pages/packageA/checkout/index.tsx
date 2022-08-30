@@ -156,8 +156,8 @@ const Checkout = () => {
         </View>
       </View>
 
-      <View className="bg-white rounded-sm mx-1 mt-1 p-1 flex items-center">
-        <View className="mr-1 text-30 text-gray-400">买家留言</View>
+      <View className="bg-white rounded-sm mx-1 mt-1 p-1 flex items-start">
+        <View className="mr-1 text-30 text-gray-400" style={{paddingTop: '0.1rem'}}>买家留言</View>
         <View className="flex-1">
           <Textarea
             style={{paddingBottom: 0, height: remark.length > 0 ? 'auto' : '.5rem'}}

@@ -203,6 +203,20 @@ const Account = () => {
             }}
           />
         </AtList>
+        <AtList hasBorder={false} className="mt-1">
+          <AtListItem
+            iconInfo={{ size: 22, value: 'user' }}
+            title="发票管理"
+            arrow="right"
+            onClick={() => {
+              getAuthentication(() => {
+                Taro.navigateTo({
+                  url: '/pages/packageA/invoiceManage/index',
+                })
+              })
+            }}
+          />
+        </AtList>
         {/* <AtList hasBorder={false}>
           <AtListItem iconInfo={{ size: 28, value: 'user' }} title="个人信息" arrow="right" />
           <AtListItem iconInfo={{ size: 28, value: 'settings' }} title="设置" arrow="right" />
