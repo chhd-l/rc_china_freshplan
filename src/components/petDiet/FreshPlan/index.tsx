@@ -10,7 +10,7 @@ import { freshPlanList } from './index.modules'
 import './index.less'
 
 const FreshPlan = () => {
-  const [status, setStatus] = useState('more')
+  const [status] = useState<'more' | 'loading' | 'noMore' | undefined>('more')
   return (
     <View className="mt-[90px] fresh">
       <View className="text-[64px] font-bold">Fresh Plan </View>

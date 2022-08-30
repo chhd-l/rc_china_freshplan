@@ -55,14 +55,12 @@ const OrderList = () => {
           ? { queryParameters }
           : {},
     })
-    console.log('res.total', res.total)
-    console.log('offset + 10', offset + 10, res?.total < offset + 10)
-    setIsNoMore(res?.total < offset + 10)
+    setIsNoMore(res?.total <= offset + 10)
     setOrderList(records.concat(res?.records))
   }
 
   useReachBottom(() => {
-    if (isNoMore) {
+    if (!isNoMore) {
       let page = currentPage + 1
       setCurrentPage(page)
       getOrderLists({ curPage: page })

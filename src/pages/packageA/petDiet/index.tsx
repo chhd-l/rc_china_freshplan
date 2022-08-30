@@ -14,7 +14,12 @@ const PetDiet = () => {
   return (
     <View className="diet">
       <View className="w-full h-[772px]">
-        <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/banner.png" />
+        <Image
+          style={{
+            height: '100%',
+          }}
+          src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/banner.png"
+        />
       </View>
       <View className=" mb-[70px] mt-[73px] px-[30px]">
         <PetTitle>
