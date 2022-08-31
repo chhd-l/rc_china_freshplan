@@ -64,7 +64,7 @@ const Schedule = () => {
           {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center h-[160px]" key={key}>
               <Image
-                className="mr-1 h-full border border-solid border-[#E2E2E2]"
+                className="mr-1 h-full border border-solid border-[#E2E2E2] rounded-[10px]"
                 src={el?.variants?.defaultImage}
                 style={{ width: '1.6rem' }}
               />
@@ -84,19 +84,19 @@ const Schedule = () => {
         </View>
         <AtList hasBorder={false} className="my-1">
           <AtListItem
-            className="py-0.5 pl-0 text-[28px]"
+            className="py-0.5 px-0 text-[28px]"
             title="商品金额"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.productPrice + subscriptionDetails.price.deliveryPrice)}
           />
           <AtListItem
-            className="py-0.5 pl-0 text-[28px]"
+            className="py-0.5 px-0 text-[28px]"
             title="促销折扣"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.discountsPrice)}
           />
           <AtListItem
-            className="py-0.5 pl-0 text-[28px]"
+            className="py-0.5 px-0 text-[28px]"
             hasBorder={false}
             title="运费"
             extraText={formatMoney(subscriptionDetails.price.deliveryPrice)}
@@ -111,7 +111,7 @@ const Schedule = () => {
               <Text className="text-[28px]" style={{ color: '#000' }}>
                 商品小计：
               </Text>
-              <Text className="text-[40px] mr-[24px]" style={{ color: '#D49D28' }}>
+              <Text className="text-[40px]" style={{ color: '#D49D28' }}>
                 <Text className="text-[26px]">￥</Text>
                 <Text className="font-bold">{subscriptionDetails?.price?.totalPrice.toFixed(2)}</Text>
               </Text>
@@ -195,14 +195,19 @@ const Schedule = () => {
                 <Text className="text-[#000]">第{key + 1}笔</Text>
               </View>
               <View
+                className="px-1 pb-1"
                 style={{
                   borderBottom: '1px solid #E2E2E2',
                   borderTop: '1px solid #E2E2E2',
                 }}
               >
                 {el?.lineItems.map((item, index) => (
-                  <View className="flex item-center h-[160px] p-1" key={index}>
-                    <Image className="mr-1 h-full rounded-[10px]" src={item?.pic} style={{ width: '1.6rem' }} />
+                  <View className="flex item-center h-[160px] mt-1" key={index}>
+                    <Image
+                      className="mr-1 h-full rounded-[10px] border border-solid border-[#E2E2E2]"
+                      src={item?.pic}
+                      style={{ width: '1.6rem' }}
+                    />
                     <View className="h-full flex flex-col justify-center flex-1">
                       <View className="font-bold text-[28px] text-[#000] flex justify-between">
                         <Text>{item?.skuName}</Text>

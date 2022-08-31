@@ -150,7 +150,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 Invoice()
               }}
             >
-              查看发票
+              {order?.orderState?.invoiceStatus ? '查看' : '申请'}发票
             </AtButton>
             <AtButton className="rounded-full ml-0.5">查看物流</AtButton>
             <AtButton
@@ -175,7 +175,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 Invoice()
               }}
             >
-              申请开票
+              {order?.orderState?.invoiceStatus ? '查看' : '申请'}开票
             </AtButton>
           </View>
         )}
@@ -197,7 +197,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 Invoice()
               }}
             >
-              申请开票
+              {order?.orderState?.invoiceStatus ? '查看' : '申请'}开票
             </AtButton>
           </View>
         )}

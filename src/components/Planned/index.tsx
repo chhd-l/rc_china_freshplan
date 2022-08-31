@@ -60,66 +60,78 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           onChange={(e) => setCurrent(e.detail.current)}
           className="w-full flex items-center overflow-hidden"
           nextMargin="10px"
-          previousMargin="32px"
+          previousMargin="12px"
         >
           {subscriptionList.map((item, key) => (
             <SwiperItem key={key}>
-              <View className="plan">
-                <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
-                <View className="swiperItemCard px-1 pt-0.5 pb-[0.3rem] flex flex-col justify-between text-white">
-                  <View className="flex items-center text-[24px]">
-                    <View className="ml-0.5 mr-1.5">
-                      <AtAvatar
-                        size="large"
-                        className="w-[1.2rem] h-[1.2rem]"
-                        circle
-                        image={`${
-                          item?.pet?.image ? item?.pet?.image : CDNIMGURL2 + returnPetdefaultImage(item?.pet?.type)
-                        }`}
-                      />
-                    </View>
-                    <View className="flex-1 mt-1 pr-2">
-                      <View className="text-[36px] flex items-center justify-between">
-                        <Text className="w-[250px] truncate">{item?.pet?.name}</Text>{' '}
-                        <Text
-                          className={`rcciconfont ${
-                            item?.pet?.gender === 'MALE'
-                              ? 'rccicon-male text-[#FFE3B9]'
-                              : 'rccicon-female text-[#D49D28]'
-                          } translateText`}
-                          style={{
-                            fontSize: '0.3rem',
-                          }}
+              <View className="plan m-auto pt-[10px]">
+                <View
+                  className="rounded-b-[0.3rem] rounded-tl-[0.3rem]"
+                  style={{
+                    boxShadow: '0px 10px 5px -9px #999',
+                  }}
+                >
+                  <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
+                  <View className="swiperItemCard px-1 pt-0.5 pb-[0.3rem] flex flex-col justify-between text-white">
+                    <View className="flex items-center text-[24px]">
+                      <View className="ml-0.5 mr-1.5">
+                        <AtAvatar
+                          size="large"
+                          className="w-[1.2rem] h-[1.2rem]"
+                          circle
+                          image={`${
+                            item?.pet?.image ? item?.pet?.image : CDNIMGURL2 + returnPetdefaultImage(item?.pet?.type)
+                          }`}
                         />
                       </View>
-                      <View className="mt-[17px] text-[26px]">
-                        {item?.pet?.recentHealth === PetPosture.Emaciated
-                          ? '瘦弱'
-                          : item?.pet?.recentHealth === PetPosture.Obesity
-                          ? '超重'
-                          : '标准'}
-                        体重&nbsp;&nbsp;{item?.pet?.age}
-                      </View>
-                      <View className="mt-[0.17rem] text-[26px]">
-                        {item?.pet?.breed}&nbsp;&nbsp;{item?.pet?.recentWeight}kg
+                      <View className="flex-1 mt-1 pr-2">
+                        <View className="text-[36px] flex items-center justify-between">
+                          <Text className="w-[250px] truncate">{item?.pet?.name}</Text>{' '}
+                          <Text
+                            className={`rcciconfont ${
+                              item?.pet?.gender === 'MALE'
+                                ? 'rccicon-male text-[#FFE3B9]'
+                                : 'rccicon-female text-[#D49D28]'
+                            } translateText`}
+                            style={{
+                              fontSize: '0.3rem',
+                            }}
+                          />
+                        </View>
+                        <View className="mt-[17px] text-[26px]">
+                          {item?.pet?.recentHealth === PetPosture.Emaciated
+                            ? '瘦弱'
+                            : item?.pet?.recentHealth === PetPosture.Obesity
+                            ? '超重'
+                            : '标准'}
+                          体重&nbsp;&nbsp;{item?.pet?.age}
+                        </View>
+                        <View className="mt-[0.17rem] text-[26px]">
+                          {item?.pet?.breed}&nbsp;&nbsp;{item?.pet?.recentWeight}kg
+                        </View>
                       </View>
                     </View>
+                    <AtButton
+                      onClick={() => {
+                        Taro.navigateTo({
+                          url: `/pages/freshPlanDetails/index?id=${item?.id}`,
+                        })
+                      }}
+                      className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[26px] border-0"
+                    >
+                      管理计划
+                    </AtButton>
                   </View>
-                  <AtButton
-                    onClick={() => {
-                      Taro.navigateTo({
-                        url: `/pages/freshPlanDetails/index?id=${item?.id}`,
-                      })
-                    }}
-                    className="mx-2.5 h-[67px] rounded-full flex items-center bg-white text-[#96CC39] text-[26px] border-0"
-                  >
-                    管理计划
-                  </AtButton>
                 </View>
                 <View className="swiperItemScroll flex flex-col">
                   <View className="rounded-full" />
                   <View>
-                    <View className="h-full pt-[23px] flex flex-col">
+                    <View
+                      className="h-full pt-[23px] flex flex-col"
+                      style={{
+                        boxShadow: '0px 2px 10px -4px #999',
+                      }}
+                    >
                       <View
                         className="p-1 flex-1"
                         style={{
