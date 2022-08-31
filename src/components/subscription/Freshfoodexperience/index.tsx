@@ -14,9 +14,14 @@ const FreshFoodExperience = () => {
           <View className="text-[48px]">提供营养健康的鲜食体验</View>
         </PetTitle>
       </View>
-      <View className="flex flex-col ">
+      <View className="flex flex-col mx-[20px]">
         <View className="freshFoodbg">用新鲜完整的食材制成</View>
-        <View className="relative pt-[45px] flex flex-col shadow  pb-[40px] ">
+        <View
+          className="relative pt-[45px] flex flex-col shadow pb-[40px]"
+          style={{
+            borderRadius: '0 0 0.16rem 0.16rem',
+          }}
+        >
           <View className="flex flex-row mb-[40px]">
             <View className="flex flex-col  flex-1 pl-[55px] divider">
               {freshFood_left.map((item, key) => (

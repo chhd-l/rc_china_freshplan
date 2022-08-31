@@ -1,9 +1,9 @@
 import { Text } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
-const CopyText = ({ str }: { str: string | undefined }) => {
+const CopyText = ({ str, type = false }: { str: string | undefined; type?: boolean }) => {
   return (
-    <Text className="text-[28px] flex items-center justify-between flex-1">
+    <Text className={`text-[28px] flex items-center ${type ? 'justify-between' : 'justify-end'}  flex-1`}>
       {str}
       <Text
         className="text-[26px] text-[#96CC39] pl-0.5"

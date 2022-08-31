@@ -16,6 +16,10 @@ const orderStatusType = {
 }
 
 const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function }) => {
+  const Invoice = () => {
+    Taro.navigateTo({ url: `/pages/packageA/invoiceDetail/index?orderno=${order.orderNumber}` })
+  }
+
   const returnTypeImage = () => {
     switch (order?.orderState?.orderSource) {
       case 'WECHAT_MINI_PROGRAM':
@@ -66,7 +70,10 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
       <View className="mb-1 flex flex flex-col">
         {(order?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
           <View className="orderBody mt-1 flex item-center" key={key}>
-            <Image className="orderImage mx-1 h-full border border-solid border-[#E2E2E2]" src={el?.pic} />
+            <Image
+              className="orderImage mr-1 rounded-[10px] h-full border border-solid border-[#E2E2E2]"
+              src={el?.pic}
+            />
             <View className="h-full flex flex-col flex-1" style={{ fontWeight: 700 }}>
               <View className="flex justify-between">
                 <Text className="text-[26px] leading-[33px]">{el?.spuName}</Text>
@@ -84,7 +91,10 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         ))}
         {(order?.lineItem?.filter((el) => el.isGift) || []).map((el, key) => (
           <View className="orderBody mt-2 flex item-center" key={key}>
-            <Image className="orderImage mx-1 rounded-full" src={el?.pic} />
+            <Image
+              className="orderImage mr-1 rounded-[10px] h-full border border-solid border-[#E2E2E2]"
+              src={el?.pic}
+            />
             <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
               <View className="text-[26px] leading-[28px]">{el?.spuName}</View>
               <View className="flex items-center justify-between">
@@ -109,7 +119,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
           </View>
         </View>
         {order.orderState?.orderState === 'UNPAID' && (
-          <View className="flex items-center">
+          <View className="flex items-center my-[0.1rem]">
             <AtButton
               className="rounded-full"
               onClick={(e) => {
@@ -132,8 +142,17 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
           </View>
         )}
         {order.orderState?.orderState === 'SHIPPED' && (
-          <View className="flex items-center">
-            <AtButton className="rounded-full">查看物流</AtButton>
+          <View className="flex items-center my-[0.1rem]">
+            <AtButton
+              className="rounded-full"
+              onClick={(e) => {
+                e.stopPropagation()
+                Invoice()
+              }}
+            >
+              {order?.orderState?.invoiceStatus ? '查看' : '申请'}发票
+            </AtButton>
+            <AtButton className="rounded-full ml-0.5">查看物流</AtButton>
             <AtButton
               type="primary"
               className="mx-0.5 rounded-full"
@@ -147,13 +166,21 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
           </View>
         )}
         {order.orderState?.orderState === 'COMPLETED' && (
-          <View className="flex items-center">
+          <View className="flex items-center my-[0.1rem]">
             <AtButton className="rounded-full m-0">查看详情</AtButton>
-            <AtButton className="rounded-full ml-1">申请开票</AtButton>
+            <AtButton
+              className="rounded-full ml-0.5"
+              onClick={(e) => {
+                e.stopPropagation()
+                Invoice()
+              }}
+            >
+              {order?.orderState?.invoiceStatus ? '查看' : '申请'}开票
+            </AtButton>
           </View>
         )}
         {order.orderState?.orderState === 'TO_SHIP' && (
-          <View className="flex items-center">
+          <View className="flex items-center my-[0.1rem]">
             <AtButton
               className="rounded-full"
               onClick={(e) => {
@@ -163,10 +190,19 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
             >
               催发货
             </AtButton>
+            <AtButton
+              className="rounded-full ml-0.5"
+              onClick={(e) => {
+                e.stopPropagation()
+                Invoice()
+              }}
+            >
+              {order?.orderState?.invoiceStatus ? '查看' : '申请'}开票
+            </AtButton>
           </View>
         )}
         {order.orderState?.orderState === 'VOID' && (
-          <View className="flex items-center">
+          <View className="flex items-center my-[0.1rem]">
             <AtButton
               className="rounded-full"
               onClick={(e) => {

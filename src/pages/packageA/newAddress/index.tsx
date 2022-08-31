@@ -126,7 +126,7 @@ const NewAddress = () => {
           />
           <View
             className="pt-1 pb-2 text-28 border-b border-t-0 border-l-0 border-r-0 border-solid flex items-center"
-            style={{ borderColor: '#ebf2f7' }}
+            style={{ borderColor: '#E7E7E7' }}
           >
             <Text>所在地区</Text>
             <Text
@@ -150,14 +150,17 @@ const NewAddress = () => {
             cancel={onCancel}
             onRef={onRef}
           />
-          <AtTextarea
-            value={addressInfo['detail']}
-            onChange={(value) => updateAddressInfo(value, 'detail')}
-            maxLength={200}
-            placeholder="请输入详细地址"
-            count={false}
-            className="border-0 border-t-0 rc-text-area p-0 mt-0.5"
-          />
+          <View className="flex pt-1">
+            <View className="w-[1.72rem] mr-[0.16rem] text-[28px]">详细地址</View>
+            <AtTextarea
+              value={addressInfo['detail']}
+              onChange={(value) => updateAddressInfo(value, 'detail')}
+              maxLength={200}
+              placeholder="请输入详细地址"
+              count={false}
+              className="border-0 border-t-0 rc-text-area p-0 flex-1"
+            />
+          </View>
         </View>
       </AtForm>
       <View
@@ -167,19 +170,17 @@ const NewAddress = () => {
         }}
       >
         <Text className="text-[30px] text-black">默认地址</Text>
-        <View className="rounded-full switch w-[83px] h-[40px] bg-[#B7B7B7]">
-          <View
-            className={`${
-              addressInfo.isDefault ? 'w-full' : 'w-[40px]'
-            } rounded-full h-full bg-[#96CC39] flex justify-end`}
-          >
-            <View className="rounded-full h-full w-[40px] bg-white" />
-          </View>
+        <View
+          className={`rounded-full switch flex items-center ${
+            addressInfo.isDefault ? 'justify-start' : 'justify-end'
+          } p-[2px] w-[83px] h-[40px] ${addressInfo.isDefault ? 'bg-[#96CC39]' : 'bg-[#B7B7B7]'}`}
+        >
+          <View className="rounded-full h-[38px] w-[38px] bg-white" />
         </View>
       </View>
       <View className="w-full pt-1 pb-2 fixed bottom-0 left-0 bg-white">
         <AtButton
-          className="mx-4 rounded-full"
+          className="mx-4 rounded-full tracking-[0.2em]"
           customStyle={{ backgroundColor: '#96CC39', borderColor: '#96CC39' }}
           type="primary"
           formType="submit"

@@ -81,10 +81,10 @@ const AddressItem = ({
   }
 
   return (
-    <View className="p-1 bg-white mt-1 rounded AddressItem">
+    <View className="px-1 pt-1 pb-0.5 bg-white mt-1 rounded AddressItem">
       <View onClick={selectAddress}>
         <View className="flex flex-row justify-between">
-          <Text className="text-black font-semibold">{receiverName}</Text>
+          <Text className="text-black font-semibold text-[32px]">{receiverName}</Text>
           <Text className="text-gray-400">{phone}</Text>
         </View>
         <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #E7E7E7' }}>

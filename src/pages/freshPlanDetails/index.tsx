@@ -121,20 +121,20 @@ const FreshPlanDetails = () => {
           }}
         >
           <View className="flex justify-between items-end">
-            <Text className="text-[34px]">Fresh Plan商品</Text>
+            <Text className="text-[30px]">Fresh Plan商品</Text>
             <Text className="text-[24px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
           </View>
         </View>
         <View className="flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
-            <View className="mt-1 flex item-center text-[20px] h-[190px]" key={key}>
+            <View className="mt-1 flex item-center text-[24px] h-[190px]" key={key}>
               <Image
-                className="mx-1 h-full border border-solid border-[#E2E2E2]"
+                className="mr-1 h-full border border-solid border-[#E2E2E2] rounded-[10px]"
                 src={el?.variants?.defaultImage}
                 style={{ width: '1.9rem' }}
               />
               <View className="h-full flex flex-col justify-center flex-1">
-                <View className="font-bold text-[30px] text-[#000]">{el?.name}</View>
+                <View className="font-bold text-[28px] text-[#000]">{el?.name}</View>
                 <View className="flex items-center justify-between mt-1.5 text-[#666]">
                   {(el?.description ?? '').replace(/<[^>]+>/gi, '')}
                 </View>
@@ -145,7 +145,7 @@ const FreshPlanDetails = () => {
       </View>
       <View className="bg-white boxShadow px-1 pt-1 pb-2 mt-1">
         <View
-          className="text-[34px] pb-1"
+          className="text-[30px] pb-1"
           style={{
             borderBottom: '1px solid #E2E2E2',
           }}
@@ -157,12 +157,12 @@ const FreshPlanDetails = () => {
             <Image
               style={{
                 width: '1.1rem',
-                height: '0.86rem',
+                height: '1.06rem',
                 backgroundSize: '103% 100%',
               }}
               src={`${CDNIMGURL}post.png`}
             />
-            <Text className="ml-1.5 text-[28px] leading-[33px]">
+            <Text className="ml-1.5 text-[24px] leading-[33px]">
               下一次将在{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}发货，请注意查收!
             </Text>
           </View>
@@ -175,7 +175,7 @@ const FreshPlanDetails = () => {
               }}
               src={`${CDNIMGURL2}cancel-icon.png`}
             />
-            <Text className="ml-1.5 mt-1 text-[28px] leading-[33px]">本次Fresh plan已取消</Text>
+            <Text className="ml-1.5 mt-1 text-[24px] leading-[33px]">本次Fresh plan已取消</Text>
           </View>
         )}
         <View className="flex justify-end">
@@ -195,14 +195,14 @@ const FreshPlanDetails = () => {
       </View>
       <View className="bg-white boxShadow p-1 mt-1">
         <View
-          className="text-[34px] pb-1"
+          className="text-[30px] pb-1"
           style={{
             borderBottom: '1px solid #E2E2E2',
           }}
         >
           签约信息
         </View>
-        <View className="flex text-[28px] items-center mt-1 ml-0.5">
+        <View className="flex text-[24px] items-center mt-1 ml-0.5">
           <Image
             style={{
               width: '0.3022rem',
@@ -212,7 +212,7 @@ const FreshPlanDetails = () => {
           />
           <Text className="ml-1">签约平台：{returnTypeText()}</Text>
         </View>
-        <View className="flex text-[28px] items-center mt-1 ml-0.5">
+        <View className="flex text-[24px] items-center mt-1 ml-0.5">
           <Image
             style={{
               width: '0.2997rem',

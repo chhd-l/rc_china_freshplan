@@ -11,7 +11,7 @@ const ExpressLine = ({ expressList }: { expressList: any[] }) => {
   }, [expressList])
 
   return list.length ? (
-    <View className="expressLine py-1 pl-[0.125rem]">
+    <View className="expressLine pt-1 pb-[40px] pl-[0.125rem]">
       {list.map((express, key) => (
         <View className="mt-[0.03rem]" key={key}>
           <View className="flex items-center">
