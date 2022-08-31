@@ -109,7 +109,7 @@ const Checkout = () => {
             <View className="text-28 font-bold mt-0.5">{address?.receiverName} {address?.phone}</View>
           </View> : <View className="py-1 flex items-center">
             <Text className="rcciconfont rccicon-location text-32"></Text>
-            <Text className="ml-1 text-30 font-bold">添加收获地址</Text>
+            <Text className="ml-1 text-30 font-bold">添加收货地址</Text>
           </View>}
           <Text className="rcciconfont rccicon-right text-22 text-gray-400"></Text>
         </View>

@@ -2,6 +2,7 @@ import { View, Text, Swiper, SwiperItem } from '@tarojs/components'
 import PetItem from '../common/PetItem'
 import { AtIcon } from 'taro-ui'
 import { PetListItemProps } from '@/framework/types/consumer'
+import { useState } from 'react'
 
 import './index.less'
 
@@ -14,6 +15,8 @@ interface IProps {
 }
 
 const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selectedPetId }: IProps) => {
+  const [current, setCurrent] = useState<number>(0);
+  console.log('current:', current);
 
   if ((petList ?? []).length === 0) {
     return (
@@ -49,15 +52,36 @@ const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selected
       </View>
     )
   } else {
+    let navArr: number[] = [], navSize = petList.length;
+    if (hasAdd) {
+      navSize = navSize + 1;
+    }
+    for (let i = 0, len = navSize % 4 + 1; i < len; i ++) {
+      navArr.push(i);
+    }
     return (
-      <Swiper displayMultipleItems={4} className="w-full overflow-hidden">
-        {petList.map((item: PetListItemProps, idx: number) => (
-          <SwiperItem key={idx} className="mr-2 inline-block">
-            <PetItem pet={item} hasSelect={!!onSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
-          </SwiperItem>
-        ))}
-        {hasAdd ? <SwiperItem><PetItem isAdd={true} onClick={() => onAdd && onAdd()} /></SwiperItem> : null}
-      </Swiper>
+      <View>
+        <Swiper
+          current={current}
+          onChange={(e) => setCurrent(e.detail.current)}
+          displayMultipleItems={4}
+          className="w-full overflow-hidden"
+        >
+          {petList.map((item: PetListItemProps, idx: number) => (
+            <SwiperItem key={idx} className="mr-2 inline-block">
+              <PetItem pet={item} hasSelect={!!onSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
+            </SwiperItem>
+          ))}
+          {hasAdd ? <SwiperItem><PetItem isAdd={true} onClick={() => onAdd && onAdd()} /></SwiperItem> : null}
+        </Swiper>
+        <View className="flex justify-center">
+          <View className="pet-list-nav flex items-center">
+            {navArr.map((item: number) => (
+              <Text key={item} className={`nav-item ${item === current ? 'active' : ''}`} />
+            ))}
+          </View>
+        </View>
+      </View>
     )
   }
 }

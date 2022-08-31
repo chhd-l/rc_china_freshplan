@@ -7,7 +7,7 @@ export function loginWithAlipay(callback?: Function) {
       console.log(authCode);
       my.getPhoneNumber({
         success: ({ response }) => {
-          console.log('phone encrypt:', JSON.parse(response).response);
+          console.log('phone encrypt:', JSON.parse(response));
           aliRegisterAndLogin(authCode, JSON.parse(response).response).then(consumer => {
             console.log('login response:', consumer);
             callback && callback(consumer);

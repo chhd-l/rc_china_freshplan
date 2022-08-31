@@ -101,7 +101,7 @@ export const subscriptionCreateAndPay = async ({
       })
       setTimeout(() => {
         let url = `${routers.orderList}?status=TO_SHIP&isFromSubscription=true`
-        Taro.redirectTo({
+        Taro.reLaunch({
           url,
         })
       }, 1000)
@@ -125,13 +125,13 @@ export const subscriptionCreateAndPay = async ({
               },
             });
           }
-          Taro.redirectTo({
+          Taro.reLaunch({
             url: `${routers.orderList}?status=ALL&isFromSubscription=true`,
           })
         },
         fail: (res) => {
           console.log(res);
-          Taro.redirectTo({
+          Taro.reLaunch({
             url: `${routers.orderList}?status=UNPAID&isFromSubscription=true`,
           })
         }

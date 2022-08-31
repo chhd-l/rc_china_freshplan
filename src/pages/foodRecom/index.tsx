@@ -21,6 +21,7 @@ const FoodRecom = () => {
 
   Taro.useReady(() => {
     const data: PetListItemProps = Taro.getStorageSync("petItem");
+    console.log('pet item:', data);
     setPet(data);
     Promise.all([
       getSubscriptionSimpleRecommend({

@@ -190,7 +190,7 @@ const Account = () => {
         {/* 其他选项 */}
         <AtList hasBorder={false} className="mt-1">
           <AtListItem
-            thumb={`${CDNIMGURL}my-address.png`}
+            thumb={`${CDNIMGURL2}location-icon.png`}
             hasBorder={false}
             title="收货地址"
             arrow="right"
@@ -205,7 +205,8 @@ const Account = () => {
         </AtList>
         <AtList hasBorder={false} className="mt-1">
           <AtListItem
-            iconInfo={{ size: 22, value: 'user' }}
+            thumb={`${CDNIMGURL2}invoice-icon.png`}
+            hasBorder={false}
             title="发票管理"
             arrow="right"
             onClick={() => {

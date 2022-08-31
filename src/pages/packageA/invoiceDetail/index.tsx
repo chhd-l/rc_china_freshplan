@@ -20,6 +20,9 @@ const InvoiceDetail = () => {
         username: consumer?.id,
       }
     });
+    if (res?.data?.code !== 1) {
+      Taro.showToast({ title: res?.data?.message ?? '获取token失败' });
+    }
     setUrl(`https://fapiao-h5.easyapi.com/make/single-query?accessToken=${res?.data?.content?.accessToken ?? ''}&outOrderNo=${orderNo}`);
   });
 
