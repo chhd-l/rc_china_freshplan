@@ -1,6 +1,5 @@
 import { View, Text, Swiper, SwiperItem } from '@tarojs/components'
 import PetItem from '../common/PetItem'
-import { AtIcon } from 'taro-ui'
 import { PetListItemProps } from '@/framework/types/consumer'
 import { useState } from 'react'
 
@@ -30,7 +29,7 @@ const PetNavigation = ({ petList = [], hasAdd = false, hasSelect = false, onSele
           <View className="text-28 text-gray-400">给它定制专属食物</View>
         </View>
         <View>
-          <AtIcon size="28" value="chevron-right" className="text-gray-400" />
+          <Text className="rcciconfont rccicon-right text-28 text-gray-400" />
         </View>
       </View>
     )

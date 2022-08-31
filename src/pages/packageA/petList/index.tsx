@@ -9,7 +9,6 @@ import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { CDNIMGURL2 } from '@/lib/constants'
 import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
-import { AtIcon } from 'taro-ui'
 import './index.less'
 
 const PetList = () => {
@@ -79,7 +78,7 @@ const PetList = () => {
                 <View className="text-28 text-gray-400">{pet.breed} {pet.age}</View>
               </View>
               <View>
-                <AtIcon size="24" value="chevron-right" className="text-gray-200" />
+                <Text className="rcciconfont rccicon-right text-24 text-gray-200" />
               </View>
             </View>
           )
