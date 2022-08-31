@@ -120,24 +120,24 @@ const AddRessManage = () => {
             }}
           >
             <Image className="mt-2" src={`${CDNIMGURL}pop.png`} style={{ width: '2.36rem', height: '2.36rem' }} />
-            <View className="text-[29px] text-[#333] mt-2">您确定要删除这个地址嘛？</View>
+            <View className="text-[29px] text-[#333] mt-2">您确定要删除这个地址吗？</View>
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39]"
-                onClick={delAddress}
-              >
-                确定
-              </AtButton>
-              <AtButton
-                circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399] ml-2"
+                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowDelTip(false)
                 }}
               >
                 取消
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
+                onClick={delAddress}
+              >
+                确定
               </AtButton>
             </View>
           </View>
