@@ -60,7 +60,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           onChange={(e) => setCurrent(e.detail.current)}
           className="w-full flex items-center overflow-hidden"
           nextMargin="10px"
-          previousMargin="12px"
+          previousMargin="10px"
         >
           {subscriptionList.map((item, key) => (
             <SwiperItem key={key}>
