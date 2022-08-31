@@ -73,6 +73,7 @@ const ChoosePet = () => {
             <PetNavigation
               petList={petList}
               hasAdd={false}
+              hasSelect={true}
               onSelect={handleChoosedPet}
               selectedPetId={pet?.id}
             />

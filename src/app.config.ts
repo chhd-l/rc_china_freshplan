@@ -40,7 +40,7 @@ export default defineAppConfig({
     list: [
       {
         pagePath: 'pages/subscription/index',
-        text: 'Fresh Plan',
+        text: '智能推荐',
         iconPath: 'assets/icons/icon-subscription.png',
         selectedIconPath: 'assets/icons/icon-subscription-selected.png',
       },

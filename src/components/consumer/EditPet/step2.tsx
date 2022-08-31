@@ -79,13 +79,13 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="mt-1 rcc-single-choice flex justify-between items-center">
         <Text
           onClick={() => handleGenderChange(PetGender.Male)}
-          className={`rcc-choice-item flex-1 mr-1 text-30 ${pet.gender === PetGender.Male ? 'active' : ''}`}
+          className={`rcc-choice-item flex-1 mr-1 text-30 font-bold ${pet.gender === PetGender.Male ? 'active' : ''}`}
         >
           小鲜肉
         </Text>
         <Text
           onClick={() => handleGenderChange(PetGender.Female)}
-          className={`rcc-choice-item flex-1 ml-1 text-30 ${pet.gender === PetGender.Female ? 'active' : ''}`}
+          className={`rcc-choice-item flex-1 ml-1 text-30 font-bold ${pet.gender === PetGender.Female ? 'active' : ''}`}
         >
           小公主
         </Text>
