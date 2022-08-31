@@ -35,10 +35,12 @@ const OrderList = () => {
     orderState = current,
     curPage = currentPage,
     queryParameters,
+    list = [],
   }: {
     orderState?: string
     curPage?: number
     queryParameters?: any
+    list?: any[]
   }) => {
     const limit = 10
     let offset = curPage ? curPage * limit : 0
@@ -55,14 +57,14 @@ const OrderList = () => {
           : {},
     })
     setIsNoMore(res?.total <= offset + 10)
-    setOrderList(orderList.concat(res?.records))
+    setOrderList(list.concat(res?.records))
   }
 
   useReachBottom(() => {
     if (!isNoMore) {
       let page = currentPage + 1
       setCurrentPage(page)
-      getOrderLists({ curPage: page })
+      getOrderLists({ curPage: page, list: orderList })
     }
   })
 

@@ -84,19 +84,19 @@ const Schedule = () => {
         </View>
         <AtList hasBorder={false} className="my-1">
           <AtListItem
-            className="py-0.5 text-[28px]"
+            className="py-0.5 pl-0 text-[28px]"
             title="商品金额"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.productPrice + subscriptionDetails.price.deliveryPrice)}
           />
           <AtListItem
-            className="py-0.5 text-[28px]"
+            className="py-0.5 pl-0 text-[28px]"
             title="促销折扣"
             hasBorder={false}
             extraText={formatMoney(subscriptionDetails.price.discountsPrice)}
           />
           <AtListItem
-            className="py-0.5 text-[28px]"
+            className="py-0.5 pl-0 text-[28px]"
             hasBorder={false}
             title="运费"
             extraText={formatMoney(subscriptionDetails.price.deliveryPrice)}
@@ -186,12 +186,13 @@ const Schedule = () => {
       {/* 历史订单 */}
 
       {subscriptionDetails.completedDeliveries && subscriptionDetails.completedDeliveries.length ? (
-        <View className="mt-1 p-1 boxShadow">
+        <View className="mt-1 py-1 boxShadow">
           <View className="text-[34px]">历史订单</View>
           {subscriptionDetails.completedDeliveries.map((el: any, key) => (
             <View key={key} className="rounded-[10px] mt-1 text-[24px] text-[#999] bg-white">
               <View className="flex items-center justify-between p-1">
-                <View>订单编号: {el?.orderId}</View>第{key + 1}笔
+                <View>订单编号: {el?.orderId}</View>
+                <Text className="text-[#000]">第{key + 1}笔</Text>
               </View>
               <View
                 style={{
@@ -244,7 +245,7 @@ const Schedule = () => {
             }}
           >
             <Image className="mt-2" src={`${CDNIMGURL}pop.png`} style={{ width: '2.36rem', height: '2.36rem' }} />
-            <View className="text-[29px] text-[#333] mt-2">您确定要取消这个计划嘛？</View>
+            <View className="text-[29px] text-[#333] mt-2">您确定要取消这个计划吗？</View>
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
@@ -270,7 +271,7 @@ const Schedule = () => {
                   setPopupOpne(false)
                 }}
               >
-                我在想想
+                我再想想
               </AtButton>
             </View>
           </View>

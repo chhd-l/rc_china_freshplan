@@ -48,7 +48,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
         lowerThreshold={Threshold}
         onScroll={onScroll}
       >
-        <View className="px-3 py-2 title flex items-center -mb-[2px] z-20">
+        <View className="px-3 py-2 title flex items-center">
           <Image className="mr-0.5" src={`${CDNIMGURL}claws.png`} />
           <Text className={`${subscriptionList[current]?.pet?.name.length > 3 && 'w-[120px]'} truncate`}>
             {subscriptionList[current]?.pet?.name}
@@ -58,14 +58,14 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
         <Swiper
           current={current}
           onChange={(e) => setCurrent(e.detail.current)}
-          className="w-full flex items-center overflow-hidden z-10"
+          className="w-full flex items-center overflow-hidden"
           nextMargin="10px"
           previousMargin="32px"
         >
           {subscriptionList.map((item, key) => (
             <SwiperItem key={key}>
               <View className="plan">
-                <View className="px-1 showBox py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
+                <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
                 <View className="swiperItemCard px-1 pt-0.5 pb-[0.3rem] flex flex-col justify-between text-white">
                   <View className="flex items-center text-[24px]">
                     <View className="ml-0.5 mr-1.5">
