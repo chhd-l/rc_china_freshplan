@@ -112,9 +112,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             <SwiperItem key={key}>
               <View className="plan m-auto pt-[10px]">
                 <View className="rounded-b-[0.3rem] rounded-tl-[0.3rem]">
-                  <View className="px-1 pb-[0.18rem] pt-[0.28rem] w-full inline-block fresh">
-                    FRESH编号：{item?.no}
-                  </View>
+                  <View className="px-1 pr-2 pb-[0.18rem] pt-[0.28rem] inline-block fresh">FRESH编号：{item?.no}</View>
                   <View className="swiperItemCard px-1 pt-0.5 pb-[0.3rem] flex flex-col justify-between text-white">
                     <View className="flex items-center text-[24px]">
                       <View className="ml-0.5 mr-1.5">
