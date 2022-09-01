@@ -90,7 +90,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
         scrollY
         scrollWithAnimation
         scrollTop={scrollTop}
-        style={{ height: scrollHeight > 600 ? '89vh' : '100vh' }}
+        style={{ height: '100vh' }}
         lowerThreshold={Threshold}
         onScroll={onScroll}
       >
