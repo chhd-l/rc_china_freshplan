@@ -26,7 +26,9 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
 
   return (
     <View className="oldUserPlan bg-[#d3e4b5]">
-      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} bg-white fixed bottom-0 left-0 w-full z-10 py-1`}>
+      <View
+        className={`${scrollHeight > 600 ? 'block' : 'hidden'} bg-transparent fixed bottom-0 left-0 w-full z-10 py-1`}
+      >
         <View
           className="mx-4 py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
           onClick={() => {
