@@ -11,6 +11,8 @@ import './step.less';
 
 const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
   const [show, setShow] = useState<boolean>(false);
+  const { system } = Taro.getSystemInfoSync();
+  const androidFlag = system.indexOf('Android') > -1 ? 'android' : 'ios';
 
   const handleGenderChange = (gender: PetGender) => {
     if (!pet.name) {
@@ -79,18 +81,18 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
       <View className="mt-1 rcc-single-choice flex justify-between items-center">
         <Text
           onClick={() => handleGenderChange(PetGender.Male)}
-          className={`rcc-choice-item flex-1 mr-1 text-30 ${pet.gender === PetGender.Male ? 'active' : ''}`}
+          className={`rcc-choice-item flex-1 mr-1 text-30 font-bold ${pet.gender === PetGender.Male ? 'active' : ''}`}
         >
           小鲜肉
         </Text>
         <Text
           onClick={() => handleGenderChange(PetGender.Female)}
-          className={`rcc-choice-item flex-1 ml-1 text-30 ${pet.gender === PetGender.Female ? 'active' : ''}`}
+          className={`rcc-choice-item flex-1 ml-1 text-30 font-bold ${pet.gender === PetGender.Female ? 'active' : ''}`}
         >
           小公主
         </Text>
       </View>
-      <View className="pet-edit-btns">
+      <View className={`pet-edit-btns ${androidFlag}`}>
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP1)}>上一步</Text>
           <Text className={`btn-item ${!pet.name || !pet.gender ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>

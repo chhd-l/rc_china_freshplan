@@ -1,6 +1,5 @@
 import { View, Text, Swiper, SwiperItem } from '@tarojs/components'
 import PetItem from '../common/PetItem'
-import { AtIcon } from 'taro-ui'
 import { PetListItemProps } from '@/framework/types/consumer'
 import { useState } from 'react'
 
@@ -8,13 +7,14 @@ import './index.less'
 
 interface IProps {
   petList?: PetListItemProps[]
+  hasSelect?: boolean
   onSelect?: (pet: PetListItemProps) => void
   hasAdd?: boolean
   onAdd?: Function
   selectedPetId?: string
 }
 
-const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selectedPetId }: IProps) => {
+const PetNavigation = ({ petList = [], hasAdd = false, hasSelect = false, onSelect, onAdd, selectedPetId }: IProps) => {
   const [current, setCurrent] = useState<number>(0);
   console.log('current:', current);
 
@@ -29,7 +29,7 @@ const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selected
           <View className="text-28 text-gray-400">给它定制专属食物</View>
         </View>
         <View>
-          <AtIcon size="28" value="chevron-right" className="text-gray-400" />
+          <Text className="rcciconfont rccicon-right text-28 text-gray-400" />
         </View>
       </View>
     )
@@ -37,16 +37,16 @@ const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selected
     return (
       <View className={`flex items-center justify-around`}>
         {petList.map((item: PetListItemProps, idx: number) => (
-          <PetItem key={idx} pet={item} hasSelect={!!onSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
+          <PetItem key={idx} pet={item} hasSelect={hasSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
         ))}
         {hasAdd ? <PetItem isAdd={true}  onClick={() => onAdd && onAdd()} /> : null}
       </View>
     )
   } else if ((!hasAdd && petList.length <= 4) || (hasAdd && petList.length <= 3)) {
     return (
-      <View className={`flex items-center justify-between`}>
+      <View className={`flex items-center justify-around`}>
         {petList.map((item: PetListItemProps, idx: number) => (
-          <PetItem key={idx} pet={item} hasSelect={!!onSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
+          <PetItem key={idx} pet={item} hasSelect={hasSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
         ))}
         {hasAdd ? <PetItem isAdd={true} onClick={() => onAdd && onAdd()} /> : null}
       </View>
@@ -69,7 +69,7 @@ const PetNavigation = ({ petList = [], hasAdd = false, onSelect, onAdd, selected
         >
           {petList.map((item: PetListItemProps, idx: number) => (
             <SwiperItem key={idx} className="mr-2 inline-block">
-              <PetItem pet={item} hasSelect={!!onSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
+              <PetItem pet={item} hasSelect={hasSelect} selected={item.id === selectedPetId} onClick={() => onSelect && onSelect(item)} />
             </SwiperItem>
           ))}
           {hasAdd ? <SwiperItem><PetItem isAdd={true} onClick={() => onAdd && onAdd()} /></SwiperItem> : null}

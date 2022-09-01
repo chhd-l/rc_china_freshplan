@@ -439,7 +439,7 @@ const OrderDetails = () => {
 
       {/* 弹出层 */}
       <View
-        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
+        className="pop-modal fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center"
         style={{
           display: showDelTip ? 'flex' : 'none',
         }}
@@ -460,7 +460,7 @@ const OrderDetails = () => {
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowDelTip(false)
@@ -470,7 +470,7 @@ const OrderDetails = () => {
               </AtButton>
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
+                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
                 onClick={handleClickActionTipModal}
               >
                 确定

@@ -214,6 +214,7 @@ const PetDetail = () => {
       <View className="bg-white px-2 py-1 flex items-center">
         <View className="head w-6 h-6" onClick={() => setShowUpload(true)}>
           <Image className="rounded-full" src={pet.image || `${CDNIMGURL}${pet.type === PetType.Cat ? 'cat-default.png' : 'dog-default.png'}`}></Image>
+          <Text className={`up-alert rcciconfont rccicon-cam`} />
         </View>
         <View className="flex-1">
           <Text className="ml-2 text-32">{pet.name}</Text>
@@ -482,20 +483,20 @@ const PetDetail = () => {
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39]"
-                onClick={handleDelete}
-              >
-                确定
-              </AtButton>
-              <AtButton
-                circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399] ml-2"
+                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowDel(false)
                 }}
               >
                 取消
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
+                onClick={handleDelete}
+              >
+                确定
               </AtButton>
             </View>
           </View>

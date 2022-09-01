@@ -2,7 +2,6 @@ import NoPlan from '@/components/NoPlan'
 import Planned from '@/components/Planned'
 import { getSubscriptionFindByConsumerId } from '@/framework/api/subscription/subscription'
 import { getAgeYear } from '@/utils/utils'
-import customerServiceImg from '@/assets/img/customerService.png'
 
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
@@ -11,6 +10,7 @@ import { useAtom } from 'jotai'
 import { consumerAtom } from '@/store/consumer'
 import { Image, View } from '@tarojs/components'
 import { getPets } from '@/framework/api/pet/get-pets'
+import { CDNIMGURL2 } from '@/lib/constants'
 
 const Index = () => {
   const [SubscriptionList, setSubscriptionList] = useState([])
@@ -52,12 +52,12 @@ const Index = () => {
   return (
     <>
       <View
-        className="w-[110px] fixed right-0  z-50 top-[1140px] "
+        className="w-[110px] fixed right-1  z-50 top-[1140px] "
         onClick={() => {
           Taro.navigateTo({ url: '/pages/packageA/customerService/index' })
         }}
       >
-        <Image src={customerServiceImg} mode="widthFix" />
+        <Image src={`${CDNIMGURL2}customer-service.png`} mode="widthFix" />
       </View>
 
       {consumer?.id && SubscriptionList.length ? <Planned subscriptionList={SubscriptionList} /> : <NoPlan />}
