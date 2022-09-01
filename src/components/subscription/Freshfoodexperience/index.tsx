@@ -12,7 +12,7 @@ const FreshFoodExperience = () => {
           Taro.navigateTo({ url: '/pages/packageA/petDiet/index' })
         }}
       >
-        开始定制
+        查看饮食
       </Button>
     </View>
   )

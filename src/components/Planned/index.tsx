@@ -25,8 +25,8 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
   }
 
   return (
-    <View className="oldUserPlan bg-white">
-      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} z-10 py-1`}>
+    <View className="oldUserPlan bg-[#d3e4b5]">
+      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} fixed bottom-0 left-0 w-full z-10 py-1`}>
         <View
           className="mx-4 py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
           onClick={() => {
@@ -65,13 +65,10 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           {subscriptionList.map((item, key) => (
             <SwiperItem key={key}>
               <View className="plan m-auto pt-[10px]">
-                <View
-                  className="rounded-b-[0.3rem] rounded-tl-[0.3rem]"
-                  style={{
-                    boxShadow: '0px 10px 5px -9px #999',
-                  }}
-                >
-                  <View className="px-1 py-[0.18rem] pr-2 inline-block fresh">FRESH编号：{item?.no}</View>
+                <View className="rounded-b-[0.3rem] rounded-tl-[0.3rem]">
+                  <View className="px-1 pb-[0.18rem] pt-[0.28rem] w-full inline-block fresh">
+                    FRESH编号：{item?.no}
+                  </View>
                   <View className="swiperItemCard px-1 pt-0.5 pb-[0.3rem] flex flex-col justify-between text-white">
                     <View className="flex items-center text-[24px]">
                       <View className="ml-0.5 mr-1.5">
@@ -187,8 +184,20 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             </SwiperItem>
           ))}
         </Swiper>
+        {subscriptionList.length > 1 && (
+          <View className="flex my-[39px] items-center justify-center">
+            {subscriptionList.map((_, key) => (
+              <View
+                key={key}
+                className={`${
+                  current === key ? 'bg-[#fff] w-[25px]' : 'bg-[#e5e5e5] w-[15px]'
+                } mx-[0.1rem] h-[15px]  rounded-full`}
+              />
+            ))}
+          </View>
+        )}
         <View
-          className="mx-3 mt-[32px] py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
+          className="mx-3 py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
           onClick={() => {
             Taro.navigateTo({
               url: '/pages/packageA/choosePet/index',
@@ -198,25 +207,18 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           <AtIcon className="mr-0.5" value="clock" size="25" />
           <Text className="text-[34px]">更多定制</Text>
         </View>
-        {subscriptionList.length > 1 && (
-          <View className="flex mt-1 mb-2 items-center justify-center">
-            {subscriptionList.map((_, key) => (
-              <View
-                key={key}
-                className={`${
-                  current === key ? 'bg-[#96CC39] w-[25px]' : 'bg-[#e5e5e5] w-[15px]'
-                } mx-[0.1rem] h-[15px]  rounded-full`}
-              />
-            ))}
-          </View>
-        )}
-        <View className="mt-1 px-[20px]">
+        <View className="mt-1 px-[30px]">
           <Step />
           <FreshFoodExperience />
           <LovePetHealth />
           <CommonProblem />
-          <View className="w-full h-[750px] ">
-            <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/home_foot_img.png" />
+          <View className="h-[750px] mx-[-30px]">
+            <Image
+              src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/home_foot_img.png"
+              style={{
+                transform: 'translateY(20px)',
+              }}
+            />
           </View>
         </View>
       </ScrollView>

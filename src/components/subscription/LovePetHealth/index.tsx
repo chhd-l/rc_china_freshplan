@@ -9,7 +9,7 @@ const LovePetHealth = () => {
 
   return (
     <View className="petHealth">
-      <View className="ml-[20px]">
+      <View className="mt-[76px] mb-[60px]">
         <PetTitle>
           <View className="text-[48px]">专业的科研团队 </View>
           <View className="text-[48px]">时刻守护您的爱宠健康</View>
@@ -36,7 +36,7 @@ const LovePetHealth = () => {
             </SwiperItem>
           ))}
         </Swiper>
-        <View className="indicatorDots w-full bg-white">
+        <View className="indicatorDots w-full">
           <View className="flex my-1 items-center justify-center">
             {swiperList.map((_, key) => (
               <View key={key} className={`${current === key && 'selectInd'} rounded-full`} />

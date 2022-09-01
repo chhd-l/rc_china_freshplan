@@ -48,7 +48,7 @@ const Subscription = () => {
 
   return (
     <View className="bg-[#d3e4b5]">
-      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} z-10 py-1`}>
+      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} fixed bottom-0 left-0 w-full z-10 py-1`}>
         {consumer?.id ? (
           <Button
             className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
@@ -82,7 +82,8 @@ const Subscription = () => {
         scrollY
         scrollWithAnimation
         scrollTop={scrollTop}
-        style={{ height: scrollHeight > 600 ? '89vh' : '100vh' }}
+        // style={{ height: scrollHeight > 600 ? '89vh' : '100vh' }}
+        style={{ height: '100vh' }}
         lowerThreshold={Threshold}
         onScroll={onScroll}
       >
@@ -144,8 +145,13 @@ const Subscription = () => {
             <FreshFoodExperience />
             <LovePetHealth />
             <CommonProblem />
-            <View className="w-full h-[750px] ">
-              <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/home_foot_img.png" />
+            <View className="h-[750px] mx-[-30px]">
+              <Image
+                src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/home_foot_img.png"
+                style={{
+                  transform: 'translateY(20px)',
+                }}
+              />
             </View>
           </View>
         </View>

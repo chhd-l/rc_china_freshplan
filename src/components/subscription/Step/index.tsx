@@ -6,7 +6,7 @@ const Step = () => {
   return (
     <View>
       <View className="flex justify-center mt-[44px] mb-[55px]">
-        <Text className="rcciconfont rccicon-down IconDownAnimo" />
+        <Text className="rcciconfont rccicon-down IconDownAnimo text-[#fff] font-normal" />
       </View>
       <View className="p-[52px] rounded-[30px] bg-white">
         <View className="mb-[64px]">

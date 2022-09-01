@@ -6,8 +6,8 @@ import { commonProblems } from './index.modules'
 
 const CommonProblem = () => {
   return (
-    <View>
-      <View className="ml-[20px]">
+    <View className="mb-[30px]">
+      <View className="mt-[76px] mb-[60px]">
         <PetTitle>
           <Text className="text-[48px]">常见问题为您提供解答</Text>
         </PetTitle>
@@ -15,7 +15,7 @@ const CommonProblem = () => {
       {commonProblems.map((item, key) => (
         <View
           key={key}
-          className="bg-[#FAFAFA] border-[16px] mb-[22px] p-[26px] flex flex-col rounded-[16px] mx-[0.2rem]"
+          className="bg-[#FAFAFA] border-[16px] mb-[26px] p-[26px] flex flex-col rounded-[30px] mx-[0.2rem] overflow-hidden"
           style={{
             boxShadow: '6px 6px 22px -8px #d4d1d1',
           }}
