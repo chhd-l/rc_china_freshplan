@@ -5,7 +5,7 @@ import { consumerAtom } from '@/store/consumer';
 import { PetListItemProps } from '@/framework/types/consumer';
 import { getPets } from '@/framework/api/pet/get-pets';
 import { View, Image } from '@tarojs/components';
-import { AtList, AtListItem } from 'taro-ui';
+import { AtList } from 'taro-ui';
 // import RotationChartList from '@/components/RotationChartList';
 import PetNavigation from "@/components/PetNavigation";
 import { CDNIMGURL2 } from '@/lib/constants';
@@ -59,16 +59,19 @@ const ChoosePet = () => {
       <View className="my-1 px-1 text-34 font-bold">选择您的宠物！</View>
       <View className="mx-1 rounded-sm border border-solid border-gray-200 overflow-hidden">
         <AtList hasBorder={false}>
-          <AtListItem
-            thumb={`${CDNIMGURL2}pet-foot.png`}
-            title="我的宠物"
-            hasBorder={false}
-            arrow="right"
-            extraText="添加宠物"
+          <View 
+            className="p-1 flex items-center"
             onClick={() => {
               Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
             }}
-          />
+          >
+            <View className="w-[50px] h-[50px]">
+              <Image src={`${CDNIMGURL2}pet-foot.png`} mode="widthFix" />
+            </View>
+            <View className="flex-1 ml-0.5 text-28 font-bold">我的宠物</View>
+            <View className="mr-0.5 text-26 text-gray-400">添加宠物</View>
+            <View className="rcciconfont rccicon-right text-28 text-gray-400" />
+          </View>
           <View className="p-1">
             <PetNavigation
               petList={petList}
