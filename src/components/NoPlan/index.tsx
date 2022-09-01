@@ -42,10 +42,6 @@ const Subscription = () => {
     }
   }
 
-  Taro.useDidShow(() => {
-    my.setNavigationBar({ image: 'https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/fresh-plan-logo.png' })
-  })
-
   return (
     <View className="bg-[#d3e4b5]">
       <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} bg-white fixed bottom-0 left-0 w-full z-10 py-1`}>

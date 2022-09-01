@@ -7,9 +7,6 @@ import './index.less'
 import { formulaData } from './index.module'
 
 const PetDiet = () => {
-  useEffect(() => {
-    my.setNavigationBar({ image: 'https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/fresh-plan-logo.png' })
-  }, [])
 
   return (
     <View className="diet">
