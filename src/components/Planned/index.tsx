@@ -1,20 +1,34 @@
-import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
-import { Image, Swiper, SwiperItem, Text, View, BaseEventOrig, ScrollView, ScrollViewProps } from '@tarojs/components'
-import Taro from '@tarojs/taro'
-import moment from 'moment'
-import { useState } from 'react'
-import { AtAvatar, AtButton, AtIcon } from 'taro-ui'
-import { PetPosture } from '@/framework/types/consumer'
 import CommonProblem from '@/components/subscription/CommonProblem'
 import FreshFoodExperience from '@/components/subscription/Freshfoodexperience'
 import LovePetHealth from '@/components/subscription/LovePetHealth'
 import Step from '@/components/subscription/Step'
+import { PetPosture } from '@/framework/types/consumer'
+import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
+import { consumerAtom } from '@/store/consumer'
+import {
+  BaseEventOrig,
+  Button,
+  Image,
+  ScrollView,
+  ScrollViewProps,
+  Swiper,
+  SwiperItem,
+  Text,
+  View,
+} from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import { useAtom } from 'jotai'
+import moment from 'moment'
+import { useState } from 'react'
+import { AtAvatar, AtButton, AtIcon } from 'taro-ui'
+import { loginWithAlipay } from '../consumer/AuthLogin/alipay-login'
 import './index.less'
 
 const scrollTop = 0
 const Threshold = 20
 
 const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
+  const [consumer, setConsumer] = useAtom(consumerAtom)
   const [current, setCurrent] = useState(0)
   const [scrollHeight, setScrollHeight] = useState(0)
   const onScroll = (e: BaseEventOrig<ScrollViewProps.onScrollDetail>) => setScrollHeight(e.detail.scrollTop)
@@ -24,22 +38,49 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
     else return 'dog-default.png'
   }
 
+  const handleLogin = (callback?: Function) => {
+    if (consumer?.id) {
+      callback && callback()
+    } else {
+      loginWithAlipay((data) => {
+        setConsumer(data)
+        callback && callback()
+      })
+    }
+  }
+
   return (
     <View className="oldUserPlan bg-[#d3e4b5]">
       <View
         className={`${scrollHeight > 600 ? 'block' : 'hidden'} bg-transparent fixed bottom-0 left-0 w-full z-10 py-1`}
       >
-        <View
-          className="mx-4 py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
-          onClick={() => {
-            Taro.navigateTo({
-              url: '/pages/packageA/choosePet/index',
-            })
-          }}
-        >
-          <AtIcon className="mr-1" value="clock" size="26" />
-          <Text className="text-30">更多定制</Text>
-        </View>
+        {consumer?.id ? (
+          <Button
+            className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
+            type="primary"
+            onClick={() => {
+              Taro.navigateTo({ url: '/pages/packageA/choosePet/index' })
+            }}
+          >
+            <AtIcon className="mr-1" value="clock" size="26" />
+            开始定制
+          </Button>
+        ) : (
+          <Button
+            className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
+            type="primary"
+            openType="getAuthorize"
+            scope="phoneNumber"
+            onGetAuthorize={() => {
+              handleLogin(() => {
+                Taro.navigateTo({ url: '/pages/packageA/choosePet/index' })
+              })
+            }}
+          >
+            <AtIcon className="mr-1" value="clock" size="26" />
+            开始定制
+          </Button>
+        )}
       </View>
       <ScrollView
         className="scrollview"
@@ -187,7 +228,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           ))}
         </Swiper>
         {subscriptionList.length > 1 && (
-          <View className="flex my-[39px] items-center justify-center">
+          <View className="flex mt-[39px] items-center justify-center">
             {subscriptionList.map((_, key) => (
               <View
                 key={key}
@@ -199,7 +240,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           </View>
         )}
         <View
-          className="mx-3 py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
+          className="mx-3 mt-[39px] py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
           onClick={() => {
             Taro.navigateTo({
               url: '/pages/packageA/choosePet/index',
