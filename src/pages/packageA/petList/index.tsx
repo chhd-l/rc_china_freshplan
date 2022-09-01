@@ -1,34 +1,30 @@
-import PetItem from '@/components/consumer/PetItem'
 import { PetListItemProps, PetGender } from '@/framework/types/consumer'
 import { consumerAtom } from '@/store/consumer'
-import { petInfoListAuto } from '@/store/pets'
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getAge } from '@/utils/utils'
 import { View, Text, Image } from '@tarojs/components'
-import Taro, { getCurrentInstance } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import { CDNIMGURL2 } from '@/lib/constants'
 import { useAtom } from 'jotai'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './index.less'
 
 const PetList = () => {
   const [petList, setPetList] = useState<PetListItemProps[]>([])
-  const { router } = getCurrentInstance()
-  const [consumerInfo, setConsumerInfo] = useAtom(consumerAtom)
-  const { system } = Taro.getSystemInfoSync()
-  const systemType = system.indexOf('Android') > -1
-  const [petInfoList, setPetInfoList] = useAtom(petInfoListAuto)
-
-  console.log('system', system, systemType)
+  const [loading, setLoading] = useState<boolean>(true)
+  // const { router } = getCurrentInstance()
+  const [consumerInfo] = useAtom(consumerAtom)
+  // const { system } = Taro.getSystemInfoSync()
 
   const getList = async () => {
+    setLoading(true)
     let res = (await getPets({ consumerId: consumerInfo?.id })) || []
     console.log('resxxxxxxxxxxxxx', res)
     res.forEach((item) => {
       item.age = getAge(item.birthday)
     })
-    setPetInfoList(res)
     setPetList(res)
+    setLoading(false)
   }
 
   const addPet = () => {
@@ -83,7 +79,7 @@ const PetList = () => {
             </View>
           )
         })}
-        {petList.length === 0 ? <View className="noOrders flex flex-col items-center justify-center mt-8">
+        {!loading && petList.length === 0 ? <View className="noOrders flex flex-col items-center justify-center mt-8">
           <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
           <View className="mt-2 flex justify-center">
             <Text className="ml-0.5">啥也没有~</Text>
@@ -91,9 +87,9 @@ const PetList = () => {
         </View> : null}
         <View className="add-pet-btn">
           <View className="px-1 mt-1 mb-2 flex items-center">
-            <View className="flex-1 mx-1 py-0.8 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={addPet}>
+            <View className="flex-1 mx-1 py-1 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={addPet}>
               <Text className="rcciconfont rccicon-footprint text-32 mr-1"></Text>
-              <Text className="text-28">添加宠物</Text>
+              <Text className="text-32">添加宠物</Text>
             </View>
           </View>
         </View>

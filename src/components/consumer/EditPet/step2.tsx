@@ -11,6 +11,8 @@ import './step.less';
 
 const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
   const [show, setShow] = useState<boolean>(false);
+  const { system } = Taro.getSystemInfoSync();
+  const androidFlag = system.indexOf('Android') > -1 ? 'android' : 'ios';
 
   const handleGenderChange = (gender: PetGender) => {
     if (!pet.name) {
@@ -90,7 +92,7 @@ const Step2 = ({ pet, onStepChange, onChange }: IProps) => {
           小公主
         </Text>
       </View>
-      <View className="pet-edit-btns">
+      <View className={`pet-edit-btns ${androidFlag}`}>
         <View className="grid grid-cols-2">
           <Text className="btn-item" onClick={() => onStepChange(PetStep.STEP1)}>上一步</Text>
           <Text className={`btn-item ${!pet.name || !pet.gender ? 'active' : 'strong'}`} onClick={handleNext}>下一步</Text>

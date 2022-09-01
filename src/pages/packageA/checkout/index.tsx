@@ -144,7 +144,7 @@ const Checkout = () => {
         </View>
         <View className="p-1">
           <View className="text-right">
-            <Text className="text-[28px]">商品小计：</Text>
+            <Text className="text-30">商品小计：</Text>
             <Text className="text-30 text-color-price font-bold">{formatMoney(prices?.productPrice ?? 0)}</Text>
           </View>
         </View>
@@ -155,7 +155,7 @@ const Checkout = () => {
           <Text className="text-30 text-gray-400">商品金额</Text>
           <Text>{formatMoney(prices?.productPrice ?? 0)}</Text>
         </View>
-        <View className="mt-2 flex justify-between items-center text-30">
+        <View className="mt-1 flex justify-between items-center text-30">
           <Text className="text-30 text-gray-400">运费</Text>
           <Text>{formatMoney(prices?.deliveryPrice ?? 0)}</Text>
         </View>

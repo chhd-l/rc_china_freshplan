@@ -96,13 +96,13 @@ const Account = () => {
   return (
     <View className="Account pb-2">
       <View className="flex items-center loginHerder">
-        <AtAvatar size="large" className="mx-1.5" circle image={consumer?.avatarUrl || CDNIMGURL + 'my-notlo.png'} />
+        <AtAvatar size="large" className="mx-1" circle image={consumer?.avatarUrl || CDNIMGURL + 'my-notlo.png'} />
         {consumer?.id ? (
           <View className="flex flex-col">
-            <Text className="UserName">{consumer?.nickName}</Text>
-            <Text className="UserNameIcon flex items-center">
+            <View className="text-36">{consumer?.nickName}</View>
+            <View className="mt-0.2 text-26 text-gray-500">
               {hasCat && hasDog ? '猫狗双全天下赢家' : hasCat ? '什么都不干只想撸猫' : hasDog ? '天天遛狗锻炼身体' : '暂无可服侍的小主'}
-            </Text>
+            </View>
           </View>
         ) : (
           <Button
@@ -134,7 +134,7 @@ const Account = () => {
                 <Image src={`${CDNIMGURL2}orderlist-icon.png`} mode="widthFix" />
               </View>
               <View className="flex-1 ml-0.5 text-28 font-bold">我的订单</View>
-              <View className="mr-0.5 text-26 text-gray-400">查看全部订单</View>
+              <View className="mr-0.5 text-26 text-gray-400">全部订单</View>
               <View className="rcciconfont rccicon-right text-28 text-gray-400" />
             </View>
             <View className="grid grid-cols-3 myOrderLists mb-1">
@@ -249,7 +249,7 @@ const Account = () => {
         </AtList>
       </View>
       <View
-        className="w-[110px] fixed right-0  z-50 top-[1140px] "
+        className="w-[110px] fixed right-1  z-50 top-[1140px] "
         onClick={() => {
           Taro.navigateTo({ url: '/pages/packageA/customerService/index' })
         }}

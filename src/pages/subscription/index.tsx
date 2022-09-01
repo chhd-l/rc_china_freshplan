@@ -49,7 +49,7 @@ const Index = () => {
   return (
     <>
       <View
-        className="w-[110px] fixed right-0  z-50 top-[1140px] "
+        className="w-[110px] fixed right-1  z-50 top-[1140px] "
         onClick={() => {
           Taro.navigateTo({ url: '/pages/packageA/customerService/index' })
         }}
