@@ -48,7 +48,7 @@ const Subscription = () => {
 
   return (
     <View className="bg-[#d3e4b5]">
-      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} fixed bottom-0 left-0 w-full z-10 py-1`}>
+      <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} bg-white fixed bottom-0 left-0 w-full z-10 py-1`}>
         {consumer?.id ? (
           <Button
             className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
