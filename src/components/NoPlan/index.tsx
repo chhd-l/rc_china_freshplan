@@ -42,10 +42,6 @@ const Subscription = () => {
     }
   }
 
-  Taro.useDidShow(() => {
-    my.setNavigationBar({ image: 'https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/fresh-plan-logo.png' })
-  })
-
   return (
     <View className="bg-[#d3e4b5]">
       <View
