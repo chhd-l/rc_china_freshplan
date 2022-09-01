@@ -31,7 +31,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         <Text className="text-[28px]">{orderStatusType[order?.orderState?.orderState || '']}</Text>
         <Text className="text-[22px] text-[#666]">创建时间:2022-06-21 12:13:34</Text>
       </View>
-      <View className="my-[40px]">
+      <View className="my-[40px] flex items-center">
         {(order?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
           <View key={key} className="w-[150px] h-[150px] border border-solid border-[#f1f1f1] rounded-[10px] mr-[22px]">
             <Image
@@ -61,7 +61,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 取消
               </AtButton>
               <AtButton
-                className="ml-0.5 rounded-full"
+                className="ml-[20px] rounded-full"
                 type="primary"
                 onClick={(e) => {
                   e.stopPropagation()
@@ -74,19 +74,11 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
           )}
           {order.orderState?.orderState === 'SHIPPED' && (
             <View className="flex items-center my-[0.1rem]">
-              <AtButton
-                className="rounded-full"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  Invoice()
-                }}
-              >
-                {order?.orderState?.invoiceStatus ? '查看' : '申请'}发票
-              </AtButton>
-              <AtButton className="rounded-full ml-0.5">查看物流</AtButton>
+              <Text className="text-[28px]">更多</Text>
+              <AtButton className="rounded-full mx-[20px]">查看物流</AtButton>
               <AtButton
                 type="primary"
-                className="mx-0.5 rounded-full"
+                className="rounded-full"
                 onClick={(e) => {
                   e.stopPropagation()
                   orderButton(order.orderNumber, order?.orderState?.orderState)
@@ -122,7 +114,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 催发货
               </AtButton>
               <AtButton
-                className="rounded-full ml-0.5"
+                className="rounded-full ml-[20px]"
                 onClick={(e) => {
                   e.stopPropagation()
                   Invoice()

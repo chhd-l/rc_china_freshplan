@@ -30,7 +30,7 @@ const OrderList = () => {
     fieldName: 'orderNoOrProductName',
     fieldValue: '',
   })
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true)
 
   const getOrderLists = async ({
     orderState = current,
@@ -191,12 +191,26 @@ const OrderList = () => {
           </AtTabsPane>
         ))}
       </AtTabs>
+      {isNoMore && !!orderList.length && (
+        <View className="text-center text-[26px] text-[#666] mt-[10px] mb-[50px]">没有更多了~</View>
+      )}
       {!loading && !orderList.length && (
-        <View className="noOrders flex flex-col items-center justify-center mt-8">
+        <View className={`noOrders flex flex-col items-center justify-center ${current === 'ALL' ? 'mt-4' : 'mt-8'}`}>
           <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
           <View className="mt-1 flex justify-center">
             <Text className="ml-0.5 text-[#666]">啥也没有~</Text>
           </View>
+          {current === 'ALL' && (
+            <AtButton
+              type="primary"
+              className="rounded-full startCustomizing mt-[86px]"
+              onClick={(e) => {
+                e.stopPropagation()
+              }}
+            >
+              开始定制
+            </AtButton>
+          )}
         </View>
       )}
 
