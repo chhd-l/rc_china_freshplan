@@ -1,19 +1,17 @@
-import { AtLoadMore } from 'taro-ui'
-import { useState } from 'react'
-import { Image, Text, View } from '@tarojs/components'
 import fresh_icon from '@/assets/icons/fresh_icon.png'
 import plan_icon from '@/assets/icons/plan_icon.png'
-import wrong from '@/assets/icons/wrong.png'
 import right from '@/assets/icons/right.png'
+import wrong from '@/assets/icons/wrong.png'
+import { Image, Text, View } from '@tarojs/components'
 import '../Formula/index.less'
-import { freshPlanList } from './index.modules'
 import './index.less'
+import { freshPlanList } from './index.modules'
 
 const FreshPlan = () => {
-  const [status] = useState<'more' | 'loading' | 'noMore' | undefined>('more')
+  // const [status] = useState<'more' | 'loading' | 'noMore' | undefined>('more')
   return (
-    <View className="mt-[90px] fresh">
-      <View className="text-[64px] font-bold">Fresh Plan </View>
+    <View className="py-[41px] fresh bg-[#EEE] mx-[-30px] px-[30px]">
+      <View className="text-[64px] font-bold mb-[35px]">Fresh Plan的优势</View>
       <View className="flex flex-row justify-end mr-[30px]">
         <View className="w-[96px] h-[29px]">
           <Image src={fresh_icon} />
@@ -42,19 +40,6 @@ const FreshPlan = () => {
           </View>
         </View>
       ))}
-      <AtLoadMore
-        moreText="没有更多了"
-        moreBtnStyle={{ border: 'none', fontSize: '0.24rem' }}
-        // onClick={() => {
-        //   setStatus('loading')
-        //   // 模拟异步请求数据
-        //   setTimeout(() => {
-        //     // 没有更多了
-        //     setStatus('noMore')
-        //   }, 2000)
-        // }}
-        status={status}
-      />
     </View>
   )
 }
