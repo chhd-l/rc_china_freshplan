@@ -30,6 +30,7 @@ const OrderList = () => {
     fieldName: 'orderNoOrProductName',
     fieldValue: '',
   })
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getOrderLists = async ({
     orderState = current,
@@ -44,6 +45,7 @@ const OrderList = () => {
   }) => {
     const limit = 10
     let offset = curPage ? curPage * limit : 0
+    setLoading(true)
     const res = await getOrderList({
       limit,
       offset,
@@ -58,6 +60,7 @@ const OrderList = () => {
     })
     setIsNoMore(res?.total <= offset + 10)
     setOrderList(list.concat(res?.records))
+    setLoading(false)
   }
 
   useReachBottom(() => {
@@ -188,7 +191,7 @@ const OrderList = () => {
           </AtTabsPane>
         ))}
       </AtTabs>
-      {!orderList.length && (
+      {!loading && !orderList.length && (
         <View className="noOrders flex flex-col items-center justify-center mt-8">
           <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
           <View className="mt-1 flex justify-center">
