@@ -8,7 +8,6 @@ import { useAtom } from 'jotai'
 import { useEffect, useState } from 'react'
 import { Consumer } from '@/framework/types/consumer'
 import { AtIcon } from 'taro-ui'
-import './index.less'
 import { formulaData } from './index.module'
 
 const PetDiet = () => {
@@ -35,7 +34,7 @@ const PetDiet = () => {
   }, [])
 
   return (
-    <View className="diet">
+    <View>
       <View className="w-full h-[8rem]">
         <Image
           style={{

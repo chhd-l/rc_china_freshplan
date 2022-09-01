@@ -1,14 +1,13 @@
 import { CDNIMGURL2 } from '@/lib/constants'
 import { FormulaData } from '@/pages/packageA/petDiet/index.module'
 import { Image, Text, View } from '@tarojs/components'
-import './index.less'
 
 type FormulaProps = {
   data: FormulaData
 }
 const Formula = ({ data }: FormulaProps) => {
   return (
-    <View className="mt-1 formula bg-white pl-[45px] pr-[35px] py-[50px] rounded-[30px]">
+    <View className="mt-1 bg-white pl-[45px] pr-[35px] py-[50px] rounded-[30px]">
       <View
         className="h-[230px] relative pb-1"
         style={{
