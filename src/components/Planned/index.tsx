@@ -52,7 +52,10 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
   return (
     <View className="oldUserPlan bg-[#d3e4b5]">
       <View
-        className={`${scrollHeight > 600 ? 'block' : 'hidden'} bg-transparent fixed bottom-0 left-0 w-full z-10 py-1`}
+        className={`${scrollHeight > 600 ? 'block' : 'hidden'} bg-transparent bottom-0 left-0 w-full z-10 py-1`}
+        style={{
+          position: 'fixed',
+        }}
       >
         {consumer?.id ? (
           <Button
