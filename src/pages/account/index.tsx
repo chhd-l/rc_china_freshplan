@@ -249,7 +249,7 @@ const Account = () => {
         </AtList>
       </View>
       <View
-        className="w-[110px] fixed right-1  z-50 top-[1140px] "
+        className="w-[110px] fixed right-[5px]  z-50 bottom-[90px] "
         onClick={() => {
           Taro.navigateTo({ url: '/pages/packageA/customerService/index' })
         }}
