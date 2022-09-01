@@ -6,7 +6,7 @@ import { commonProblems } from './index.modules'
 
 const CommonProblem = () => {
   return (
-    <View>
+    <View className="mt-[76px]">
       <View className="ml-[20px]">
         <PetTitle>
           <Text className="text-[48px]">常见问题为您提供解答</Text>
