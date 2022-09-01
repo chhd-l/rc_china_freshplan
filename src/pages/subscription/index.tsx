@@ -44,6 +44,9 @@ const Index = () => {
 
   Taro.useDidShow(() => {
     loginInit()
+    my.setNavigationBar({
+      backgroundColor: '#d3e4b5',
+    })
   })
 
   return (

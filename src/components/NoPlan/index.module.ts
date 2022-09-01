@@ -1,6 +1,6 @@
 export const titleSwiperList = [
     {
-        title: '为爱宠探索定制鲜食体验~',
+        title: '为爱宠探索定制鲜食体验',
         p: '新鲜完整的食材，用心将鲜食做到极致，精准定制方案',
         span: '仅需30秒哦~',
     },

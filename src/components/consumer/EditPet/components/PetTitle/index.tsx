@@ -1,11 +1,10 @@
 import { View, Text } from '@tarojs/components'
-import './index.less'
 
 const PetTitle = (props: any) => {
   return (
-    <View className="pet-title relative text-32 font-bold mb-[30px] mt-[75px]">
-      <Text className="anchor absolute" />
-      <View className="ml-21px">{props.children}</View>
+    <View className="text-32 font-bold flex flex-col items-center justify-center">
+      <View className="text-center">{props.children}</View>
+      <Text className="bg-[#96CC39] w-[133px] h-[9px] mt-[29px]" />
     </View>
   )
 }

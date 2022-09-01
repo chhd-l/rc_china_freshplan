@@ -4,22 +4,19 @@ import './index.less'
 
 const Step = () => {
   return (
-    <View className="bg-white">
-      <View className="flex justify-center">
+    <View>
+      <View className="flex justify-center mt-[44px] mb-[55px]">
         <Text className="rcciconfont rccicon-down IconDownAnimo" />
       </View>
-      <View className="ml-[20px]">
-        <PetTitle>
-          <Text className="text-[48px]">仅三步即可开启鲜食计划</Text>
-        </PetTitle>
-      </View>
-      <View
-        className="mx-[20px] h-[672px]"
-        style={{
-          padding: '0 14px',
-        }}
-      >
-        <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/steps.png" />
+      <View className="p-[52px] rounded-[30px] bg-white">
+        <View className="mb-[64px]">
+          <PetTitle>
+            <Text className="text-[48px]">仅三步即可开启鲜食计划</Text>
+          </PetTitle>
+        </View>
+        <View className="mx-[20px] h-[590px]">
+          <Image src="https://dtc-platform.oss-cn-shanghai.aliyuncs.com/static/steps.png" />
+        </View>
       </View>
     </View>
   )

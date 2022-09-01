@@ -188,7 +188,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           ))}
         </Swiper>
         <View
-          className="mx-4 mt-[32px] py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
+          className="mx-3 mt-[32px] py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
           onClick={() => {
             Taro.navigateTo({
               url: '/pages/packageA/choosePet/index',

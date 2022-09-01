@@ -113,7 +113,7 @@ export const getAgeYear = (birthdayStr) => {
 
 export const handleReturnTime = (time: any) => {
   if (time !== null && time !== undefined && time !== '') {
-    return moment(new Date(time)).format('YYYY-MM-DD HH:mm:SS')
+    return moment(new Date(time)).format('YYYY-MM-DD HH:mm:ss')
   } else {
     return ''
   }

@@ -133,7 +133,7 @@ const NewAddress = () => {
               onClick={() => {
                 WPickerRef.show()
               }}
-              className={`${province ? '' : 'text-gray-300'} pl-2 flex-1`}
+              className={`${province ? '' : 'text-gray-300'} pl-[0.39rem] flex-1`}
               style={{
                 marginLeft: '0.44rem',
               }}
@@ -158,7 +158,7 @@ const NewAddress = () => {
               maxLength={200}
               placeholder="请输入详细地址"
               count={false}
-              className="border-0 border-t-0 rc-text-area p-0 flex-1"
+              className="border-0 border-t-0 rc-text-area py-[0.01rem] pl-[0.1rem] pr-[0.18rem] flex-1"
             />
           </View>
         </View>

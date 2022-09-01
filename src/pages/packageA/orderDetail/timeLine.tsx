@@ -6,8 +6,8 @@ const TimeLine = ({
   type: 'UNPAID' | 'TO_SHIP' | 'SHIPPED' | 'COMPLETED' | 'VOID' | undefined
 }) => {
   return (
-    <View className="timeLine px-2 pb-1.5">
-      <View className="line flex items-center">
+    <View className="timeLine px-1 pb-1.5">
+      <View className="line flex items-center mx-[1.5em]">
         <View
           className={`lineSpot rounded-full mr-0.5 ${
             (type === 'TO_SHIP' || type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'

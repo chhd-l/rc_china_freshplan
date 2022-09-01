@@ -47,7 +47,7 @@ const Subscription = () => {
   })
 
   return (
-    <View>
+    <View className="bg-[#d3e4b5]">
       <View className={`${scrollHeight > 600 ? 'block' : 'hidden'} z-10 py-1`}>
         {consumer?.id ? (
           <Button
@@ -78,7 +78,7 @@ const Subscription = () => {
         )}
       </View>
       <ScrollView
-        className="scrollview"
+        className="scrollview bg-[#d3e4b5]"
         scrollY
         scrollWithAnimation
         scrollTop={scrollTop}
@@ -86,7 +86,7 @@ const Subscription = () => {
         lowerThreshold={Threshold}
         onScroll={onScroll}
       >
-        <View className="subscription bg-white">
+        <View className="subscription bg-[#d3e4b5]">
           <View className="TitleSwiper relative">
             <Swiper current={current} circular autoplay interval={2000} onChange={(e) => setCurrent(e.detail.current)}>
               {titleSwiperList.map((item, key) => (
@@ -104,7 +104,12 @@ const Subscription = () => {
                 </SwiperItem>
               ))}
             </Swiper>
-            <View className="indicatorDots absolute w-full bg-white">
+            <View className="indicatorDots absolute w-full">
+              <View className="flex my-1 items-center justify-center">
+                {titleSwiperList.map((_, key) => (
+                  <View key={key} className={`${current === key && 'selectInd'} rounded-full`} />
+                ))}
+              </View>
               {consumer?.id ? (
                 <Button
                   className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
@@ -132,47 +137,13 @@ const Subscription = () => {
                   开始定制
                 </Button>
               )}
-              <View className="flex my-1 items-center justify-center">
-                {titleSwiperList.map((_, key) => (
-                  <View key={key} className={`${current === key && 'selectInd'} rounded-full`} />
-                ))}
-              </View>
             </View>
           </View>
-          <View className="px-[20px]">
+          <View className="px-[30px]">
             <Step />
             <FreshFoodExperience />
             <LovePetHealth />
             <CommonProblem />
-            {/* <View className="mt-[100px] mb-[70px]">
-            {consumer?.id ? (
-              <Button
-                className="mx-4 rounded-full flex items-center bg-color-primary border-0 justify-center"
-                type="primary"
-                onClick={() => {
-                  Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
-                }}
-              >
-                <AtIcon className="mr-1" value="clock" size="26" />
-                开始定制
-              </Button>
-            ) : (
-              <Button
-                className="mx-4 rounded-full flex items-center bg-color-primary border-0 justify-center"
-                type="primary"
-                openType="getAuthorize"
-                scope="phoneNumber"
-                onGetAuthorize={() => {
-                  handleLogin(() => {
-                    Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
-                  })
-                }}
-              >
-                <AtIcon className="mr-1" value="clock" size="26" />
-                开始定制
-              </Button>
-            )}
-          </View> */}
             <View className="w-full h-[750px] ">
               <Image src="https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/home_foot_img.png" />
             </View>

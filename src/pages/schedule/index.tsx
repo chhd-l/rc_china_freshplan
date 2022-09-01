@@ -133,7 +133,7 @@ const Schedule = () => {
       </View>
       <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[24px]">
         <View
-          className="text-[30px] pb-1"
+          className="text-[30px] font-bold pb-1"
           style={{
             borderBottom: '1px solid #E2E2E2',
           }}
@@ -187,10 +187,15 @@ const Schedule = () => {
 
       {subscriptionDetails.completedDeliveries && subscriptionDetails.completedDeliveries.length ? (
         <View className="mt-1 py-1 boxShadow">
-          <View className="text-[34px]">历史订单</View>
+          <View className="text-[30px] font-bold">历史订单</View>
           {subscriptionDetails.completedDeliveries.map((el: any, key) => (
             <View key={key} className="rounded-[10px] mt-1 text-[24px] text-[#999] bg-white">
-              <View className="flex items-center justify-between p-1">
+              <View
+                className="flex items-center justify-between mx-1 py-1"
+                style={{
+                  borderBottom: '1px solid #E2E2E2',
+                }}
+              >
                 <View>订单编号: {el?.orderId}</View>
                 <Text className="text-[#000]">第{key + 1}笔</Text>
               </View>
@@ -198,7 +203,6 @@ const Schedule = () => {
                 className="px-1 pb-1"
                 style={{
                   borderBottom: '1px solid #E2E2E2',
-                  borderTop: '1px solid #E2E2E2',
                 }}
               >
                 {el?.lineItems.map((item, index) => (
