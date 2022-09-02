@@ -85,6 +85,9 @@ export interface Order {
   subscriptionNo?: string
   orderPrice: OrderPrice
   orderState?: OrderState
+  invoice?: {
+    invoiceStatus: any
+  }
   logs?: Logs
   remark?: string
   buyer?: Buyer
