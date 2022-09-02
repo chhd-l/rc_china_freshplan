@@ -95,6 +95,7 @@ export interface ShippingInfo {
   shippingTime?: string
   expectedShippingDate?: string
   shippingCompany?: string
+  shippingCompanyImg?: string
   trackingId?: string
   isReturn?: string
   status?: string

@@ -9,24 +9,24 @@ const TimeLine = ({
     <View className="timeLine px-1 pb-1.5">
       <View className="line flex items-center mx-[1.5em]">
         <View
-          className={`lineSpot rounded-full mr-0.5 ${
+          className={`lineSpot rounded-full ${
             (type === 'TO_SHIP' || type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'
           }`}
-        />
+        >1</View>
         <View
           className={`HorizontalLine flex-1 ${
             (type === 'TO_SHIP' || type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'
           }`}
         />
         <View
-          className={`lineSpot rounded-full mx-0.5 ${
+          className={`lineSpot rounded-full ${
             (type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'
           }`}
-        />
+        >2</View>
         <View
           className={`HorizontalLine flex-1 ${(type === 'SHIPPED' || type === 'COMPLETED') && 'selectBackground'}`}
         />
-        <View className={`lineSpot rounded-full ml-0.5 ${type === 'COMPLETED' && 'selectBackground'}`} />
+        <View className={`lineSpot rounded-full ${type === 'COMPLETED' && 'selectBackground'}`}>3</View>
       </View>
       <View className="flex items-center justify-between mt-1 text-[#999]">
         <View

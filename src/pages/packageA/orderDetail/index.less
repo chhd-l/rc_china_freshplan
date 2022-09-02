@@ -1,4 +1,15 @@
+.a-page {
+  background: linear-gradient(179.43deg, #C3EC7B 12.71%, rgba(195, 236, 123, 0) 50.54%, rgba(249,249,249, 1) 100%);
+}
+
 .OrderDetails {
+  .block-boxshadow {
+    box-shadow: 0px 0px 12px 10px rgba(191, 191, 191, 0.1);
+  }
+
+  .block-bordert {
+    border-top: 1px solid #E7E7E7;
+  }
 
   .body {
     >view {
@@ -89,9 +100,17 @@
     color: #A6A6A6;
 
     .lineSpot {
-      width: 22px;
-      height: 22px;
-      background-color: #D9D9D9;
+      box-sizing: border-box;
+      width: 34px;
+      height: 34px;
+      color: #979797;
+      font-size: 26px;
+      text-align: center;
+      border: 1px solid #D9D9D9;
+      &.selectBackground {
+        color: #ffffff;
+        border: none;
+      }
     }
 
     .HorizontalLine {
@@ -126,8 +145,8 @@
 
   .orderAtCard {
     .orderAtCardTitle {
-      font-size: 26px;
-      border-bottom: 1px solid #EBEBEB;
+      font-size: 28px;
+      border-bottom: 1px solid #E7E7E7;
     }
 
     .orderAtCardBody {
@@ -163,7 +182,7 @@
 
       >text {
         &:first-child {
-          color: #A4A4A4
+          color: #666666;
         }
       }
     }

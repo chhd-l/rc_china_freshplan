@@ -54,6 +54,10 @@ const OrderDetails = () => {
     },
   })
 
+  Taro.useReady(() => {
+    my.setNavigationBar({ backgroundColor: '#C3EC7B', frontColor: '#000000' })
+  })
+
   const getOrderCancelTime = async () => {
     const res = await getOrderSetting()
     const orderCancelSetting = res.filter((item) => item.code === 'order_超时时间')
@@ -207,9 +211,8 @@ const OrderDetails = () => {
   return (
     <ScrollView scrollY overflow-anchor={false} className="p-1 pb-[1.5rem] OrderDetails">
       <View className="body">
-        <View className="rounded-[16px]">
+        <View className="rounded-[16px] block-boxshadow">
           <View className="px-1 pt-1.5 pb-2 flex items-center header">
-            <Image className="mr-1 headerImage rounded-[17px]" src={`${CDNIMGURL2}${titleImageType()}`} />
             <View className="flex flex-col">
               <Text className="mb-[15px] leading-[32px]">
                 {orderStatusType[orderDetail?.orderState?.orderState || '']}
@@ -219,7 +222,7 @@ const OrderDetails = () => {
           </View>
           {orderDetail?.orderState?.orderState !== 'VOID' && <TimeLine type={orderDetail?.orderState?.orderState} />}
         </View>
-        <View className="px-1 py-1 my-1 receiving relative rounded-[16px]">
+        <View className="px-1 py-1 my-1 receiving relative rounded-[16px] block-boxshadow">
           {(orderDetail?.orderState?.orderState === 'SHIPPED' ||
             orderDetail?.orderState?.orderState === 'COMPLETED') && (
             <View className="express mb-[36px]">
@@ -227,10 +230,10 @@ const OrderDetails = () => {
                 <Image
                   className="mr-[15px]"
                   style={{
-                    height: '0.35rem',
-                    width: '0.4rem',
+                    height: '0.44rem',
+                    width: '0.44rem',
                   }}
-                  src={`${CDNIMGURL}order%20logistics.png`}
+                  src={orderDetail?.delivery?.shippingCompanyImg ?? ''}
                 />
                 <View className="flex items-center leading-[35px] flex-1">
                   <Text className="mr-0.5 text-[30px]">{getCarrierType()}</Text>
@@ -244,14 +247,14 @@ const OrderDetails = () => {
             <Image
               className="mr-1"
               style={{
-                height: '0.4rem',
-                width: '0.35rem',
+                height: '0.44rem',
+                width: '0.38rem',
               }}
-              src={`${CDNIMGURL}order%20address.png`}
+              src={`${CDNIMGURL2}gloc-icon.png`}
             />
             <View>
               <View>
-                <Text className="text-[30px]">{orderDetail.shippingAddress.receiverName}</Text>
+                <Text className="text-[30px] font-bold">{orderDetail.shippingAddress.receiverName}</Text>
                 <Text className="text-[26px] text-[#999] ml-[17px]">{orderDetail.shippingAddress.phone}</Text>
               </View>
               <View className="receivingAddress mt-0.5 text-[26px]">
@@ -262,13 +265,13 @@ const OrderDetails = () => {
           </View>
         </View>
       </View>
-      <View className="bg-white mt-1 pb-1 orderAtCard px-1 rounded-[16px]">
+      <View className="bg-white mt-1 pb-1 orderAtCard px-1 rounded-[16px] block-boxshadow">
         <View className="orderAtCardTitle py-1 flex items-center">
           <Image
             className="mr-[11px]"
             style={{
-              width: '0.3117rem',
-              height: '0.3117rem',
+              width: '0.34rem',
+              height: '0.34rem',
             }}
             src={`${CDNIMGURL}${returnTypeImage()}`}
           />
@@ -278,12 +281,12 @@ const OrderDetails = () => {
           {(orderDetail?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-1 flex item-center" key={key}>
               <Image
-                className="orderAtCardImage mr-1 rounded-[10px] h-full border border-solid border-[#E2E2E2]"
+                className="orderAtCardImage mr-1 rounded-[10px] h-full bg-[#E2E2E2]"
                 src={el?.pic}
               />
               <View className="h-full flex flex-col flex-1" style={{ fontWeight: 700 }}>
                 <View className="flex item-center justify-between">
-                  <Text>{el?.spuName}</Text>
+                  <Text className="text-28 font-bold">{el?.spuName}</Text>
                   <Text style={{ color: '#9D9D9D', fontWeight: 400 }}>X {el?.num}</Text>
                 </View>
                 <View className="mt-[28px]">
@@ -295,11 +298,11 @@ const OrderDetails = () => {
           {(orderDetail?.lineItem?.filter((el) => el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
               <Image
-                className="orderAtCardImage mr-1 rounded-[10px] h-full border border-solid border-[#E2E2E2]"
+                className="orderAtCardImage mr-1 rounded-[10px] h-full bg-[#E2E2E2]"
                 src={el?.pic}
               />
               <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
-                <View>{el?.spuName}</View>
+                <View className="text-28 font-bold">{el?.spuName}</View>
                 <View className="flex items-center justify-between">
                   <Text>
                     <Text className="orderAtCardPrice">{el?.price}</Text>
@@ -310,37 +313,28 @@ const OrderDetails = () => {
             </View>
           ))}
         </View>
-      </View>
-      <AtList hasBorder={false} className="my-1 rounded-[16px]">
-        <AtListItem className="py-[17px]" title="配送方式" extraText="快递" />
-        <AtListItem className="py-[17px]" hasBorder={false} title="买家留言" extraText={orderDetail.remark || '无'} />
-      </AtList>
-      <AtList hasBorder={false} className="mb-1 rounded-[16px]">
-        <AtListItem
-          title="商品金额"
-          className="py-[10px]"
-          hasBorder={false}
-          extraText={formatMoney(orderDetail.orderPrice.productPrice + orderDetail.orderPrice.deliveryPrice)}
-        />
-        <AtListItem
-          title="促销折扣"
-          className="py-[10px]"
-          hasBorder={false}
-          extraText={formatMoney(orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice)}
-        />
-        <AtListItem className="py-[10px]" title="运费" extraText={formatMoney(orderDetail.orderPrice.deliveryPrice)} />
-        <View className="flex justify-end py-1.5">
-          <Text>
-            <Text className="text-[30px]" style={{ color: '#000' }}>
-              合计：
-            </Text>
-            <Text className="text-[40px] font-bold mr-[24px]" style={{ color: '#D49D28' }}>
-              {formatMoney(orderDetail.orderPrice.totalPrice)}
-            </Text>
-          </Text>
+        <View className="my-1 flex items-center justify-between">
+          <View className="text-28 text-[#666]">商品金额</View>
+          <View className="text-28">{formatMoney(orderDetail.orderPrice.productPrice + orderDetail.orderPrice.deliveryPrice)}</View>
         </View>
-      </AtList>
-      <View className="orderInfo px-[24px] bg-white py-1.5 mb-1 rounded-[16px]">
+        <View className="my-1 flex items-center justify-between">
+          <View className="text-28 text-[#666]">促销折扣</View>
+          <View className="text-28">-{formatMoney(orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice)}</View>
+        </View>
+        <View className="my-1 flex items-center justify-between">
+          <View className="text-28 text-[#666]">运费</View>
+          <View className="text-28">{formatMoney(orderDetail.orderPrice.deliveryPrice)}</View>
+        </View>
+        <View className="pt-1 block-bordert flex items-center justify-end">
+          <Text className="text-30 mr-1">合计：</Text>
+          <Text className="text-40 text-[#D49D28] font-bold">{formatMoney(orderDetail.orderPrice.totalPrice)}</Text>
+        </View>
+      </View>
+      <View className="orderInfo px-[24px] bg-white py-1.5 my-1 rounded-[16px]">
+        <View className="flex items-center justify-between">
+          <Text>配送方式</Text>
+          <Text className="copyText">快递</Text>
+        </View>
         <View className="flex items-center justify-between">
           <Text>订单编号：</Text>
           <CopyText str={orderDetail.orderNumber} />
@@ -375,6 +369,10 @@ const OrderDetails = () => {
           <Text>创建时间：</Text>
           <Text className="copyText">{handleReturnTime(orderDetail?.orderState?.createdAt)}</Text>
         </View>
+        <View className="flex items-center justify-between">
+          <Text>买家留言：</Text>
+        </View>
+        <View className="rounded-sm p-1" style={{backgroundColor: '#f7f7f7'}}>{orderDetail.remark || '无'}</View>
       </View>
       <View className="pt-1 pb-2 bg-white orderFooter rounded-[16px] fixed left-0 bottom-0 w-full">
         {orderDetail?.orderState?.orderState === 'UNPAID' && (
