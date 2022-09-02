@@ -1,7 +1,7 @@
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
-import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { PetGender } from '@/framework/types/consumer'
+import { CDNIMGURL } from '@/lib/constants'
 import { getAge } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
@@ -52,7 +52,7 @@ const FreshPlanDetails = () => {
 
   Taro.useDidShow(() => {
     const { router } = getCurrentInstance()
-    const subscriptionId = router?.params?.id ?? ''
+    const subscriptionId = router?.params?.id ?? '6cddcdb1-fa9f-62b0-2d39-de03c6269d61'
     getSubscriptionDetails(subscriptionId)
   })
 
@@ -174,7 +174,7 @@ const FreshPlanDetails = () => {
                 width: '1.1rem',
                 height: '1.1rem',
               }}
-              src={`${CDNIMGURL2}ship-cancel.png`}
+              src={`${CDNIMGURL}ship-cancel.png`}
             />
             <Text className="ml-1.5 mt-1 text-[24px] leading-[33px]">本次Fresh plan已取消</Text>
           </View>
@@ -187,7 +187,7 @@ const FreshPlanDetails = () => {
               })
             }}
             circle
-            className="w-[228px] h-[64px] leading-[64px] text-[26px] m-0"
+            className="w-[180px] h-[72px] leading-[72px] text-[28px] m-0 flex items-center justify-center"
             type="primary"
           >
             {subscriptionDetails.status !== 'VOID' ? '计划进度' : '查看详情'}
