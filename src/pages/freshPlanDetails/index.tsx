@@ -176,7 +176,7 @@ const FreshPlanDetails = () => {
               }}
               src={`${CDNIMGURL}ship-cancel.png`}
             />
-            <Text className="ml-1.5 mt-1 text-[24px] leading-[33px]">本次Fresh plan已取消</Text>
+            <Text className="ml-1.5 mt-1 text-[24px] leading-[33px]">本次计划已取消</Text>
           </View>
         )}
         <View className="flex justify-end">
