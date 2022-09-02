@@ -164,7 +164,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                     </AtButton>
                   </View>
                 </View>
-                <View className="swiperItemScroll flex flex-col">
+                <View className="swiperItemScroll flex flex-col px-0.5">
                   <View className="rounded-full" />
                   <View>
                     <View
