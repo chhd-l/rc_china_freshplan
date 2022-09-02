@@ -77,18 +77,13 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
             <View className="flex items-center my-[0.1rem]">
               <View className="text-[28px] relative">
                 更多
-                <View
-                  className="absolute bottom-0 left-0 p-1"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    Invoice()
-                  }}
-                >
-                  <View className="relative">
-                    <View className="absolute" />
-                    {order?.orderState?.orderType ? '查看' : '申请'}开票
-                  </View>
-                </View>
+                {/* <View
+                  className="absolute bottom-[-88px] left-0 p-1 w-[200px] h-[88px] more"
+                  // onClick={(e) => {
+                  //   e.stopPropagation()
+                  //   Invoice()
+                  // }}
+                /> */}
               </View>
               <AtButton className="rounded-full mx-[20px]">查看物流</AtButton>
               <AtButton

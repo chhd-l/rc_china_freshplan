@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "31620951",
+      "name": "计划",
+      "font_class": "jihua",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "31620239",
+      "name": "签约",
+      "font_class": "qianyue",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "31620240",
+      "name": "发货驿站",
+      "font_class": "fahuoyizhan",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "31620241",
+      "name": "推荐商品",
+      "font_class": "tuijianshangpin",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "31620242",
+      "name": "我的宠物",
+      "font_class": "wodechongwu",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
       "icon_id": "31487902",
       "name": "down",
       "font_class": "down",
