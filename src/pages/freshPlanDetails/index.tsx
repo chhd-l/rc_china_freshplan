@@ -158,10 +158,10 @@ const FreshPlanDetails = () => {
             <Image
               style={{
                 width: '1.1rem',
-                height: '1.06rem',
+                height: '1.1rem',
                 backgroundSize: '103% 100%',
               }}
-              src={`${CDNIMGURL}post.png`}
+              src={`${CDNIMGURL}next-ship.png`}
             />
             <Text className="ml-1.5 text-[24px] leading-[33px]">
               下一次将在{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}发货，请注意查收!
@@ -174,7 +174,7 @@ const FreshPlanDetails = () => {
                 width: '1.1rem',
                 height: '1.1rem',
               }}
-              src={`${CDNIMGURL2}cancel-icon.png`}
+              src={`${CDNIMGURL2}ship-cancel.png`}
             />
             <Text className="ml-1.5 mt-1 text-[24px] leading-[33px]">本次Fresh plan已取消</Text>
           </View>
