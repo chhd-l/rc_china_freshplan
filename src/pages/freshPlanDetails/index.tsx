@@ -212,7 +212,7 @@ const FreshPlanDetails = () => {
             }}
             src={`${CDNIMGURL2}Group 1240.png`}
           />
-          <Text className="ml-1">签约平台：{returnTypeText()}</Text>
+          <Text className="ml-0.5">签约平台：{returnTypeText()}</Text>
         </View>
         <View className="flex text-[24px] items-center mt-1">
           <Image
@@ -222,7 +222,7 @@ const FreshPlanDetails = () => {
             }}
             src={`${CDNIMGURL2}Group 1239.png`}
           />
-          <Text className="ml-1">签约账户：{subscriptionDetails.consumer.phone}</Text>
+          <Text className="ml-0.5">签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>
       </View>
     </View>
