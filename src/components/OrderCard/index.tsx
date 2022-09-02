@@ -3,7 +3,6 @@ import { Order } from '@/framework/types/order'
 import { handleReturnTime } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { useState } from 'react'
 import { AtButton } from 'taro-ui'
 import './index.less'
 
@@ -16,7 +15,6 @@ const orderStatusType = {
 }
 
 const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function }) => {
-  const [moreOpen, setMoreOpen] = useState(false)
   const Invoice = () => {
     Taro.navigateTo({ url: `/pages/packageA/invoiceDetail/index?orderno=${order.orderNumber}` })
   }
@@ -83,7 +81,6 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
               className="text-[28px] relative moreHover"
               onClick={(e) => {
                 e.stopPropagation()
-                setMoreOpen(true)
               }}
             >
               更多
