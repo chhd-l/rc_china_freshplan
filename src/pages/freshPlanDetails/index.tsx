@@ -7,7 +7,7 @@ import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
-import { AtButton, AtIcon } from 'taro-ui'
+import { AtButton } from 'taro-ui'
 import './index.less'
 
 const FreshPlanDetails = () => {
@@ -107,7 +107,7 @@ const FreshPlanDetails = () => {
               </Text>
             </View>
           </View>
-          <AtIcon className="font-thin -mr-[5px]" value="chevron-right" color="#9D9D9D" size="22" />
+          <Text className="rcciconfont rccicon-right text-22 text-[#9D9D9D]" />
         </View>
       </View>
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
