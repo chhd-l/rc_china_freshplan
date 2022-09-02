@@ -6,7 +6,7 @@ import { getAge } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AtButton, AtIcon } from 'taro-ui'
 import './index.less'
 
@@ -56,11 +56,12 @@ const FreshPlanDetails = () => {
     getSubscriptionDetails(subscriptionId)
   })
 
-  // const returnPetdefaultImage = () => {
-  //   if (subscriptionDetails?.pet?.image) return subscriptionDetails.pet.image
-  //   else if (subscriptionDetails?.pet?.type === 'CAT') return 'cat-default.png'
-  //   else return 'dog-default.png'
-  // }
+  useEffect(() => {
+    my.setNavigationBar({
+      backgroundColor: '#c3ec7b',
+    })
+  }, [])
+
   const handlePetDetail = (pet: any) => {
     Taro.navigateTo({
       url: '/pages/packageA/petDetail/index',
@@ -79,11 +80,7 @@ const FreshPlanDetails = () => {
             borderBottom: '1px solid #E2E2E2',
           }}
         >
-          <Image
-            className="mr-0.5 h-full rounded-full"
-            src={`${CDNIMGURL2}pet-foot.png`}
-            style={{ width: '0.33rem', height: '0.33rem' }}
-          />
+          <Text className="rcciconfont rccicon-wodechongwu text-34 mr-0.5 text-[#ffb038]" />
           我的宠物
         </View>
         <View className="flex items-center justify-between" onClick={() => handlePetDetail(subscriptionDetails?.pet)}>
@@ -121,15 +118,18 @@ const FreshPlanDetails = () => {
           }}
         >
           <View className="flex justify-between items-end">
-            <Text className="text-[30px] font-bold">Fresh Plan商品</Text>
-            <Text className="text-[24px] text-[#666]">Fresh编号:{subscriptionDetails.no}</Text>
+            <Text className="text-[30px] font-bold">
+              <Text className="rcciconfont rccicon-jihua text-34 mr-0.5 text-[#0f8ee9]" />
+              计划商品
+            </Text>
+            <Text className="text-[24px] text-[#666]">计划编号:{subscriptionDetails.no}</Text>
           </View>
         </View>
         <View className="flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center text-[24px] h-[190px]" key={key}>
               <Image
-                className="mr-1 h-full border border-solid border-[#E2E2E2] rounded-[10px]"
+                className="mr-1 h-full rounded-[10px]"
                 src={el?.variants?.defaultImage}
                 style={{ width: '1.9rem' }}
               />
@@ -150,6 +150,7 @@ const FreshPlanDetails = () => {
             borderBottom: '1px solid #E2E2E2',
           }}
         >
+          <Text className="rcciconfont rccicon-fahuoyizhan text-34 mr-0.5 text-[#0f8ee9]" />
           发货驿站
         </View>
         {subscriptionDetails.status !== 'VOID' ? (
@@ -189,7 +190,7 @@ const FreshPlanDetails = () => {
             className="w-[228px] h-[64px] leading-[64px] text-[26px] m-0"
             type="primary"
           >
-            {subscriptionDetails.status !== 'VOID' ? '计划进度' : '查看计划详情'}
+            {subscriptionDetails.status !== 'VOID' ? '计划进度' : '查看详情'}
           </AtButton>
         </View>
       </View>
@@ -200,6 +201,7 @@ const FreshPlanDetails = () => {
             borderBottom: '1px solid #E2E2E2',
           }}
         >
+          <Text className="rcciconfont rccicon-qianyue text-34 mr-0.5 text-[#ffb038]" />
           签约信息
         </View>
         <View className="flex text-[24px] items-center mt-1">
@@ -210,7 +212,7 @@ const FreshPlanDetails = () => {
             }}
             src={`${CDNIMGURL2}Group 1240.png`}
           />
-          <Text className="ml-1">签约平台：{returnTypeText()}</Text>
+          <Text className="ml-0.5">签约平台：{returnTypeText()}</Text>
         </View>
         <View className="flex text-[24px] items-center mt-1">
           <Image
@@ -220,7 +222,7 @@ const FreshPlanDetails = () => {
             }}
             src={`${CDNIMGURL2}Group 1239.png`}
           />
-          <Text className="ml-1">签约账户：{subscriptionDetails.consumer.phone}</Text>
+          <Text className="ml-0.5">签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>
       </View>
     </View>
