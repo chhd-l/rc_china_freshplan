@@ -80,7 +80,7 @@ const FreshPlanDetails = () => {
             borderBottom: '1px solid #E2E2E2',
           }}
         >
-          <Text className="rcciconfont rccicon-wodechongwu text-34 mr-0.5 text-[#ffb038]" />
+          <Text className="rcciconfont rccicon-chongwu2 text-34 mr-0.5 text-[#ffb038]" />
           我的宠物
         </View>
         <View className="flex items-center justify-between" onClick={() => handlePetDetail(subscriptionDetails?.pet)}>
@@ -201,28 +201,16 @@ const FreshPlanDetails = () => {
             borderBottom: '1px solid #E2E2E2',
           }}
         >
-          <Text className="rcciconfont rccicon-qianyue text-34 mr-0.5 text-[#ffb038]" />
+          <Text className="rcciconfont rccicon-a-11 text-34 mr-0.5 text-[#ffb038]" />
           签约信息
         </View>
         <View className="flex text-[24px] items-center mt-1">
-          <Image
-            style={{
-              width: '0.3022rem',
-              height: '0.2807rem',
-            }}
-            src={`${CDNIMGURL2}Group 1240.png`}
-          />
-          <Text className="ml-0.5">签约平台：{returnTypeText()}</Text>
+          <Text className="rcciconfont rccicon-pingtai text-34 mr-0.5 text-[#96CC39]" />
+          <Text>签约平台：{returnTypeText()}</Text>
         </View>
         <View className="flex text-[24px] items-center mt-1">
-          <Image
-            style={{
-              width: '0.2997rem',
-              height: '0.2162rem',
-            }}
-            src={`${CDNIMGURL2}Group 1239.png`}
-          />
-          <Text className="ml-0.5">签约账户：{subscriptionDetails.consumer.phone}</Text>
+          <Text className="rcciconfont rccicon-zhanghao text-34 mr-0.5 text-[#96CC39]" />
+          <Text>签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>
       </View>
     </View>
