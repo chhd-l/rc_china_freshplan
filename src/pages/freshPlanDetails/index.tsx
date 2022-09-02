@@ -52,7 +52,7 @@ const FreshPlanDetails = () => {
 
   Taro.useDidShow(() => {
     const { router } = getCurrentInstance()
-    const subscriptionId = router?.params?.id ?? '6cddcdb1-fa9f-62b0-2d39-de03c6269d61'
+    const subscriptionId = router?.params?.id ?? ''
     getSubscriptionDetails(subscriptionId)
   })
 

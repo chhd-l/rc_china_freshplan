@@ -52,10 +52,12 @@ const Schedule = () => {
 
   return (
     <View className="p-1 pb-4 Schedule">
-      <View className="justify-center text-white text-[32px] font-bold mb-[50px] flex items-center">
-        <Text className="rcciconfont rccicon-cuowu mr-0.5" style={{ fontSize: '0.4rem' }} />
-        计划已取消
-      </View>
+      {subscriptionDetails.status === 'VOID' && (
+        <View className="justify-center text-white text-[32px] font-bold mb-[50px] flex items-center">
+          <Text className="rcciconfont rccicon-cuowu mr-0.5" style={{ fontSize: '0.4rem' }} />
+          计划已取消
+        </View>
+      )}
       <View className="bg-white px-1 boxShadow">
         <View
           className="py-1"
