@@ -1,13 +1,13 @@
 import { getPets } from '@/framework/api/pet/get-pets'
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
-import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { PetGender } from '@/framework/types/consumer'
+import { CDNIMGURL } from '@/lib/constants'
 import { getAge } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
-import { AtButton, AtIcon } from 'taro-ui'
+import { AtButton } from 'taro-ui'
 import './index.less'
 
 const FreshPlanDetails = () => {
@@ -52,7 +52,7 @@ const FreshPlanDetails = () => {
 
   Taro.useDidShow(() => {
     const { router } = getCurrentInstance()
-    const subscriptionId = router?.params?.id ?? ''
+    const subscriptionId = router?.params?.id ?? '6cddcdb1-fa9f-62b0-2d39-de03c6269d61'
     getSubscriptionDetails(subscriptionId)
   })
 
@@ -80,7 +80,7 @@ const FreshPlanDetails = () => {
             borderBottom: '1px solid #E2E2E2',
           }}
         >
-          <Text className="rcciconfont rccicon-wodechongwu text-34 mr-0.5 text-[#ffb038]" />
+          <Text className="rcciconfont rccicon-chongwu2 text-34 mr-0.5 text-[#ffb038]" />
           我的宠物
         </View>
         <View className="flex items-center justify-between" onClick={() => handlePetDetail(subscriptionDetails?.pet)}>
@@ -107,7 +107,7 @@ const FreshPlanDetails = () => {
               </Text>
             </View>
           </View>
-          <AtIcon className="font-thin -mr-[5px]" value="chevron-right" color="#9D9D9D" size="22" />
+          <Text className="rcciconfont rccicon-right text-22 text-[#9D9D9D]" />
         </View>
       </View>
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
@@ -174,7 +174,7 @@ const FreshPlanDetails = () => {
                 width: '1.1rem',
                 height: '1.1rem',
               }}
-              src={`${CDNIMGURL2}ship-cancel.png`}
+              src={`${CDNIMGURL}ship-cancel.png`}
             />
             <Text className="ml-1.5 mt-1 text-[24px] leading-[33px]">本次Fresh plan已取消</Text>
           </View>
@@ -187,7 +187,7 @@ const FreshPlanDetails = () => {
               })
             }}
             circle
-            className="w-[228px] h-[64px] leading-[64px] text-[26px] m-0"
+            className="w-[180px] h-[72px] leading-[72px] text-[28px] m-0 flex items-center justify-center"
             type="primary"
           >
             {subscriptionDetails.status !== 'VOID' ? '计划进度' : '查看详情'}
@@ -201,28 +201,16 @@ const FreshPlanDetails = () => {
             borderBottom: '1px solid #E2E2E2',
           }}
         >
-          <Text className="rcciconfont rccicon-qianyue text-34 mr-0.5 text-[#ffb038]" />
+          <Text className="rcciconfont rccicon-a-11 text-34 mr-0.5 text-[#ffb038]" />
           签约信息
         </View>
         <View className="flex text-[24px] items-center mt-1">
-          <Image
-            style={{
-              width: '0.3022rem',
-              height: '0.2807rem',
-            }}
-            src={`${CDNIMGURL2}Group 1240.png`}
-          />
-          <Text className="ml-0.5">签约平台：{returnTypeText()}</Text>
+          <Text className="rcciconfont rccicon-pingtai text-34 mr-0.5 text-[#96CC39]" />
+          <Text>签约平台：{returnTypeText()}</Text>
         </View>
         <View className="flex text-[24px] items-center mt-1">
-          <Image
-            style={{
-              width: '0.2997rem',
-              height: '0.2162rem',
-            }}
-            src={`${CDNIMGURL2}Group 1239.png`}
-          />
-          <Text className="ml-0.5">签约账户：{subscriptionDetails.consumer.phone}</Text>
+          <Text className="rcciconfont rccicon-zhanghao text-34 mr-0.5 text-[#96CC39]" />
+          <Text>签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>
       </View>
     </View>

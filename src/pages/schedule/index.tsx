@@ -6,7 +6,7 @@ import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
-import { AtButton, AtIcon, AtList, AtListItem } from 'taro-ui'
+import { AtButton, AtDivider, AtIcon, AtList, AtListItem } from 'taro-ui'
 import './index.less'
 
 const Schedule = () => {
@@ -52,6 +52,10 @@ const Schedule = () => {
 
   return (
     <View className="p-1 pb-4 Schedule">
+      <View className="justify-center text-white text-[32px] font-bold mb-[50px] flex items-center">
+        <Text className="rcciconfont rccicon-cuowu mr-0.5" style={{ fontSize: '0.4rem' }} />
+        计划已取消
+      </View>
       <View className="bg-white px-1 boxShadow">
         <View
           className="py-1"
@@ -63,14 +67,13 @@ const Schedule = () => {
             <Text className="text-[30px] font-bold">
               {subscriptionDetails.status !== 'VOID' ? '下次发货' : 'Fresh Plan商品'}
             </Text>
-            {subscriptionDetails.status === 'VOID' && <Text className="text-[#EE2737] text-[24px]">计划已取消</Text>}
           </View>
         </View>
         <View className="flex flex flex-col">
           {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center h-[160px]" key={key}>
               <Image
-                className="mr-1 h-full border border-solid border-[#E2E2E2] rounded-[10px]"
+                className="mr-1 h-full rounded-[10px]"
                 src={el?.variants?.defaultImage}
                 style={{ width: '1.6rem' }}
               />
@@ -148,7 +151,7 @@ const Schedule = () => {
         </View>
         {subscriptionDetails.status !== 'VOID' && (
           <View className="mt-1 flex pr-[18px]">
-            <AtIcon className="mr-0.5" value="calendar" size="16" color="#666" />
+            <AtIcon className="mr-0.5" value="calendar" size="16" color="#96CC39" />
             <Text className="ml-[6px] text-[#666]">
               发货日期&nbsp;&nbsp;&nbsp;{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}
             </Text>
@@ -156,7 +159,7 @@ const Schedule = () => {
         )}
         <View className="mt-1 flex pr-[18px]">
           <Text
-            className="rcciconfont rccicon-location text-[#666] mr-0.5"
+            className="rcciconfont rccicon-location text-[#96CC39] mr-0.5"
             style={{
               fontSize: '0.32rem',
             }}
@@ -170,7 +173,8 @@ const Schedule = () => {
           <View className="flex mt-2 justify-end">
             <AtButton
               circle
-              className="w-[180px] h-[72px] leading-[72px] text-[28px] m-0 flex items-center justify-center border-[#ECEEF1]"
+              className="w-[180px] h-[72px] leading-[72px] text-[28px] m-0 flex items-center justify-center"
+              type="primary"
               onClick={() => {
                 Taro.setStorage({
                   key: 'current-address',
@@ -188,12 +192,15 @@ const Schedule = () => {
           </View>
         )}
       </View>
+      {subscriptionDetails.completedDeliveries && (
+        <View className="text-center text-[#999] text-[26px] mt-1">温馨提示: 修改地址以外其他信息请联系人工客服</View>
+      )}
 
       {/* 历史订单 */}
 
       {subscriptionDetails.completedDeliveries && subscriptionDetails.completedDeliveries.length ? (
-        <View className="mt-1 py-1 boxShadow">
-          <View className="text-[30px] font-bold">历史订单</View>
+        <View className="mt-1 py-1">
+          <AtDivider className="text-[30px] h-[auto] w-[80%] m-auto" content="历史订单" />
           {subscriptionDetails.completedDeliveries.map((el: any, key) => (
             <View key={key} className="rounded-[10px] mt-1 text-[24px] text-[#999] bg-white">
               <View
@@ -213,11 +220,7 @@ const Schedule = () => {
               >
                 {el?.lineItems.map((item, index) => (
                   <View className="flex item-center h-[160px] mt-1" key={index}>
-                    <Image
-                      className="mr-1 h-full rounded-[10px] border border-solid border-[#E2E2E2]"
-                      src={item?.pic}
-                      style={{ width: '1.6rem' }}
-                    />
+                    <Image className="mr-1 h-full rounded-[10px]" src={item?.pic} style={{ width: '1.6rem' }} />
                     <View className="h-full flex flex-col justify-center flex-1">
                       <View className="font-bold text-[28px] text-[#000] flex justify-between">
                         <Text>{item?.skuName}</Text>
