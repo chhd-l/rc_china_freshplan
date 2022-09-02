@@ -200,7 +200,7 @@ const Schedule = () => {
                 <Text className="text-[#000]">第{key + 1}笔</Text>
               </View>
               <View
-                className="px-1 pb-1"
+                className="mx-1 pb-1"
                 style={{
                   borderBottom: '1px solid #E2E2E2',
                 }}

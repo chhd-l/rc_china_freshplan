@@ -1,5 +1,6 @@
 import { payFromOrder } from '@/framework/api/payment/pay'
 import { Order } from '@/framework/types/order'
+import { handleReturnTime } from '@/utils/utils'
 import { Image, Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtButton } from 'taro-ui'
@@ -20,7 +21,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
 
   return (
     <View
-      className="p-1 bg-white mt-1 orderCard m-[30px]"
+      className="p-1.5 bg-white mt-1 orderCard m-[25px]"
       onClick={() =>
         Taro.navigateTo({
           url: '/pages/packageA/orderDetail/index?id=' + order.orderNumber,
@@ -29,11 +30,11 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
     >
       <View className="flex items-center justify-between">
         <Text className="text-[28px]">{orderStatusType[order?.orderState?.orderState || '']}</Text>
-        <Text className="text-[22px] text-[#666]">创建时间:2022-06-21 12:13:34</Text>
+        <Text className="text-[22px] text-[#666]">创建时间:{handleReturnTime(order?.orderState?.createdAt)}</Text>
       </View>
       <View className="my-[40px] flex items-center">
         {(order?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
-          <View key={key} className="w-[150px] h-[150px] border border-solid border-[#f1f1f1] rounded-[10px] mr-[22px]">
+          <View key={key} className="w-[150px] h-[150px] rounded-[10px] mr-[22px]">
             <Image
               style={{
                 height: '100%',
@@ -44,8 +45,8 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
         ))}
       </View>
       <View className="flex justify-between items-center">
-        <Text className="font-bold text-[24px]">
-          <Text className="text-[16px]">￥</Text>
+        <Text className="font-bold text-[34px]">
+          <Text className="text-[24px]">￥</Text>
           {order.orderPrice.totalPrice.toFixed(2)}
         </Text>
         <View>
@@ -74,7 +75,21 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
           )}
           {order.orderState?.orderState === 'SHIPPED' && (
             <View className="flex items-center my-[0.1rem]">
-              <Text className="text-[28px]">更多</Text>
+              <View className="text-[28px] relative">
+                更多
+                <View
+                  className="absolute bottom-0 left-0 p-1"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    Invoice()
+                  }}
+                >
+                  <View className="relative">
+                    <View className="absolute" />
+                    {order?.orderState?.orderType ? '查看' : '申请'}开票
+                  </View>
+                </View>
+              </View>
               <AtButton className="rounded-full mx-[20px]">查看物流</AtButton>
               <AtButton
                 type="primary"
@@ -98,7 +113,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                   Invoice()
                 }}
               >
-                {order?.orderState?.invoiceStatus ? '查看' : '申请'}开票
+                {order?.orderState?.orderType ? '查看' : '申请'}开票
               </AtButton>
             </View>
           )}
@@ -120,7 +135,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                   Invoice()
                 }}
               >
-                {order?.orderState?.invoiceStatus ? '查看' : '申请'}开票
+                {order?.orderState?.orderType ? '查看' : '申请'}开票
               </AtButton>
             </View>
           )}

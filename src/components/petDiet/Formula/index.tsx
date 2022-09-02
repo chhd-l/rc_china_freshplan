@@ -7,7 +7,7 @@ type FormulaProps = {
 }
 const Formula = ({ data }: FormulaProps) => {
   return (
-    <View className="mt-1 bg-white pl-[45px] pr-[35px] py-[50px] rounded-[30px]">
+    <View className="mt-1 bg-white pl-[45px] pr-[35px] py-[50px] rounded-[30px] formula">
       <View
         className="h-[230px] relative pb-1"
         style={{

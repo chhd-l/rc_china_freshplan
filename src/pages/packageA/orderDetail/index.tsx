@@ -208,7 +208,7 @@ const OrderDetails = () => {
     <ScrollView scrollY overflow-anchor={false} className="p-1 pb-[1.5rem] OrderDetails">
       <View className="body">
         <View className="rounded-[16px]">
-          <View className="px-2 pt-1.5 pb-2 flex items-center header">
+          <View className="px-1 pt-1.5 pb-2 flex items-center header">
             <Image className="mr-1 headerImage rounded-[17px]" src={`${CDNIMGURL2}${titleImageType()}`} />
             <View className="flex flex-col">
               <Text className="mb-[15px] leading-[32px]">
@@ -400,7 +400,7 @@ const OrderDetails = () => {
                 Taro.navigateTo({ url: `/pages/packageA/invoiceDetail/index?orderno=${orderDetail.orderNumber}` })
               }}
             >
-              {orderDetail?.orderState?.invoiceStatus ? '查看' : '申请'}开票
+              {orderDetail?.orderState?.orderType ? '查看' : '申请'}开票
             </AtButton>
             <AtButton className="rounded-full m-0 mr-[24px] px-1.5 py-0" onClick={() => setShowDelTip(true)}>
               催发货
@@ -417,14 +417,14 @@ const OrderDetails = () => {
         {orderDetail?.orderState?.orderState === 'COMPLETED' && (
           <View className="flex items-center justify-end">
             <AtButton className="rounded-full m-0 px-1.5 mx-[24px] py-0">
-              {orderDetail?.orderState?.invoiceStatus ? '查看' : '申请'}发票
+              {orderDetail?.orderState?.orderType ? '查看' : '申请'}发票
             </AtButton>
           </View>
         )}
         {orderDetail?.orderState?.orderState === 'SHIPPED' && (
           <View className="flex items-center justify-end">
             <AtButton className="rounded-full m-0 px-1.5 mx-[24px] py-0">
-              {orderDetail?.orderState?.invoiceStatus ? '查看' : '申请'}开票
+              {orderDetail?.orderState?.orderType ? '查看' : '申请'}开票
             </AtButton>
             <AtButton
               className="rounded-full m-0 px-1.5 py-0 mr-[24px]"

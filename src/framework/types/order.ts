@@ -53,7 +53,6 @@ export interface OrderState {
   createdAt: string
   createdBy: string
   orderSource: string
-  invoiceStatus: any
 }
 
 export interface Logs {
