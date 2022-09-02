@@ -267,3 +267,13 @@ export const calculateOrderPrice = async ({
     return false
   }
 }
+
+export const getOrderStatistics = async () => {
+  try {
+    let data = await ApiRoot({ url: apis?.orderList }).orders().orderStatistic()
+    return data ?? {}
+  } catch (e) {
+    console.log(e)
+    return {}
+  }
+}

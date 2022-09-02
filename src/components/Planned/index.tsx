@@ -66,7 +66,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             }}
           >
             <AtIcon className="mr-1" value="clock" size="26" />
-            开始定制
+            定制鲜粮
           </Button>
         ) : (
           <Button
@@ -81,7 +81,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             }}
           >
             <AtIcon className="mr-1" value="clock" size="26" />
-            开始定制
+            定制鲜粮
           </Button>
         )}
       </View>
@@ -249,7 +249,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           }}
         >
           <AtIcon className="mr-0.5" value="clock" size="25" />
-          <Text className="text-[34px]">更多定制</Text>
+          <Text className="text-[34px]">定制鲜粮</Text>
         </View>
         <View className="mt-1 px-[30px]">
           <Step />

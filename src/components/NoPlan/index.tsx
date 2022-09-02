@@ -56,7 +56,7 @@ const Subscription = () => {
             }}
           >
             <AtIcon className="mr-1" value="clock" size="26" />
-            开始定制
+            定制鲜粮
           </Button>
         ) : (
           <Button
@@ -71,7 +71,7 @@ const Subscription = () => {
             }}
           >
             <AtIcon className="mr-1" value="clock" size="26" />
-            开始定制
+            定制鲜粮
           </Button>
         )}
       </View>
@@ -117,7 +117,7 @@ const Subscription = () => {
                   }}
                 >
                   <AtIcon className="mr-1" value="clock" size="26" />
-                  开始定制
+                  定制鲜粮
                 </Button>
               ) : (
                 <Button
@@ -132,7 +132,7 @@ const Subscription = () => {
                   }}
                 >
                   <AtIcon className="mr-1" value="clock" size="26" />
-                  开始定制
+                  定制鲜粮
                 </Button>
               )}
             </View>

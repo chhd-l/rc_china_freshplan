@@ -62,14 +62,14 @@ const PetList = () => {
             //   petList={petList}
             //   setPetList={setPetList}
             // />
-            <View key={idx} className="m-1 flex bg-white rounded-sm p-1 items-center" onClick={() => petDetail(pet)}>
+            <View key={idx} className="m-1 flex bg-white rounded-sm p-1 items-center block-boxshadow" onClick={() => petDetail(pet)}>
               <View className="pet-image rounded-full overflow-hidden">
                 <Image src={pet.image} mode="widthFix" />
               </View>
               <View className="flex-1 mx-1">
                 <View className="flex items-center mb-1">
                   <Text className="text-32 font-bold">{pet.name}</Text>
-                  <Text className={`ml-1 rcciconfont text-30 ${pet.gender === PetGender.Female ? 'text-color-primary rccicon-female' : 'text-gray-400 rccicon-male'}`}></Text>
+                  <Text className={`ml-1 rcciconfont text-30 text-color-price ${pet.gender === PetGender.Female ? 'rccicon-female' : 'rccicon-male'}`}></Text>
                 </View>
                 <View className="text-28 text-gray-400">{pet.breed} {pet.age}</View>
               </View>
