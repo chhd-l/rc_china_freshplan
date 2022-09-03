@@ -194,7 +194,7 @@ const Schedule = () => {
           </View>
         )}
       </View>
-      {subscriptionDetails.completedDeliveries && (
+      {subscriptionDetails.status !== 'VOID' && (
         <View className="text-center text-[#999] text-[26px] mt-1">温馨提示: 修改地址以外其他信息请联系人工客服</View>
       )}
 
