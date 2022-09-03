@@ -4,6 +4,7 @@ import RotationChartList from '@/components/RotationChartList'
 import PetNavigation from '@/components/PetNavigation'
 import { wxLogin } from '@/framework/api/consumer/consumer'
 import { getPets } from '@/framework/api/pet/get-pets'
+import { getOrderStatistics } from '@/framework/api/order'
 import { PetListItemProps, PetType } from '@/framework/types/consumer'
 import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
 import { consumerAtom } from '@/store/consumer'
@@ -16,9 +17,9 @@ import { AtAvatar, AtList, AtListItem } from 'taro-ui'
 import './index.less'
 
 const orderTypeList = [
-  { label: '待付款', icon: CDNIMGURL2 + 'my-waitpay.png', url: '/pages/packageA/elencoOrdini/index?status=UNPAID' },
-  { label: '待发货', icon: CDNIMGURL2 + 'my-waitship.png', url: '/pages/packageA/elencoOrdini/index?status=TO_SHIP' },
-  { label: '待收货', icon: CDNIMGURL2 + 'my-receive.png', url: '/pages/packageA/elencoOrdini/index?status=SHIPPED' },
+  { label: '待付款', icon: CDNIMGURL2 + 'my-waitpay.png', url: '/pages/packageA/elencoOrdini/index?status=UNPAID', count: 'UnpaidOrderQuantity' },
+  { label: '待发货', icon: CDNIMGURL2 + 'my-waitship.png', url: '/pages/packageA/elencoOrdini/index?status=TO_SHIP', count: 'ToShipOrderQuantity' },
+  { label: '待收货', icon: CDNIMGURL2 + 'my-receive.png', url: '/pages/packageA/elencoOrdini/index?status=SHIPPED', count: 'ShippedOrderQuantity' },
 ]
 
 const Account = () => {
@@ -27,6 +28,7 @@ const Account = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false)
   const [hasDog, setHasDog] = useState<boolean>(false)
   const [hasCat, setHasCat] = useState<boolean>(false)
+  const [order, setOrder] = useState<any>({})
 
   const getAuthentication = async (callback?: Function) => {
     if (!isLogin) {
@@ -55,6 +57,11 @@ const Account = () => {
     setHasDog(dog);
   }
 
+  const getOrderStatic = async () => {
+    const data = await getOrderStatistics();
+    setOrder(data ?? {})
+  }
+
   const loginInit = async () => {
     const _storeRes: any = Taro.getStorageSync('wxLoginRes')
     if (_storeRes?.userInfo?.id) {
@@ -62,6 +69,7 @@ const Account = () => {
       const data = await wxLogin()
       setConsumer(data)
       getList(data.id)
+      getOrderStatic()
       setIsLogin(true)
     } else {
       setIsLogin(false)
@@ -80,6 +88,7 @@ const Account = () => {
     loginWithAlipay((data) => {
       setConsumer(data)
       getList(data.id)
+      getOrderStatic()
       setIsLogin(true)
     })
   }
@@ -141,7 +150,7 @@ const Account = () => {
               {orderTypeList.map((str, key) => (
                 <View
                   key={key}
-                  className="inline-block py-1 flex flex-col items-center justify-center"
+                  className="order-get-item inline-block py-1 flex flex-col items-center justify-center"
                   onClick={() =>
                     getAuthentication(() => {
                       Taro.navigateTo({
@@ -159,6 +168,7 @@ const Account = () => {
                     src={str.icon}
                   />
                   <Text>{str.label}</Text>
+                  {(order[str.count] ?? 0) > 0 && <Text className="count">{order[str.count] ?? ''}</Text>}
                 </View>
               ))}
             </View>

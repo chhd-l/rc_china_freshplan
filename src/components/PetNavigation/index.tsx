@@ -28,9 +28,6 @@ const PetNavigation = ({ petList = [], hasAdd = false, hasSelect = false, onSele
           <View className="mb-0.5 text-32 font-bold">添加爱宠</View>
           <View className="text-28 text-gray-400">给它定制专属食物</View>
         </View>
-        <View>
-          <Text className="rcciconfont rccicon-right text-28 text-gray-400" />
-        </View>
       </View>
     )
   } else if (petList.length === 1) {

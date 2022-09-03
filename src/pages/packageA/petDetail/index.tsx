@@ -218,7 +218,7 @@ const PetDetail = () => {
         </View>
         <View className="flex-1">
           <Text className="ml-2 text-32">{pet.name}</Text>
-          <Text className={`ml-1 rcciconfont text-30 ${pet.gender === PetGender.Female ? 'text-color-primary rccicon-female' : 'text-gray-400 rccicon-male'}`}></Text>
+          <Text className={`ml-1 rcciconfont text-30 text-color-price ${pet.gender === PetGender.Female ? 'rccicon-female' : 'rccicon-male'}`}></Text>
         </View>
         <View className="pet-delete self-start flex items-center justify-center" onClick={handleOpenDelete}>
           <Text className="rcciconfont rccicon-idelete text-30" />
@@ -360,7 +360,7 @@ const PetDetail = () => {
           {!pet?.subscriptionNo || pet.subscriptionNo.length === 0
             ? <View className="flex-1 mx-1 py-0.8 rounded-full bg-color-primary text-white text-30 flex items-center justify-center" onClick={handleSub}>
             <Text className="rcciconfont rccicon-timer text-32 font-bold mr-1"></Text>
-            <Text className="text-28">开始定制</Text>
+            <Text className="text-28">定制鲜粮</Text>
           </View> : null}
         </View>
       </View>
@@ -479,11 +479,11 @@ const PetDetail = () => {
             }}
           >
             <Image className="mt-2" src={pet.image} style={{ width: '2.36rem', height: '2.36rem' }} />
-            <View className="text-[29px] text-[#333] mt-2">您确定要删除{pet.name}这个宠物吗？</View>
+            <View className="text-[34px] text-[#333] mt-2">您确定要删除<Text className="font-bold">{pet.name}</Text>这个宠物吗？</View>
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#C8E399]"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowDel(false)
@@ -493,7 +493,7 @@ const PetDetail = () => {
               </AtButton>
               <AtButton
                 circle
-                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
+                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#96CC39] ml-2"
                 onClick={handleDelete}
               >
                 确定

@@ -12,7 +12,7 @@ import { formatMoney, getDateDiff, handleReturnTime } from '@/utils/utils'
 import { Image, ScrollView, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { AtButton, AtCountdown, AtIcon, AtList, AtListItem } from 'taro-ui'
+import { AtButton, AtCountdown, AtIcon, AtFloatLayout } from 'taro-ui'
 import CopyText from './copyText'
 import ExpressLine from './expressLine'
 import './index.less'
@@ -20,7 +20,7 @@ import TimeLine from './timeLine'
 
 const orderStatusType = {
   UNPAID: '等待买家付款',
-  TO_SHIP: '等待卖家发货',
+  TO_SHIP: '等待商家发货',
   SHIPPED: '商家已发货',
   COMPLETED: '交易成功',
   VOID: '交易关闭',
@@ -53,6 +53,7 @@ const OrderDetails = () => {
       deliveryItems: [],
     },
   })
+  const [showExp, setShowExp] = useState<boolean>(false)
 
   Taro.useReady(() => {
     my.setNavigationBar({ backgroundColor: '#C3EC7B', frontColor: '#000000' })
@@ -226,7 +227,7 @@ const OrderDetails = () => {
           {(orderDetail?.orderState?.orderState === 'SHIPPED' ||
             orderDetail?.orderState?.orderState === 'COMPLETED') && (
             <View className="express mb-[36px]">
-              <View className="flex items-end">
+              <View className="flex items-center">
                 <Image
                   className="mr-[15px]"
                   style={{
@@ -240,7 +241,7 @@ const OrderDetails = () => {
                   <CopyText type str={orderDetail.delivery.trackingId} />
                 </View>
               </View>
-              <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} />
+              <ExpressLine expressList={orderDetail.delivery.deliveryItems || []} showMore={true} showAll={false} onClickShowMore={() => setShowExp(true)} />
             </View>
           )}
           <View className="my-0.5 receivingUser flex items-center">
@@ -280,10 +281,12 @@ const OrderDetails = () => {
         <View className="flex flex flex-col">
           {(orderDetail?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-1 flex item-center" key={key}>
-              <Image
-                className="orderAtCardImage mr-1 rounded-[10px] h-full bg-[#E2E2E2]"
-                src={el?.pic}
-              />
+              <View className="orderAtCardImage mr-1">
+                <Image
+                  src={el?.pic}
+                  mode="widthFix"
+                />
+              </View>
               <View className="h-full flex flex-col flex-1" style={{ fontWeight: 700 }}>
                 <View className="flex item-center justify-between">
                   <Text className="text-28 font-bold">{el?.spuName}</Text>
@@ -297,10 +300,12 @@ const OrderDetails = () => {
           ))}
           {(orderDetail?.lineItem?.filter((el) => el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
-              <Image
-                className="orderAtCardImage mr-1 rounded-[10px] h-full bg-[#E2E2E2]"
-                src={el?.pic}
-              />
+              <View className="orderAtCardImage mr-1">
+                <Image
+                  src={el?.pic}
+                  mode="widthFix"
+                />
+              </View>
               <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>
                 <View className="text-28 font-bold">{el?.spuName}</View>
                 <View className="flex items-center justify-between">
@@ -348,8 +353,8 @@ const OrderDetails = () => {
               })
           }}
         >
-          <Text>Fresh编号：</Text>
-          <CopyText str={orderDetail.subscriptionNo} />
+          <Text>计划编号：</Text>
+          <CopyText str={orderDetail.subscriptionNo} underline={true} />
         </View>
         {orderDetail?.orderState?.orderState !== 'UNPAID' && orderDetail?.orderState?.orderState !== 'VOID' && (
           <View className="flex items-center justify-between">
@@ -480,6 +485,32 @@ const OrderDetails = () => {
           </View>
         </View>
       </View>
+
+      <AtFloatLayout
+        isOpened={showExp}
+        onClose={() => setShowExp(false)}
+        title="快递详情"
+      >
+        <View>
+          <View className="express px-1 pt-2 bg-white rounded-t-md">
+            <View className="flex items-center">
+              <Image
+                className="mr-[15px]"
+                style={{
+                  height: '0.44rem',
+                  width: '0.44rem',
+                }}
+                src={orderDetail?.delivery?.shippingCompanyImg ?? ''}
+              />
+              <View className="flex items-center leading-[35px] flex-1">
+                <Text className="mr-0.5 text-[30px]">{getCarrierType()}</Text>
+                <CopyText type str={orderDetail?.delivery?.trackingId} />
+              </View>
+            </View>
+            <ExpressLine expressList={orderDetail?.delivery?.deliveryItems || []} showMore={false} showAll={true} />
+          </View>
+        </View>
+      </AtFloatLayout>
     </ScrollView>
   )
 }

@@ -1,5 +1,5 @@
 import { View, Text, Image, Textarea } from '@tarojs/components'
-import { AtTextarea } from 'taro-ui'
+import { CDNIMGURL2 } from '@/lib/constants'
 import { Address } from '@/framework/types/consumer'
 import { addPet } from '@/framework/api/pet/add-pet'
 import { getAddresses } from '@/framework/api/consumer/address'
@@ -31,6 +31,7 @@ const Checkout = () => {
   }
 
   Taro.useReady(() => {
+    my.setNavigationBar({ backgroundColor: '#C3EC7B', frontColor: '#000000' })
     const data: any = Taro.getStorageSync('checkoutItems')
     setItems(data)
     calculateOrderPrice({
@@ -100,36 +101,41 @@ const Checkout = () => {
 
   return (
     <View className="checkout-page pt-2 pb-8">
-      <View className="bg-white rounded-sm mx-1 py-1 px-1">
+      <View className="bg-white rounded-sm mx-1 py-1 px-1 block-boxshadow">
         <View className="flex justify-between items-center" onClick={handleChooseAddress}>
           {address?.id ? (
-            <View className="flex-1">
-              <View className="text-28 font-bold">
-                {address?.province}
-                {address?.city}
-                {address?.region}
+            <View className="flex-1 py-0.5 flex items-center">
+              <View className="w-[38px] h-[44px] mr-1">
+                <Image src={`${CDNIMGURL2}gloc-icon.png`} mode="widthFix" />
               </View>
-              <View className="text-30 mt-0.5">{address?.detail}</View>
-              <View className="text-28 font-bold mt-0.5">
-                {address?.receiverName} {address?.phone}
+              <View className="flex-1">
+                <View>
+                  <Text className="text-30 font-bold">{address?.receiverName}</Text>
+                  <Text className="text-26 text-color-disable ml-1">{address?.phone}</Text>
+                </View>
+                <View className="text-26 mt-0.5">
+                  {address?.province} {address?.city} {address?.region} {address?.detail}
+                </View>
               </View>
             </View>
           ) : (
             <View className="py-1 flex items-center">
-              <Text className="rcciconfont rccicon-location text-32"></Text>
-              <Text className="ml-1 text-30 font-bold">添加收货地址</Text>
+              <View className="w-[38px] h-[44px] mr-1">
+                <Image src={`${CDNIMGURL2}gloc-icon.png`} mode="widthFix" />
+              </View>
+              <Text className="text-34 font-bold">添加收货地址</Text>
             </View>
           )}
           <Text className="rcciconfont rccicon-right text-22 text-gray-400"></Text>
         </View>
       </View>
 
-      <View className="bg-white rounded-sm mx-1 mt-1">
-        <View className="text-30 p-1">订单商品</View>
+      <View className="bg-white rounded-sm mx-1 mt-1 block-boxshadow">
+        <View className="text-32 p-1">订单商品</View>
         <View className="food-list px-1">
           {items.map((item: any, idx: number) => (
             <View key={idx} className="food-item my-1 flex items-start">
-              <View className="w-8 h-8 overflow-hidden border border-solid rounded-sm border-gray-100">
+              <View className="w-8 h-8 overflow-hidden rounded-[10px]" style={{backgroundColor: '#e2e2e2'}}>
                 <Image src={item?.variants?.defaultImage} />
               </View>
               <View className="flex-1 ml-1">
@@ -143,30 +149,41 @@ const Checkout = () => {
           ))}
         </View>
         <View className="p-1">
-          <View className="text-right">
+          <View className="flex justify-end items-center">
             <Text className="text-30">商品小计：</Text>
-            <Text className="text-30 text-color-price font-bold">{formatMoney(prices?.productPrice ?? 0)}</Text>
+            <Text className="text-40 text-color-price font-bold">{formatMoney(prices?.productPrice ?? 0)}</Text>
           </View>
         </View>
       </View>
 
-      <View className="bg-white rounded-sm mx-1 mt-1 p-1">
+      <View className="bg-white rounded-sm mx-1 mt-1 p-1 block-boxshadow">
         <View className="flex justify-between items-center text-30">
-          <Text className="text-30 text-gray-400">商品金额</Text>
+          <Text className="text-30 text-color-tip">商品金额</Text>
           <Text>{formatMoney(prices?.productPrice ?? 0)}</Text>
         </View>
         <View className="mt-1 flex justify-between items-center text-30">
-          <Text className="text-30 text-gray-400">运费</Text>
+          <Text className="text-30 text-color-tip">运费</Text>
           <Text>{formatMoney(prices?.deliveryPrice ?? 0)}</Text>
         </View>
-        <View className="total-price-container mt-1 pt-1 text-right">
+        <View className="total-price-container mt-1 pt-1 flex justify-end items-center">
           <Text className="text-30">合计：</Text>
-          <Text className="text-30 text-color-price font-bold">{formatMoney(prices?.totalPrice ?? 0)}</Text>
+          <Text className="text-40 text-color-price font-bold">{formatMoney(prices?.totalPrice ?? 0)}</Text>
         </View>
       </View>
 
-      <View className="bg-white rounded-sm mx-1 mt-1 p-1 flex items-start">
-        <View className="mr-1 text-30 text-gray-400" style={{ paddingTop: '0.1rem' }}>
+      <View className="bg-white rounded-sm mx-1 mt-1 p-1 block-boxshadow">
+        <View className="flex justify-between items-center text-30">
+          <Text className="text-30 text-color-tip">首次发货</Text>
+          <Text>{moment().add(1, 'days').format('YYYY-MM-DD')}</Text>
+        </View>
+        <View className="mt-1 flex justify-between items-center text-30">
+          <Text className="text-30 text-color-tip">发货周期</Text>
+          <Text>四周</Text>
+        </View>
+      </View>
+
+      <View className="bg-white rounded-sm mx-1 mt-1 p-1 flex items-start block-boxshadow">
+        <View className="mr-1 text-30 text-color-tip" style={{ paddingTop: '0.08rem' }}>
           买家留言
         </View>
         <View className="flex-1">
@@ -180,20 +197,7 @@ const Checkout = () => {
             maxlength={-1}
           />
         </View>
-      </View>
-
-      <View className="bg-white rounded-sm mx-1 mt-1 p-1">
-        <View className="flex items-center">
-          <Text className="mr-1 rcciconfont rccicon-ontime text-color-primary text-30" />
-          <Text className="flex-1 text-28 text-gray-400">我们将每四周扣款发货一次，请注意!</Text>
-        </View>
-        <View className="mt-1 flex items-center">
-          <Text className="mr-1 rcciconfont rccicon-ship text-color-primary text-28" />
-          <Text className="flex-1 text-28 text-gray-400">
-            本次订单将在{moment().add(1, 'days').format('YYYY-MM-DD')}发货，请注意查收!
-          </Text>
-        </View>
-      </View>
+      </View>      
 
       <View className="pet-food-footer">
         <View className="mx-2 flex justify-between items-center">

@@ -1,4 +1,4 @@
 export default definePageConfig({
     navigationStyle: 'custom',
-    navigationBarTitleText: 'Fresh Plan详情'
+    navigationBarTitleText: '计划详情'
 })

@@ -44,7 +44,7 @@ const API_CONFIG: IApiConfig = {
     storeSetting: 'https://fc-com-setting-dev-common-dmgwlxbcvr.cn-shanghai.fcapp.run/fc-com-store-setting/graphql',
     liveStreaming: 'https://fc-com-treaming-dev-common-unckjafhvm.cn-shanghai.fcapp.run/fc-com-live-streaming/graphql',
     sku_detail: 'https://fc-com-u-detail-dev-common-rfhybdgjkv.cn-shanghai.fcapp.run/fc-com-sku-detail/graphql',
-    sc_subscription: "https://fcdev.fivefen.com/fc-sc-subscription/graphql",
+    sc_subscription: "https://fcdev.d2cgo.com/fc-sc-subscription/graphql",
   },
   production: {
     auth: 'https://fc-mp-auth-dev-miniprogram-dkpsdvztiu.cn-shanghai.fcapp.run/fc-mp-auth/graphql',
@@ -71,7 +71,7 @@ const API_CONFIG: IApiConfig = {
     storeSetting: 'https://fc-com-setting-dev-common-dmgwlxbcvr.cn-shanghai.fcapp.run/fc-com-store-setting/graphql',
     liveStreaming: 'https://fc-com-treaming-dev-common-unckjafhvm.cn-shanghai.fcapp.run/fc-com-live-streaming/graphql',
     sku_detail: 'https://fc-com-u-detail-dev-common-rfhybdgjkv.cn-shanghai.fcapp.run/fc-com-sku-detail/graphql',
-    sc_subscription: "https://fcdev.fivefen.com/fc-sc-subscription/graphql",
+    sc_subscription: "https://fcdev.d2cgo.com/fc-sc-subscription/graphql",
   },
 }
 
@@ -80,8 +80,8 @@ const handleApis = () => {
   const keys = Object.keys(apis)
   const values = Object.values(apis)
   keys.map((item, index) => {
-    if (String(apis[item]).indexOf('https://fcdev.fivefen.com') === -1 && String(apis[item]).indexOf('http://localhost:7000') === -1) {
-      apis[item] = 'https://fcdev.fivefen.com/' + String(values[index]).split('run/')[1]
+    if (String(apis[item]).indexOf('https://fcdev.d2cgo.com') === -1 && String(apis[item]).indexOf('http://localhost:7000') === -1) {
+      apis[item] = 'https://fcdev.d2cgo.com/' + String(values[index]).split('run/')[1]
     }
   })
   console.log(apis)
