@@ -88,11 +88,12 @@ const FreshPlanDetails = () => {
           onClick={() => handlePetDetail(subscriptionDetails?.pet)}
         >
           <View className="h-[116px] flex items-cneter">
-            <Image
-              className="mr-1 h-full rounded-full bg-[#FFB038]"
-              src={subscriptionDetails?.pet?.image}
-              style={{ width: '1.16rem' }}
-            />
+            <View className="mr-1 flex-shrink-0 rounded-full overflow-hidden bg-[#FFB038]" style={{ width: '1.16rem', height: '1.16rem' }}>
+              <Image
+                src={subscriptionDetails?.pet?.image}
+                mode="widthFix"
+              />
+            </View>
             <View className="flex flex-col justify-center">
               <Text className="text-[30px] flex items-center">
                 {subscriptionDetails?.pet?.name}{' '}
