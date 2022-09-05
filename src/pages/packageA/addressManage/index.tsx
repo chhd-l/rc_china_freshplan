@@ -52,7 +52,7 @@ const AddRessManage = () => {
       const pages = Taro.getCurrentPages()
       const current = pages[pages.length - 1]
       const eventChannel = current.getOpenerEventChannel()
-      Taro.setStorageSync('select-address', true);
+      Taro.setStorageSync('select-address', true)
       eventChannel.emit('chooseAddress', Object.assign({}, address))
       Taro.navigateBack()
     } else if (router?.params?.subscriptionDetailsID) {
@@ -66,7 +66,7 @@ const AddRessManage = () => {
 
   return (
     <View className="AddRessManage pb-[1.5rem]">
-      <View className={`px-1 ${!addressList.length && 'pt-10'} pb-1`}>
+      <View className={`px-1 ${!addressList.length && 'pt-10'} pt-1`}>
         {addressList.length ? (
           addressList.map((item: Address, key: number) => (
             <AddressItem

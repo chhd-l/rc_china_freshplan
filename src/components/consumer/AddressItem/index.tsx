@@ -3,7 +3,6 @@ import { Address } from '@/framework/types/consumer'
 import routers from '@/routers'
 import { Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { AtCheckbox } from 'taro-ui'
 import './index.less'
 
 const AddressItem = ({
@@ -81,25 +80,34 @@ const AddressItem = ({
   }
 
   return (
-    <View className="px-1 pt-1 pb-0.5 bg-white mt-1 rounded AddressItem">
+    <View className="px-1 pt-1 pb-0.5 bg-white mb-1 rounded AddressItem">
       <View onClick={selectAddress}>
         <View className="flex flex-row justify-between">
           <Text className="text-black font-semibold text-[34px]">{receiverName}</Text>
-          <Text className="text-gray-400">{phone}</Text>
+          <Text className="text-[#A5A5A5]">{phone}</Text>
         </View>
-        <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #E9E9E9' }}>
+        <View className="mt-2 pb-2 mb-0.5" style={{ borderBottom: '1px solid #eee' }}>
           <Text className="">
             {province} {city} {region} {detail}
           </Text>
         </View>
       </View>
-      <View className="flex flex-row justify-between items-center">
-        <View>
-          <AtCheckbox
-            options={[{ label: '默认地址', value: true }]}
-            selectedList={[addressInfo.isDefault]}
-            onChange={setAsDefault}
+      <View className="flex flex-row justify-between items-center py-[10px]">
+        <View
+          className="flex items-center text-[#A5A5A5] text-[26px]"
+          onClick={(e) => {
+            e.stopPropagation()
+            setAsDefault()
+          }}
+        >
+          <Text
+            style={{
+              color: addressInfo.isDefault ? '#96CC39' : '#C7C7C7',
+              fontSize: addressInfo.isDefault ? '0.32rem' : '0.31rem',
+            }}
+            className={`rcciconfont ${addressInfo.isDefault ? 'rccicon-xuanzhong' : 'rccicon-tuoyuanxing'} mr-[17px]`}
           />
+          <Text className="block pb-[3px]">默认地址</Text>
         </View>
         <View className="flex flex-row items-center">
           <View

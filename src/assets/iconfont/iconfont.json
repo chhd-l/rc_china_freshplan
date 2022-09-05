@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "31647278",
+      "name": "椭圆形",
+      "font_class": "tuoyuanxing",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
       "icon_id": "31628944",
       "name": "关闭",
       "font_class": "cuowu",
@@ -18,13 +25,6 @@
       "font_class": "xuanzhong",
       "unicode": "e650",
       "unicode_decimal": 58960
-    },
-    {
-      "icon_id": "31628288",
-      "name": "单选_未选中",
-      "font_class": "danxuan_weixuanzhong",
-      "unicode": "e651",
-      "unicode_decimal": 58961
     },
     {
       "icon_id": "31626529",
