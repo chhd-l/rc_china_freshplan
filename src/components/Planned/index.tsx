@@ -112,8 +112,8 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
             <SwiperItem key={key}>
               <View className="plan m-auto pt-[10px]">
                 <View className="rounded-b-[0.3rem] rounded-tl-[0.3rem]">
-                  <View className="px-1 pr-2 pb-[0.18rem] pt-[0.28rem] inline-block fresh">FRESH编号：{item?.no}</View>
-                  <View className="swiperItemCard px-1 pt-0.5 pb-[0.3rem] flex flex-col justify-between text-white">
+                  <View className="px-1 pr-2 pb-[0.18rem] pt-[0.28rem] inline-block fresh">计划编号：{item?.no}</View>
+                  <View className="swiperItemCard px-1 pt-0.5 pb-[0.36rem] flex flex-col justify-between text-white">
                     <View className="flex items-center text-[24px]">
                       <View className="ml-0.5 mr-1.5">
                         <AtAvatar
@@ -180,7 +180,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         }}
                       >
                         <View className="m-auto flex">
-                          <View className="w-[126.63px] h-[126.63px] bg-white rounded-[12px] overflow-hidden">
+                          <View className="w-[126.63px] h-[126.63px] bg-white rounded-[12px] overflow-hidden bg-[#fff]">
                             <Image
                               style={{
                                 width: '100%',
@@ -202,16 +202,17 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
                         <View className="m-auto flex">
                           <View className="flex items-center justify-center bg-white rounded-[12px] w-[126.63px] h-[126.63px]">
                             <Image
+                              className="ml-0.5"
                               style={{
-                                width: '0.69rem',
-                                height: '0.45rem',
+                                width: '0.88rem',
+                                height: '0.88rem',
                               }}
-                              src={`${CDNIMGURL}order%20logistics.png`}
+                              src={`${CDNIMGURL}next-ship.png`}
                             />
                           </View>
                           <View className="ml-1 flex-1">
                             <View className="text=[28px] font-medium">发货驿站</View>
-                            <View className="font-medium text-[24px] mt-1 leading-[26px]">
+                            <View className="text-[24px] mt-1 leading-[26px]">
                               下一次将在
                               <Text className="text-[#F69C32]">
                                 {moment(item?.createNextDeliveryTime).format('YYYY-MM-DD')}
@@ -241,7 +242,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           </View>
         )}
         <View
-          className="mx-3 mt-[39px] py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white"
+          className="mx-3 mt-[39px] py-0.8 rounded-full border-0 flex items-center justify-center bg-color-primary text-white boxShow"
           onClick={() => {
             Taro.navigateTo({
               url: '/pages/packageA/choosePet/index',
@@ -249,7 +250,7 @@ const TextView = ({ subscriptionList }: { subscriptionList: any[] }) => {
           }}
         >
           <AtIcon className="mr-0.5" value="clock" size="25" />
-          <Text className="text-[34px]">定制鲜粮</Text>
+          <Text className="text-[34px] font-bold">定制鲜粮</Text>
         </View>
         <View className="mt-1 px-[30px]">
           <Step />

@@ -62,7 +62,7 @@ const Schedule = () => {
         <View
           className="py-1"
           style={{
-            borderBottom: '1px solid #E2E2E2',
+            borderBottom: '1px solid #eee',
           }}
         >
           <View className="flex justify-between items-end">
@@ -75,7 +75,7 @@ const Schedule = () => {
           {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center h-[160px]" key={key}>
               <Image
-                className="mr-1 h-full rounded-[10px]"
+                className="mr-1 h-full rounded-[10px] bg-[#f1f1f1]"
                 src={el?.variants?.defaultImage}
                 style={{ width: '1.6rem' }}
               />
@@ -115,7 +115,7 @@ const Schedule = () => {
           <View
             className="flex items-center justify-end py-1"
             style={{
-              borderBottom: subscriptionDetails.status !== 'VOID' ? '1px solid #E2E2E2' : '',
+              borderBottom: subscriptionDetails.status !== 'VOID' ? '1px solid #eee' : '',
             }}
           >
             <View>
@@ -142,11 +142,11 @@ const Schedule = () => {
           )}
         </AtList>
       </View>
-      <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[24px]">
+      <View className="bg-white mt-1 p-1 pb-2 boxShadow text-[28px]">
         <View
           className="text-[30px] font-bold pb-1"
           style={{
-            borderBottom: '1px solid #E2E2E2',
+            borderBottom: '1px solid #eee',
           }}
         >
           发货信息
@@ -175,7 +175,7 @@ const Schedule = () => {
           <View className="flex mt-2 justify-end">
             <AtButton
               circle
-              className="w-[180px] h-[72px] leading-[72px] text-[28px] m-0 flex items-center justify-center"
+              className="w-[228px] h-[72px] leading-[72px] text-[30px] m-0 flex items-center justify-center"
               type="primary"
               onClick={() => {
                 Taro.setStorage({
@@ -208,7 +208,7 @@ const Schedule = () => {
               <View
                 className="flex items-center justify-between mx-1 py-1"
                 style={{
-                  borderBottom: '1px solid #E2E2E2',
+                  borderBottom: '1px solid #eee',
                 }}
               >
                 <View>订单编号: {el?.orderId}</View>
@@ -217,7 +217,7 @@ const Schedule = () => {
               <View
                 className="mx-1 pb-1"
                 style={{
-                  borderBottom: '1px solid #E2E2E2',
+                  borderBottom: '1px solid #eee',
                 }}
               >
                 {el?.lineItems.map((item, index) => (

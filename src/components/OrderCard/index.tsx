@@ -34,7 +34,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
       </View>
       <View className="my-[28px] flex items-center">
         {(order?.lineItem?.filter((el) => !el.isGift) || []).map((el, key) => (
-          <View key={key} className="w-[150px] h-[150px] rounded-[10px] mr-[22px]">
+          <View key={key} className="w-[150px] h-[150px] rounded-[10px] mr-[22px] bg-[#f1f1f1]">
             <Image
               style={{
                 height: '100%',

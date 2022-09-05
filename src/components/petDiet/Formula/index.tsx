@@ -11,11 +11,14 @@ const Formula = ({ data }: FormulaProps) => {
       <View
         className="h-[230px] relative pb-1"
         style={{
-          borderBottom: '1px solid #999',
+          borderBottom: '1px dashed #eee',
         }}
       >
         <View className="h-full flex flex-col justify-between">
-          <View className="text-[36px] font-bold">{data.name}</View>
+          <View className="text-[36px] font-bold">
+            {data.name}
+            <View className="w-[51px] h-[5px] rounded-full bg-[#BCDF81] mt-[13px]" />
+          </View>
           <View className="text-[26px] text-[#666]">{data.Ingredients}</View>
           <View
             className="mr-[1rem] pr-[1.1rem] py-[18px] pl-[18px] text-[19px] grid grid-cols-4 gap-x-[16px] rounded-[16px]"

@@ -302,7 +302,7 @@ const OrderDetails = () => {
           ))}
           {(orderDetail?.lineItem?.filter((el) => el.isGift) || []).map((el, key) => (
             <View className="orderAtCardBody mt-2 flex item-center" key={key}>
-              <View className="orderAtCardImage mr-1">
+              <View className="orderAtCardImage mr-1 bg-[#f1f1f1]">
                 <Image src={el?.pic} mode="widthFix" />
               </View>
               <View className="h-full flex flex-col justify-between flex-1" style={{ fontWeight: 700 }}>

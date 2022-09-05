@@ -1,8 +1,24 @@
 .myOrderList {
 
+  .at-search-bar__input-cnt {
+    display: flex;
+    align-items: center;
+  }
+
   .at-search-bar::after {
     width: 0px !important;
     height: 0px !important;
+  }
+
+  .at-tabs__header {
+    z-index: 50;
+    position: fixed;
+    left: 0;
+    top: 1rem;
+  }
+
+  .at-tabs__body {
+    padding-top: 1.9rem;
   }
 
   .at-button {
@@ -42,6 +58,18 @@
 
   .at-search-bar__input-cnt {
     height: 66px;
+
+    >View {
+      height: 66px !important;
+    }
+
+    >input {
+      height: 66px !important;
+    }
+
+    .at-search-bar__clear {
+      height: 66px !important;
+    }
   }
 
   .noOrdersImage {

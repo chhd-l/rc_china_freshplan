@@ -90,13 +90,13 @@ const OrderList = () => {
   const returnText = () => {
     switch (curActionType) {
       case 'UNPAID':
-        return '确定要取消该订单吗？'
+        return '您确定要取消该订单吗？'
       case 'TO_SHIP':
         return '已提醒发货，请耐心等待'
       case 'SHIPPED':
-        return '确定已经收到货物吗？'
+        return '您确定已经收到货物吗？'
       case 'VOID':
-        return '确定要删除该订单吗？'
+        return '您确定要删除该订单吗？'
       default:
         break
     }
@@ -170,10 +170,10 @@ const OrderList = () => {
 
   return (
     <View className="myOrderList pb-2">
-      <View className="bg-white py-0.5">
+      <View className="bg-white py-0.5 fixed left-0 top-0 w-full z-50">
         <AtSearchBar
           value={searchOrder.fieldValue}
-          placeholder="搜索订单"
+          placeholder="输入商品名称/订单编号搜索订单"
           onChange={(e) =>
             setSearchOrder({
               fieldName: 'orderNoOrProductName',
@@ -255,20 +255,20 @@ const OrderList = () => {
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+                className="w-[190px] h-[60px] leading-[60px] text-[26px] text-white m-0 border-0 bg-[#96CC39]"
+                onClick={handleClickActionTipModal}
+              >
+                确定
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[26px] text-white m-0 border-0 bg-[#C8E399] ml-3"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowActionTipModal(false)
                 }}
               >
                 取消
-              </AtButton>
-              <AtButton
-                circle
-                className="w-[190px] h-[80px] leading-[80px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
-                onClick={handleClickActionTipModal}
-              >
-                确定
               </AtButton>
             </View>
           </View>

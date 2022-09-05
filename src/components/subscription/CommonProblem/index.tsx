@@ -37,7 +37,7 @@ const CommonProblem = () => {
           <View />
           <View className="flex flex-row items-start pt-[21px]">
             <View className="w-[50px] h-[50px] mr-[18px] flex-shrink-0" />
-            <View className="text-[26px] leading-[30px]">{item.answer}</View>
+            <View className="text-[26px] leading-[30px] text-[#6D6D6D]">{item.answer}</View>
           </View>
         </View>
       ))}

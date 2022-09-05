@@ -32,6 +32,7 @@ const Subscription = () => {
   const onScroll = (e: BaseEventOrig<ScrollViewProps.onScrollDetail>) => setScrollHeight(e.detail.scrollTop)
 
   const handleLogin = (callback?: Function) => {
+    console.log('callback', callback)
     if (consumer?.id) {
       callback && callback()
     } else {
@@ -110,7 +111,7 @@ const Subscription = () => {
               </View>
               {consumer?.id ? (
                 <Button
-                  className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
+                  className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0 boxShow"
                   type="primary"
                   onClick={() => {
                     Taro.navigateTo({ url: '/pages/packageA/choosePet/index' })
@@ -121,7 +122,7 @@ const Subscription = () => {
                 </Button>
               ) : (
                 <Button
-                  className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
+                  className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0 boxShow"
                   type="primary"
                   openType="getAuthorize"
                   scope="phoneNumber"

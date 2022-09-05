@@ -77,13 +77,16 @@ const FreshPlanDetails = () => {
         <View
           className="text-[30px] font-bold pb-1 mb-1 flex items-cneter"
           style={{
-            borderBottom: '1px solid #E2E2E2',
+            borderBottom: '1px solid #eee',
           }}
         >
           <Text className="rcciconfont rccicon-chongwu2 text-34 mr-0.5 text-[#ffb038]" />
           我的宠物
         </View>
-        <View className="flex items-center justify-between" onClick={() => handlePetDetail(subscriptionDetails?.pet)}>
+        <View
+          className="flex items-center justify-between my-[13px]"
+          onClick={() => handlePetDetail(subscriptionDetails?.pet)}
+        >
           <View className="h-[116px] flex items-cneter">
             <Image
               className="mr-1 h-full rounded-full bg-[#FFB038]"
@@ -114,7 +117,7 @@ const FreshPlanDetails = () => {
         <View
           className="py-1"
           style={{
-            borderBottom: '1px solid #E2E2E2',
+            borderBottom: '1px solid #eee',
           }}
         >
           <View className="flex justify-between items-end">
@@ -129,7 +132,7 @@ const FreshPlanDetails = () => {
           {subscriptionDetails.productList.map((el, key) => (
             <View className="mt-1 flex item-center text-[24px] h-[190px]" key={key}>
               <Image
-                className="mr-1 h-full rounded-[10px]"
+                className="mr-1 h-full rounded-[10px] bg-[#f1f1f1]"
                 src={el?.variants?.defaultImage}
                 style={{ width: '1.9rem' }}
               />
@@ -147,7 +150,7 @@ const FreshPlanDetails = () => {
         <View
           className="text-[30px] font-bold pb-1"
           style={{
-            borderBottom: '1px solid #E2E2E2',
+            borderBottom: '1px solid #eee',
           }}
         >
           <Text className="rcciconfont rccicon-fahuoyizhan text-34 mr-0.5 text-[#0f8ee9]" />
@@ -163,7 +166,7 @@ const FreshPlanDetails = () => {
               }}
               src={`${CDNIMGURL}next-ship.png`}
             />
-            <Text className="ml-1.5 text-[24px] leading-[33px]">
+            <Text className="ml-1.5 text-[28px] leading-[33px]">
               下一次将在{moment(subscriptionDetails.createNextDeliveryTime).format('YYYY-MM-DD')}发货，请注意查收!
             </Text>
           </View>
@@ -187,7 +190,7 @@ const FreshPlanDetails = () => {
               })
             }}
             circle
-            className="w-[180px] h-[72px] leading-[72px] text-[28px] m-0 flex items-center justify-center"
+            className="w-[228px] h-[72px] leading-[72px] text-[30px] m-0 flex items-center justify-center"
             type="primary"
           >
             {subscriptionDetails.status !== 'VOID' ? '计划进度' : '查看详情'}
@@ -198,17 +201,17 @@ const FreshPlanDetails = () => {
         <View
           className="text-[30px] pb-1 font-bold"
           style={{
-            borderBottom: '1px solid #E2E2E2',
+            borderBottom: '1px solid #eee',
           }}
         >
           <Text className="rcciconfont rccicon-a-11 text-34 mr-0.5 text-[#ffb038]" />
           签约信息
         </View>
-        <View className="flex text-[24px] items-center mt-1">
+        <View className="flex text-[28px] items-center mt-1">
           <Text className="rcciconfont rccicon-pingtai text-34 mr-0.5 text-[#96CC39]" />
           <Text>签约平台：{returnTypeText()}</Text>
         </View>
-        <View className="flex text-[24px] items-center mt-1">
+        <View className="flex text-[28px] items-center mt-1">
           <Text className="rcciconfont rccicon-zhanghao text-34 mr-0.5 text-[#96CC39]" />
           <Text>签约账户：{subscriptionDetails.consumer.phone}</Text>
         </View>

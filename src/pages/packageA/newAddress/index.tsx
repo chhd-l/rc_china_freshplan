@@ -138,7 +138,7 @@ const NewAddress = () => {
                 marginLeft: '0.44rem',
               }}
             >
-              {province ? province + '，' + city + '，' + region : '省，市，区'}
+              {province ? province + '，' + city + '，' + region : <Text className="pl-[5.5px]">省，市，区</Text>}
             </Text>
           </View>
           <RegionPicker
@@ -151,14 +151,14 @@ const NewAddress = () => {
             onRef={onRef}
           />
           <View className="flex pt-1">
-            <View className="w-[1.72rem] mr-[0.16rem] text-[28px]">详细地址</View>
+            <View className="mr-[0.83rem] text-[28px]">详细地址</View>
             <AtTextarea
               value={addressInfo['detail']}
               onChange={(value) => updateAddressInfo(value, 'detail')}
               maxLength={200}
               placeholder="请输入详细地址"
               count={false}
-              className="border-0 border-t-0 rc-text-area py-[0.01rem] pl-[0.1rem] pr-[0.18rem] flex-1"
+              className="border-0 border-t-0 rc-text-area py-0 pl-0 pr-[0.18rem] flex-1"
             />
           </View>
         </View>
