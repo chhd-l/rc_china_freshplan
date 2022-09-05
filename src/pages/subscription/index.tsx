@@ -44,9 +44,6 @@ const Index = () => {
 
   Taro.useDidShow(() => {
     loginInit()
-  })
-
-  Taro.useReady(() => {
     my.setNavigationBar({
       image: 'https://dtcdata.oss-cn-shanghai.aliyuncs.com/asset/image/fresh-plan-logo.png',
       backgroundColor: '#d3e4b5',
