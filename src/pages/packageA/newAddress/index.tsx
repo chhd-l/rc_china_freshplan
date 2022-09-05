@@ -138,7 +138,7 @@ const NewAddress = () => {
                 marginLeft: '0.44rem',
               }}
             >
-              {province ? province + ',' + city + ',' + region : '省,市,区'}
+              {province ? province + '，' + city + '，' + region : '省，市，区'}
             </Text>
           </View>
           <RegionPicker
@@ -173,9 +173,9 @@ const NewAddress = () => {
         <View
           className={`rounded-full switch flex items-center ${
             addressInfo.isDefault ? 'justify-start' : 'justify-end'
-          } p-[2px] w-[83px] h-[40px] ${addressInfo.isDefault ? 'bg-[#96CC39]' : 'bg-[#B7B7B7]'}`}
+          } p-[2px] w-[74px] h-[42px] ${addressInfo.isDefault ? 'bg-[#96CC39]' : 'bg-[#B7B7B7]'}`}
         >
-          <View className="rounded-full h-[38px] w-[38px] bg-white" />
+          <View className="rounded-full h-[40px] w-[40px] bg-white" />
         </View>
       </View>
       <View className="w-full pt-1 pb-2 fixed bottom-0 left-0 bg-white">

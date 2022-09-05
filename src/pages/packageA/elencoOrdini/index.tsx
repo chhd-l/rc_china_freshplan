@@ -1,9 +1,12 @@
+import { loginWithAlipay } from '@/components/consumer/AuthLogin/alipay-login'
 import OrderCard from '@/components/OrderCard'
 import { cancelOrder, completedOrder, deleteOrder, getOrderList } from '@/framework/api/order'
 import { Order } from '@/framework/types/order'
 import { CDNIMGURL, CDNIMGURL2 } from '@/lib/constants'
+import { consumerAtom } from '@/store/consumer'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance, useReachBottom } from '@tarojs/taro'
+import { useAtom } from 'jotai'
 import { useState } from 'react'
 import { AtButton, AtIcon, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
@@ -22,6 +25,7 @@ const OrderList = () => {
   const [current, setCurrent] = useState(router?.params?.status || 'ALL')
   const [orderList, setOrderList] = useState<Order[]>([])
   const [isNoMore, setIsNoMore] = useState(false)
+  const [consumer, setConsumer] = useAtom(consumerAtom)
   const [currentPage, setCurrentPage] = useState(0)
   const [curActionOrderId, setCurActionOrderId] = useState('')
   const [curActionType, setCurActionType] = useState('')
@@ -129,6 +133,17 @@ const OrderList = () => {
     }
   }
 
+  const handleLogin = (callback?: Function) => {
+    if (consumer?.id) {
+      callback && callback()
+    } else {
+      loginWithAlipay((data) => {
+        setConsumer(data)
+        callback && callback()
+      })
+    }
+  }
+
   const handleClickActionTipModal = async () => {
     setShowActionTipModal(false)
     switch (curActionType) {
@@ -148,7 +163,9 @@ const OrderList = () => {
   }
 
   Taro.useDidShow(() => {
-    getOrderLists({ orderState: router?.params?.status })
+    console.log('router?.params?.status', router?.params?.status)
+    console.log('current', OrderStatusEnum[current])
+    getOrderLists({ orderState: current })
   })
 
   return (
@@ -188,17 +205,17 @@ const OrderList = () => {
             {orderList.map((order, key) => (
               <OrderCard orderButton={orderButton} order={order} key={key} />
             ))}
+            {isNoMore && !!orderList.length && (
+              <View className="text-center text-[26px] text-[#666] pt-[20px] mb-[50px]">没有更多了~</View>
+            )}
           </AtTabsPane>
         ))}
       </AtTabs>
-      {isNoMore && !!orderList.length && (
-        <View className="text-center text-[26px] text-[#666] mt-[10px] mb-[50px]">没有更多了~</View>
-      )}
       {!loading && !orderList.length && (
         <View className={`noOrders flex flex-col items-center justify-center ${current === 'ALL' ? 'mt-4' : 'mt-8'}`}>
           <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
           <View className="mt-1 flex justify-center">
-            <Text className="ml-0.5 text-[#666]">啥也没有~</Text>
+            <Text className="ml-0.5 text-[#666] text-[30px]">啥也没有~</Text>
           </View>
           {current === 'ALL' && (
             <AtButton
@@ -206,6 +223,7 @@ const OrderList = () => {
               className="rounded-full startCustomizing mt-[86px]"
               onClick={(e) => {
                 e.stopPropagation()
+                handleLogin()
               }}
             >
               定制鲜粮

@@ -86,7 +86,7 @@ export interface Order {
   orderPrice: OrderPrice
   orderState?: OrderState
   invoice?: {
-    invoiceStatus: any
+    status: any
   }
   logs?: Logs
   remark?: string

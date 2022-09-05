@@ -85,16 +85,13 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
             >
               更多
               <View
-                // className={`absolute bottom-[-102px] flex items-center justify-center left-[-12px] w-[200px] h-[108px] bg-white text-[30px] rounded-[5px] more ${
-                //   moreOpen ? 'absolute' : 'hidden'
-                // }`}
                 className="absolute bottom-[-102px] flex items-center justify-center left-[-12px] w-[200px] h-[108px] bg-white text-[30px] rounded-[5px] more"
                 onClick={(e) => {
                   e.stopPropagation()
                   Invoice()
                 }}
               >
-                <Text className="pt-[11px]">申请开票</Text>
+                <Text className="pt-[11px]">{order?.invoice?.status ? '查看' : '申请'}开票</Text>
               </View>
             </View>
             <View className="flex items-cennter justify-end">
@@ -122,7 +119,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 Invoice()
               }}
             >
-              {order?.orderState?.orderType ? '查看' : '申请'}开票
+              {order?.invoice?.status ? '查看' : '申请'}开票
             </AtButton>
           </View>
         )}
@@ -144,7 +141,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 Invoice()
               }}
             >
-              {order?.orderState?.orderType ? '查看' : '申请'}开票
+              {order?.invoice?.status ? '查看' : '申请'}开票
             </AtButton>
           </View>
         )}
