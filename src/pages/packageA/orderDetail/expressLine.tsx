@@ -32,7 +32,7 @@ const ExpressLine = ({
             </View>
           </View>
           <View className={`flex line ${key !== expressList.length - 1 && 'selectLine'}`}>
-            <View className="h-full mr-1">
+            <View className="mr-1">
               <View className="h-full m-auto" />
             </View>
             <View className="mb-1 text-[24px] leading-[28px] flex-1 break-all">{express?.context}</View>
@@ -54,7 +54,7 @@ const ExpressLine = ({
             </View>
           </View>
           <View className="flex line">
-            <View className="h-full mr-0.5">
+            <View className="mr-0.5">
               <View className="h-full m-auto" />
             </View>
             <View className="flex-1 overflow-hidden" />
