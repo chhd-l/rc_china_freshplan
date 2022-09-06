@@ -31,6 +31,7 @@ const PetList = () => {
     // petList.push(initNewPet)
     // SetshowAddPetBtn(false)
     // setPetList(cloneDeep(petList))
+    Taro.setStorageSync("add-pet-first", 1); //从宠物列表进入，先添加宠物再进行推荐
     Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
   }
 
@@ -68,7 +69,7 @@ const PetList = () => {
               </View>
               <View className="flex-1 mx-1">
                 <View className="flex items-center mb-1">
-                  <Text className="text-32 font-bold">{pet.name}</Text>
+                  <Text className="text-32 font-bold truncate max-w-[4rem]">{pet.name}</Text>
                   <Text className={`ml-1 rcciconfont text-30 text-color-price ${pet.gender === PetGender.Female ? 'rccicon-female' : 'rccicon-male'}`}></Text>
                 </View>
                 <View className="text-28 text-gray-400">{pet.breed} {pet.age}</View>
