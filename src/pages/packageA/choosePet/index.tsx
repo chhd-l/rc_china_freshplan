@@ -57,7 +57,7 @@ const ChoosePet = () => {
   return (
     <View className="choose-pet py-1">
       <View className="my-1 px-1 text-34 font-bold">选择您的宠物！</View>
-      <View className="mx-1 rounded-sm border border-solid border-gray-200 overflow-hidden">
+      <View className="mx-1 rounded-sm block-boxshadow overflow-hidden">
         <AtList hasBorder={false}>
           <View 
             className="p-1 flex items-center"
