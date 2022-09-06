@@ -124,20 +124,20 @@ const AddRessManage = () => {
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[26px] text-white m-0 border-0 bg-[#C8E399]"
+                className="w-[190px] h-[60px] leading-[60px] text-[26px] text-white m-0 border-0 bg-[#96CC39]"
+                onClick={delAddress}
+              >
+                确定
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[60px] leading-[60px] text-[26px] text-white m-0 border-0 bg-[#C8E399] ml-3"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowDelTip(false)
                 }}
               >
                 取消
-              </AtButton>
-              <AtButton
-                circle
-                className="w-[190px] h-[60px] leading-[60px] text-[26px] text-white m-0 border-0 bg-[#96CC39] ml-3"
-                onClick={delAddress}
-              >
-                确定
               </AtButton>
             </View>
           </View>

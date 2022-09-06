@@ -91,7 +91,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                   Invoice()
                 }}
               >
-                <Text className="pt-[11px]">{order?.invoice?.status ? '查看' : '申请'}开票</Text>
+                <Text className="pt-[11px]">{order?.invoice?.status === 'DELIVERY_STATE' ? '查看' : '申请'}开票</Text>
               </View>
             </View>
             <View className="flex items-cennter justify-end">
@@ -119,7 +119,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 Invoice()
               }}
             >
-              {order?.invoice?.status ? '查看' : '申请'}开票
+              {order?.invoice?.status === 'DELIVERY_STATE' ? '查看' : '申请'}开票
             </AtButton>
           </View>
         )}
@@ -141,7 +141,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
                 Invoice()
               }}
             >
-              {order?.invoice?.status ? '查看' : '申请'}开票
+              {order?.invoice?.status === 'DELIVERY_STATE' ? '查看' : '申请'}开票
             </AtButton>
           </View>
         )}

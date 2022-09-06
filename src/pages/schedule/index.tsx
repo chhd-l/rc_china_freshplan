@@ -67,7 +67,7 @@ const Schedule = () => {
         >
           <View className="flex justify-between items-end">
             <Text className="text-[30px] font-bold">
-              {subscriptionDetails.status !== 'VOID' ? '下次发货' : 'Fresh Plan商品'}
+              {subscriptionDetails.status !== 'VOID' ? '下次发货' : '计划商品'}
             </Text>
           </View>
         </View>
@@ -86,7 +86,7 @@ const Schedule = () => {
                     X {el?.variants?.num}
                   </View>
                 </View>
-                <View className="flex items-center justify-between mt-1 text-[24px] text-[#333]">
+                <View className="flex items-center justify-between mt-1 text-[24px] text-[#999]">
                   {formatMoney(el?.variants?.subscriptionPrice)}
                 </View>
               </View>
@@ -202,7 +202,7 @@ const Schedule = () => {
 
       {subscriptionDetails.completedDeliveries && subscriptionDetails.completedDeliveries.length ? (
         <View className="mt-1 py-1">
-          <AtDivider className="text-[30px] h-[auto] w-[80%] m-auto" content="历史订单" />
+          <AtDivider className="text-[30px] h-[auto] w-[80%] m-auto" customStyle={{ zIndex: '0' }} content="历史订单" />
           {subscriptionDetails.completedDeliveries.map((el: any, key) => (
             <View key={key} className="rounded-[10px] mt-1 text-[24px] text-[#999] bg-white">
               <View

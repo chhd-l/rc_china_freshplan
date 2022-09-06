@@ -138,7 +138,7 @@ const NewAddress = () => {
                 marginLeft: '0.44rem',
               }}
             >
-              {province ? province + '，' + city + '，' + region : <Text className="pl-[5.5px]">省，市，区</Text>}
+              {province ? province + '，' + city + '，' + region : <Text className="pl-[0.1rem]">省，市，区</Text>}
             </Text>
           </View>
           <RegionPicker
@@ -158,7 +158,7 @@ const NewAddress = () => {
               maxLength={200}
               placeholder="请输入详细地址"
               count={false}
-              className="border-0 border-t-0 rc-text-area py-0 pl-0 pr-[0.18rem] flex-1"
+              className="border-0 border-t-0 rc-text-area py-0 pl-[0.02rem] pr-[0.18rem] flex-1"
             />
           </View>
         </View>

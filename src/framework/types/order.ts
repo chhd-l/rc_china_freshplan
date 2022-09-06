@@ -86,7 +86,7 @@ export interface Order {
   orderPrice: OrderPrice
   orderState?: OrderState
   invoice?: {
-    status: any
+    status: 'PRINT_STATE' | 'DELIVERY_STATE' | 'FAIL_STATE' | 'NOT_INVOICED'
   }
   logs?: Logs
   remark?: string
