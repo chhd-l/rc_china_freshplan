@@ -468,7 +468,14 @@ const OrderDetails = () => {
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#C8E399]"
+                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#C8E399]"
+                onClick={handleClickActionTipModal}
+              >
+                确定
+              </AtButton>
+              <AtButton
+                circle
+                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#96CC39] ml-2"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowDelTip(false)
@@ -476,17 +483,10 @@ const OrderDetails = () => {
               >
                 取消
               </AtButton>
-              <AtButton
-                circle
-                className="w-[190px] h-[60px] leading-[60px] text-[24px] text-white m-0 border-0 bg-[#96CC39] ml-2"
-                onClick={handleClickActionTipModal}
-              >
-                确定
-              </AtButton>
             </View>
           </View>
           <View className="flex justify-center mt-3">
-            <AtIcon value="close-circle" size={30} color="#fff" />
+            <Text className="rcciconfont rccicon-close text-white text-48" />
           </View>
         </View>
       </View>

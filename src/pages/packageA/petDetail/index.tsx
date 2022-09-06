@@ -217,7 +217,7 @@ const PetDetail = () => {
           <Text className={`up-alert rcciconfont rccicon-cam`} />
         </View>
         <View className="flex-1 flex items-center">
-          <Text className="ml-2 text-32 truncate max-w-[3rem]">{pet.name}</Text>
+          <Text className="ml-1 text-32 truncate max-w-[3rem]">{pet.name}</Text>
           <Text className={`ml-1 rcciconfont text-30 text-color-price ${pet.gender === PetGender.Female ? 'rccicon-female' : 'rccicon-male'}`}></Text>
         </View>
         <View className="pet-delete self-start flex items-center justify-center" onClick={handleOpenDelete}>
@@ -483,14 +483,14 @@ const PetDetail = () => {
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
-                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#96CC39]"
+                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#C8E399]"
                 onClick={handleDelete}
               >
                 确定
               </AtButton>
               <AtButton
                 circle
-                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#C8E399] ml-2"
+                className="w-[190px] h-[80px] leading-[80px] text-[28px] text-white m-0 border-0 bg-[#96CC39] ml-2"
                 onClick={(e) => {
                   e.stopPropagation()
                   setShowDel(false)
@@ -501,7 +501,7 @@ const PetDetail = () => {
             </View>
           </View>
           <View className="flex justify-center mt-3">
-            <AtIcon value="close-circle" size={30} color="#fff" />
+            <Text className="rcciconfont rccicon-close text-white text-48" />
           </View>
         </View>
       </View>
