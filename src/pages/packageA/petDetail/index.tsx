@@ -479,7 +479,7 @@ const PetDetail = () => {
             }}
           >
             <Image className="mt-2 rounded-full" src={pet.image} style={{ width: '2.36rem', height: '2.36rem' }} />
-            <View className="text-[34px] text-[#333] mt-2">您确定要删除<Text className="font-bold">{pet.name}</Text>这个宠物吗？</View>
+            <View className="text-[34px] text-[#333] mt-2">您确定要删除这个宠物吗？</View>
             <View className="flex items-center justify-between my-2">
               <AtButton
                 circle
