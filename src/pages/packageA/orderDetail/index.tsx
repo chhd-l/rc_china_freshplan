@@ -149,22 +149,22 @@ const OrderDetails = () => {
     }
   }
 
-  const titleImageType = () => {
-    switch (orderDetail?.orderState?.orderState) {
-      case 'UNPAID':
-        return 'wait-pay.png'
-      case 'TO_SHIP':
-        return 'wait-ship.png'
-      case 'SHIPPED':
-        return 'shipped.png'
-      case 'COMPLETED':
-        return 'completed.png'
-      case 'VOID':
-        return 'closed.png'
-      default:
-        break
-    }
-  }
+  // const titleImageType = () => {
+  //   switch (orderDetail?.orderState?.orderState) {
+  //     case 'UNPAID':
+  //       return 'wait-pay.png'
+  //     case 'TO_SHIP':
+  //       return 'wait-ship.png'
+  //     case 'SHIPPED':
+  //       return 'shipped.png'
+  //     case 'COMPLETED':
+  //       return 'completed.png'
+  //     case 'VOID':
+  //       return 'closed.png'
+  //     default:
+  //       break
+  //   }
+  // }
 
   const getModalContent = () => {
     switch (orderDetail?.orderState?.orderState) {
@@ -408,7 +408,10 @@ const OrderDetails = () => {
                 Taro.navigateTo({ url: `/pages/packageA/invoiceDetail/index?orderno=${orderDetail.orderNumber}` })
               }}
             >
-              {orderDetail?.orderState?.orderType ? '查看' : '申请'}开票
+              {orderDetail?.invoice?.status === 'DELIVERY_STATE' || orderDetail?.invoice?.status === 'PRINT_STATE'
+                ? '查看'
+                : '申请'}
+              开票
             </AtButton>
             <AtButton className="rounded-full m-0 mr-[24px] px-1.5 py-0" onClick={() => setShowDelTip(true)}>
               催发货
@@ -425,14 +428,20 @@ const OrderDetails = () => {
         {orderDetail?.orderState?.orderState === 'COMPLETED' && (
           <View className="flex items-center justify-end">
             <AtButton className="rounded-full m-0 px-1.5 mx-[24px] py-0">
-              {orderDetail?.orderState?.orderType ? '查看' : '申请'}发票
+              {orderDetail?.invoice?.status === 'DELIVERY_STATE' || orderDetail?.invoice?.status === 'PRINT_STATE'
+                ? '查看'
+                : '申请'}
+              发票
             </AtButton>
           </View>
         )}
         {orderDetail?.orderState?.orderState === 'SHIPPED' && (
           <View className="flex items-center justify-end">
             <AtButton className="rounded-full m-0 px-1.5 mx-[24px] py-0">
-              {orderDetail?.orderState?.orderType ? '查看' : '申请'}开票
+              {orderDetail?.invoice?.status === 'DELIVERY_STATE' || orderDetail?.invoice?.status === 'PRINT_STATE'
+                ? '查看'
+                : '申请'}
+              开票
             </AtButton>
             <AtButton
               className="rounded-full m-0 px-1.5 py-0 mr-[24px]"
