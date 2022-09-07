@@ -198,6 +198,7 @@ const Account = () => {
               hasSelect={false}
               onAdd={() => {
                 getAuthentication(() => {
+                  Taro.setStorageSync("add-pet-first", 1); //从宠物列表进入，先添加宠物再进行推荐
                   Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
                 })
               }}

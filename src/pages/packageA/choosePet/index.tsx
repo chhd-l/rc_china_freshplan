@@ -29,6 +29,7 @@ const ChoosePet = () => {
     });
     setPetList(pets);
     if (pets.length === 0) {
+      Taro.setStorageSync("add-pet-first", 0); //从推荐进入，先进行推荐，再添加宠物
       Taro.redirectTo({
         url: '/pages/packageA/petEdit/index',
       })
@@ -62,6 +63,7 @@ const ChoosePet = () => {
           <View 
             className="p-1 flex items-center"
             onClick={() => {
+              Taro.setStorageSync("add-pet-first", 0); //从推荐进入，先进行推荐，再添加宠物
               Taro.navigateTo({ url: '/pages/packageA/petEdit/index' })
             }}
           >

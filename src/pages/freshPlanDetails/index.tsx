@@ -95,8 +95,8 @@ const FreshPlanDetails = () => {
               />
             </View>
             <View className="flex flex-col justify-center">
-              <Text className="text-[30px] flex items-center">
-                {subscriptionDetails?.pet?.name}{' '}
+              <View className="text-[30px] flex items-center">
+                <Text className="truncate max-w-[4rem]">{subscriptionDetails?.pet?.name}</Text>
                 <Text
                   className={`mx-0.5 rcciconfont text-[#D49D28] ${
                     subscriptionDetails?.pet?.gender === PetGender.Male ? 'rccicon-male' : 'rccicon-female'
@@ -105,7 +105,7 @@ const FreshPlanDetails = () => {
                     fontSize: '0.18rem',
                   }}
                 />
-              </Text>
+              </View>
               <Text className="text-[24px] text-[#999] mt-[16px]">
                 {subscriptionDetails?.pet?.breed} {subscriptionDetails?.pet?.age}
               </Text>
