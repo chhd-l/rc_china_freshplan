@@ -50,7 +50,7 @@ const Subscription = () => {
       >
         {consumer?.id ? (
           <Button
-            className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
+            className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0 boxShow"
             type="primary"
             onClick={() => {
               Taro.navigateTo({ url: '/pages/packageA/choosePet/index' })
@@ -61,7 +61,7 @@ const Subscription = () => {
           </Button>
         ) : (
           <Button
-            className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0"
+            className="mx-4 rounded-full flex items-center bg-color-primary justify-center border-0 boxShow"
             type="primary"
             openType="getAuthorize"
             scope="phoneNumber"

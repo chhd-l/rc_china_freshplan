@@ -326,7 +326,8 @@ const OrderDetails = () => {
         <View className="my-1 flex items-center justify-between">
           <View className="text-28 text-[#666]">促销折扣</View>
           <View className="text-28">
-            -{formatMoney(orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice)}
+            {orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice > 0 && '-'}
+            {formatMoney(orderDetail.orderPrice.discountsPrice + orderDetail.orderPrice.vipDiscountsPrice)}
           </View>
         </View>
         <View className="my-1 flex items-center justify-between">

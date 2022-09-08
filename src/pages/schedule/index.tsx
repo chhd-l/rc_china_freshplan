@@ -118,13 +118,11 @@ const Schedule = () => {
               borderBottom: subscriptionDetails.status !== 'VOID' ? '1px solid #eee' : '',
             }}
           >
-            <View>
-              <Text className="text-[28px]" style={{ color: '#000' }}>
-                商品小计：
-              </Text>
-              <Text className="text-[40px]" style={{ color: '#D49D28' }}>
-                <Text className="text-[26px]">￥</Text>
-                <Text className="font-bold">{subscriptionDetails?.price?.totalPrice.toFixed(2)}</Text>
+            <View className="text-[28px]">
+              <Text style={{ color: '#666' }}>商品小计：</Text>
+              <Text className="text-[#000]">
+                <Text>￥</Text>
+                <Text>{subscriptionDetails?.price?.totalPrice.toFixed(2)}</Text>
               </Text>
             </View>
           </View>
@@ -166,9 +164,12 @@ const Schedule = () => {
               fontSize: '0.32rem',
             }}
           />
-          <Text className="ml-[6px] flex-1 leading-[28px] text-[#666]">
-            收货地址&nbsp;&nbsp;&nbsp;{subscriptionDetails?.address?.province} {subscriptionDetails?.address?.city}{' '}
-            {subscriptionDetails?.address?.region} {subscriptionDetails?.address?.detail}
+          <Text className="ml-[6px] flex-1 leading-[28px] text-[#666] flex">
+            <Text className="w-[4em]">收货地址</Text>&nbsp;&nbsp;&nbsp;
+            <Text className="flex-1 break-all">
+              {subscriptionDetails?.address?.province} {subscriptionDetails?.address?.city}{' '}
+              {subscriptionDetails?.address?.region} {subscriptionDetails?.address?.detail}
+            </Text>
           </Text>
         </View>
         {subscriptionDetails.status !== 'VOID' && (
@@ -222,7 +223,11 @@ const Schedule = () => {
               >
                 {el?.lineItems.map((item, index) => (
                   <View className="flex item-center h-[160px] mt-1" key={index}>
-                    <Image className="mr-1 h-full rounded-[10px]" src={item?.pic} style={{ width: '1.6rem' }} />
+                    <Image
+                      className="mr-1 h-full rounded-[10px] bg-[#f1f1f1]"
+                      src={item?.pic}
+                      style={{ width: '1.6rem' }}
+                    />
                     <View className="h-full flex flex-col justify-center flex-1">
                       <View className="font-bold text-[28px] text-[#000] flex justify-between">
                         <Text>{item?.skuName}</Text>

@@ -28,7 +28,7 @@ const FreshPlan = () => {
         <View key={key}>
           <View className="line " />
           <View className="flex flex-row justify-between my-[34px] ">
-            <View className="flex-[2] text-18px">{item.text}</View>
+            <View className="flex-[2] text-[18px]">{item.text}</View>
             <View className="flex flex-row flex-1 justify-between mr-[30px]">
               <View className="w-[37px] h-[26px]">
                 <Image src={right} />

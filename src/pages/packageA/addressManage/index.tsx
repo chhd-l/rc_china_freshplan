@@ -1,3 +1,4 @@
+import RessBG from '@/assets/img/ressBg.png'
 import { AddressItem } from '@/components/consumer'
 import { deleteAddress, getAddresses } from '@/framework/api/consumer/address'
 import { updateSubscriptionAddress } from '@/framework/api/subscription/subscription'
@@ -7,7 +8,7 @@ import routers from '@/routers'
 import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { useState } from 'react'
-import { AtButton, AtIcon } from 'taro-ui'
+import { AtButton } from 'taro-ui'
 import './index.less'
 
 const AddRessManage = () => {
@@ -80,7 +81,7 @@ const AddRessManage = () => {
           ))
         ) : (
           <View className="noOrders flex flex-col items-center justify-center">
-            <Image className="noOrdersImage" src={`${CDNIMGURL}Empty%20orders.png`} />
+            <Image className="noOrdersImage" src={RessBG} />
             <View className="mt-2 flex justify-center">
               <Text className="ml-0.5">汪汪~啥也没有!</Text>
             </View>
