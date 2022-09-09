@@ -81,9 +81,9 @@ const PetList = () => {
           )
         })}
         {!loading && petList.length === 0 ? <View className="noOrders flex flex-col items-center justify-center mt-8">
-          <Image className="noOrdersImage" src={`${CDNIMGURL2}image 43.png`} />
+          <Image className="noOrdersImage" src={`${CDNIMGURL2}pet-empty.png`} />
           <View className="mt-2 flex justify-center">
-            <Text className="ml-0.5">啥也没有~</Text>
+            <Text className="ml-0.5">啊哦,这里还没有宠物~</Text>
           </View>
         </View> : null}
         <View className="add-pet-btn">
