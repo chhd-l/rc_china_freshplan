@@ -122,6 +122,7 @@ export default class RegionPicker extends Component {
         let range = { ...this.state.range }
         console.log(range)
         let arr = [...e.detail.value];
+        console.log('arr',arr)
         let provinceIndex = arr[0], cityIndex = arr[1], areaIndex = this.props.hideArea ? 0 : arr[2];
         let provinces = areaData;
         let citys = (provinces[provinceIndex] && provinces[provinceIndex].children) || provinces[provinces.length - 1].children || [];
@@ -139,23 +140,32 @@ export default class RegionPicker extends Component {
             }
         if (this.state.checkObj.province.label != province.label) {
             //当省更新的时候需要刷新市、区县的数据;
+            arr = [arr[0], 0, 0]
             range.citys = citys;
             if (!this.props.hideArea) {
                 range.areas = areas;
             }
             this.setState({
-                range
+                range,
             })
 
         }
         if (this.state.checkObj.city.label != city.label) {
             //当市更新的时候需要刷新区县的数据;
+                arr = [arr[0], arr[1], 0]
             if (!this.props.hideArea) {
                 range.areas = areas;
             }
             this.setState({
                 range
             })
+        }
+        if(!obj.city) {
+            obj.city = citys[0]
+            obj.area = areas[0]
+        }
+        if(!obj.area) {
+            obj.area = areas[0]
         }
         this.setState({
             checkObj: obj,
@@ -180,26 +190,20 @@ export default class RegionPicker extends Component {
         const { pickVal,range }=this.state
         return (
             <View className='w-picker-view'>
-                <PickerView className="d-picker-view" indicatorStyle={this.props.itemHeight} value={pickVal} onChange={this.handlerChange}>
+                <PickerView className="d-picker-view" value={pickVal} onChange={this.handlerChange}>
                     <PickerViewColumn>
                         {
-                            range.provinces.map((item, index) => {
-                                return (<View className="w-picker-item" key={index}>{item.label}</View>)
-                            })
+                            range.provinces.map((item) => <View key={item.value}>{item.label}</View>)
                         }
                     </PickerViewColumn>
                     <PickerViewColumn>
                         {
-                            range.citys.map((item, index) => {
-                                return (<View className="w-picker-item" key={index}>{item.label}</View>)
-                            })
+                            range.citys.map((item) => <View key={item.value}>{item.label}</View>)
                         }
                     </PickerViewColumn>
                     <PickerViewColumn>
                         {
-                            range.areas.map((item, index) => {
-                                return (<View className="w-picker-item" key={index}>{item.label}</View>)
-                            })
+                            range.areas.map((item) => <View key={item.value}>{item.label}</View>)
                         }
                     </PickerViewColumn>
                 </PickerView>
