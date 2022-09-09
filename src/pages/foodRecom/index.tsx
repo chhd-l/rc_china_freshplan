@@ -87,9 +87,9 @@ const FoodRecom = () => {
 
   return (
     <View className="pet-food-recom pt-2 pb-12">
-      <View className="my-1 text-42 font-bold text-center">{pet?.name}的专属健康食谱</View>
-      <View className="my-1 text-32 text-center">专家根据您的宠物信息推荐<Text className="text-color-primary font-bold">{recommendProductNames}</Text>套餐</View>
-      <View className="my-1 text-28 light-gray-text text-center">最多选择<Text className="text-color-primary font-bold">两个</Text>套餐</View>
+      <View className="my-1 px-1 text-42 font-bold text-center">{pet?.name}的专属健康食谱</View>
+      <View className="my-1 px-1 text-32 text-center">专家根据您的宠物信息推荐<Text className="text-color-primary font-bold">{recommendProductNames}</Text>套餐</View>
+      <View className="my-1 px-1 text-28 light-gray-text text-center">最多选择<Text className="text-color-primary font-bold">两个</Text>套餐</View>
       <View className="pet-food-list mx-2 my-1">
         {list.map((item: any, idx: number) => (
           <View key={idx} className={`pet-food-item overflow-hidden my-1.5 ${selected.indexOf(item?.variants?.id) > -1 ? 'active' : ''}`} onClick={() => handleSelect(item?.variants?.id)}>
