@@ -1,4 +1,4 @@
-import { getPets } from '@/framework/api/pet/get-pets'
+import { getPet, getPets } from '@/framework/api/pet/get-pets'
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
 import { PetGender } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
@@ -32,9 +32,8 @@ const FreshPlanDetails = () => {
   })
   const getSubscriptionDetails = async (id: string) => {
     let res = await getSubscriptionDetail(id)
-    const _storeRes: any = Taro.getStorageSync('wxLoginRes')
-    const pets = (await getPets({ consumerId: _storeRes?.userInfo?.id })) || []
-    res.pet = pets.filter((item) => item.id === res.pet.id)[0]
+    const pet = (await getPet(res.pet.id)) || []
+    res.pet = pet
     res.pet.age = getAge(res.pet.birthday)
     setSubscriptionDetails(res)
   }
