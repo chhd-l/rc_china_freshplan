@@ -151,7 +151,7 @@ WPicker.defaultProps = {
     defaultType: "label",
     hideArea: false,
     level: 2,
-    timeout: false,
+    timeout: true,
     expand: 30,
     startYear: 1970,
     endYear: defaultTime

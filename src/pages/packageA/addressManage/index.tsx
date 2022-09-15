@@ -80,10 +80,10 @@ const AddRessManage = () => {
             />
           ))
         ) : (
-          <View className="noOrders flex flex-col items-center justify-center">
+          <View className="flex flex-col items-center justify-center">
             <Image className="noOrdersImage" src={RessBG} />
             <View className="mt-2 flex justify-center">
-              <Text className="ml-0.5">汪汪~啥也没有!</Text>
+              <Text className="ml-0.5 text-[30px] text-[#666]">地址空空如也~</Text>
             </View>
           </View>
         )}

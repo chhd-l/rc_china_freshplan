@@ -57,10 +57,9 @@ const Checkout = () => {
     Taro.navigateTo({
       url: `/pages/packageA/addressManage/index?method=select`,
       events: {
-        chooseAddress: function (address: Address) {
-          console.log('choosed address---', address)
+        chooseAddress: function (addresss: Address) {
           //let newPetInfo = Object.assign({}, pet, { breed, code })
-          setAddress(address)
+          setAddress(addresss)
         },
       },
     })
@@ -135,7 +134,7 @@ const Checkout = () => {
         <View className="food-list px-1">
           {items.map((item: any, idx: number) => (
             <View key={idx} className="food-item my-1 flex items-start">
-              <View className="w-8 h-8 overflow-hidden rounded-[10px]" style={{backgroundColor: '#e2e2e2'}}>
+              <View className="w-8 h-8 overflow-hidden rounded-[10px]" style={{ backgroundColor: '#e2e2e2' }}>
                 <Image src={item?.variants?.defaultImage} />
               </View>
               <View className="flex-1 ml-1">
@@ -149,9 +148,9 @@ const Checkout = () => {
           ))}
         </View>
         <View className="p-1">
-          <View className="flex justify-end items-center">
-            <Text className="text-30">商品小计：</Text>
-            <Text className="text-40 text-color-price font-bold">{formatMoney(prices?.productPrice ?? 0)}</Text>
+          <View className="flex justify-end items-center text-[28px]">
+            <Text className="text-[#666]">商品小计：</Text>
+            <Text>{formatMoney(prices?.productPrice ?? 0)}</Text>
           </View>
         </View>
       </View>
@@ -197,7 +196,7 @@ const Checkout = () => {
             maxlength={-1}
           />
         </View>
-      </View>      
+      </View>
 
       <View className="pet-food-footer">
         <View className="mx-2 flex justify-between items-center">
