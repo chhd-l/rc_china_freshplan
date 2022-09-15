@@ -85,7 +85,7 @@ export const subscriptionCreateAndPay = async ({
     }
     let params = {
       input: subscriptionInput,
-      payWayId: 'e47dfb0f-1d3f-11ed-8ae8-00163e02a658',
+      payWayId: 'ALI_PAY', // 'e47dfb0f-1d3f-11ed-8ae8-00163e02a658',
       storeId: wxLoginRes?.userInfo?.storeId,
       operator: wxLoginRes?.userInfo?.nickName || '',
     }
