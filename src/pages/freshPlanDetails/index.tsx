@@ -88,11 +88,11 @@ const FreshPlanDetails = () => {
           onClick={() => handlePetDetail(subscriptionDetails?.pet)}
         >
           <View className="h-[116px] flex items-cneter">
-            <View className="mr-1 flex-shrink-0 rounded-full overflow-hidden bg-[#FFB038]" style={{ width: '1.16rem', height: '1.16rem' }}>
-              <Image
-                src={subscriptionDetails?.pet?.image}
-                mode="widthFix"
-              />
+            <View
+              className="mr-1 flex-shrink-0 rounded-full overflow-hidden bg-[#FFB038]"
+              style={{ width: '1.16rem', height: '1.16rem' }}
+            >
+              <Image src={subscriptionDetails?.pet?.image} mode="widthFix" />
             </View>
             <View className="flex flex-col justify-center">
               <View className="text-[30px] flex items-center">
@@ -180,7 +180,7 @@ const FreshPlanDetails = () => {
               }}
               src={`${CDNIMGURL}ship-cancel.png`}
             />
-            <Text className="ml-1.5 mt-1 text-[24px] leading-[33px]">本次计划已取消</Text>
+            <Text className="ml-1.5 mt-1 text-[28px] leading-[33px]">本次计划已取消</Text>
           </View>
         )}
         <View className="flex justify-end">
