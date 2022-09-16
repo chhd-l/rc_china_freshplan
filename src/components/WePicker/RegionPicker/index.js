@@ -141,27 +141,29 @@ export default class RegionPicker extends Component {
         if (this.state.checkObj.province.label != province.label) {
             //当省更新的时候需要刷新市、区县的数据;
             arr = [arr[0], 0, 0]
-            range.citys = citys;
+            areas = (citys[0] && citys[0].children) || citys[citys.length - 1].children || [];
             if (!this.props.hideArea) {
+                range.citys = citys;
                 range.areas = areas;
             }
+            obj.city = citys[0]
+            obj.area = areas[0]
             this.setState({
                 range,
             })
-
-        }
+        } 
         if (this.state.checkObj.city.label != city.label) {
             //当市更新的时候需要刷新区县的数据;
                 arr = [arr[0], arr[1], 0]
             if (!this.props.hideArea) {
                 range.areas = areas;
             }
+            obj.area = areas[0]
             this.setState({
                 range
             })
         }
         if(!obj.city) {
-            obj.city = citys[0]
             obj.area = areas[0]
         }
         if(!obj.area) {
