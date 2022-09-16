@@ -8,7 +8,7 @@ import { Image, Text, View } from '@tarojs/components'
 import Taro, { getCurrentInstance, useReachBottom } from '@tarojs/taro'
 import { useAtom } from 'jotai'
 import { useState } from 'react'
-import { AtButton, AtIcon, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
+import { AtButton, AtSearchBar, AtTabs, AtTabsPane } from 'taro-ui'
 import './index.less'
 
 const tabList = [{ title: '全部' }, { title: '待付款' }, { title: '待发货' }, { title: '待收货' }]
@@ -223,7 +223,7 @@ const OrderList = () => {
               className="rounded-full startCustomizing mt-[86px]"
               onClick={(e) => {
                 e.stopPropagation()
-                handleLogin()
+                handleLogin(() => Taro.navigateTo({ url: '/pages/packageA/choosePet/index' }))
               }}
             >
               定制鲜粮

@@ -1,4 +1,4 @@
-import { getPet, getPets } from '@/framework/api/pet/get-pets'
+import { getPet } from '@/framework/api/pet/get-pets'
 import { getSubscriptionDetail } from '@/framework/api/subscription/subscription'
 import { PetGender } from '@/framework/types/consumer'
 import { CDNIMGURL } from '@/lib/constants'
@@ -84,7 +84,9 @@ const FreshPlanDetails = () => {
         </View>
         <View
           className="flex items-center justify-between my-[13px]"
-          onClick={() => handlePetDetail(subscriptionDetails?.pet)}
+          onClick={() => {
+            subscriptionDetails.status !== 'VOID' && handlePetDetail(subscriptionDetails?.pet)
+          }}
         >
           <View className="h-[116px] flex items-cneter">
             <View
@@ -110,7 +112,9 @@ const FreshPlanDetails = () => {
               </Text>
             </View>
           </View>
-          <Text className="rcciconfont rccicon-right text-22 text-[#9D9D9D]" />
+          {subscriptionDetails.status !== 'VOID' && (
+            <Text className="rcciconfont rccicon-right text-22 text-[#9D9D9D]" />
+          )}
         </View>
       </View>
       <View className="bg-white mt-1 pb-1 px-1 boxShadow">
@@ -182,20 +186,22 @@ const FreshPlanDetails = () => {
             <Text className="ml-1.5 mt-1 text-[28px] leading-[33px]">本次计划已取消</Text>
           </View>
         )}
-        <View className="flex justify-end">
-          <AtButton
-            onClick={() => {
-              Taro.navigateTo({
-                url: `/pages/schedule/index?id=${subscriptionDetails?.id}`,
-              })
-            }}
-            circle
-            className="w-[228px] h-[72px] leading-[72px] text-[30px] m-0 flex items-center justify-center"
-            type="primary"
-          >
-            {subscriptionDetails.status !== 'VOID' ? '计划进度' : '查看详情'}
-          </AtButton>
-        </View>
+        {subscriptionDetails.status !== 'VOID' && (
+          <View className="flex justify-end">
+            <AtButton
+              onClick={() => {
+                Taro.navigateTo({
+                  url: `/pages/schedule/index?id=${subscriptionDetails?.id}`,
+                })
+              }}
+              circle
+              className="w-[228px] h-[72px] leading-[72px] text-[30px] m-0 flex items-center justify-center"
+              type="primary"
+            >
+              计划进度
+            </AtButton>
+          </View>
+        )}
       </View>
       <View className="bg-white boxShadow p-1 mt-1">
         <View
