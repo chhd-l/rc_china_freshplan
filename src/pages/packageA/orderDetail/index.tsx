@@ -206,6 +206,8 @@ const OrderDetails = () => {
       case 'WECHAT_PAY':
         return '微信'
       case 'ALI_PAY':
+      case 'ALI_PAY_APP':
+      case 'ALI_PAY_CYCLE':
         return '支付宝'
     }
   }

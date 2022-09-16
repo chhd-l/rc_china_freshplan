@@ -17,6 +17,7 @@ const Checkout = () => {
   const [items, setItems] = useState<any[]>([])
   const [prices, setPrices] = useState<any>({})
   const [remark, setRemark] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(true)
 
   const getAddressList = async () => {
     const reflag = Taro.getStorageSync('select-address')
@@ -42,6 +43,7 @@ const Checkout = () => {
       isWXGroupVip: null,
     }).then((res) => {
       setPrices(res)
+      setLoading(false)
     })
   })
 
@@ -66,6 +68,9 @@ const Checkout = () => {
   }
 
   const handlePayment = async () => {
+    if (loading) {
+      return
+    }
     if (!address?.id) {
       Taro.showToast({ title: '请先选择收货地址' })
       return
@@ -203,7 +208,7 @@ const Checkout = () => {
           <View className="text-32">
             应付：<Text className="font-bold text-color-price">{formatMoney(prices?.totalPrice ?? 0)}</Text>
           </View>
-          <View className="footer-btn px-4 text-white text-32 bg-color-primary rounded-full" onClick={handlePayment}>
+          <View className={`footer-btn px-4 text-white text-32 rounded-full ${loading ? 'bg-color-light' : 'bg-color-primary'}`} onClick={handlePayment}>
             支 付
           </View>
         </View>
