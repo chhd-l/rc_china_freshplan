@@ -21,7 +21,7 @@ const OrderCard = ({ order, orderButton }: { order: Order; orderButton: Function
 
   return (
     <View
-      className="px-1.5 py-[0.28rem] bg-white mx-[25px] mt-[30px] orderCard"
+      className="px-[0.4rem] py-[0.3rem] bg-white mx-[22px] mt-[15px] orderCard"
       onClick={() =>
         Taro.navigateTo({
           url: '/pages/packageA/orderDetail/index?id=' + order.orderNumber,
